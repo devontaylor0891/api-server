@@ -11,7 +11,7 @@ var routes = require('./routes');
 
 var app = express();
 
-app.use('/api', routes);
+app.get('/api', routes);
 
 app.get('/hikes', hike.index);
 app.post('/add_hike', hike.add_hike);
