@@ -10,9 +10,6 @@ var hike = require('./routes/hike');
 
 var app = express();
 
-  console.log('devons branch');
-  console.log('Application is listening at http://localhost:8081/api');
-
 app.get('/hikes', hike.index);
 app.post('/add_hike', hike.add_hike);
 
