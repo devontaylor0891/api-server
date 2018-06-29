@@ -10,7 +10,7 @@ var hike = require('./routes/hike');
 
 var app = express();
 
-app.listen(8081, function () {
+app.use( function () {
   console.log('devons branch');
   console.log('Application is listening at http://localhost:8081/api');
 });
