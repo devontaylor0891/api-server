@@ -8,7 +8,7 @@ module.exports = {
   get_users: function(req, res) {
     connection.query(
       `SELECT * FROM users`, function (error, usersResult) {
-        return res.send(201, usersResult.json())
+        return res.status(200).send(usersResult);
       }
     )
     // return res.send(201, logg())
