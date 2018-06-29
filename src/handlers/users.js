@@ -6,7 +6,10 @@ var UserByIdOrders = require('./users/{id}/orders');
 
 module.exports = {
   get_users: function(req, res) {
-    console.log('getusers called');
+    return res.send(201, logg())
+    function logg() {
+      console.log('getusers called: ', req);
+    };
     // connection.query(`
     //   SELECT u.*, p.id AS producer_id
     //   FROM users AS u
