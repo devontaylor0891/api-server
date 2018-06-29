@@ -9,7 +9,7 @@ module.exports = {
     connection.query(
       `SELECT * FROM producers
       WHERE id = ${producerId}`, function (error, results) {
-        res.status(200).send(results);
+        return res.status(200).send(results);
       }
     )
 
