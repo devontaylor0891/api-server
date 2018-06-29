@@ -8,7 +8,7 @@ module.exports = {
 
     connection.query(
       `SELECT * FROM producers
-      WHERE id = ${producerId}`, function (error, results) {
+      WHERE producer_id = ${producerId}`, function (error, results) {
         return res.status(200).send(results);
       }
     )
