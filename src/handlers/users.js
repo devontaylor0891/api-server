@@ -84,9 +84,11 @@ module.exports = {
     };
     connection.query("SELECT * from users WHERE user_id=?", userId, function(err, rows, fields){
       if (rows.length != 0) {
+        console.log('rows: ', res.json(rows));
           data["Data"] = "Successfully logged in..";
           res.json(data);
       } else {
+        console.log('failed: ', res.json(rows));
           data["Data"] = "incorrectomundo";
           res.json(data);
       }
