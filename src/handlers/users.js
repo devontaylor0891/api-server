@@ -69,19 +69,8 @@ module.exports = {
 
   post_users: function (req, res) {
     connection.query(
-      `INSERT INTO users (
-        first_name,
-        email,
-        role,
-        registration_date,
-        user_id
-      ) VALUES (
-        ${req.body.firstName},
-        ${req.body.email},
-        ${req.body.role},
-        ${req.body.registrationDate},
-        ${req.body.id}
-      ) RETURN id`, function (err, result) {
+      `INSERT INTO users (first_name, email, role, registration_date, user_id) VALUES (${req.body.firstName}, ${req.body.email}, ${req.body.role}, ${req.body.registrationDate}, ${req.body.id})`,
+      function (err, result) {
         if (err) {
           console.log('error in create user:', err);
           res.send('error:', err);
