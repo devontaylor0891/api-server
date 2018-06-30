@@ -147,6 +147,16 @@ module.exports = {
   //   });
   // },
 
+  get_users_userId: function (req, res) {
+    let userId = req.params.userId;
+    connection.query(
+      `SELECT * FROM users
+      WHERE user_id = ${userId}`, function (error, results) {
+        return res.status(200).send(results);
+      }
+    )
+  },
+
   get_users_id: function(req, res) {
     UserById.get_users_id(req, res);
 
