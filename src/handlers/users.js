@@ -57,15 +57,18 @@ module.exports = {
         registration_date,
         user_id
       )
-      VALUES (
+      SET (
         ${user.firstName},
         ${user.email},
         ${user.role},
         ${user.registrationDate},
         ${user.id}
-      )`
-    )
-    return res.status(200).send(req.body);
+      )`, function (error, userResult) {
+        if (error) throw error;
+        return res.status(200).send(userResult);
+      }
+    );
+    // return res.status(200).send(req.body);
   },
 
   get_users_id: function(req, res) {
