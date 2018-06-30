@@ -74,28 +74,72 @@ module.exports = {
   // },
 
   post_users: function (req, res) {
-    let first_name = req.body.firstName;
-    let email = req.body.email;
-    let role = req.body.role;
-    let registrationDate = req.body.registrationDate;
-    let userId = req.body.id;
-    var data = {
-        "Data":""
-    };
-    connection.query("SELECT * from users WHERE user_id=?", userId, function(err, rows, fields){
-      if (rows.length != 0) {
-        console.log('rows: ', res.json(rows));
-          data["Data"] = "Successfully logged in..";
-          res.json(data);
-          return res.status(200).send(rows);
-      } else {
-        console.log('failed: ', res.json(rows));
-          data["Data"] = "incorrectomundo";
-          res.json(data);
-          return res.status(200).send('failed: ', rows);
+    let sql = `INSERT INTO users (
+      first_name,
+      email,
+      role,
+      registration_date,
+      user_id
+    )
+    VALUES ($1, $2, $3, $4, $5)
+    RETURNING id`;
+    let data = [
+      req.body.firstName,
+      req.body.email,
+      req.body.role,
+      req.body.registrationDate,
+      req.body.id
+    ];
+    connection.query(sql, data, function (err, result) {
+      if (err) {
+        console.error(err);
+        res.status = 500;
+        return res.json({
+          errors: ['Did not create a new user']
+        });
       }
-    });
+      let newUserId = result.rows[0].id;
+      let sql = `SELECT * FROM users WHERE id = $1`;
+      connection.query(sql, [ newUserId ], function(err, result) {
+        if (err) {
+          console.error(err);
+          res.status = 500;
+          return res.json({
+            errors: ['Did not return a new user']
+          });
+        };
+        // The request created a new resource object
+        res.statusCode = 201;
+        console.log('user was created');
+        // The result of CREATE should be the same as GET
+        res.json(result.rows[0]);
+      })
+    })
   },
+
+  // post_users: function (req, res) {
+  //   let first_name = req.body.firstName;
+  //   let email = req.body.email;
+  //   let role = req.body.role;
+  //   let registrationDate = req.body.registrationDate;
+  //   let userId = req.body.id;
+  //   var data = {
+  //       "Data":""
+  //   };
+  //   connection.query("SELECT * from users WHERE user_id=?", userId, function(err, rows, fields){
+  //     if (rows.length != 0) {
+  //       console.log('rows: ', res.json(rows));
+  //         data["Data"] = "Successfully logged in..";
+  //         res.json(data);
+  //         return res.status(200).send(rows);
+  //     } else {
+  //       console.log('failed: ', res.json(rows));
+  //         data["Data"] = "incorrectomundo";
+  //         res.json(data);
+  //         return res.status(200).send('failed: ', rows);
+  //     }
+  //   });
+  // },
 
   get_users_id: function(req, res) {
     UserById.get_users_id(req, res);
