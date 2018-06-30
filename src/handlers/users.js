@@ -41,36 +41,17 @@ module.exports = {
     // });
   },
 
-  // post_users: function(req, res) {
-  //   let user = req.body;
-  //   connection.query(
-  //     `INSERT INTO users (
-  //       first_name,
-  //       email,
-  //       role,
-  //       registration_date,
-  //       user_id
-  //     )
-  //     SET (
-  //       ${user.firstName},
-  //       ${user.email},
-  //       ${user.role},
-  //       ${user.registrationDate},
-  //       ${user.id}
-  //     )`, function (error, userResult) {
-  //       if (error) {
-  //         console.log('error: ', error);
-  //       };
-  //       return res.status(200).send(userResult);
-  //     }
-  //   );
-  //   // return res.status(200).send(req.body);
-  // },
-
   post_users: function (req, res) {
     connection.query(
-      `INSERT INTO users (email, registration_date, user_id) VALUES ('${req.body.email}', '${req.body.registrationDate}', '${req.body.id}')`,
-      function (err, result) {
+      `INSERT INTO users (
+        email, 
+        registration_date, 
+        user_id
+      ) VALUES (
+        '${req.body.email}', 
+        '${req.body.registrationDate}', 
+        '${req.body.id}'
+      )`, function (err, result) {
         if (err) {
           console.log('error in create user:', err);
           res.send('error:', err);
@@ -80,86 +61,34 @@ module.exports = {
         }
       }
     )
-    // let sql = `INSERT INTO users (
-    //   first_name,
-    //   email,
-    //   role,
-    //   registration_date,
-    //   user_id
-    // )
-    // VALUES ($1, $2, $3, $4, $5)
-    // RETURNING id`;
-    // let data = [
-    //   req.body.firstName,
-    //   req.body.email,
-    //   req.body.role,
-    //   req.body.registrationDate,
-    //   req.body.id
-    // ];
-    // connection.query(sql, data, function (err, result) {
-    //   if (err) {
-    //     console.error(err);
-    //     res.status = 500;
-    //     return res.json({
-    //       errors: ['Did not create a new user']
-    //     });
-    //   }
-    //   let newUserId = result.rows[0].id;
-    //   let sql = `SELECT * FROM users WHERE id = $1`;
-    //   connection.query(sql, [ newUserId ], function(err, result) {
-    //     if (err) {
-    //       console.error(err);
-    //       res.status = 500;
-    //       return res.json({
-    //         errors: ['Did not return a new user']
-    //       });
-    //     };
-    //     // The request created a new resource object
-    //     res.statusCode = 201;
-    //     console.log('user was created');
-    //     // The result of CREATE should be the same as GET
-    //     res.json(result.rows[0]);
-    //   })
-    // })
-  },
-
-  // post_users: function (req, res) {
-  //   let first_name = req.body.firstName;
-  //   let email = req.body.email;
-  //   let role = req.body.role;
-  //   let registrationDate = req.body.registrationDate;
-  //   let userId = req.body.id;
-  //   var data = {
-  //       "Data":""
-  //   };
-  //   connection.query("SELECT * from users WHERE user_id=?", userId, function(err, rows, fields){
-  //     if (rows.length != 0) {
-  //       console.log('rows: ', res.json(rows));
-  //         data["Data"] = "Successfully logged in..";
-  //         res.json(data);
-  //         return res.status(200).send(rows);
-  //     } else {
-  //       console.log('failed: ', res.json(rows));
-  //         data["Data"] = "incorrectomundo";
-  //         res.json(data);
-  //         return res.status(200).send('failed: ', rows);
-  //     }
-  //   });
-  // },
-
-  get_users_userId: function (req, res) {
-    let userId = req.params.userId;
-    connection.query(
-      `SELECT * FROM users
-      WHERE user_id = ${userId}`, function (error, results) {
-        return res.status(200).send(results);
-      }
-    )
   },
 
   get_users_id: function(req, res) {
     UserById.get_users_id(req, res);
 
+  },
+
+  patch_users_id: function(req, res) {
+    if (req.body.role === 'consumer') {// if consumer, patch firstName, role, email
+      connection.query(
+        `UPDATE users SET
+        first_name='${req.body.firstName}',
+        email='${req.body.email}',
+        role='consumer'
+        `
+      ), function (err, result) {
+        if (err) {
+          console.log('error in update user:', err);
+          res.send('error:', err);
+        } else {
+          console.log('user updated: ', result);
+          return res.status(200).send(result);
+        }
+      }
+    } else { // if producer, patch consumer values AND producer values
+
+    }
+    
   },
 
   get_users_id_orders: function(req, res) {
