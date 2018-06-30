@@ -87,10 +87,12 @@ module.exports = {
         console.log('rows: ', res.json(rows));
           data["Data"] = "Successfully logged in..";
           res.json(data);
+          return res.status(200).send(rows);
       } else {
         console.log('failed: ', res.json(rows));
           data["Data"] = "incorrectomundo";
           res.json(data);
+          return res.status(200).send('failed: ', rows);
       }
     });
   },
