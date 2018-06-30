@@ -47,30 +47,52 @@ module.exports = {
     // });
   },
 
-  post_users: function(req, res) {
-    let user = req.body;
-    connection.query(
-      `INSERT INTO users (
-        first_name,
-        email,
-        role,
-        registration_date,
-        user_id
-      )
-      SET (
-        ${user.firstName},
-        ${user.email},
-        ${user.role},
-        ${user.registrationDate},
-        ${user.id}
-      )`, function (error, userResult) {
-        if (error) {
-          console.log('error: ', error);
-        };
-        return res.status(200).send(userResult);
+  // post_users: function(req, res) {
+  //   let user = req.body;
+  //   connection.query(
+  //     `INSERT INTO users (
+  //       first_name,
+  //       email,
+  //       role,
+  //       registration_date,
+  //       user_id
+  //     )
+  //     SET (
+  //       ${user.firstName},
+  //       ${user.email},
+  //       ${user.role},
+  //       ${user.registrationDate},
+  //       ${user.id}
+  //     )`, function (error, userResult) {
+  //       if (error) {
+  //         console.log('error: ', error);
+  //       };
+  //       return res.status(200).send(userResult);
+  //     }
+  //   );
+  //   // return res.status(200).send(req.body);
+  // },
+
+  post_users: function (req, res) {
+    let first_name = req.body.firstName;
+    let email = req.body.email;
+    let role = req.body.role;
+    let registrationDate = req.body.registrationDate;
+    let userId = req.body.id;
+    var email = req.body.email;
+    var pass = req.body.password;
+    var data = {
+        "Data":""
+    };
+    connection.query("SELECT * from users WHERE user_id=?", userId, function(err, rows, fields){
+      if (rows.length != 0) {
+          data["Data"] = "Successfully logged in..";
+          res.json(data);
+      } else {
+          data["Data"] = "incorrectomundo";
+          res.json(data);
       }
-    );
-    // return res.status(200).send(req.body);
+    });
   },
 
   get_users_id: function(req, res) {
