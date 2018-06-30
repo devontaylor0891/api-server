@@ -83,8 +83,8 @@ module.exports = {
         ${req.body.id}
       ) RETURN id`, function (err, result) {
         if (err) {
-          console.log('error in create user:', error);
-          res.send('error:', error);
+          console.log('error in create user:', err);
+          res.send('error:', err);
         } else {
           console.log('user created: ', result);
           return res.status(200).send(result);
