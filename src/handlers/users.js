@@ -64,7 +64,9 @@ module.exports = {
         ${user.registrationDate},
         ${user.id}
       )`, function (error, userResult) {
-        if (error) throw error;
+        if (error) {
+          console.log('error: ', error);
+        };
         return res.status(200).send(userResult);
       }
     );
