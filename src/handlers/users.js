@@ -75,7 +75,7 @@ module.exports = {
         first_name='${req.body.firstName}',
         email='${req.body.email}',
         role='consumer'
-        WHERE user_id='${req.body.id}'
+        WHERE user_id='${req.params.id}'
         `
       ), function (err, result) {
         if (err) {
