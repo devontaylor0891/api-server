@@ -68,7 +68,7 @@ module.exports = {
 
   },
 
-  patch_users_id: function(req, res) {
+  put_users_id: function(req, res) {
     if (req.body.role === 'consumer') {// if consumer, patch firstName, role, email
       connection.query(
         `UPDATE users SET
