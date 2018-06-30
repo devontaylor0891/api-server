@@ -11,10 +11,6 @@ module.exports = {
         return res.status(200).send(usersResult);
       }
     )
-    // return res.send(201, logg())
-    // function logg() {
-    //   console.log('getusers called: ', req);
-    // };
     // connection.query(`
     //   SELECT u.*, p.id AS producer_id
     //   FROM users AS u
@@ -25,13 +21,11 @@ module.exports = {
     //     return;
     //   }
     //   console.log("usersResult 1:", usersResult);
-
     //   connection.query(`
     //     SELECT * FROM orders`, function (error, ordersResults) {
     //     const ordersGroupedBy = _(ordersResults)
     //       .groupBy('user_id')
     //       .value();
-
     //     var users = usersResult.map(function(row) {
     //       return {
     //         id: row.id,

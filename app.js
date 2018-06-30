@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var bodyParser = require('body-parser');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -10,6 +11,8 @@ var hike = require('./routes/hike');
 var routes = require('./routes');
 
 var app = express();
+
+app.use(bodyParser.json({ type: 'application/json' }));
 
 app.use('/api', routes);
 
