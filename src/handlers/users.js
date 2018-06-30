@@ -68,47 +68,70 @@ module.exports = {
   // },
 
   post_users: function (req, res) {
-    let sql = `INSERT INTO users (
-      first_name,
-      email,
-      role,
-      registration_date,
-      user_id
-    )
-    VALUES ($1, $2, $3, $4, $5)
-    RETURNING id`;
-    let data = [
-      req.body.firstName,
-      req.body.email,
-      req.body.role,
-      req.body.registrationDate,
-      req.body.id
-    ];
-    connection.query(sql, data, function (err, result) {
-      if (err) {
-        console.error(err);
-        res.status = 500;
-        return res.json({
-          errors: ['Did not create a new user']
-        });
-      }
-      let newUserId = result.rows[0].id;
-      let sql = `SELECT * FROM users WHERE id = $1`;
-      connection.query(sql, [ newUserId ], function(err, result) {
+    connection.query(
+      `INSERT INTO users (
+        first_name,
+        email,
+        role,
+        registration_date,
+        user_id
+      ) VALUES (
+        ${req.body.firstName},
+        ${req.body.email},
+        ${req.body.role},
+        ${req.body.registrationDate},
+        ${req.body.id}
+      ) RETURNING id`, function (err, result) {
         if (err) {
-          console.error(err);
-          res.status = 500;
-          return res.json({
-            errors: ['Did not return a new user']
-          });
-        };
-        // The request created a new resource object
-        res.statusCode = 201;
-        console.log('user was created');
-        // The result of CREATE should be the same as GET
-        res.json(result.rows[0]);
-      })
-    })
+          console.log('error in create user:', error);
+          res.send('error:', error);
+        } else {
+          console.log('user created: ', result);
+          return res.status(200).send(result);
+        }
+      }
+    )
+    // let sql = `INSERT INTO users (
+    //   first_name,
+    //   email,
+    //   role,
+    //   registration_date,
+    //   user_id
+    // )
+    // VALUES ($1, $2, $3, $4, $5)
+    // RETURNING id`;
+    // let data = [
+    //   req.body.firstName,
+    //   req.body.email,
+    //   req.body.role,
+    //   req.body.registrationDate,
+    //   req.body.id
+    // ];
+    // connection.query(sql, data, function (err, result) {
+    //   if (err) {
+    //     console.error(err);
+    //     res.status = 500;
+    //     return res.json({
+    //       errors: ['Did not create a new user']
+    //     });
+    //   }
+    //   let newUserId = result.rows[0].id;
+    //   let sql = `SELECT * FROM users WHERE id = $1`;
+    //   connection.query(sql, [ newUserId ], function(err, result) {
+    //     if (err) {
+    //       console.error(err);
+    //       res.status = 500;
+    //       return res.json({
+    //         errors: ['Did not return a new user']
+    //       });
+    //     };
+    //     // The request created a new resource object
+    //     res.statusCode = 201;
+    //     console.log('user was created');
+    //     // The result of CREATE should be the same as GET
+    //     res.json(result.rows[0]);
+    //   })
+    // })
   },
 
   // post_users: function (req, res) {
