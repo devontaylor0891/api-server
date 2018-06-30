@@ -69,7 +69,7 @@ module.exports = {
 
   post_users: function (req, res) {
     connection.query(
-      `INSERT INTO users (email, registration_date, user_id) VALUES (${req.body.email}, ${req.body.registrationDate}, ${req.body.id})`,
+      `INSERT INTO users (email, registration_date, user_id) VALUES ('${req.body.email}', '${req.body.registrationDate}', '${req.body.id}')`,
       function (err, result) {
         if (err) {
           console.log('error in create user:', err);
