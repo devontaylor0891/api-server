@@ -48,7 +48,24 @@ module.exports = {
   },
 
   post_users: function(req, res) {
-    return res.send(201);
+    let user = req.body;
+    connection.query(
+      `INSERT INTO users (
+        first_name,
+        email,
+        role,
+        registration_date,
+        user_id
+      )
+      VALUES (
+        ${user.firstName},
+        ${user.email},
+        ${user.role},
+        ${user.registrationDate},
+        ${user.id}
+      )`
+    )
+    return res.status(200).send(req.body);
   },
 
   get_users_id: function(req, res) {
