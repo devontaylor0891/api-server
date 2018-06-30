@@ -9,7 +9,7 @@ var express = require('express');
 var router = express.Router();
 
 router.route('/users').get(users.get_users);
-router.route('/users').post(users.post_users);
+router.route('/users/create').post(users.post_users);
 router.route('/users/:id').get(users.get_users_id);
 router.route('/users/:id/orders').get(users.get_users_id_orders);
 // BODY: array of products (object with id and qty)
