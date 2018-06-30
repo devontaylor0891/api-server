@@ -81,7 +81,7 @@ module.exports = {
         ${req.body.role},
         ${req.body.registrationDate},
         ${req.body.id}
-      ) RETURNING id`, function (err, result) {
+      ) RETURN id`, function (err, result) {
         if (err) {
           console.log('error in create user:', error);
           res.send('error:', error);
