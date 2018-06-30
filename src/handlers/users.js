@@ -79,8 +79,6 @@ module.exports = {
     let role = req.body.role;
     let registrationDate = req.body.registrationDate;
     let userId = req.body.id;
-    var email = req.body.email;
-    var pass = req.body.password;
     var data = {
         "Data":""
     };
