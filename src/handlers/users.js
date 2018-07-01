@@ -69,13 +69,25 @@ module.exports = {
   },
 
   put_users_id: function(req, res) {
+    // get the primary key id
+    let id = connection.query(
+      `SELECT * FROM users WHERE user_id='${req.params.id}'`, function (err, res) {
+        if (err) {
+          console.log('error in fetching user:', err);
+          res.send('error:', err);
+        } else {
+          console.log('user fetched: ', result);
+          return res.send(result.id);
+        }
+      }
+    )
     if (req.body.role === 'consumer') {// if consumer, patch firstName, role, email
       connection.query(
         `UPDATE users SET
         first_name='${req.body.firstName}',
         email='${req.body.email}',
         role='consumer'
-        WHERE user_id='${req.params.id}'
+        WHERE user_id='${id}'
         `
       ), function (err, result) {
         if (err) {
