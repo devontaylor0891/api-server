@@ -106,9 +106,11 @@ module.exports = {
             console.log('user updated: ', result);
             return res.status(200).send(result);
           }
-        }
-      } else { // if producer, patch consumer values AND producer values
-
+          
+        } 
+        
+      )} else { // if producer, patch consumer values AND producer values
+        
       }
     // };
     
