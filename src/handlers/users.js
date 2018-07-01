@@ -76,8 +76,8 @@ module.exports = {
           console.log('error in fetching user:', err);
           res.send('error:', err);
         } else {
-          console.log('user fetched: ', result);
-          return res.send(result.id);
+          console.log('user fetched: ', res);
+          return res.send(res.id);
         }
       }
     )
