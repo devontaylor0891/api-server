@@ -81,15 +81,15 @@ module.exports = {
           return (res[0].id);
         }
       }
-    ).then(doThePut());
-    function doThePut() {
+    ).then(doThePut(id));
+    function doThePut(id) {
       if (req.body.role === 'consumer') {// if consumer, patch firstName, role, email
         connection.query(
           `UPDATE users SET
           first_name='${req.body.firstName}',
           email='${req.body.email}',
           role='consumer'
-          WHERE user_id='${id}'
+          WHERE id='${id}'
           `
         ), function (err, result) {
           if (err) {
