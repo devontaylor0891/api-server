@@ -77,7 +77,7 @@ module.exports = {
           res.send('error:', err);
         } else {
           console.log('user fetched: ', res);
-          return res.send(res.id);
+          return (res.id);
         }
       }
     )
