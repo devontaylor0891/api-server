@@ -82,7 +82,7 @@ module.exports = {
       //   `
       // ),
       'UPDATE users SET first_name = ?, email = ?, role = ? WHERE id = ?',
-      ['${req.body.firstName}', '${req.body.email}', '${req.body.role}', '${req.params.id}'],
+      ['${req.body.firstName}', '${req.body.email}', '${req.body.role}', req.params.id],
       function (err, result) {
         if (err) {
           console.log('error in update user:', err);
