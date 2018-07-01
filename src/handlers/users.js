@@ -90,7 +90,7 @@ module.exports = {
           UPDATE users SET
           first_name='${req.body.firstName}',
           email='${req.body.email}',
-          role='consumer',
+          role='${req.body.role}'
           WHERE user_id='${req.params.id}';
           SET SQL_SAFE_UPDATES=1;
           `
