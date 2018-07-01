@@ -85,14 +85,10 @@ module.exports = {
     // ).then(doThePut(id));
     // function doThePut(id) {
       if (req.body.role === 'consumer') {// if consumer, patch firstName, role, email
-        let firstName = req.body.firstName;
-        let email = req.body.email;
-        let role = 'consumer';
-        let targetId = req.params.id;
         connection.query(
           `
           SET SQL_SAFE_UPDATES=0;
-          UPDATE users SET first_name=firstName, email=email, role=role WHERE user_id=targetId;
+          UPDATE users SET 'first_name'='${req.body.firstName}', 'email'='${req.body.email}', 'role'='${req.body.role}' WHERE 'user_id'='${req.params.id}';
           SET SQL_SAFE_UPDATES=1;
           `
         ), function (err, result) {
