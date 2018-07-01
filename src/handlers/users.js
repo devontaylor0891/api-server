@@ -70,26 +70,29 @@ module.exports = {
 
   put_users_id: function(req, res) {
     // get the primary key id
-    let id = connection.query(
-      `SELECT * FROM users WHERE user_id='${req.params.id}'`, function (err, res) {
-        if (err) {
-          console.log('error in fetching user:', err);
-          res.send('error:', err);
-        } else {
-          console.log('user fetched: ', res);
-          console.log('res.id', res[0].id);
-          return (res[0].id);
-        }
-      }
-    ).then(doThePut(id));
-    function doThePut(id) {
+    // let id;
+    // connection.query(
+    //   `SELECT * FROM users WHERE user_id='${req.params.id}'`, function (err, res) {
+    //     if (err) {
+    //       console.log('error in fetching user:', err);
+    //       res.send('error:', err);
+    //     } else {
+    //       console.log('user fetched: ', res);
+    //       console.log('res.id', res[0].id);
+    //       id = res[0].id;
+    //     }
+    //   }
+    // ).then(doThePut(id));
+    // function doThePut(id) {
       if (req.body.role === 'consumer') {// if consumer, patch firstName, role, email
         connection.query(
-          `UPDATE users SET
+          `SET SQL_SAFE_UPDATES=0;
+          UPDATE users SET
           first_name='${req.body.firstName}',
           email='${req.body.email}',
           role='consumer'
-          WHERE id='${id}'
+          WHERE user_id='${req.params.id};';
+          SET SQL_SAFE_UPDATES=1;
           `
         ), function (err, result) {
           if (err) {
@@ -103,7 +106,7 @@ module.exports = {
       } else { // if producer, patch consumer values AND producer values
 
       }
-    };
+    // };
     
   },
 
