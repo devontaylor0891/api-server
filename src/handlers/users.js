@@ -86,12 +86,9 @@ module.exports = {
     // function doThePut(id) {
       if (req.body.role === 'consumer') {// if consumer, patch firstName, role, email
         connection.query(
-          `SET SQL_SAFE_UPDATES=0;
-          UPDATE users SET
-          first_name='${req.body.firstName}',
-          email='${req.body.email}',
-          role='${req.body.role}'
-          WHERE user_id='${req.params.id}';
+          `
+          SET SQL_SAFE_UPDATES=0;
+          UPDATE users SET first_name='${req.body.firstName}', email='${req.body.email}', role='consumer' WHERE user_id='${req.params.id}';
           SET SQL_SAFE_UPDATES=1;
           `
         ), function (err, result) {
