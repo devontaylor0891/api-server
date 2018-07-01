@@ -81,14 +81,15 @@ module.exports = {
       //   SET SQL_SAFE_UPDATES=1;
       //   `
       // ),
-      'SET SQL_SAFE_UPDATES=0; UPDATE users SET first_name = ?, email = ?, role = ? WHERE id = ?; SET SQL_SAFE_UPDATES=1;',
+      'UPDATE users SET first_name = ?, email = ?, role = ? WHERE id = ?',
       ['${req.body.firstName}', '${req.body.email}', '${req.body.role}', '${req.params.id}'],
       function (err, result) {
         if (err) {
           console.log('error in update user:', err);
-          res.send('error:', err);
+          res.status(500).send('error:', err);
         } else {
           console.log('user updated: ', result);
+          console.log('req body: ', req.body);
           return res.status(200).send(result);
         }
         
