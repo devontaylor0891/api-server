@@ -90,6 +90,7 @@ module.exports = {
         } else {
           console.log('user updated: ', result);
           console.log('req body: ', req.body);
+          console.log('params: ', req.params);
           return res.status(200).send(result);
         }
         
