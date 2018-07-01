@@ -77,30 +77,33 @@ module.exports = {
           res.send('error:', err);
         } else {
           console.log('user fetched: ', res);
+          console.log('res.id', res.id);
           return (res.id);
         }
       }
-    )
-    if (req.body.role === 'consumer') {// if consumer, patch firstName, role, email
-      connection.query(
-        `UPDATE users SET
-        first_name='${req.body.firstName}',
-        email='${req.body.email}',
-        role='consumer'
-        WHERE user_id='${id}'
-        `
-      ), function (err, result) {
-        if (err) {
-          console.log('error in update user:', err);
-          res.send('error:', err);
-        } else {
-          console.log('user updated: ', result);
-          return res.status(200).send(result);
+    ).then(doThePut());
+    function doThePut() {
+      if (req.body.role === 'consumer') {// if consumer, patch firstName, role, email
+        connection.query(
+          `UPDATE users SET
+          first_name='${req.body.firstName}',
+          email='${req.body.email}',
+          role='consumer'
+          WHERE user_id='${id}'
+          `
+        ), function (err, result) {
+          if (err) {
+            console.log('error in update user:', err);
+            res.send('error:', err);
+          } else {
+            console.log('user updated: ', result);
+            return res.status(200).send(result);
+          }
         }
-      }
-    } else { // if producer, patch consumer values AND producer values
+      } else { // if producer, patch consumer values AND producer values
 
-    }
+      }
+    };
     
   },
 
