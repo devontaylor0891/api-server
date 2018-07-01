@@ -88,7 +88,7 @@ module.exports = {
         connection.query(
           `
           SET SQL_SAFE_UPDATES=0;
-          UPDATE users SET 'first_name'='${req.body.firstName}', 'email'='${req.body.email}', 'role'='${req.body.role}' WHERE 'user_id'='${req.params.id}';
+          UPDATE users SET first_name='${req.body.firstName}', email='${req.body.email}', role='${req.body.role}' WHERE user_id='${req.params.id}';
           SET SQL_SAFE_UPDATES=1;
           `
         ), function (err, result) {
