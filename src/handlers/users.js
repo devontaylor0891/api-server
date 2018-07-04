@@ -71,16 +71,6 @@ module.exports = {
   put_users_id: function(req, res) {
     if (req.body.role === 'consumer') {// if consumer, patch firstName, role, email
       connection.query(
-      //   `
-      //   SET SQL_SAFE_UPDATES=0;
-      //   UPDATE users SET 
-      // first_name='${req.body.firstName}', 
-      // email='${req.body.email}', 
-      // role='${req.body.role}' 
-      // WHERE user_id='${req.params.id}';
-      //   SET SQL_SAFE_UPDATES=1;
-      //   `
-      // ),
       'SET SQL_SAFE_UPDATES=0; UPDATE users SET first_name = ?, email = ?, role = ? WHERE user_id = ?; SET SQL_SAFE_UPDATES=1;',
       [req.body.firstName, req.body.email, req.body.role, req.params.id],
       function (err, result) {

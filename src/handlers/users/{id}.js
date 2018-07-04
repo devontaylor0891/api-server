@@ -8,6 +8,8 @@ module.exports = {
     connection.query(
       `SELECT * FROM users
       WHERE id = ${userId}`, function (error, results) {
+        console.log('req.params.id: ', req.params.id);
+        console.log('results: ', results);
         return res.status(200).send(results);
       }
     )
