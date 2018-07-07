@@ -72,7 +72,7 @@ module.exports = {
     var id = req.params.id;
     connection.query(
       `SELECT * FROM users
-      WHERE user_id = ${id}`, function (error, results) {
+      WHERE user_id = '${id}'`, function (error, results) {
         console.log('req.params.authid: ', req.params.id);
         console.log('results: ', results);
         return res.status(200).send(results);
