@@ -75,7 +75,16 @@ module.exports = {
       WHERE user_id = '${id}'`, function (error, results) {
         console.log('req.params.authid: ', req.params.id);
         console.log('results: ', results);
-        return res.status(200).send(results);
+        let newUser = results.map(function(row) {
+          return {
+            id: row.id,
+            firstName: row.first_name,
+            email: row.email,
+            registrationDate: row.registration_date,
+            role: row.role
+          }
+        })
+        return res.status(200).send(newUser);
       }
     )
   },
