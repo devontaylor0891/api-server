@@ -11,6 +11,7 @@ var router = express.Router();
 router.route('/users').get(users.get_users); // GET all users
 router.route('/users').post(users.post_users); // CREATE a new user
 router.route('/users/:id').get(users.get_users_id); // GET a single user
+router.route('/users/auth/:id').get(users.get_users_auth_id); // GET a single user by auth0 id
 router.route('/users/:id').put(users.put_users_id); // UPDATE a user
 router.route('/users/:id/orders').get(users.get_users_id_orders);
 // BODY: array of products (object with id and qty)

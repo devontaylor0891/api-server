@@ -68,6 +68,18 @@ module.exports = {
 
   },
 
+  get_users_auth_id: function (req, res) {
+    var id = req.params.id;
+    connection.query(
+      `SELECT * FROM users
+      WHERE user_id = ${id}`, function (error, results) {
+        console.log('req.params.id: ', req.params.id);
+        console.log('results: ', results);
+        return res.status(200).send(results);
+      }
+    )
+  },
+
   put_users_id: function(req, res) {
     if (req.body.role === 'consumer') {// if consumer, patch firstName, role, email
       connection.query(

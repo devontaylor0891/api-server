@@ -3,11 +3,11 @@ var connection = require('../../../db');
 
 module.exports = {
   get_users_id: function(req, res) {
-    var userId = req.params.id;
+    var id = req.params.id;
 
     connection.query(
       `SELECT * FROM users
-      WHERE id = ${userId}`, function (error, results) {
+      WHERE id = ${id}`, function (error, results) {
         console.log('req.params.id: ', req.params.id);
         console.log('results: ', results);
         return res.status(200).send(results);
