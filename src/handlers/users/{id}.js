@@ -10,7 +10,7 @@ module.exports = {
       WHERE id = ${id}`, function (error, results) {
         console.log('req.params.id: ', req.params.id);
         console.log('results: ', results);
-        let newUser = result.map(function(row) {
+        let newUser = results.map(function(row) {
           return {
             id: row.id,
             firstName: row.first_name,
