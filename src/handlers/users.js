@@ -90,6 +90,7 @@ module.exports = {
   },
 
   put_users_id: function(req, res) {
+    console.log('put called: ', req.body);
     if (req.body.role === 'consumer') {// if consumer, patch firstName, role, email
       connection.query(
       'SET SQL_SAFE_UPDATES=0; UPDATE users SET first_name = ?, email = ?, role = ? WHERE user_id = ?; SET SQL_SAFE_UPDATES=1;',
