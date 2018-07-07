@@ -50,7 +50,7 @@ module.exports = {
       ) VALUES (
         '${req.body.email}', 
         '${req.body.registrationDate}', 
-        '${req.body.id}'
+        '${req.body.auth0Id}'
       )`, function (err, result) {
         if (err) {
           console.log('error in create user:', err);
