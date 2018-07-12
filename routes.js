@@ -33,7 +33,7 @@ router.route('/products').get(products.get_products);
 router.route('/products/:id').get(products.get_products_id); // will have producer's info
 router.route('/products/:id').patch(products.patch_products_id);
 
-router.route('/search').get(search.get_search);
+router.route('/searchResults').get(search.get_search);
 
 
 module.exports = router;
