@@ -24,6 +24,7 @@ router.route('/producers/:id/products').post(producers.post_producer_id_products
 router.route('/producers/:id/old-products').get(producers.get_producers_id_old_products);
 router.route('/producers/:id/schedules').post(producers.post_producers_id_schedules);
 
+router.route('/schedules').get(schedules.get_schedules);
 router.route('/schedules/:id').delete(schedules.delete_schedules_id);
 router.route('/schedules/:id').put(schedules.put_schedules_id);
 
