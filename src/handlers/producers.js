@@ -142,7 +142,7 @@ module.exports = {
 		Producer.get_producers_id(req, res);
   },
 
-  patch_producer_id: function(req, res) {
+  put_producer_id: function(req, res) {
     console.log(req.params.id);
     var producerId = req.params.id;
     return res.send(201);

@@ -84,7 +84,7 @@ module.exports = {
     Product.get_products_id(req, res);
   },
 
-  patch_products_id: function(req, res) {
+  put_products_id: function(req, res) {
     console.log(req.params.id);
     var productId = req.params.id;
     return res.send(201);
