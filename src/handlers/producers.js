@@ -109,6 +109,35 @@ module.exports = {
     // });
   },
 
+  post_producers: function (req, rest) {
+    let postQuery = {
+      user_id: '${req.body.id}',
+      name: '${req.body.name}',
+      location: '${req.body.city}',
+      province: '${req.body.province}',
+      address: '${req.body.address}',
+      description: '${req.body.description}',
+      email: '${req.body.email}',
+      logoUrl: '${req.body.logoUrl}',
+      longitude: '${req.body.longitude}',
+      latitude: '${req.body.latitude}',
+      status: '${req.body.status}'
+    };
+    connection.query(
+      'INSERT INTO posts SET ?',
+      postQuery,
+      function(err, result) {
+        if (err) {
+          console.log('error in create producer:', err);
+          res.send('error:', err);
+        } else {
+          console.log('producer created: ', result);
+          return res.status(200).send(result);
+        }
+      }
+    )
+  },
+
   get_producers_id: function(req, res) {
 		Producer.get_producers_id(req, res);
   },

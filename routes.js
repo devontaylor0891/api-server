@@ -19,19 +19,19 @@ router.route('/users/:id/orders').post(users.post_users_id_orders);
 
 router.route('/producers').get(producers.get_producers);
 router.route('/producers/:id').get(producers.get_producers_id); // will have products in it and have schedules
-router.route('/producers/:id').patch(producers.patch_producer_id);
+router.route('/producers/:id').put(producers.patch_producer_id);
 router.route('/producers/:id/products').post(producers.post_producer_id_products);
 router.route('/producers/:id/old-products').get(producers.get_producers_id_old_products);
 router.route('/producers/:id/schedules').post(producers.post_producers_id_schedules);
 
 router.route('/schedules/:id').delete(schedules.delete_schedules_id);
-router.route('/schedules/:id').patch(schedules.patch_schedules_id);
+router.route('/schedules/:id').put(schedules.patch_schedules_id);
 
 router.route('/categories').get(categories.get_categories);
 
 router.route('/products').get(products.get_products);
 router.route('/products/:id').get(products.get_products_id); // will have producer's info
-router.route('/products/:id').patch(products.patch_products_id);
+router.route('/products/:id').put(products.patch_products_id);
 
 router.route('/searchResults').get(search.get_search);
 

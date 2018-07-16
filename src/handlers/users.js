@@ -42,16 +42,15 @@ module.exports = {
   },
 
   post_users: function (req, res) {
+    let postQuery = {
+      email: '${req.body.email}',
+      registration_date: '${req.body.registrationDate}',
+      user_id: '${req.body.auth0Id}'
+    };
     connection.query(
-      `INSERT INTO users (
-        email, 
-        registration_date, 
-        user_id
-      ) VALUES (
-        '${req.body.email}', 
-        '${req.body.registrationDate}', 
-        '${req.body.auth0Id}'
-      )`, function (err, result) {
+      'INSERT INTO users SET ?',
+      postQuery,
+      function(err, result) {
         if (err) {
           console.log('error in create user:', err);
           res.send('error:', err);
@@ -60,7 +59,26 @@ module.exports = {
           return res.status(200).send(result);
         }
       }
-    )
+    );
+    // connection.query(
+    //   `INSERT INTO users (
+    //     email, 
+    //     registration_date, 
+    //     user_id
+    //   ) VALUES (
+    //     '${req.body.email}', 
+    //     '${req.body.registrationDate}', 
+    //     '${req.body.auth0Id}'
+    //   )`, function (err, result) {
+    //     if (err) {
+    //       console.log('error in create user:', err);
+    //       res.send('error:', err);
+    //     } else {
+    //       console.log('user created: ', result);
+    //       return res.status(200).send(result);
+    //     }
+    //   }
+    // )
   },
 
   get_users_id: function(req, res) {
