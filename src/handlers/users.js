@@ -43,9 +43,9 @@ module.exports = {
 
   post_users: function (req, res) {
     let postQuery = {
-      email: '${req.body.email}',
-      registration_date: '${req.body.registrationDate}',
-      user_id: '${req.body.auth0Id}'
+      email: `${req.body.email}`,
+      registration_date: `${req.body.registrationDate}`,
+      user_id: `${req.body.auth0Id}`
     };
     connection.query(
       'INSERT INTO users SET ?',
