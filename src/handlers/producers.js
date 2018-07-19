@@ -9,23 +9,25 @@ module.exports = {
       `SELECT * FROM producers
       LEFT JOIN users ON producers.user_id = users.id`,
       function (error, producersResult) {
-        let producers = producersResult.map(row => 
-          ({
-            id = row.user_id,
-            producerId: row.producer_id,
-            name: row.name,
-            location: row.location,
-            province: row.province,
-            longitude: row.longitude,
-            latitude: row.latitude,
-            status: row.status,
-            address: row.address,
-            description: row.description,
-            logoUrl: row.logoUrl,
-            firstName: row.first_name,
-            email: row.email,
-            registrationDate: row.registration_date,
-          })
+        let producers = producersResult.map(function(row) 
+          {
+            return {
+              id: row.user_id,
+              producerId: row.producer_id,
+              name: row.name,
+              location: row.location,
+              province: row.province,
+              longitude: row.longitude,
+              latitude: row.latitude,
+              status: row.status,
+              address: row.address,
+              description: row.description,
+              logoUrl: row.logoUrl,
+              firstName: row.first_name,
+              email: row.email,
+              registrationDate: row.registration_date
+            }
+          }
         );
         console.log('producers Results: ', producersResult);
         return res.status(200).send(producersResult);
