@@ -33,11 +33,7 @@ module.exports = {
         return res.status(200).send(producers);
       }
     )
-    // connection.query(
-    //   `SELECT * FROM producers`, function (error, producersResult) {
-    //     return res.status(200).send(producersResult);
-    //   }
-    // )
+
     // connection.query(`
     //   SELECT pd.*,
     //   u.first_name AS producer_first_name,
