@@ -29,8 +29,8 @@ module.exports = {
             }
           }
         );
-        console.log('producers Results: ', producersResult);
-        return res.status(200).send(producersResult);
+        console.log('producers Results: ', producers);
+        return res.status(200).send(producers);
       }
     )
     // connection.query(
