@@ -11,7 +11,7 @@ module.exports = {
       function (error, producersResult) {
         let producers = producersResult.map(row => 
           ({
-            id: row.user_id,
+            id = row.user_id,
             producerId: row.producer_id,
             name: row.name,
             location: row.location,
