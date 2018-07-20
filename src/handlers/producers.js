@@ -137,7 +137,7 @@ module.exports = {
     let postQuery = {
       user_id: `${req.body.id}`,
       name: `${req.body.name}`,
-      location: `${req.body.city}`,
+      location: `${req.body.location}`,
       province: `${req.body.province}`,
       address: `${req.body.address}`,
       description: `${req.body.description}`,
