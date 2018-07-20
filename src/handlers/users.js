@@ -15,7 +15,8 @@ module.exports = {
               id: row.id,
               firstName: row.first_name,
               email: row.email,
-              registrationDate: row.registration_date
+              registrationDate: row.registration_date,
+              role: row.role
             }
           }
         );
