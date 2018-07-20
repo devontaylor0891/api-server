@@ -183,7 +183,7 @@ module.exports = {
         'category': 'Produce',
         'subcategory': 'Carrots',
         'producer': {
-          'id': 13,
+          'id': 122121130,
           'name': 'Gardenia Farms',
           'location': 'Virden',
           'province': 'MB',
@@ -287,7 +287,7 @@ module.exports = {
         'category': 'Produce',
         'subcategory': 'Potatoes',
         'producer': {
-          'id': 13,
+          'id': 122121130,
           'name': 'Gardenia Farms',
           'location': 'Virden',
           'province': 'MB',
@@ -391,7 +391,7 @@ module.exports = {
         'category': 'Produce',
         'subcategory': 'Beets',
         'producer': {
-          'id': 18,
+          'id': 122121130,
           'name': 'Different Farms',
           'location': 'Whitewood',
           'province': 'SK',
