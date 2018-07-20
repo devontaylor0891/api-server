@@ -8,8 +8,30 @@ module.exports = {
 
     connection.query(
       `SELECT * FROM producers
-      WHERE producer_id = ${producerId}`, function (error, results) {
-        return res.status(200).send(results);
+      LEFT JOIN users ON producers.user_id = users.id
+      WHERE user_id = ${producerId}`, function (error, producerResult) {
+        let producer = producerResult.map(function(row) 
+          {
+            return {
+              id: row.user_id,
+              producerId: row.producer_id,
+              name: row.name,
+              location: row.location,
+              province: row.province,
+              longitude: row.longitude,
+              latitude: row.latitude,
+              status: row.status,
+              address: row.address,
+              description: row.description,
+              logoUrl: row.logoUrl,
+              firstName: row.first_name,
+              email: row.email,
+              registrationDate: row.registration_date
+            }
+          }
+        );
+        console.log('producer Results: ', producer);
+        return res.status(200).send(producer);
       }
     )
 
