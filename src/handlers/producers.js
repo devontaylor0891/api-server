@@ -133,7 +133,7 @@ module.exports = {
     // });
   },
 
-  post_producers: function (req, rest) {
+  post_producers: function (req, res) {
     let postQuery = {
       user_id: '${req.body.id}',
       name: '${req.body.name}',
@@ -141,7 +141,6 @@ module.exports = {
       province: '${req.body.province}',
       address: '${req.body.address}',
       description: '${req.body.description}',
-      email: '${req.body.email}',
       logoUrl: '${req.body.logoUrl}',
       longitude: '${req.body.longitude}',
       latitude: '${req.body.latitude}',
