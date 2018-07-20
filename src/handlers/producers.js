@@ -178,10 +178,6 @@ module.exports = {
     return res.send(201);
   },
 
-  get_producers_id_old_products: function(req, res) {
-    return res.json({});
-  },
-
   get_producer_id_schedules: function(req, res) {
     return res.json({});
   },
