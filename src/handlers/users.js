@@ -7,38 +7,21 @@ var UserByIdOrders = require('./users/{id}/orders');
 module.exports = {
   get_users: function(req, res) {
     connection.query(
-      `SELECT * FROM users`, function (error, usersResult) {
-        return res.status(200).send(usersResult);
+      `SELECT * FROM users`,
+      function (error, usersResult) {
+        let users = usersResult.map(function(row) 
+          {
+            return {
+              id: row.id,
+              firstName: row.first_name,
+              email: row.email,
+              registrationDate: row.registration_date
+            }
+          }
+        );
+        return res.status(200).send(users);
       }
     )
-    // connection.query(`
-    //   SELECT u.*, p.id AS producer_id
-    //   FROM users AS u
-    //   LEFT JOIN producers p
-    //     on p.user_id = u.id`, function (error, usersResult) {
-    //   if (usersResult.length === 0) {
-    //     res.status(404).send({ message: "Users not found"});
-    //     return;
-    //   }
-    //   console.log("usersResult 1:", usersResult);
-    //   connection.query(`
-    //     SELECT * FROM orders`, function (error, ordersResults) {
-    //     const ordersGroupedBy = _(ordersResults)
-    //       .groupBy('user_id')
-    //       .value();
-    //     var users = usersResult.map(function(row) {
-    //       return {
-    //         id: row.id,
-    //         firstName: row.first_name,
-    //         email: row.email,
-    //         registrationDate: row.registration_date,
-    //         role: row.producer_id ? 'producer' : 'consumer',
-    //         orders: ordersGroupedBy[row.id] || [],
-    //       }
-    //     });
-    //     res.status(200).send(users);
-    //   });
-    // });
   },
 
   post_users: function (req, res) {
@@ -60,25 +43,6 @@ module.exports = {
         }
       }
     );
-    // connection.query(
-    //   `INSERT INTO users (
-    //     email, 
-    //     registration_date, 
-    //     user_id
-    //   ) VALUES (
-    //     '${req.body.email}', 
-    //     '${req.body.registrationDate}', 
-    //     '${req.body.auth0Id}'
-    //   )`, function (err, result) {
-    //     if (err) {
-    //       console.log('error in create user:', err);
-    //       res.send('error:', err);
-    //     } else {
-    //       console.log('user created: ', result);
-    //       return res.status(200).send(result);
-    //     }
-    //   }
-    // )
   },
 
   get_users_id: function(req, res) {

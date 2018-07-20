@@ -167,9 +167,7 @@ module.exports = {
   },
 
   put_producer_id: function(req, res) {
-    console.log(req.params.id);
-    var producerId = req.params.id;
-    return res.send(201);
+    Producer.put_producers_id(req, res);
   },
 
   post_producer_id_products: function(req, res) {
