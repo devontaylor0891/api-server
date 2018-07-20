@@ -135,16 +135,16 @@ module.exports = {
 
   post_producers: function (req, res) {
     let postQuery = {
-      user_id: '${req.body.id}',
-      name: '${req.body.name}',
-      location: '${req.body.city}',
-      province: '${req.body.province}',
-      address: '${req.body.address}',
-      description: '${req.body.description}',
-      logoUrl: '${req.body.logoUrl}',
-      longitude: '${req.body.longitude}',
-      latitude: '${req.body.latitude}',
-      status: '${req.body.status}'
+      user_id: `${req.body.id}`,
+      name: `${req.body.name}`,
+      location: `${req.body.city}`,
+      province: `${req.body.province}`,
+      address: `${req.body.address}`,
+      description: `${req.body.description}`,
+      logoUrl: `${req.body.logoUrl}`,
+      longitude: `${req.body.longitude}`,
+      latitude: `${req.body.latitude}`,
+      status: `${req.body.status}`
     };
     console.log('postQuery: ', postQuery);
     connection.query(
