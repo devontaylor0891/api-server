@@ -45,7 +45,7 @@ module.exports = {
     let postQuery = {
       email: `${req.body.email}`,
       registration_date: `${req.body.registrationDate}`,
-      user_id: `${req.body.auth0Id}`
+      auth0_id: `${req.body.auth0Id}`
     };
     connection.query(
       'INSERT INTO users SET ?',
@@ -90,7 +90,7 @@ module.exports = {
     var id = req.params.id;
     connection.query(
       `SELECT * FROM users
-      WHERE user_id = '${id}'`, function (error, results) {
+      WHERE auth0_id = '${id}'`, function (error, results) {
         console.log('req.params.authid: ', req.params.id);
         console.log('results: ', results);
         let newUser = results.map(function(row) {
