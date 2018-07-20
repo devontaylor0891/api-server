@@ -148,7 +148,7 @@ module.exports = {
       status: '${req.body.status}'
     };
     connection.query(
-      'INSERT INTO posts SET ?',
+      'INSERT INTO producers SET ?',
       postQuery,
       function(err, result) {
         if (err) {
