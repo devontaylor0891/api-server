@@ -146,6 +146,7 @@ module.exports = {
       latitude: '${req.body.latitude}',
       status: '${req.body.status}'
     };
+    console.log('postQuery: ', postQuery);
     connection.query(
       'INSERT INTO producers SET ?',
       postQuery,
