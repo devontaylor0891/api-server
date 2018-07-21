@@ -40,7 +40,8 @@ module.exports = {
         let products = productsResult.map(function(row) {
         console.log('productsResult: ', productsResult)
         return res.status(201);
-        }
+        })
+      }
     )
     // connection.query(
     //   `SELECT * FROM products`, function (error, productsResult) {
