@@ -6,7 +6,7 @@ module.exports = {
   get_products: function(req, res) {
     connection.query(
       `SELECT *, producers.user_id AS pId, producers.name AS pName FROM products
-      LEFT JOIN producers ON products.producer_id_fk_products = producers.producer_id`, function (error, productsResult) {
+      LEFT JOIN producers ON products.user_id_fk_products = producers.user_id`, function (error, productsResult) {
         let products = productsResult.map(function(row) {
           return {
             id: row.product_id,
