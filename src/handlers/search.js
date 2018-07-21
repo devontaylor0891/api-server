@@ -17,7 +17,7 @@ module.exports = {
         'category': 'Meat',
         'subcategory': 'Pork',
         'producer': {
-          'id': 10156726911823276,
+          'id': 123123129,
           'name': 'Gardenzia Farms',
           'location': 'Virden',
           'province': 'MB',
@@ -100,7 +100,7 @@ module.exports = {
         'category': 'Meat',
         'subcategory': 'Beef',
         'producer': {
-          'id': 10156726911823276,
+          'id': 123123129,
           'name': 'Gardenzia Farms',
           'location': 'Virden',
           'province': 'MB',
@@ -391,7 +391,7 @@ module.exports = {
         'category': 'Produce',
         'subcategory': 'Beets',
         'producer': {
-          'id': 122121130,
+          'id': 123123129,
           'name': 'Different Farms',
           'location': 'Whitewood',
           'province': 'SK',
