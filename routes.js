@@ -4,6 +4,7 @@ var categories = require('./src/handlers/categories');
 var products = require('./src/handlers/products');
 var schedules = require('./src/handlers/schedules');
 var search = require('./src/handlers/search');
+var orders = require('./src/handlers/orders');
 var express = require('express');
 
 var router = express.Router();
