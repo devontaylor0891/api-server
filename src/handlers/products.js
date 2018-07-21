@@ -5,43 +5,54 @@ var Product = require('./products/{id}');
 module.exports = {
   get_products: function(req, res) {
     connection.query(
-      // `SELECT *, producers.user_id AS pId, producers.name AS pName FROM products
-      // LEFT JOIN producers ON products.producer_id_fk_products = producers.producer_id`, function (error, productsResult) {
-      //   let products = productsResult.map(function(row) {
-      //     return {
-      //       id: row.product_id,
-      //       name: row.name,
-      //       description: row.description,
-      //       image: row.image,
-      //       pricePerUnit: row.pricePerUnit,
-      //       unit: row.unit,
-      //       unitsPer: row.unitsPer,
-      //       category: row.category,
-      //       subcategory: row.subcategory,
-      //       producer: {
-      //         id: row.pId,
-      //         name: row.pName
-      //       },
-      //       dateAdded: row.date_added,
-      //       qtyAvailable: row.qty_available,
-      //       qtyPending: row.qty_pending,
-      //       qtyAccepted: row.qty_accepted,
-      //       qtyCompleted: row.qty_completed,
-      //       isObsolete: row.is_obsolete
-      //     }
-      //   });
-      //   return res.status(200).send(products);
-      // }
-      // `SELECT * FROM products`, function (error, productsResult) {
-      //       return res.status(200).send(productsResult);
-      //     }
-      `SELECT * FROM products, producers
-      WHERE products.producer_id_fk_products = producers.producer_id`, function (error, productsResult) {
+      `SELECT 
+      products.product_id,
+      products.name AS productName,
+      products.description,
+      products.image,
+      products.pricePerUnit,
+      products.unit,
+      products.unitsPer,
+      products.category,
+      products.subcategory,
+      products.date_added,
+      products.qty_available,
+      products.qty_pending,
+      products.qty_accepted,
+      products.qty_completed,
+      products.is_obsolete,
+      producers.user_id AS pId,
+      producers.name AS pName 
+      FROM products
+      LEFT JOIN producers ON products.producer_id_fk_products = producers.producer_id`, function (error, productsResult) {
         let products = productsResult.map(function(row) {
-        console.log('productsResult: ', productsResult)
-        return res.status(201);
-        })
+          return {
+            id: row.product_id,
+            name: row.productName,
+            description: row.description,
+            image: row.image,
+            pricePerUnit: row.pricePerUnit,
+            unit: row.unit,
+            unitsPer: row.unitsPer,
+            category: row.category,
+            subcategory: row.subcategory,
+            producer: {
+              id: row.pId,
+              name: row.pName
+            },
+            dateAdded: row.date_added,
+            qtyAvailable: row.qty_available,
+            qtyPending: row.qty_pending,
+            qtyAccepted: row.qty_accepted,
+            qtyCompleted: row.qty_completed,
+            isObsolete: row.is_obsolete
+          }
+        });
+        return res.status(200).send(products);
       }
+      `SELECT * FROM products`, function (error, productsResult) {
+            return res.status(200).send(productsResult);
+          }
     )
     // connection.query(
     //   `SELECT * FROM products`, function (error, productsResult) {
