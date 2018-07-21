@@ -39,6 +39,8 @@ router.route('/products/:id').get(products.get_products_id); // will have produc
 router.route('/products/:id').put(products.put_products_id);
 // delete product/id
 
+router.route('/orders').get(orders.get_orders);
+
 router.route('/searchResults').get(search.get_search);
 
 
