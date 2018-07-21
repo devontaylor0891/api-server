@@ -53,9 +53,9 @@ module.exports = {
         });
         return res.status(200).send(products);
       }
-      `SELECT * FROM products`, function (error, productsResult) {
-            return res.status(200).send(productsResult);
-          }
+      // `SELECT * FROM products`, function (error, productsResult) {
+      //       return res.status(200).send(productsResult);
+      //     }
     )
     // connection.query(
     //   `SELECT * FROM products`, function (error, productsResult) {
