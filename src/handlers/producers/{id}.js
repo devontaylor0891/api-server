@@ -40,7 +40,15 @@ module.exports = {
     return res.status(201);
   },
   get_producer_id_products: function(req, res) {
-    console.log('get producer products called: ', req);
-    return res.sendStatus(201);
+    let userId = req.params.id'
+    connection.query(
+      `SELECT * from products
+      WHERE user_id_fk_products = ${userId}`,
+      function(error, productsResults) {
+        return productsResults;
+      }
+    )
+    console.log('get producer products called: ', productsResults);
+    return res.status(200).send(productsResults);
   }
 };
