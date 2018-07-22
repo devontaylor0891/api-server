@@ -42,12 +42,37 @@ module.exports = {
   get_producer_id_products: function(req, res) {
     let userId = req.params.id;
     connection.query(
-      `SELECT * from products
-      WHERE user_id_fk_products = ${userId}`,
-      function(error, productsResults) {
-        console.log('get producer products called: ', productsResults);
-        return res.status(200).send(productsResults);
+      `SELECT * FROM products
+      WHERE user_id_fk_products = ${userId}`, 
+      function (error, productsResult) {
+        console.log('productsResults: ', productsResult);
+        let products = productsResult.map(function(row) {
+          return {
+            id: row.product_id,
+            name: row.name,
+            description: row.description,
+            image: row.image,
+            pricePerUnit: row.pricePerUnit,
+            unit: row.unit,
+            unitsPer: row.unitsPer,
+            category: row.category,
+            subcategory: row.subcategory,
+            dateAdded: row.date_added,
+            qtyAvailable: row.qty_available,
+            qtyPending: row.qty_pending,
+            qtyAccepted: row.qty_accepted,
+            qtyCompleted: row.qty_completed,
+            isObsolete: row.is_obsolete
+          }
+        });
+        return res.status(200).send(products);
       }
+      // `SELECT * from products
+      // WHERE user_id_fk_products = ${userId}`,
+      // function(error, productsResults) {
+      //   console.log('get producer products called: ', productsResults);
+      //   return res.status(200).send(productsResults);
+      // }
     )
   }
 };
