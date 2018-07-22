@@ -7,7 +7,7 @@ var search = require('./src/handlers/search');
 var orders = require('./src/handlers/orders');
 var express = require('express');
 
-var router = express.Router();
+var router = express.Router({ mergeParams: true });
 
 router.route('/users').get(users.get_users); // GET all users
 router.route('/users').post(users.post_users); // CREATE a new user
