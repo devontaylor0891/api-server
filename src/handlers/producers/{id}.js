@@ -40,7 +40,7 @@ module.exports = {
     return res.status(201);
   },
   get_producer_id_products: function(req, res) {
-    let userId = req.params.id'
+    let userId = req.params.id;
     connection.query(
       `SELECT * from products
       WHERE user_id_fk_products = ${userId}`,
