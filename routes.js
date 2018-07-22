@@ -21,7 +21,7 @@ router.route('/producers').get(producers.get_producers);
 router.route('/producers').post(producers.post_producers);
 router.route('/producers/:id').get(producers.get_producers_id); // will have products in it and have schedules
 router.route('/producers/:id').put(producers.put_producer_id);
-// router.route('/producers/:id/products').get(producers.get_producer_id_products);
+router.route('/producers/:id/products').get(producers.get_producer_id_products);
 router.route('/producers/:id/products').post(producers.post_producer_id_products);
 // router.route('/producers/:id/old-products').get(producers.get_producers_id_old_products);
 // router.route('/producers/:id/schedules').post(producers.post_producers_id_schedules);
@@ -35,7 +35,7 @@ router.route('/schedules/:id').put(schedules.put_schedules_id);
 
 // router.route('/categories').get(categories.get_categories);
 
-router.route('/products').get(products.get_products);
+router.route('/products').get(products.get_products); // for admin dash only
 router.route('/products/:id').get(products.get_products_id); // will have producer's info
 router.route('/products/:id').put(products.put_products_id);
 // delete product/id

@@ -170,6 +170,10 @@ module.exports = {
     Producer.put_producers_id(req, res);
   },
 
+  get_producer_id_products: function (req, res) {
+    Producer.get_producer_id_products(req, res);
+  },
+
   post_producer_id_products: function(req, res) {
     console.log(req.params.id);
     var producerId = req.params.id;
