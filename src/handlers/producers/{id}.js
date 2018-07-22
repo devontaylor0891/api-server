@@ -45,7 +45,6 @@ module.exports = {
       `SELECT * from products
       WHERE user_id_fk_products = ${userId}`,
       function(error, productsResults) {
-        return productsResults;
         console.log('get producer products called: ', productsResults);
         return res.status(200).send(productsResults);
       }
