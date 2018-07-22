@@ -41,6 +41,6 @@ module.exports = {
   },
   get_producer_id_products: function(req, res) {
     console.log('get producer products called: ', req);
-    return res.status(201);
+    return res.send(201);
   }
 };
