@@ -79,7 +79,7 @@ module.exports = {
     let userId = req.params.id;
     connection.query(
       `SELECT * FROM schedules
-      WHERE user_id_fk_schedules = ${userid}`,
+      WHERE user_id_fk_schedules = ${userId}`,
       function (error, schedulesResult) {
         let schedules = schedulesResult.map(function(row) {
           return {
