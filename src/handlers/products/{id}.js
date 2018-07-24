@@ -31,7 +31,30 @@ module.exports = {
       ON products.producer_id_fk_products = producers.producer_id
       WHERE product_id = ${productId}`,
       function (error, results) {
-        return res.status(200).send(results);
+        let product = productResult.map(function(row) {
+          return {
+            id: row.product_id,
+            name: row.productName,
+            description: row.description,
+            image: row.image,
+            pricePerUnit: row.pricePerUnit,
+            unit: row.unit,
+            unitsPer: row.unitsPer,
+            category: row.category,
+            subcategory: row.subcategory,
+            producer: {
+              id: row.pId,
+              name: row.pName
+            },
+            dateAdded: row.date_added,
+            qtyAvailable: row.qty_available,
+            qtyPending: row.qty_pending,
+            qtyAccepted: row.qty_accepted,
+            qtyCompleted: row.qty_completed,
+            isObsolete: row.is_obsolete
+          }
+        });
+        return res.status(200).send(product);
       }
     )
 
