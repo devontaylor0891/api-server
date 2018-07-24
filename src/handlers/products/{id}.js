@@ -30,7 +30,7 @@ module.exports = {
       LEFT JOIN producers 
       ON products.producer_id_fk_products = producers.producer_id
       WHERE product_id = ${productId}`,
-      function (error, results) {
+      function (error, productResult) {
         let product = productResult.map(function(row) {
           return {
             id: row.product_id,
