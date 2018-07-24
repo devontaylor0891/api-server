@@ -181,7 +181,7 @@ module.exports = {
   },
 
   get_producer_id_schedules: function(req, res) {
-    return res.json({});
+    Producer.get_producer_id_schedules(req, res);
   },
 
   post_producers_id_schedules: function(req, res) {

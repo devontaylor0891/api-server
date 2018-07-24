@@ -23,12 +23,11 @@ router.route('/producers/:id').get(producers.get_producers_id); // will have pro
 router.route('/producers/:id').put(producers.put_producer_id);
 router.route('/producersProducts/:id').get(producers.get_producer_id_products);
 router.route('/producers/:id/products').post(producers.post_producer_id_products);
-// router.route('/producers/:id/old-products').get(producers.get_producers_id_old_products);
-// router.route('/producers/:id/schedules').post(producers.post_producers_id_schedules);
-// get producer/id/schedules
+router.route('/producersSchedules/:id').get(producers.get_producer_id_schedules);
 // get producer/id/orders
 
 router.route('/schedules').get(schedules.get_schedules);
+router.route('/schedules').post(schedules.post_schedules);
 router.route('/schedules/:id').delete(schedules.delete_schedules_id);
 router.route('/schedules/:id').put(schedules.put_schedules_id);
 // post new sched
@@ -38,7 +37,7 @@ router.route('/schedules/:id').put(schedules.put_schedules_id);
 router.route('/products').get(products.get_products); // for admin dash only
 router.route('/products/:id').get(products.get_products_id); // will have producer's info
 router.route('/products/:id').put(products.put_products_id);
-// delete product/id
+router.route('/products/:id').delete(products.delete_products_id);
 
 router.route('/orders').get(orders.get_orders);
 
