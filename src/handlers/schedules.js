@@ -45,4 +45,8 @@ module.exports = {
     return res.send(201);
   },
 
+  post_schedules: function (req, res) {
+    return res.send(201);
+  }
+
 };

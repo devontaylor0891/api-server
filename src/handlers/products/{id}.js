@@ -6,9 +6,55 @@ module.exports = {
     var productId = req.params.id;
     console.log("productId", productId);
     connection.query(
-      `SELECT * FROM products
-      WHERE product_id = ${productId}`, function (error, results) {
-        return res.status(200).send(results);
+      // `SELECT * FROM products
+      // WHERE product_id = ${productId}`,
+      `SELECT 
+      products.product_id,
+      products.name AS productName,
+      products.description,
+      products.image,
+      products.pricePerUnit,
+      products.unit,
+      products.unitsPer,
+      products.category,
+      products.subcategory,
+      products.date_added,
+      products.qty_available,
+      products.qty_pending,
+      products.qty_accepted,
+      products.qty_completed,
+      products.is_obsolete,
+      producers.user_id AS pId,
+      producers.name AS pName 
+      FROM products
+      LEFT JOIN producers 
+      ON products.producer_id_fk_products = producers.producer_id
+      WHERE product_id = ${productId}`,
+      function (error, productResult) {
+        let product = productResult.map(function(row) {
+          return {
+            id: row.product_id,
+            name: row.productName,
+            description: row.description,
+            image: row.image,
+            pricePerUnit: row.pricePerUnit,
+            unit: row.unit,
+            unitsPer: row.unitsPer,
+            category: row.category,
+            subcategory: row.subcategory,
+            producer: {
+              id: row.pId,
+              name: row.pName
+            },
+            dateAdded: row.date_added,
+            qtyAvailable: row.qty_available,
+            qtyPending: row.qty_pending,
+            qtyAccepted: row.qty_accepted,
+            qtyCompleted: row.qty_completed,
+            isObsolete: row.is_obsolete
+          }
+        });
+        return res.status(200).send(product);
       }
     )
 

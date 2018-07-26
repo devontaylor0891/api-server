@@ -133,22 +133,22 @@ module.exports = {
     // });
   },
 
-  post_producers: function (req, rest) {
+  post_producers: function (req, res) {
     let postQuery = {
-      user_id: '${req.body.id}',
-      name: '${req.body.name}',
-      location: '${req.body.city}',
-      province: '${req.body.province}',
-      address: '${req.body.address}',
-      description: '${req.body.description}',
-      email: '${req.body.email}',
-      logoUrl: '${req.body.logoUrl}',
-      longitude: '${req.body.longitude}',
-      latitude: '${req.body.latitude}',
-      status: '${req.body.status}'
+      user_id: `${req.body.id}`,
+      name: `${req.body.name}`,
+      location: `${req.body.location}`,
+      province: `${req.body.province}`,
+      address: `${req.body.address}`,
+      description: `${req.body.description}`,
+      logoUrl: `${req.body.logoUrl}`,
+      longitude: `${req.body.longitude}`,
+      latitude: `${req.body.latitude}`,
+      status: `${req.body.status}`
     };
+    console.log('postQuery: ', postQuery);
     connection.query(
-      'INSERT INTO posts SET ?',
+      'INSERT INTO producers SET ?',
       postQuery,
       function(err, result) {
         if (err) {
@@ -167,9 +167,11 @@ module.exports = {
   },
 
   put_producer_id: function(req, res) {
-    console.log(req.params.id);
-    var producerId = req.params.id;
-    return res.send(201);
+    Producer.put_producers_id(req, res);
+  },
+
+  get_producer_id_products: function (req, res) {
+    Producer.get_producer_id_products(req, res);
   },
 
   post_producer_id_products: function(req, res) {
@@ -178,12 +180,8 @@ module.exports = {
     return res.send(201);
   },
 
-  get_producers_id_old_products: function(req, res) {
-    return res.json({});
-  },
-
   get_producer_id_schedules: function(req, res) {
-    return res.json({});
+    Producer.get_producer_id_schedules(req, res);
   },
 
   post_producers_id_schedules: function(req, res) {

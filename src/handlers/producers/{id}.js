@@ -8,90 +8,102 @@ module.exports = {
 
     connection.query(
       `SELECT * FROM producers
-      WHERE producer_id = ${producerId}`, function (error, results) {
-        return res.status(200).send(results);
+      LEFT JOIN users ON producers.user_id = users.id
+      WHERE user_id = ${producerId}`, function (error, producerResult) {
+        let producer = producerResult.map(function(row) 
+          {
+            return {
+              id: row.user_id,
+              producerId: row.producer_id,
+              name: row.name,
+              location: row.location,
+              province: row.province,
+              longitude: row.longitude,
+              latitude: row.latitude,
+              status: row.status,
+              address: row.address,
+              description: row.description,
+              logoUrl: row.logoUrl,
+              firstName: row.first_name,
+              email: row.email,
+              registrationDate: row.registration_date
+            }
+          }
+        );
+        console.log('producer Results: ', producer);
+        return res.status(200).send(producer);
       }
     )
-
-    // connection.query(`
-    //   SELECT pd.*,
-    //   u.first_name AS producer_first_name,
-    //   u.email AS producer_email,
-    //   u.registration_date AS producer_registration_date
-    //   FROM producers pd
-    //     LEFT JOIN users u
-    //       on pd.user_id = u.id
-    //   WHERE pd.id = ${producerId};`, function (error, results) {
-    //   if (results.length === 0) {
-    //     res.status(404).send({ message: "Producer not found"});
-    //     return;
-    //   }
-    //   console.log("results 1", results);
-    //   var producer = {
-    //     id: results[0].id,
-    //     name: results[0].name,
-    //     location: results[0].city,
-    //     province: "SK",
-    //     description: 'This is the description. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    //     email: results[0].producer_email,
-    //     logoURL: '/images/product.jpg',
-    //     longitude: results[0].latitude,
-    //     latitude: results[0].longitude,
-    //     firstName: results[0].producer_first_name,
-    //     registrationDate: results[0].producer_registration_date,
-    //     status: "active",
-    //   };
-      // connection.query(`SELECT * FROM products WHERE producer_id = ${producerId}`, function (error, results) {
-      //   console.log("results 2", results);
-      //   var products = results.map(function(row) {
-      //     return {
-      //       id: row.id,
-      //       name: row.name,
-      //       description: row.description,
-      //       image: row.image,
-      //       pricePerUnit: row.price,
-      //       unit: row.unit,
-      //       unitsPer: '1',
-      //       category: row.category,
-      //       subcategory: row.subcategory_id,
-      //       dateAdded: "2017-12-02T01:00:00.000Z",
-      //       qtyAvailable: row.quantity_avaliable,
-      //       qtyPending: row.quantity_pending,
-      //       qtyAccepted: row.quantity_accepted,
-      //       qtyCompleted: row.quantity_completed,
-      //       isObsolete: false,
-      //       scheduleList: [
-      //         444,
-      //         445,
-      //         789
-      //       ],
-      //     };
-      //   });
-      //   producer.products = products;
-
-        // connection.query(`SELECT * FROM delivery WHERE producer_id = ${producerId}`, function (error, results) {
-        //   console.log("results 3:", results);
-        //   var schedule = results.map(function(row) {
-        //     return {
-        //       id: row.id,
-        //       type: row.type,
-        //       description: row.details,
-        //       startDateTime: row.start_time,
-        //       endDateTime: row.end_time,
-        //       hasFee: row.delivery_fee,
-        //       feeWaiver: row.fee_waiver_value,
-        //       latitude: row.latitude,
-        //       longitude: row.longitude,
-        //       city: row.location,
-        //       address: "Hard coded address",
-        //       province: "Hard coded province",
-        //       orderDeadline: "What is this"
-        //     };
-        //   });
-        //   producer.schedule = schedule;
-        //   res.status(200).send(producer);
-        // });
-      // });
-    // });
   },
+  put_producers_id: function(req, res) {
+    console.log('put producer called, id: ', req.params.id);
+    return res.status(201);
+  },
+  get_producer_id_products: function(req, res) {
+    let userId = req.params.id;
+    connection.query(
+      `SELECT * FROM products
+      WHERE user_id_fk_products = ${userId}`, 
+      function (error, productsResult) {
+        console.log('productsResults: ', productsResult);
+        let products = productsResult.map(function(row) {
+          return {
+            id: row.product_id,
+            name: row.name,
+            description: row.description,
+            image: row.image,
+            pricePerUnit: row.pricePerUnit,
+            unit: row.unit,
+            unitsPer: row.unitsPer,
+            category: row.category,
+            subcategory: row.subcategory,
+            dateAdded: row.date_added,
+            qtyAvailable: row.qty_available,
+            qtyPending: row.qty_pending,
+            qtyAccepted: row.qty_accepted,
+            qtyCompleted: row.qty_completed,
+            isObsolete: row.is_obsolete
+          }
+        });
+        return res.status(200).send(products);
+      }
+      // `SELECT * from products
+      // WHERE user_id_fk_products = ${userId}`,
+      // function(error, productsResults) {
+      //   console.log('get producer products called: ', productsResults);
+      //   return res.status(200).send(productsResults);
+      // }
+    )
+  },
+  get_producer_id_schedules: function(req, res) {
+    let userId = req.params.id;
+    connection.query(
+      `SELECT * FROM schedules
+      WHERE user_id_fk_schedules = ${userId}`,
+      function (error, schedulesResult) {
+        let schedules = schedulesResult.map(function(row) {
+          return {
+            id: row.schedule_id,
+            producerId: row.producer_id_fk_s,
+            userId: row.user_id_fk_schedules,
+            type: row.schedule_type,
+            description: row.description,
+            startDateTime: row.start_date_time,
+            endDateTime: row.end_date_time,
+            hasFee: row.has_fee,
+            hasWiaver: row.has_waiver,
+            latitude: row.latitude,
+            longitude: row.longitude,
+            city: row.city,
+            province: row.province,
+            orderDeadline: row.order_deadline,
+            address: row.address,
+            fee: row.fee,
+            feeWaiver: row.fee_waiver
+          }
+        });
+        return res.status(200).send(schedules);
+      }
+    )
+  }
 };

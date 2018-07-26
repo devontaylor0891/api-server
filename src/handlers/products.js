@@ -5,12 +5,42 @@ var Product = require('./products/{id}');
 module.exports = {
   get_products: function(req, res) {
     connection.query(
+<<<<<<< HEAD
       `SELECT *, producers.user_id AS pId, producers.name AS pName FROM products
       LEFT JOIN producers ON products.producer_id_fk_products = producers.producer_id`, function (error, productsResult) {
         let products = productsResult.map(function(row) {
           return {
             id: row.product_id,
             name: row.name,
+=======
+      `SELECT 
+      products.product_id,
+      products.name AS productName,
+      products.description,
+      products.image,
+      products.pricePerUnit,
+      products.unit,
+      products.unitsPer,
+      products.category,
+      products.subcategory,
+      products.date_added,
+      products.qty_available,
+      products.qty_pending,
+      products.qty_accepted,
+      products.qty_completed,
+      products.is_obsolete,
+      producers.user_id AS pId,
+      producers.name AS pName 
+      FROM products
+      LEFT JOIN producers 
+      ON products.producer_id_fk_products = producers.producer_id`, 
+      function (error, productsResult) {
+        console.log('productsResults: ', productsResult);
+        let products = productsResult.map(function(row) {
+          return {
+            id: row.product_id,
+            name: row.productName,
+>>>>>>> f3577e0d025dd5c68e69b189bc6dbb83670672c4
             description: row.description,
             image: row.image,
             pricePerUnit: row.pricePerUnit,
@@ -32,6 +62,9 @@ module.exports = {
         });
         return res.status(200).send(products);
       }
+      // `SELECT * FROM products`, function (error, productsResult) {
+      //       return res.status(200).send(productsResult);
+      //     }
     )
     // connection.query(
     //   `SELECT * FROM products`, function (error, productsResult) {
@@ -118,4 +151,10 @@ module.exports = {
     var productId = req.params.id;
     return res.send(201);
   },
+
+  delete_products_id: function(req, res) {
+    console.log(req.params.id);
+    var productId = req.params.id;
+    return res.send(201);
+  }
 };
