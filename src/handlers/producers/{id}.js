@@ -42,14 +42,34 @@ module.exports = {
   get_producer_id_products: function(req, res) {
     let userId = req.params.id;
     connection.query(
-      `SELECT * FROM products
+      `SELECT 
+      products.product_id,
+      products.name AS productName,
+      products.description,
+      products.image,
+      products.pricePerUnit,
+      products.unit,
+      products.unitsPer,
+      products.category,
+      products.subcategory,
+      products.date_added,
+      products.qty_available,
+      products.qty_pending,
+      products.qty_accepted,
+      products.qty_completed,
+      products.is_obsolete,
+      producers.user_id AS pId,
+      producers.name AS pName 
+      FROM products
+      LEFT JOIN producers 
+      ON products.producer_id_fk_products = producers.producer_id
       WHERE user_id_fk_products = ${userId}`, 
       function (error, productsResult) {
         console.log('productsResults: ', productsResult);
         let products = productsResult.map(function(row) {
           return {
             id: row.product_id,
-            name: row.name,
+            name: row.productName,
             description: row.description,
             image: row.image,
             pricePerUnit: row.pricePerUnit,
@@ -57,6 +77,10 @@ module.exports = {
             unitsPer: row.unitsPer,
             category: row.category,
             subcategory: row.subcategory,
+            producer: {
+              id: row.pId,
+              name: row.pName
+            },
             dateAdded: row.date_added,
             qtyAvailable: row.qty_available,
             qtyPending: row.qty_pending,
@@ -67,11 +91,30 @@ module.exports = {
         });
         return res.status(200).send(products);
       }
-      // `SELECT * from products
-      // WHERE user_id_fk_products = ${userId}`,
-      // function(error, productsResults) {
-      //   console.log('get producer products called: ', productsResults);
-      //   return res.status(200).send(productsResults);
+      // `SELECT * FROM products
+      // WHERE user_id_fk_products = ${userId}`, 
+      // function (error, productsResult) {
+      //   console.log('productsResults: ', productsResult);
+      //   let products = productsResult.map(function(row) {
+      //     return {
+      //       id: row.product_id,
+      //       name: row.name,
+      //       description: row.description,
+      //       image: row.image,
+      //       pricePerUnit: row.pricePerUnit,
+      //       unit: row.unit,
+      //       unitsPer: row.unitsPer,
+      //       category: row.category,
+      //       subcategory: row.subcategory,
+      //       dateAdded: row.date_added,
+      //       qtyAvailable: row.qty_available,
+      //       qtyPending: row.qty_pending,
+      //       qtyAccepted: row.qty_accepted,
+      //       qtyCompleted: row.qty_completed,
+      //       isObsolete: row.is_obsolete
+      //     }
+      //   });
+      //   return res.status(200).send(products);
       // }
     )
   },
