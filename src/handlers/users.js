@@ -7,19 +7,6 @@ var UserByIdOrders = require('./users/{id}/orders');
 module.exports = {
   get_users: function(req, res) {
     connection.query(
-<<<<<<< HEAD
-      `SELECT * FROM users`, function (error, usersResult) {
-        let users = usersResult.map(function(row) {
-          return {
-            id: row.id,
-            firstName: row.first_name,
-            email: row.email,
-            role: row.role,
-            registrationDate: row.registration_date,
-            userId: row.user_id
-          }
-        });
-=======
       `SELECT * FROM users`,
       function (error, usersResult) {
         let users = usersResult.map(function(row) 
@@ -33,7 +20,6 @@ module.exports = {
             }
           }
         );
->>>>>>> f3577e0d025dd5c68e69b189bc6dbb83670672c4
         return res.status(200).send(users);
       }
     )

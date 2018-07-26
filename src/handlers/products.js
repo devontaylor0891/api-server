@@ -5,14 +5,6 @@ var Product = require('./products/{id}');
 module.exports = {
   get_products: function(req, res) {
     connection.query(
-<<<<<<< HEAD
-      `SELECT *, producers.user_id AS pId, producers.name AS pName FROM products
-      LEFT JOIN producers ON products.producer_id_fk_products = producers.producer_id`, function (error, productsResult) {
-        let products = productsResult.map(function(row) {
-          return {
-            id: row.product_id,
-            name: row.name,
-=======
       `SELECT 
       products.product_id,
       products.name AS productName,
@@ -40,7 +32,6 @@ module.exports = {
           return {
             id: row.product_id,
             name: row.productName,
->>>>>>> f3577e0d025dd5c68e69b189bc6dbb83670672c4
             description: row.description,
             image: row.image,
             pricePerUnit: row.pricePerUnit,
