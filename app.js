@@ -13,7 +13,7 @@ var routes = require('./routes');
 
 var app = express();
 
-app.use(cors());
+app.options('*', cors());
 
 app.use(bodyParser.json({ type: 'application/json' }));
 
