@@ -36,8 +36,36 @@ module.exports = {
     )
   },
   put_producers_id: function(req, res) {
-    console.log('put producer called, id: ', req.params.id);
-    return res.status(201);
+    console.log('put producer called: ', req.body);
+    let postQuery = {
+      name: `${req.body.name}`,
+      description: `${req.body.description}`,
+      logoUrl: `${req.body.logoUrl}`,
+      address: `${req.body.address}`,
+      location: `${req.body.location}`,
+      province: `${req.body.province}`,
+      latitude: `${req.body.latitude}`,
+      longitude: `${req.body.longitude}`
+    };
+    let userId = req.params.id;
+    connection.query(
+      `SET SQL_SAFE_UPDATES=0;
+      UPDATE producers 
+      SET ? 
+      WHERE user_id = ?;
+      SET SQL_SAFE_UPDATES=1;`,
+      [postQuery, userId],
+      function (err, result) {
+        if (err) {
+          console.log('error in update producer:', err);
+          res.status(500).send('error:', err);
+        } else {
+          console.log('producer updated: ', result);
+          console.log('postQuery: ', postQuery);
+          return res.status(200).send(result);
+        }
+      } 
+    )
   },
   get_producer_id_products: function(req, res) {
     let userId = req.params.id;
@@ -91,31 +119,6 @@ module.exports = {
         });
         return res.status(200).send(products);
       }
-      // `SELECT * FROM products
-      // WHERE user_id_fk_products = ${userId}`, 
-      // function (error, productsResult) {
-      //   console.log('productsResults: ', productsResult);
-      //   let products = productsResult.map(function(row) {
-      //     return {
-      //       id: row.product_id,
-      //       name: row.name,
-      //       description: row.description,
-      //       image: row.image,
-      //       pricePerUnit: row.pricePerUnit,
-      //       unit: row.unit,
-      //       unitsPer: row.unitsPer,
-      //       category: row.category,
-      //       subcategory: row.subcategory,
-      //       dateAdded: row.date_added,
-      //       qtyAvailable: row.qty_available,
-      //       qtyPending: row.qty_pending,
-      //       qtyAccepted: row.qty_accepted,
-      //       qtyCompleted: row.qty_completed,
-      //       isObsolete: row.is_obsolete
-      //     }
-      //   });
-      //   return res.status(200).send(products);
-      // }
     )
   },
   get_producer_id_schedules: function(req, res) {

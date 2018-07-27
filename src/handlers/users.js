@@ -72,25 +72,6 @@ module.exports = {
     )
   },
 
-  // put_users_id: function(req, res) {
-  //   console.log('put called: ', req.body);
-  //   connection.query(
-  //     'SET SQL_SAFE_UPDATES=0; UPDATE users SET first_name = ?, email = ?, role = ? WHERE id = ?; SET SQL_SAFE_UPDATES=1;',
-  //     [req.body.firstName, req.body.email, req.body.role, req.params.id],
-  //     function (err, result) {
-  //       if (err) {
-  //         console.log('error in update user:', err);
-  //         res.status(500).send('error:', err);
-  //       } else {
-  //         console.log('user updated: ', result);
-  //         console.log('req body: ', req.body);
-  //         console.log('params.id: ', req.params.id);
-  //         return res.status(200).send(result);
-  //       }
-  //     } 
-  //   )
-  // },
-
   put_users_id: function(req, res) {
     console.log('put called: ', req.body);
     let postQuery = {
