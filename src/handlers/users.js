@@ -98,7 +98,7 @@ module.exports = {
       email: `${req.body.email}`,
       role: `${req.body.role}`
     };
-    let userId = `${req.params.id}`;
+    let userId = req.params.id;
     connection.query(
       `UPDATE users 
       SET ? 
