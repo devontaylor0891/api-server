@@ -13,21 +13,28 @@ var routes = require('./routes');
 
 var app = express();
 
-var allowCrossDomain = function(req, res, next) {
-  if ('OPTIONS' == req.method) {
-    console.log('cors tried: ', req.method);
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-    console.log('res header: ', res.header);
-    res.send(200);
-  }
-  else {
-    next();
-  }
-};
+app.options("/*", function(req, res, next){
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,PATCH,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  res.send(200);
+});
 
-app.use(allowCrossDomain);
+// var allowCrossDomain = function(req, res, next) {
+//   if ('OPTIONS' == req.method) {
+//     console.log('cors tried: ', req.method);
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+//     console.log('res header: ', res.header);
+//     res.send(200);
+//   }
+//   else {
+//     next();
+//   }
+// };
+
+// app.use(allowCrossDomain);
 
 // let corsOptions = {
 //   "origin": "*",
