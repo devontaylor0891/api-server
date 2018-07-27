@@ -93,19 +93,17 @@ module.exports = {
 
   put_users_id: function(req, res) {
     console.log('put called: ', req.body);
-    let postQuery = [
-      `${req.body.firstName}`,
-      `${req.body.email}`,
-      `${req.body.role}`,
-      `${req.params.id}`
-    ];
+    let postQuery = {
+      first_name: `${req.body.firstName}`,
+      email: `${req.body.email}`,
+      role: `${req.body.role}`
+    };
+    let userId = `${req.params.id}`;
     connection.query(
       `UPDATE users 
-      SET first_name = ?, 
-      email = ?, 
-      role = ? 
+      SET ? 
       WHERE id = ?;`,
-      [postQuery],
+      [postQuery, userId],
       function (err, result) {
         if (err) {
           console.log('error in update user:', err);
