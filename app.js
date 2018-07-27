@@ -14,9 +14,11 @@ var routes = require('./routes');
 var app = express();
 
 app.options("/*", function(req, res, next){
+  console.log('reaq: ', req);
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,PATCH,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  console.log('res received');
   res.send(200);
 });
 
