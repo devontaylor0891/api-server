@@ -65,7 +65,6 @@ router.route('/producers').post(producers.post_producers);
 router.route('/producers/:id').get(producers.get_producers_id);
 router.route('/producers/:id').put(producers.put_producer_id);
 router.route('/producersProducts/:id').get(producers.get_producer_id_products);
-router.route('/producers/:id/products').post(producers.post_producer_id_products);
 router.route('/producersSchedules/:id').get(producers.get_producer_id_schedules);
 // router.route('/producers/:id/orders').get(producer.get_producer_id_orders);
 
