@@ -144,9 +144,9 @@ module.exports = {
       subcategory: `${req.body.subcategory}`,
       date_added: `${req.body.dateAdded}`,
       qty_available: `${req.body.qtyAvailable}`,
-      qty_pending: `${req.body.qtyPending}`,
-      qty_accepted: `${req.body.qtyAccepted}`,
-      qty_completed: `${req.body.qtyCompleted}`,
+      qty_pending: 0,
+      qty_accepted: 0`,
+      qty_completed: 0`,
       is_obsolete: `${req.body.isObsolete}`
     };
     console.log('postQuery: ', postQuery);

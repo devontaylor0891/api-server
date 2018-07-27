@@ -150,7 +150,7 @@ module.exports = {
     let productId = req.params.id;
     connection.query(
       `UPDATE products 
-      SET name = ?,
+      SET ?,
       WHERE product_id = ?;`,
       [postQuery, productId],
       function (err, result) {
