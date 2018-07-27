@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
     // has more than one bit, then we cannot assume it is supposed to be a Boolean.
     // if ( ( field.type === "TINYINT" ) && ( field.length === 1 ) ) {
       if (field.type == 'TINYINT' && field.length == 1) {
-        return (field.string() == '1'); // 1 = true, 0 = false
+        return (field.string() == '0'); // 1 = true, 0 = false
       }
         // var bytes = field.buffer();
         // A Buffer in Node represents a collection of 8-bit unsigned integers.
