@@ -174,12 +174,6 @@ module.exports = {
     Producer.get_producer_id_products(req, res);
   },
 
-  post_producer_id_products: function(req, res) {
-    console.log(req.params.id);
-    var producerId = req.params.id;
-    return res.send(201);
-  },
-
   get_producer_id_schedules: function(req, res) {
     Producer.get_producer_id_schedules(req, res);
   },

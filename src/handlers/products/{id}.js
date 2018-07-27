@@ -128,5 +128,48 @@ module.exports = {
 //       });
 //     });
   },
+
+  put_products_id: function (req, res) {
+    console.log('put product called: ', req.body);
+    let postQuery = {
+      name: `${req.body.name}`,
+      description: `${req.body.description}`,
+      image: `${req.body.image}`,
+      pricePerUnit: `${req.body.pricePerUnit}`,
+      unit: `${req.body.unit}`,
+      unitsPer: `${req.body.unitsPer}`,
+      category: `${req.body.category}`,
+      subcategory: `${req.body.subcategory}`,
+      date_added: `${req.body.dateAdded}`,
+      qty_available: `${req.body.qtyAvailable}`,
+      qty_pending: `${req.body.qtyPending}`,
+      qty_accepted: `${req.body.qtyAccepted}`,
+      qty_completed: `${req.body.qtyCompleted}`,
+      is_obsolete: `${req.body.isObsolete}`
+    };
+    let productId = req.params.id;
+    connection.query(
+      `UPDATE products 
+      SET name = ?,
+      WHERE product_id = ?;`,
+      [postQuery, productId],
+      function (err, result) {
+        if (err) {
+          console.log('error in update product:', err);
+          res.status(500).send('error:', err);
+        } else {
+          console.log('product updated: ', result);
+          console.log('postQuery: ', postQuery);
+          return res.status(200).send(result);
+        }
+      } 
+    )
+  },
+
+  patch_products_id: function (req, res) {
+    console.log('patch product called: ', req.params, req.body);
+    return res.send(201);
+  }
+
 };
   

@@ -133,14 +133,48 @@ module.exports = {
     // });
   },
 
+  post_products: function (req, res) {
+    let postQuery = {
+      producer_id_fk_products: `${req.body.producerId}`,
+      name: `${req.body.name}`,
+      description: `${req.body.description}`,
+      pricePerUnit: `${req.body.pricePerUnit}`,
+      unitsPer: `${req.body.unitsPer}`,
+      category: `${req.body.category}`,
+      subcategory: `${req.body.subcategory}`,
+      date_added: `${req.body.dateAdded}`,
+      qty_available: `${req.body.qtyAvailable}`,
+      qty_pending: `${req.body.qtyPending}`,
+      qty_accepted: `${req.body.qtyAccepted}`,
+      qty_completed: `${req.body.qtyCompleted}`,
+      is_obsolete: `${req.body.isObsolete}`
+    };
+    console.log('postQuery: ', postQuery);
+    connection.query(
+      `INSERT INTO products SET ?`,
+      postQuery,
+      function(err, result) {
+        if (err) {
+          console.log('error in create product:', err);
+          res.send('error:', err);
+        } else {
+          console.log('product created: ', result);
+          return res.status(200).send(result);
+        }
+      }
+    )
+  },
+
   get_products_id: function(req, res) {
     Product.get_products_id(req, res);
   },
 
   put_products_id: function(req, res) {
-    console.log(req.params.id);
-    var productId = req.params.id;
-    return res.send(201);
+    Product.put_products_id(req, res);
+  },
+
+  patch_products_id: function (req, res) {
+    Product.patch_products_id(req, res);
   },
 
   delete_products_id: function(req, res) {
