@@ -32,7 +32,7 @@ module.exports = {
       auth0_id: `${req.body.auth0Id}`
     };
     connection.query(
-      'INSERT INTO users SET ?',
+      `INSERT INTO users SET ?`,
       postQuery,
       function(err, result) {
         if (err) {
@@ -72,19 +72,47 @@ module.exports = {
     )
   },
 
+  // put_users_id: function(req, res) {
+  //   console.log('put called: ', req.body);
+  //   connection.query(
+  //     'SET SQL_SAFE_UPDATES=0; UPDATE users SET first_name = ?, email = ?, role = ? WHERE id = ?; SET SQL_SAFE_UPDATES=1;',
+  //     [req.body.firstName, req.body.email, req.body.role, req.params.id],
+  //     function (err, result) {
+  //       if (err) {
+  //         console.log('error in update user:', err);
+  //         res.status(500).send('error:', err);
+  //       } else {
+  //         console.log('user updated: ', result);
+  //         console.log('req body: ', req.body);
+  //         console.log('params.id: ', req.params.id);
+  //         return res.status(200).send(result);
+  //       }
+  //     } 
+  //   )
+  // },
+
   put_users_id: function(req, res) {
     console.log('put called: ', req.body);
+    let postQuery = {
+      first_name: `${req.body.firstName}`,
+      email: `${req.body.email}`,
+      role: `${req.body.role}`,
+      id: `${req.params.id}`
+    };
     connection.query(
-      'SET SQL_SAFE_UPDATES=0; UPDATE users SET first_name = ?, email = ?, role = ? WHERE id = ?; SET SQL_SAFE_UPDATES=1;',
-      [req.body.firstName, req.body.email, req.body.role, req.params.id],
+      `UPDATE users 
+      SET first_name = ?, 
+      email = ?, 
+      role = ? 
+      WHERE id = ?;`,
+      [postQuery],
       function (err, result) {
         if (err) {
           console.log('error in update user:', err);
           res.status(500).send('error:', err);
         } else {
           console.log('user updated: ', result);
-          console.log('req body: ', req.body);
-          console.log('params.id: ', req.params.id);
+          console.log('postQuery: ', postQuery);
           return res.status(200).send(result);
         }
       } 
