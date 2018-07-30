@@ -15,9 +15,10 @@ var app = express();
 
 app.use(function(req, res, next){
   console.log('reaq: ', req);
-  res.append('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.append('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE, OPTIONS');
-  res.append('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  res.set('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.set('methods', 'GET, PUT, POST, PATCH, DELETE, OPTIONS');
+  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  res.set('Access-Control-Allow-Methods', 'methods');
   console.log('res received', res);
   next();
 });
