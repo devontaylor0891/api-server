@@ -13,67 +13,14 @@ var routes = require('./routes');
 
 var app = express();
 
-app.use(function(req, res, next){
-  console.log('reaq: ', req);
-  res.set('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.set('Access-Control-Allow-Method', 'GET, PUT, POST, PATCH, DELETE, OPTIONS');
-  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  res.set('Access-Control-Expose-Headers', 'Access-Control-Allow-Methods');
-  console.log('res received', res);
-  next();
-});
-
-// var allowCrossDomain = function(req, res, next) {
-//   if ('OPTIONS' == req.method) {
-//     console.log('cors tried: ', req.method);
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
-//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-//     console.log('res header: ', res.header);
-//     res.send(200);
-//   }
-//   else {
-//     next();
-//   }
-// };
-
-// app.use(allowCrossDomain);
-
-// let corsOptions = {
-//   "origin": "*",
-//   "credentials": true,
-//   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-//   "preflightContinue": false,
-//   "optionsSuccessStatus": 204
-// };
-
-// app.options('*', cors());
-
-// app.all('/', function(req, res, next) {
-//   res.header('Access-Control-Allow-Origin', '*')
-//   res.header('Access-Control-Allow-Credentials', true)
-//   res.header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PATCH, PUT, DELETE')
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-//   if (req.method === 'OPTIONS') {
-//     res.send(200)
-//   } else {
-//     next()
-//   }
-// })
-
 app.use(bodyParser.json({ type: 'application/json' }));
 
-// app.all('/', function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
-//   next();
-//  });
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   next();
-// });
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", 'PATCH, POST, GET, PUT, DELETE, OPTIONS');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.use('/api', routes);
 
