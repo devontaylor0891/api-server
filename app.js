@@ -15,11 +15,11 @@ var app = express();
 
 app.use(function(req, res, next){
   console.log('reaq: ', req);
-  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
-  res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  res.append('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.append('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE, OPTIONS');
+  res.append('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
   console.log('res received', res);
-  res.send(200);
+  next();
 });
 
 // var allowCrossDomain = function(req, res, next) {
