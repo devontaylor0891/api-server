@@ -11,18 +11,18 @@ var logger = require('morgan');
 var hike = require('./routes/hike');
 var routes = require('./routes');
 
-var corsOptions = {
-  origin: true,
-  methods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-  credentials: true,
-  maxAge: 3600,
-  enablePreflight: true,
-  preflightContinue: true
-};
+// var corsOptions = {
+//   origin: true,
+//   methods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+//   credentials: true,
+//   maxAge: 3600,
+//   enablePreflight: true,
+//   preflightContinue: true
+// };
 
 var app = express();
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(bodyParser.json({ type: 'application/json' }));
 
