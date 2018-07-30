@@ -13,7 +13,7 @@ var routes = require('./routes');
 
 var corsOptions = {
   origin: true,
-  methods: ['POST, GET, PUT, DELETE, OPTIONS, PATCH'],
+  methods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
   credentials: true,
   maxAge: 3600,
   enablePreflight: true,
