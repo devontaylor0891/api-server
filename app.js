@@ -16,7 +16,8 @@ var corsOptions = {
   methods: ['POST, GET, PUT, DELETE, OPTIONS, PATCH'],
   credentials: true,
   maxAge: 3600,
-  enablePreflight: true
+  enablePreflight: true,
+  preflightContinue: true
 };
 
 var app = express();
