@@ -17,8 +17,9 @@ app.use(bodyParser.json({ type: 'application/json' }));
 
 app.use(function(req, res, next) {
   res.set("Access-Control-Allow-Origin", "*");
-  res.set("Access-Control-Allow-Methods", 'POST, GET, PUT, DELETE, OPTIONS, PATCH');
+  res.set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS, PATCH");
   res.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Expose-Headers", "Access-Control-Allow-Methods");
   next();
 });
 
