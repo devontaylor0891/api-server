@@ -13,7 +13,7 @@ var routes = require('./routes');
 
 var app = express();
 
-app.options("/*", function(req, res, next){
+app.use(function(req, res, next){
   console.log('reaq: ', req);
   res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
   res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE, OPTIONS');
