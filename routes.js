@@ -72,7 +72,7 @@ router.route('/products').get(products.get_products); // ADMIN DASH ONLY
 router.route('/products').post(products.post_products);
 router.route('/products/:id').get(products.get_products_id);
 router.route('/products/:id').put(products.put_products_id);
-router.route('/products/:id').patch(products.patch_products_id);
+// router.route('/products/:id').patch(products.patch_products_id);
 router.route('/products/:id').delete(products.delete_products_id);
 
 router.route('/schedules').get(schedules.get_schedules); // ADMIN DASH ONLY

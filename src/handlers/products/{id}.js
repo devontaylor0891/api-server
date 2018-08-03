@@ -10,6 +10,7 @@ module.exports = {
       // WHERE product_id = ${productId}`,
       `SELECT 
       products.product_id,
+      products.producer_id_fk_products,
       products.name AS productName,
       products.description,
       products.image,
@@ -132,6 +133,7 @@ module.exports = {
   put_products_id: function (req, res) {
     console.log('put product called: ', req.body);
     let postQuery = {
+      producer_id_fk_products: `${req.body.producerId}`,
       name: `${req.body.name}`,
       description: `${req.body.description}`,
       image: `${req.body.image}`,

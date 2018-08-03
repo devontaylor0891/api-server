@@ -5,20 +5,8 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
 var hike = require('./routes/hike');
 var routes = require('./routes');
-
-// var corsOptions = {
-//   origin: true,
-//   methods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
-//   credentials: true,
-//   maxAge: 3600,
-//   enablePreflight: true,
-//   preflightContinue: true
-// };
 
 var app = express();
 
@@ -26,18 +14,7 @@ app.use(cors());
 
 app.use(bodyParser.json({ type: 'application/json' }));
 
-// app.use(function(req, res, next) {
-//   res.set("Access-Control-Allow-Origin", "*");
-//   res.set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS, PATCH");
-//   res.set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//   res.header("Access-Control-Expose-Headers", "Access-Control-Allow-Methods");
-//   next();
-// });
-
 app.use('/api', routes);
-
-// app.get('/hikes', hike.index);
-// app.post('/add_hike', hike.add_hike);
 
 // // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -48,9 +25,6 @@ app.set('view engine', 'jade');
 // app.use(express.urlencoded({ extended: false }));
 // app.use(cookieParser());
 // // app.use(express.static(path.join(__dirname, 'public')));
-
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
