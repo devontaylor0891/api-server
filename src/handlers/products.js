@@ -132,6 +132,7 @@ module.exports = {
   },
 
   post_products: function (req, res) {
+    console.log('new product body: ', req.body);
     let postQuery = {
       producer_id_fk_products: `${req.body.producerId}`,
       name: `${req.body.name}`,
