@@ -139,6 +139,7 @@ module.exports = {
       description: `${req.body.description}`,
       image: `${req.body.image}`,
       pricePerUnit: `${req.body.pricePerUnit}`,
+      unit: `${req.body.unit}`,
       unitsPer: `${req.body.unitsPer}`,
       category: `${req.body.category}`,
       subcategory: `${req.body.subcategory}`,
