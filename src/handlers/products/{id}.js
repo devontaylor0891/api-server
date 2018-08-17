@@ -134,7 +134,7 @@ module.exports = {
     console.log('put product called: ', req.body);
     let postQuery = {
       user_id_fk_products: `${req.body.user.id}`,
-      product_id: `${req.body.product_id}`,
+      product_id: `${req.params.id}`,
       name: `${req.body.name}`,
       description: `${req.body.description}`,
       image: `${req.body.image}`,
@@ -150,7 +150,7 @@ module.exports = {
       qty_completed: `${req.body.qtyCompleted}`,
       is_obsolete: `${req.body.isObsolete}`,
       schedule_list: `${req.body.scheduleList}`,
-      producer_id_fk_products: `${req.body.producer.id}`
+      producer_id_fk_products: `${req.body.producerId}`
     };
     let productId = req.params.id;
     connection.query(
