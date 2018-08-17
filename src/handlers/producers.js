@@ -177,4 +177,8 @@ module.exports = {
     return res.send(201);
   },
 
+  get_producer_id_orders: function (req, res) {
+    Producer.get_producer_id_orders(req, res);
+  }
+
 };

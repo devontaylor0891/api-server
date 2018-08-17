@@ -145,5 +145,37 @@ module.exports = {
         return res.status(200).send(schedules);
       }
     )
+  },
+  get_producer_id_orders: function(req, res) {
+    let producerId = req.params.id;
+    connection.query(
+      `SELECT * FROM orders
+      WHERE producer_id_fk_orders = ${producerId}`,
+      function (error, ordersResult) {
+        // let schedules = schedulesResult.map(function(row) {
+        //   return {
+        //     id: row.schedule_id,
+        //     producerId: row.producer_id_fk_s,
+        //     userId: row.user_id_fk_schedules,
+        //     type: row.schedule_type,
+        //     description: row.description,
+        //     startDateTime: row.start_date_time,
+        //     endDateTime: row.end_date_time,
+        //     hasFee: row.has_fee,
+        //     hasWiaver: row.has_waiver,
+        //     latitude: row.latitude,
+        //     longitude: row.longitude,
+        //     city: row.city,
+        //     province: row.province,
+        //     orderDeadline: row.order_deadline,
+        //     address: row.address,
+        //     fee: row.fee,
+        //     feeWaiver: row.fee_waiver
+        //   }
+        // });
+        console.log('producer orders: ', ordersResult);
+        return res.status(200).send(ordersResult);
+      }
+    )
   }
 };
