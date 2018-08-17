@@ -55,6 +55,7 @@ module.exports = {
             producerId: row.producer_id_fk_products
           }
         });
+        console.log('product returned: ', product);
         return res.status(200).send(product);
       }
     )
