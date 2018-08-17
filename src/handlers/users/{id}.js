@@ -8,8 +8,8 @@ module.exports = {
     connection.query(
       `SELECT * FROM users
       WHERE id = ${id}`, function (error, results) {
-        console.log('req.params.id: ', req.params.id);
-        console.log('results: ', results);
+        // console.log('req.params.id: ', req.params.id);
+        // console.log('results: ', results);
         let newUser = results.map(function(row) {
           return {
             id: row.id,
