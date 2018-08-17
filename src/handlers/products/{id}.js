@@ -51,7 +51,8 @@ module.exports = {
             qtyPending: row.qty_pending,
             qtyAccepted: row.qty_accepted,
             qtyCompleted: row.qty_completed,
-            isObsolete: row.is_obsolete
+            isObsolete: row.is_obsolete,
+            producerId: row.producer_id_fk_products
           }
         });
         return res.status(200).send(product);
