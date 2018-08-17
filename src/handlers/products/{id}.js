@@ -152,11 +152,9 @@ module.exports = {
     console.log('postQuery: ', postQuery);
     let productId = req.params.id;
     connection.query(
-      `SET SQL_SAFE_UPDATES=0;
-      UPDATE products 
-      SET ?,
-      WHERE product_id = ?;
-      SET SQL_SAFE_UPDATES=1;`,
+      `UPDATE products 
+      SET ?
+      WHERE product_id = ?;`,
       [postQuery, productId],
       function (err, result) {
         if (err) {
