@@ -40,7 +40,7 @@ module.exports = {
         if (err) {
           res.send('error:', err);
         } else {
-          return res.status(200).send(result);
+          return res.status(200).send('result');
         }
       }
     )
