@@ -27,7 +27,6 @@ module.exports = {
       LEFT JOIN producers 
       ON products.producer_id_fk_products = producers.producer_id`, 
       function (error, productsResult) {
-        // console.log('productsResults: ', productsResult);
         let products = productsResult.map(function(row) {
           return {
             id: row.product_id,
