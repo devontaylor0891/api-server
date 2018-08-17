@@ -17,7 +17,7 @@ module.exports = {
       }
     )
   },
-  post_orders: function (req, res) {
+  post_order: function (req, res) {
     let postQuery = {
       producer_id_fk_o: `${req.body.id}`,
       consumer_id_fk_o: `${req.body.id}`,
@@ -40,7 +40,7 @@ module.exports = {
         if (err) {
           res.send('error:', err);
         } else {
-          return res.status(200).send('result');
+          return res.status(200).send(result);
         }
       }
     )
