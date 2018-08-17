@@ -86,7 +86,6 @@ module.exports = {
     //     res.status(404).send({ message: "Products not found"});
     //     return;
     //   }
-    //   console.log("results 1:", results);
     //   var products = results.map(function(row, index) {
     //     return {
     //       id: row.id,

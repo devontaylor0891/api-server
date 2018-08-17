@@ -2,8 +2,6 @@
 
 module.exports = {
   get_search: function(req, res) {
-    // console.log(req.params.id);
-    // var producerId = req.params.id;
 
     return res.json([
       {

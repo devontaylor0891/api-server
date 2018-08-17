@@ -4,7 +4,6 @@ var connection = require('../../../db');
 module.exports = {
   get_products_id: function(req, res) {
     var productId = req.params.id;
-    console.log("productId", productId);
     connection.query(
       // `SELECT * FROM products
       // WHERE product_id = ${productId}`,
@@ -92,7 +91,6 @@ module.exports = {
 //         dateAdded: "2017-12-02T01:00:00.000Z",
 //         scheduleList: [ 798, 799 ], // delete me in future
 //       };
-// console.log("productResults[0].producer_id", productResults[0].producer_id);
 //       connection.query(`
 //         SELECT pd.*,
 //         u.first_name AS producer_first_name,
@@ -102,7 +100,6 @@ module.exports = {
 //           LEFT JOIN users u
 //             on pd.user_id = u.id
 //         WHERE pd.id = ${productResults[0].producer_id}`, function (error, producerResults) {
-//           console.log("producerResults", producerResults);
 //         const producer = {
 //           id: producerResults[0].id,
 //           name: producerResults[0].name,
@@ -154,9 +151,11 @@ module.exports = {
     };
     let productId = req.params.id;
     connection.query(
-      `UPDATE products 
+      `SET SQL_SAFE_UPDATES=0;
+      UPDATE products 
       SET ?,
-      WHERE product_id = ?;`,
+      WHERE product_id = ?;
+      SET SQL_SAFE_UPDATES=1;`,
       [postQuery, productId],
       function (err, result) {
         if (err) {
@@ -169,11 +168,6 @@ module.exports = {
         }
       } 
     )
-  },
-
-  patch_products_id: function (req, res) {
-    console.log('patch product called: ', req.params, req.body);
-    return res.send(201);
   }
 
 };

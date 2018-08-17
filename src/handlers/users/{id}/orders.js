@@ -8,7 +8,6 @@ var connection = require('../../../../db');
 module.exports = {
   get_users_id_orders: function(req, res) {
     var userId = req.params.id;
-    console.log("userId", userId);
 /*
 
     connection.query(
@@ -38,7 +37,6 @@ module.exports = {
         res.status(404).send({ message: "Order not found"});
         return;
       }
-      console.log("results 1", results);
       var userOrders = {
         iD: results.id,
         userId: results.user_id,

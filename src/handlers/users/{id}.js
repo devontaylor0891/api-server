@@ -8,8 +8,6 @@ module.exports = {
     connection.query(
       `SELECT * FROM users
       WHERE id = ${id}`, function (error, results) {
-        // console.log('req.params.id: ', req.params.id);
-        // console.log('results: ', results);
         let newUser = results.map(function(row) {
           return {
             id: row.id,
@@ -33,7 +31,6 @@ module.exports = {
     //     res.status(404).send({ message: "User not found"});
     //     return;
     //   }
-    //   console.log("userResult 1", userResult);
 
     //   connection.query(`SELECT * FROM orders WHERE user_id = ${userId}`, function (error, ordersResults) {
     //     var user = userResult.map(function(row) {

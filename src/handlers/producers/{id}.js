@@ -4,8 +4,6 @@ var connection = require('../../../db');
 module.exports = {
   get_producers_id: function(req, res) {
     var producerId = req.params.id;
-    console.log("producerId", producerId);
-
     connection.query(
       `SELECT * FROM producers
       LEFT JOIN users ON producers.user_id = users.id
@@ -30,13 +28,11 @@ module.exports = {
             }
           }
         );
-        console.log('producer Results: ', producer);
         return res.status(200).send(producer);
       }
     )
   },
   put_producers_id: function(req, res) {
-    console.log('put producer called: ', req.body);
     let postQuery = {
       name: `${req.body.name}`,
       description: `${req.body.description}`,
@@ -57,11 +53,8 @@ module.exports = {
       [postQuery, userId],
       function (err, result) {
         if (err) {
-          console.log('error in update producer:', err);
           res.status(500).send('error:', err);
         } else {
-          console.log('producer updated: ', result);
-          console.log('postQuery: ', postQuery);
           return res.status(200).send(result);
         }
       } 

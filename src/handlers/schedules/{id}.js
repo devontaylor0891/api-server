@@ -8,8 +8,6 @@ module.exports = {
     connection.query(
       `SELECT * FROM schedules
       WHERE schedule_id = ${id}`, function (error, results) {
-        // console.log('req.params.id: ', req.params.id);
-        // console.log('results: ', results);
         let schedule = results.map(function(row) {
           return {
             id: row.schedule_id,

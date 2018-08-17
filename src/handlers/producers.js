@@ -29,7 +29,6 @@ module.exports = {
             }
           }
         );
-        console.log('producers Results: ', producers);
         return res.status(200).send(producers);
       }
     )
@@ -108,7 +107,6 @@ module.exports = {
     //           })
     //           .groupBy('producer_id')
     //           .value();
-    //           console.log("schedule", scheduleGroupedBy);
     //         var producers = producerResults.map(function(row) {
     //           return {
     //             id: row.id,
@@ -146,16 +144,13 @@ module.exports = {
       latitude: `${req.body.latitude}`,
       status: `${req.body.status}`
     };
-    console.log('postQuery: ', postQuery);
     connection.query(
       'INSERT INTO producers SET ?',
       postQuery,
       function(err, result) {
         if (err) {
-          console.log('error in create producer:', err);
           res.send('error:', err);
         } else {
-          console.log('producer created: ', result);
           return res.status(200).send(result);
         }
       }
