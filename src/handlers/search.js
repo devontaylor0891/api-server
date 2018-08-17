@@ -5,7 +5,7 @@ module.exports = {
 
     return res.json([
       {
-        'id': 66,
+        'id': 1,
         'name': 'Bacon',
         'description': 'Great stuff.',
         'image': '10156726911823275/1528163379263',
@@ -88,7 +88,7 @@ module.exports = {
         ]
       },
       {
-        'id': 67,
+        'id': 2,
         'name': 'Ground Beef',
         'description': 'Great beefy stuff.',
         'image': '10156726911823275/1527556172014',
@@ -171,7 +171,7 @@ module.exports = {
         ]
       },
       {
-        'id': 43,
+        'id': 3,
         'name': 'Carrots',
         'description': 'Orange, cylindrical, delicious.',
         'image': '10156726911823275/1528163112905',
@@ -275,7 +275,7 @@ module.exports = {
         ]
       },
       {
-        'id': 95,
+        'id': 4,
         'name': 'Potatoes - 3lb bag',
         'description': 'Red, roundish, delicious.',
         'image': '10156726911823275/1528163046332',
@@ -379,7 +379,7 @@ module.exports = {
         ]
       },
       {
-        'id': 88,
+        'id': 5,
         'name': 'Beets',
         'description': 'This is a description',
         'image': '',
