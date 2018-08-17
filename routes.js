@@ -82,6 +82,7 @@ router.route('/schedules/:id').delete(schedules.delete_schedules_id);
 router.route('/schedules/:id').put(schedules.put_schedules_id);
 
 router.route('/orders').get(orders.get_orders); // ADMIN DASH ONLY
+router.route('/orders').post(orders.post_order);
 
 router.route('/searchResults').get(search.get_search);
 
