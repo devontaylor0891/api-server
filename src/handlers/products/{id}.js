@@ -130,7 +130,7 @@ module.exports = {
   put_products_id: function (req, res) {
     console.log('put product called: ', req.body);
     let postQuery = {
-      user_id_fk_products: `${req.body.user.id}`,
+      user_id_fk_products: `${req.body.userId}`,
       product_id: `${req.params.id}`,
       name: `${req.body.name}`,
       description: `${req.body.description}`,
@@ -149,6 +149,7 @@ module.exports = {
       schedule_list: `${req.body.scheduleList}`,
       producer_id_fk_products: `${req.body.producerId}`
     };
+    console.log('postQuery: ', postQuery);
     let productId = req.params.id;
     connection.query(
       `SET SQL_SAFE_UPDATES=0;
@@ -163,7 +164,6 @@ module.exports = {
           res.status(500).send('error:', err);
         } else {
           console.log('product updated: ', result);
-          console.log('postQuery: ', postQuery);
           return res.status(200).send(result);
         }
       } 
