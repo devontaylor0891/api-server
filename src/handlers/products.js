@@ -134,9 +134,10 @@ module.exports = {
   post_products: function (req, res) {
     console.log('new product body: ', req.body);
     let postQuery = {
-      producer_id_fk_products: `${req.body.producerId}`,
+      user_id_fk_products: `${req.body.producer.id}`,
       name: `${req.body.name}`,
       description: `${req.body.description}`,
+      image: `${req.body.image}`,
       pricePerUnit: `${req.body.pricePerUnit}`,
       unitsPer: `${req.body.unitsPer}`,
       category: `${req.body.category}`,
@@ -146,7 +147,9 @@ module.exports = {
       qty_pending: 0,
       qty_accepted: 0,
       qty_completed: 0,
-      is_obsolete: `${req.body.isObsolete}`
+      is_obsolete: `${req.body.isObsolete}`,
+      schedule_list: 0,
+      producer_id_fk_products: `${req.body.producerId}`
     };
     console.log('postQuery: ', postQuery);
     connection.query(
