@@ -133,7 +133,8 @@ module.exports = {
   put_products_id: function (req, res) {
     console.log('put product called: ', req.body);
     let postQuery = {
-      producer_id_fk_products: `${req.body.producerId}`,
+      user_id_fk_products: `${req.body.user.id}`,
+      product_id: `${req.body.product_id}`,
       name: `${req.body.name}`,
       description: `${req.body.description}`,
       image: `${req.body.image}`,
@@ -147,7 +148,9 @@ module.exports = {
       qty_pending: `${req.body.qtyPending}`,
       qty_accepted: `${req.body.qtyAccepted}`,
       qty_completed: `${req.body.qtyCompleted}`,
-      is_obsolete: `${req.body.isObsolete}`
+      is_obsolete: `${req.body.isObsolete}`,
+      schedule_list: `${req.body.scheduleList}`,
+      producer_id_fk_products: `${req.body.producer.id}`
     };
     let productId = req.params.id;
     connection.query(
