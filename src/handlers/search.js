@@ -44,13 +44,13 @@ module.exports = {
         'isObsolete': false,
         'scheduleList': [
           {
-            'id': 666,
-            'producerId': 10156726911823276,
+            'id': 1,
+            'producerId': 123123129,
             'productList': [
               66,
               67
             ],
-            'type': 'Door-to-door Delivery',
+            'type': 'On-farm Pickup',
             'description': 'A description.',
             'startDateTime': '2017-12-28T01:00:00.000Z',
             'endDateTime': '2017-12-28T02:00:00.000Z',
