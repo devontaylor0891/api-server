@@ -19,17 +19,17 @@ module.exports = {
   },
   post_order: function (req, res) {
     let orderPostQuery = {
-      producer_id_fk_o: `${req.body.id}`,
-      consumer_id_fk_o: `${req.body.id}`,
-      schedule_id_fk_o: `${req.body.id}`,
-      producer_comment: `${req.body.id}`,
-      consumer_comment: `${req.body.id}`,
-      delivery_address: `${req.body.id}`,
-      delivery_fee: `${req.body.id}`,
-      created_date: `${req.body.id}`,
-      order_status: `${req.body.id}`,
-      order_value: `${req.body.id}`,
-      incomplete_reason: `${req.body.id}`
+      producer_id_fk_o: `${req.body.producerId}`,
+      consumer_id_fk_o: `${req.body.consumer.id}`,
+      schedule_id_fk_o: `${req.body.chosenSchedule.id}`,
+      producer_comment: null,
+      consumer_comment: `${req.body.orderDetails.consumerComment}`,
+      delivery_address: `${req.body.orderDetails.deliveryAddress}`,
+      delivery_fee: `${req.body.orderDetails.deliveryFee}`,
+      created_date: `${req.body.orderDetails.createdDate}`,
+      order_status: `${req.body.orderDetails.orderStatus}`,
+      order_value: `${req.body.orderDetails.orderValue}`,
+      incomplete_reason: null
     };
     let productQuantitiesPostQuery;
     console.log('post new order: ', orderPostQuery);
