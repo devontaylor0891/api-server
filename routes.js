@@ -57,8 +57,7 @@ router.route('/users').post(users.post_users); // CREATE a new user
 router.route('/users/:id').get(users.get_users_id); // GET a single user
 router.route('/users/auth/:id').get(users.get_users_auth_id); // GET a single user by auth0 id
 router.route('/users/:id').put(users.put_users_id);
-router.route('/users/:id/orders').get(users.get_users_id_orders);
-// router.route('/users/:id/orders').post(users.post_users_id_orders);
+router.route('/usersOrders/:id').get(users.get_users_id_orders);
 
 router.route('/producers').get(producers.get_producers);
 router.route('/producers').post(producers.post_producers);
@@ -67,13 +66,11 @@ router.route('/producers/:id').put(producers.put_producer_id);
 router.route('/producersProducts/:id').get(producers.get_producer_id_products);
 router.route('/producersSchedules/:id').get(producers.get_producer_id_schedules);
 router.route('/producersOrders/:id').get(producers.get_producer_id_orders);
-// router.route('/producers/:id/orders').get(producer.get_producer_id_orders);
 
 router.route('/products').get(products.get_products); // ADMIN DASH ONLY
 router.route('/products').post(products.post_products);
 router.route('/products/:id').get(products.get_products_id);
 router.route('/products/:id').put(products.put_products_id);
-// router.route('/products/:id').patch(products.patch_products_id);
 router.route('/products/:id').delete(products.delete_products_id);
 
 router.route('/schedules').get(schedules.get_schedules); // ADMIN DASH ONLY

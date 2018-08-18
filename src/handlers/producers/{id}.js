@@ -150,7 +150,7 @@ module.exports = {
     let producerId = req.params.id;
     connection.query(
       `SELECT * FROM orders
-      WHERE producer_id_fk_orders = ${producerId}`,
+      WHERE producer_id_fk_o = ${producerId}`,
       function (error, ordersResult) {
         // let schedules = schedulesResult.map(function(row) {
         //   return {
