@@ -43,6 +43,7 @@ module.exports = {
         // } else { // success
           // use result.insertId to add to other table
           // using a for loop to add to product_quantities table
+          console.log('result of post order: ', result)
           let productQuantities = req.body.orderDetails.productQuantities;
           for (let i = 0; i < productQuantities.length; i++) {
             // build query
