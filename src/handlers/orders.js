@@ -48,7 +48,7 @@ module.exports = {
           for (let i = 0; i < productQuantities.length; i++) {
             // build query
             productQuantitiesPostQuery = {
-              order_id_fk_pol: result.insertId,
+              order_id_fk_pok: result.insertId,
               product_id_fk_pok: `${productQuantities[i].productId}`,
               quantity: `${productQuantities[i].orderQuantity}`
             };
