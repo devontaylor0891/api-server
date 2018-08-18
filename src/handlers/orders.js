@@ -38,9 +38,9 @@ module.exports = {
       SET ?`,
       orderPostQuery,
       function(err, result) {
-        if (err) {
-          res.status(500).send('error: ', err)
-        } else { // success
+        // if (err) {
+        //   res.status(500).send('error: ', err)
+        // } else { // success
           // use result.insertId to add to other table
           // using a for loop to add to product_quantities table
           let productQuantities = req.body.orderDetails.productQuantities;
@@ -65,7 +65,7 @@ module.exports = {
               }
             )
           } 
-        }
+      //  }
       }
     )
   }
