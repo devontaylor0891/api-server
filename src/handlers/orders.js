@@ -53,6 +53,7 @@ module.exports = {
               quantity: `${productQuantities[i].orderQuantity}`
             };
             // run insert query
+            console.log('product order qty query: ', productQuantitiesPostQuery);
             connection.query(
               `INSERT INTO product_order_quantities
               SET ?`,
