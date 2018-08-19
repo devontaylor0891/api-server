@@ -38,20 +38,18 @@ module.exports = {
           connection.query(
             productsOptions,
             function(error, productsResults) {
-              let newProducts = productsResults.map(function (row) {
+              order.products = productsResults.map(function (row) {
                 // console.log('products: ', row);
                 // return {
                 //   products: row
                 // }
-                // console.log('row: ', row);
+                console.log('row: ', row);
                 return row;
               });
-              products = newProducts;
             }
           );
-          order.products = products;
           order.order = row;
-          console.log('order: ', order);
+          // console.log('order: ', order);
           return order;
         });
         // console.log('orders: ', orders);
