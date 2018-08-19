@@ -26,26 +26,30 @@ module.exports = {
       options,
       function (error, ordersResult) {
         let orders = ordersResult.map(function (row) {
+          let order = [];
+          let products = [];
           let orderId = row.orders.order_id;
-          console.log('orderid: ', orderId);
+          // console.log('orderid: ', orderId);
           let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
           let productsOptions = {sql: productsSqlString, nestTables: true, values: [orderId]}; 
           connection.query(
             productsOptions,
             function(error, productsResults) {
               let results = productsResults.map(function (row) {
-                console.log('products: ', row);
-                return {
-                  products: row
-                }
+                // console.log('products: ', row);
+                // return {
+                //   products: row
+                // }
+                products.push(row);
               })
             }
           );
-          return {
-            order: row
-          }
+          orders.push(products);
+          order.push(row);
+          console.log('order: ', order);
+          return order;
         });
-        console.log('orders: ', orders);
+        // console.log('orders: ', orders);
         return res.status(200).send(orders);
       }
     )
