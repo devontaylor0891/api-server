@@ -25,14 +25,20 @@ module.exports = {
       LEFT JOIN producers
       ON orders.producer_id_fk_o = producers.producer_id
       LEFT JOIN users
-      ON orders.consumer_id_fk_o = users.id`,
+      ON orders.consumer_id_fk_o = users.id
+      LEFT JOIN product_order_quantities
+      ON orders.order_id = product_order_quantities.order_id_fk_pok
+      LEFT JOIN products
+      ON product_order_quantities.product_id_fk_pok = products.product_id`,
       function (error, ordersResult) {
         let orders = ordersResult.map(function (row) {
           return {
             id: row.order_id,
             producerId: row.producer_id_fk_o,
             name: row.name,
-            firstName: row.first_name
+            firstName: row.first_name,
+            quantity: row.quantity,
+            pricePerUnit: row.pricePerUnit
           }
         });
         console.log('orders: ', orders);
