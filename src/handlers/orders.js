@@ -43,7 +43,7 @@ module.exports = {
                 // return {
                 //   products: row
                 // }
-                console.log('row: ', row);
+                // console.log('row: ', row);
                 return row;
               });
             }
