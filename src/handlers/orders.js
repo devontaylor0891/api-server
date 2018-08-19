@@ -38,7 +38,8 @@ module.exports = {
             name: row.name,
             firstName: row.first_name,
             quantity: row.quantity,
-            pricePerUnit: row.pricePerUnit
+            pricePerUnit: row.pricePerUnit,
+            wholeObject: row
           }
         });
         console.log('orders: ', orders);
