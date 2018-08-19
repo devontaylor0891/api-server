@@ -38,12 +38,12 @@ module.exports = {
           connection.query(
             productsOptions,
             function(error, productsResults) {
-              products = productsResults.map(function (row) {
+              productsResults.map(function (row) {
                 // console.log('products: ', row);
                 // return {
                 //   products: row
                 // }
-                return row;
+                products.push(row);
               })
             }
           );
