@@ -26,7 +26,7 @@ module.exports = {
       options,
       function (error, ordersResult) {
         let orders = ordersResult.map(function (row) {
-          let order = [];
+          let order;
           let products = [];
           let orderId = row.orders.order_id;
           // console.log('orderid: ', orderId);
@@ -44,8 +44,8 @@ module.exports = {
               })
             }
           );
-          order.push(products);
-          order.push(row);
+          order.products = products;
+          order.order = row;
           console.log('order: ', order);
           return order;
         });
