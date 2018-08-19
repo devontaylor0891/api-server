@@ -28,7 +28,7 @@ module.exports = {
         let orders = ordersResult.map(function (row) {
           let orderId = row.orders.order_id;
           console.log('orderid: ', orderId);
-          let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
+          let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
           let productsOptions = {sql: productsSqlString, nestTables: true, values: [orderId]}; 
           connection.query(
             productsOptions,
