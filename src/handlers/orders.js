@@ -44,9 +44,8 @@ module.exports = {
                 //   products: row
                 // }
                 // console.log('row: ', row);
-                products.push(row);
+                order.products.push(row);
               });
-              order.products = products;
             }
           );
           order.order = row;
