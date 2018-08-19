@@ -33,8 +33,7 @@ module.exports = {
         LEFT JOIN product_order_quantities
         ON orders.order_id = product_order_quantities.order_id_fk_pok
         LEFT JOIN products
-        ON product_order_quantities.product_id_fk_pok = products.product_id`,
-        nestTables: true
+        ON product_order_quantities.product_id_fk_pok = products.product_id`
       },
       function (error, ordersResult) {
         let orders = ordersResult.map(function (row) {
