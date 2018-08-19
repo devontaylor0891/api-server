@@ -43,7 +43,7 @@ module.exports = {
                 // return {
                 //   products: row
                 // }
-                return products;
+                return row;
               })
             }
           );
