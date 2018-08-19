@@ -35,12 +35,12 @@ module.exports = {
       function (error, ordersResult) {
         let orders = ordersResult.map(function (row) {
           return {
-            // id: row.order_id,
-            // producerId: row.producer_id_fk_o,
-            // name: row.name,
-            // firstName: row.first_name,
-            // quantity: row.quantity,
-            // pricePerUnit: row.pricePerUnit,
+            id: row.order_id,
+            producerId: row.producer_id_fk_o,
+            name: row.name,
+            firstName: row.first_name,
+            quantity: row.quantity,
+            pricePerUnit: row.pricePerUnit,
             wholeObject: row
           }
         });
