@@ -3,16 +3,36 @@ var connection = require('../../db');
 
 module.exports = {
   get_orders: function(req, res) {
+    // connection.query(
+    //   `SELECT * FROM orders`,
+    //   function (error, ordersResult) {
+    //     let orders = ordersResult.map(function(row) 
+    //       {
+    //         return {
+    //           id: row.order_id,
+    //           chosenSchedule: {
+    //             producerId: row.producer_id_fk_o,
+    //           }
+    //         }
+    //       }
+    //     );
+    //     return res.status(200).send(orders);
+    //   }
+    // )
     connection.query(
-      `SELECT * FROM orders`,
+      `SELECT *
+      FROM orders
+      LEFT JOIN producers
+      ON orders.producer_id_fk_o = producers.producer_id`,
       function (error, ordersResult) {
-        let orders = ordersResult.map(function(row) 
-          {
-            return {
-              id: row.order_id
-            }
+        let orders = ordersResult.map(function (row) {
+          return {
+            id: row.order_id,
+            producerId: row.producer_id_fk_o,
+            name: row.name
           }
-        );
+        });
+        console.log('orders: ', orders);
         return res.status(200).send(orders);
       }
     )
