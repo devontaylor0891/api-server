@@ -43,13 +43,14 @@ module.exports = {
                 // return {
                 //   products: row
                 // }
+                console.log('row: ', row);
                 products.push(row);
               })
             }
           );
           order.products = products;
           order.order = row;
-          console.log('order: ', order);
+          // console.log('order: ', order);
           return order;
         });
         // console.log('orders: ', orders);
