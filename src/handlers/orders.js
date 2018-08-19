@@ -22,11 +22,12 @@ module.exports = {
     var sqlString = 'SELECT * FROM orders LEFT JOIN producers ON orders.producer_id_fk_o = producers.producer_id LEFT JOIN users ON orders.consumer_id_fk_o = users.id';
     // var sqlString = 'SELECT * FROM orders LEFT JOIN producers ON orders.producer_id_fk_o = producers.producer_id LEFT JOIN users ON orders.consumer_id_fk_o = users.id LEFT JOIN product_order_quantities ON orders.order_id = product_order_quantities.order_id_fk_pok LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id';
     var options = {sql: sqlString, nestTables: true, values: [1]};
-  connection.query(
-    options,
+    connection.query(
+      options,
       function (error, ordersResult) {
         let orders = ordersResult.map(function (row) {
-          let orderId = row.order.orders.order_id;
+          let orderId = row.orders.order_id;
+          console.log('orderid: ', orderId);
           let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ${orderId}';
           let productsOptions = {sql: productsSqlString, nestTables: true, values: [1]}; 
           // connection.query(
