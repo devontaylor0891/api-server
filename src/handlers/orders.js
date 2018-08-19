@@ -38,7 +38,7 @@ module.exports = {
           connection.query(
             productsOptions,
             function(error, productsResults) {
-              products = productsResults.map(function (row) {
+              let newProducts = productsResults.map(function (row) {
                 // console.log('products: ', row);
                 // return {
                 //   products: row
@@ -46,6 +46,7 @@ module.exports = {
                 // console.log('row: ', row);
                 return row;
               });
+              products = newProducts;
             }
           );
           order.products = products;
