@@ -23,13 +23,16 @@ module.exports = {
       `SELECT *
       FROM orders
       LEFT JOIN producers
-      ON orders.producer_id_fk_o = producers.producer_id`,
+      ON orders.producer_id_fk_o = producers.producer_id
+      LEFT JOIN users
+      ON orders.consumer_id_fk_o = users.id`,
       function (error, ordersResult) {
         let orders = ordersResult.map(function (row) {
           return {
             id: row.order_id,
             producerId: row.producer_id_fk_o,
-            name: row.name
+            name: row.name,
+            firstName: row.first_name
           }
         });
         console.log('orders: ', orders);
