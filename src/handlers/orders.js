@@ -26,7 +26,10 @@ module.exports = {
       options,
       function (error, ordersResult) {
         let orders = ordersResult.map(function (row) {
-          let order;
+          let order = {
+            products: null,
+            order: null
+          };
           let products = [];
           let orderId = row.orders.order_id;
           // console.log('orderid: ', orderId);
