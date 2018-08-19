@@ -30,7 +30,7 @@ module.exports = {
             products: null,
             order: null
           };
-          let products = [];
+          let products = 'hello';
           let orderId = row.orders.order_id;
           // console.log('orderid: ', orderId);
           let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
