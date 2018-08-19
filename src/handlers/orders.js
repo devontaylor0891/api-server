@@ -46,6 +46,7 @@ module.exports = {
                 // console.log('row: ', row);
                 return row;
               });
+              return order.products;
             }
           );
           console.log('orderRow: ', row);
