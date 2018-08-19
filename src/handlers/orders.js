@@ -19,24 +19,23 @@ module.exports = {
     //     return res.status(200).send(orders);
     //   }
     // )
-    let options = {
-      sql: 
-      `SELECT *
-      FROM orders
-      LEFT JOIN producers
-      ON orders.producer_id_fk_o = producers.producer_id
-      LEFT JOIN users
-      ON producers.user_id = users.id
-      LEFT JOIN users
-      ON orders.consumer_id_fk_o = users.id
-      LEFT JOIN product_order_quantities
-      ON orders.order_id = product_order_quantities.order_id_fk_pok
-      LEFT JOIN products
-      ON product_order_quantities.product_id_fk_pok = products.product_id`,
-      nestTables: true
-    };
     connection.query(
-      options,
+      {
+        sql: 
+        `SELECT *
+        FROM orders
+        LEFT JOIN producers
+        ON orders.producer_id_fk_o = producers.producer_id
+        LEFT JOIN users
+        ON producers.user_id = users.id
+        LEFT JOIN users
+        ON orders.consumer_id_fk_o = users.id
+        LEFT JOIN product_order_quantities
+        ON orders.order_id = product_order_quantities.order_id_fk_pok
+        LEFT JOIN products
+        ON product_order_quantities.product_id_fk_pok = products.product_id`,
+        nestTables: true
+      },
       function (error, ordersResult) {
         let orders = ordersResult.map(function (row) {
           return {
