@@ -3,6 +3,15 @@ var connection = require('../../db');
 
 module.exports = {
   get_orders: function(req, res) {
+
+    connection.query('SELECT * FROM orders LEFT JOIN producers ON orders.producer_id_fk_o = producers.producer_id LEFT JOIN users ON orders.consumer_id_fk_o = users.id; SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = 15', function (error, results, fields) {
+      if (error) throw error;
+      // `results` is an array with one element for every statement in the query:
+      console.log(results[0]); // [{1: 1}]
+      console.log(results[1]); // [{2: 2}]
+    });
+
+
     // connection.query(
     //   `SELECT * FROM orders`,
     //   function (error, ordersResult) {
@@ -19,49 +28,52 @@ module.exports = {
     //     return res.status(200).send(orders);
     //   }
     // )
-    var sqlString = 'SELECT * FROM orders LEFT JOIN producers ON orders.producer_id_fk_o = producers.producer_id LEFT JOIN users ON orders.consumer_id_fk_o = users.id';
-    // var sqlString = 'SELECT * FROM orders LEFT JOIN producers ON orders.producer_id_fk_o = producers.producer_id LEFT JOIN users ON orders.consumer_id_fk_o = users.id LEFT JOIN product_order_quantities ON orders.order_id = product_order_quantities.order_id_fk_pok LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id';
-    var options = {sql: sqlString, nestTables: true, values: [1]};
-    connection.query(
-      options,
-      function (error, ordersResult) {
-        let orders = ordersResult.map(function (row) {
-          let newRow = {
-            order: row,
-            products: null
-          }
-          return newRow;
-        });
-        // console.log('orders: ', orders);
-        // return res.status(200).send(orders);
 
-        // build new object
-        let ordersArray = orders;
-        // loop through each order
-        for (let i = 0; i < ordersArray.length; i++) {
-          let orderId = ordersArray[i].order.orders.order_id;
-          let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
-          let productsOptions = {sql: productsSqlString, nestTables: true, values: [orderId]}; 
-          // run the query to pull in the product info
-          connection.query(
-            productsOptions,
-            function (error, productsResults) {
-              // console.log('product results: ', productsResults);
-              let productResults = productsResults.map( function (row) {
-                return row;
-              });
-              // console.log('products: ', productResults);
-              //  ordersArray.orders[i].products = productResults;
-              ordersArray[i].products = productResults;
-              console.log('order: ', ordersArray[i]);
-            }
-          );
+
+
+    // var sqlString = 'SELECT * FROM orders LEFT JOIN producers ON orders.producer_id_fk_o = producers.producer_id LEFT JOIN users ON orders.consumer_id_fk_o = users.id;';
+    // // var sqlString = 'SELECT * FROM orders LEFT JOIN producers ON orders.producer_id_fk_o = producers.producer_id LEFT JOIN users ON orders.consumer_id_fk_o = users.id LEFT JOIN product_order_quantities ON orders.order_id = product_order_quantities.order_id_fk_pok LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id';
+    // var options = {sql: sqlString, nestTables: true, values: [1]};
+    // connection.query(
+    //   options,
+    //   function (error, ordersResult) {
+    //     let orders = ordersResult.map(function (row) {
+    //       let newRow = {
+    //         order: row,
+    //         products: null
+    //       }
+    //       return newRow;
+    //     });
+    //     // console.log('orders: ', orders);
+    //     // return res.status(200).send(orders);
+
+    //     // build new object
+    //     let ordersArray = orders;
+    //     // loop through each order
+    //     for (let i = 0; i < ordersArray.length; i++) {
+    //       let orderId = ordersArray[i].order.orders.order_id;
+    //       let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
+    //       let productsOptions = {sql: productsSqlString, nestTables: true, values: [orderId]}; 
+    //       // run the query to pull in the product info
+    //       connection.query(
+    //         productsOptions,
+    //         function (error, productsResults) {
+    //           // console.log('product results: ', productsResults);
+    //           let productResults = productsResults.map( function (row) {
+    //             return row;
+    //           });
+    //           // console.log('products: ', productResults);
+    //           //  ordersArray.orders[i].products = productResults;
+    //           ordersArray[i].products = productResults;
+    //           console.log('order: ', ordersArray[i]);
+    //         }
+    //       );
           
-        };
+    //     };
         
-        return res.status(200).send(ordersArray);
-      }
-    )
+    //     return res.status(200).send(ordersArray);
+    //   }
+    // )
   },
   post_order: function (req, res) {
     let orderPostQuery = {
