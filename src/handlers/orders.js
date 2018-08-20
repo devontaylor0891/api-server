@@ -72,7 +72,7 @@ module.exports = {
               })
             }
           );
-          orders[i].products = products;
+          orders[i][products] = products;
         };
         
 
