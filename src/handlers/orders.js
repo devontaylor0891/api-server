@@ -7,8 +7,8 @@ module.exports = {
     connection.query('SELECT * FROM orders LEFT JOIN producers ON orders.producer_id_fk_o = producers.producer_id LEFT JOIN users ON orders.consumer_id_fk_o = users.id; SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = 15', function (error, results, fields) {
       if (error) throw error;
       // `results` is an array with one element for every statement in the query:
-      console.log(results[0]); // [{1: 1}]
-      console.log(results[1]); // [{2: 2}]
+      console.log('order: ', results[0]); // [{1: 1}]
+      console.log('product info: ', results[1]); // [{2: 2}]
     });
 
 
