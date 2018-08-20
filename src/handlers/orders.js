@@ -73,14 +73,14 @@ module.exports = {
           connection.query(
             productsOptions,
             function (error, productsResults) {
-              console.log('product results: ', productsResults);
-              let productResults = productsResults.map( function (row) {
+              // console.log('product results: ', productsResults);
+              // let productResults = productsResults.map( function (row) {
                 
-                return row;
-              });
-              //   console.log('products: ', productResults);
+              //   return row;
+              // });
+              // console.log('products: ', productResults);
               //  ordersArray.orders[i].products = productResults;
-              ordersArray[i].products = productResults;
+              ordersArray[i].products = productsResults;
               // console.log('order: ', ordersArray[i]);
             }
           );
