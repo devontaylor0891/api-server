@@ -63,10 +63,7 @@ module.exports = {
         // return res.status(200).send(orders);
 
         // build new object
-        let ordersArray = {
-          orders: orders,
-          products: null
-        };
+        let ordersArray = orders;
         // loop through each order
         for (let i = 0; i < ordersArray.orders.length; i++) {
           let orderId = ordersArray.orders[i].order_id;
@@ -83,6 +80,7 @@ module.exports = {
             //  ordersArray.orders[i].products = productResults;
             }
           );
+          console.log('order: ', ordersArray.orders[i]);
         };
         
 
