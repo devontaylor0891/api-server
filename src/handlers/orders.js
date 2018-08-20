@@ -26,38 +26,85 @@ module.exports = {
       options,
       function (error, ordersResult) {
         let orders = ordersResult.map(function (row) {
-          let order = {
-            products: null,
-            order: null
-          };
-          let products = 'hello';
-          let orderId = row.orders.order_id;
-          // console.log('orderid: ', orderId);
-          let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
-          let productsOptions = {sql: productsSqlString, nestTables: true, values: [orderId]}; 
-          connection.query(
-            productsOptions,
-            function(error, productsResults) {
-              order.products = productsResults.map(function (row) {
-                // console.log('products: ', row);
-                // return {
-                //   products: row
-                // }
-                // console.log('row: ', row);
-                return row;
-              });
-              // return order.products;
-              console.log('orderProducts: ', order.products);
-              return res.status(200).send(orders);
-            }
-          );
-          console.log('orderRow: ', row);
-          order.order = row;
-          // console.log('order: ', order);
+          // let order = {
+          //   products: null,
+          //   order: null
+          // };
+          // let products = 'hello';
+          // let orderId = row.orders.order_id;
+          // // console.log('orderid: ', orderId);
+          // let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
+          // let productsOptions = {sql: productsSqlString, nestTables: true, values: [orderId]}; 
+          // connection.query(
+          //   productsOptions,
+          //   function(error, productsResults) {
+          //     order.products = productsResults.map(function (row) {
+          //       // console.log('products: ', row);
+          //       // return {
+          //       //   products: row
+          //       // }
+          //       // console.log('row: ', row);
+          //       return row;
+          //     });
+          //     // return order.products;
+          //     console.log('orderProducts: ', order.products);
+          //   }
+          // );
+          // console.log('orderRow: ', row);
+          // order.order = row;
+          // // console.log('order: ', order);
           return order;
         });
         // console.log('orders: ', orders);
+        // return res.status(200).send(orders);
+
+        // loop through each order
+        for (let i = 0; i < order.length; i++) {
+          let orderId = orders.order_id;
+          let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
+          let productsOptions = {sql: productsSqlString, nestTables: true, values: [orderId]}; 
+          // run the query to pull in the product info
+          connection.query(
+            productsOptions,
+            function (error, productsResults) {
+              let products = productsResults.map( function (row) {
+                return row;
+              })
+            }
+          );
+          order.products = products;
+        };
         
+
+
+        // let order = {
+        //   products: null,
+        //   order: null
+        // };
+        // let products = 'hello';
+        // let orderId = row.orders.order_id;
+        // // console.log('orderid: ', orderId);
+        // let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
+        // let productsOptions = {sql: productsSqlString, nestTables: true, values: [orderId]}; 
+        // connection.query(
+        //   productsOptions,
+        //   function(error, productsResults) {
+        //     order.products = productsResults.map(function (row) {
+        //       // console.log('products: ', row);
+        //       // return {
+        //       //   products: row
+        //       // }
+        //       // console.log('row: ', row);
+        //       return row;
+        //     });
+        //     // return order.products;
+        //     console.log('orderProducts: ', order.products);
+        //   }
+        // );
+        // console.log('orderRow: ', row);
+        // order.order = row;
+        // console.log('order: ', order);
+        return res.status(200).send(orders);
       }
     )
   },
