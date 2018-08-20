@@ -46,7 +46,9 @@ module.exports = {
                 // console.log('row: ', row);
                 return row;
               });
-              return order.products;
+              // return order.products;
+
+              return res.status(200).send(orders);
             }
           );
           console.log('orderRow: ', row);
@@ -55,7 +57,7 @@ module.exports = {
           return order;
         });
         // console.log('orders: ', orders);
-        return res.status(200).send(orders);
+        
       }
     )
   },
