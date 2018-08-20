@@ -53,7 +53,11 @@ module.exports = {
           // console.log('orderRow: ', row);
           // order.order = row;
           // // console.log('order: ', order);
-          return row;
+          let newRow = {
+            order: row,
+            products: null
+          }
+          return newRow;
         });
         // console.log('orders: ', orders);
         // return res.status(200).send(orders);
@@ -76,7 +80,7 @@ module.exports = {
                 return row;
               });
               console.log('products: ', productResults);
-             ordersArray.orders[i].push(productResults);
+            //  ordersArray.orders[i].products = productResults;
             }
           );
         };
