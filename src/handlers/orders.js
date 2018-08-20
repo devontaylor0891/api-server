@@ -47,7 +47,7 @@ module.exports = {
                 return row;
               });
               // return order.products;
-
+              console.log('orderProducts: ', order.products);
               return res.status(200).send(orders);
             }
           );
