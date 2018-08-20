@@ -109,7 +109,7 @@ module.exports = {
         // console.log('orderRow: ', row);
         // order.order = row;
         // console.log('order: ', order);
-        return res.status(200).send(orders);
+        return res.status(200).send(ordersArray);
       }
     )
   },
