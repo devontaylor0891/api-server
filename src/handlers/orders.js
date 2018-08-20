@@ -59,7 +59,7 @@ module.exports = {
         // return res.status(200).send(orders);
 
         // loop through each order
-        for (let i = 0; i < order.length; i++) {
+        for (let i = 0; i < orders.length; i++) {
           let orderId = orders.order_id;
           let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
           let productsOptions = {sql: productsSqlString, nestTables: true, values: [orderId]}; 
