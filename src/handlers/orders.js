@@ -81,7 +81,7 @@ module.exports = {
               // console.log('products: ', productResults);
               //  ordersArray.orders[i].products = productResults;
               ordersArray[i].products = productsResults;
-              // console.log('order: ', ordersArray[i]);
+              console.log('order: ', ordersArray[i]);
             }
           );
           
