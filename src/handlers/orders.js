@@ -9,7 +9,7 @@ module.exports = {
       // `results` is an array with one element for every statement in the query:
       console.log('order: ', results[0]); // [{1: 1}]
       console.log('product info: ', results[1]); // [{2: 2}]
-      return res.status(200).send('ok');
+      return res.status(200).send(results);
     });
 
 
