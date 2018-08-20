@@ -64,8 +64,8 @@ module.exports = {
           products: null
         };
         // loop through each order
-        for (let i = 0; i < ordersArray.length; i++) {
-          let orderId = ordersArray[i].order_id;
+        for (let i = 0; i < ordersArray.orders.length; i++) {
+          let orderId = ordersArray.orders[i].order_id;
           let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
           let productsOptions = {sql: productsSqlString, nestTables: true, values: [orderId]}; 
           // run the query to pull in the product info
@@ -75,7 +75,7 @@ module.exports = {
               let products = productsResults.map( function (row) {
                 return row;
               });
-             ordersArray[i].products = products;
+             ordersArray.orders[i].push(products);
             }
           );
         };
