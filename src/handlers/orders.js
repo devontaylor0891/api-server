@@ -74,6 +74,7 @@ module.exports = {
             productsOptions,
             function (error, productsResults) {
               let productResults = productsResults.map( function (row) {
+                console.log('product results: ', row);
                 return row;
               });
               //   console.log('products: ', productResults);
