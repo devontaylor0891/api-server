@@ -22,14 +22,10 @@ module.exports = {
     var sqlString = 'SELECT * FROM orders LEFT JOIN producers ON orders.producer_id_fk_o = producers.producer_id LEFT JOIN users ON orders.consumer_id_fk_o = users.id';
     // var sqlString = 'SELECT * FROM orders LEFT JOIN producers ON orders.producer_id_fk_o = producers.producer_id LEFT JOIN users ON orders.consumer_id_fk_o = users.id LEFT JOIN product_order_quantities ON orders.order_id = product_order_quantities.order_id_fk_pok LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id';
     var options = {sql: sqlString, nestTables: true, values: [1]};
-    let orders = {
-      order: null,
-      products: null
-    };
     connection.query(
       options,
       function (error, ordersResult) {
-        orders.order = ordersResult.map(function (row) {
+        let orders = ordersResult.map(function (row) {
           // let order = {
           //   products: null,
           //   order: null
@@ -62,9 +58,14 @@ module.exports = {
         // console.log('orders: ', orders);
         // return res.status(200).send(orders);
 
+        // build new object
+        let ordersArray = {
+          orders: orders,
+          products: null
+        };
         // loop through each order
-        for (let i = 0; i < orders.length; i++) {
-          let orderId = orders.order_id;
+        for (let i = 0; i < ordersArray.length; i++) {
+          let orderId = ordersArray[i].order_id;
           let productsSqlString = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
           let productsOptions = {sql: productsSqlString, nestTables: true, values: [orderId]}; 
           // run the query to pull in the product info
@@ -73,10 +74,10 @@ module.exports = {
             function (error, productsResults) {
               let products = productsResults.map( function (row) {
                 return row;
-              })
+              });
+             ordersArray[i].products = products;
             }
           );
-          orders[i][products] = products;
         };
         
 
