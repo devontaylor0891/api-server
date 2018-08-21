@@ -29,8 +29,8 @@ module.exports = {
     let getProductsSql = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok IN (?)';
     let getProductsQueryOptions = {
       sql: getProductsSql,
-      nestTables: true,
-      values: []
+      values: [],
+      nestTables: true
     };
     let ordersReceived, productsReceived, results;
 
