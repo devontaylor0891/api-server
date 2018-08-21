@@ -26,13 +26,14 @@ module.exports = {
       sql: getOrdersSql,
       nestTables: true
     };
-    let getProductsSql = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok IN (values)';
+    let getProductsSql = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok IN (?)';
     let getProductsQueryOptions = {
       sql: getProductsSql,
       values: [],
       nestTables: true
     };
-    let ordersReceived, productsReceived, results;
+    let ordersReceived, productsReceived;
+    let values = [];
 
     // then call the promisedQuery and pass the queries into it
     promisedQuery(getOrdersQueryOptions)
@@ -44,8 +45,9 @@ module.exports = {
         for (let i = 0; i < ordersReceived.length; i++) {
           let orderId = ordersReceived[i].orders.order_id;
           console.log('id: ', orderId);
-          getProductsQueryOptions.values.push(orderId);
+          values.push(orderId);
         }
+        getProductsQueryOptions.values = [values];
         console.log('product options: ', getProductsQueryOptions);
         // call the promisedQuery again
         return promisedQuery(getProductsQueryOptions);
