@@ -5,7 +5,10 @@ module.exports = {
   get_orders: function(req, res) {
 
     // create an array to hold our completed results
-    let ordersArray;
+    let ordersArray = {
+     orders: null,
+     products: null
+    };
 
     // build a query inside a promise, this will return the rows from the query
     function promisedQuery(sql) { 
@@ -40,6 +43,7 @@ module.exports = {
       .then(rows => {
         // do stuff with the returned rows from the first query
         ordersReceived = rows;
+        ordersArray.orders = ordersReceived;
         console.log('orders received: ', ordersReceived.length);
         // retreive the orderId and assign to the values in the getProductsQueryOptions
         for (let i = 0; i < ordersReceived.length; i++) {
@@ -55,9 +59,10 @@ module.exports = {
       .then(rows => {
         // do stuff with the rows from that query
         productsReceived = rows;
+        ordersArray.products = productsReceived;
         console.log('prodcuts received: ', productsReceived.length);
         // ordersArray = ordersReceived + productsReceived;
-        return res.status(200).send(ordersReceived, productsReceived);
+        return res.status(200).send(ordersArray);
       // })
       // .then(rows => {
       //   // build the final objects
