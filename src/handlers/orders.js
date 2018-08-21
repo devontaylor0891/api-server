@@ -25,7 +25,7 @@ module.exports = {
       sql: getOrdersSql,
       nestTables: true
     };
-    let getProductsSql = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = ?';
+    let getProductsSql = 'SELECT * FROM product_order_quantities LEFT JOIN products ON product_order_quantities.product_id_fk_pok = products.product_id WHERE product_order_quantities.order_id_fk_pok = 15';
     let getProductsQueryOptions = {
       sql: getProductsSql,
       nestTables: true,
