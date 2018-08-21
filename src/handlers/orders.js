@@ -61,14 +61,7 @@ module.exports = {
         productsReceived = rows;
         ordersArray.products = productsReceived;
         console.log('prodcuts received: ', productsReceived.length);
-        // ordersArray = ordersReceived + productsReceived;
         return res.status(200).send(ordersArray);
-      // })
-      // .then(rows => {
-      //   // build the final objects
-      //   ordersArray = rows;
-      //   // send the results
-        
       }).catch(err => {
         return res.status(500).send(err);
       });
