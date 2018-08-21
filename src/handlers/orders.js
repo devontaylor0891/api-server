@@ -56,8 +56,7 @@ module.exports = {
         // do stuff with the rows from that query
         productsReceived = rows;
         console.log('prodcuts received: ', productsReceived.length);
-        ordersArray = ordersReceived;
-        ordersArray.push(productsReceived);
+        ordersArray = ordersReceived + productsReceived;
         return res.status(200).send(ordersArray);
       // })
       // .then(rows => {
