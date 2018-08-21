@@ -10,6 +10,7 @@ module.exports = {
     // build a query inside a promise, this will return the rows from the query
     function promisedQuery(sql) { 
       return new Promise ((resolve, reject) => {
+        console.log('query: ', sql);
         connection.query(sql, function(err, rows) {
           if ( err ) {
             return reject( err );
@@ -43,11 +44,11 @@ module.exports = {
         for (let i = 0; i < ordersReceived.length; i++) {
           let orderId = ordersReceived[i].orders.order_id;
           console.log('id: ', orderId);
-          getProductsQueryOptions.values.push("'" + orderId + "'");
+          getProductsQueryOptions.values.push(orderId);
         }
         console.log('product options: ', getProductsQueryOptions);
         // call the promisedQuery again
-        return promisedQuery(getProductsQueryOptions)
+        return promisedQuery(getProductsQueryOptions);
       })
       .then(rows => {
         // do stuff with the rows from that query
