@@ -42,6 +42,7 @@ module.exports = {
         // retreive the orderId and assign to the values in the getProductsQueryOptions
         for (let i = 0; i < ordersReceived.length; i++) {
           let orderId = ordersReceived[i].orders.order_id;
+          console.log('id: ', orderId);
           getProductsQueryOptions.values.push(orderId);
         }
         // call the promisedQuery again
@@ -51,12 +52,15 @@ module.exports = {
         // do stuff with the rows from that query
         productsReceived = rows;
         console.log('prodcuts received: ', productsReceived.length);
-      })
-      .then(rows => {
-        // build the final objects
-        ordersArray = rows;
-        // send the results
+        ordersArray = ordersReceived;
+        ordersArray.push(productsReceived);
         return res.status(200).send(ordersArray);
+      // })
+      // .then(rows => {
+      //   // build the final objects
+      //   ordersArray = rows;
+      //   // send the results
+        
       }).catch(err => {
         return res.status(500).send(err);
       });
