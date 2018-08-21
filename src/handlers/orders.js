@@ -43,7 +43,7 @@ module.exports = {
         for (let i = 0; i < ordersReceived.length; i++) {
           let orderId = ordersReceived[i].orders.order_id;
           console.log('id: ', orderId);
-          getProductsQueryOptions.values.push(orderId);
+          getProductsQueryOptions.values.push("'" + orderId + "'");
         }
         console.log('product options: ', getProductsQueryOptions);
         // call the promisedQuery again
