@@ -45,6 +45,7 @@ module.exports = {
           console.log('id: ', orderId);
           getProductsQueryOptions.values.push(orderId);
         }
+        console.log('product options: ', getProductsQueryOptions);
         // call the promisedQuery again
         return promisedQuery(getProductsQueryOptions)
       })
