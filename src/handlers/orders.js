@@ -231,8 +231,8 @@ module.exports = {
           console.log('product: ', product);
           console.log('newOrder: ', newOrder);
           newOrder.orderDetails.productQuantities.push(product.product_order_quantities);
-          newOrder.orderDetails.productList.push(product.products);
-          console.log('newOrder.orderDetails.productQuantities: ', newOrder.orderDetails.productQuantities)
+          newOrder.productList.push(product.products);
+          // console.log('newOrder.orderDetails.productQuantities: ', newOrder.orderDetails.productQuantities)
         });
         // push the new order to the formattedOrdersArray
         formattedOrdersArray.push(newOrder);
@@ -324,7 +324,7 @@ module.exports = {
               registrationDate: row.users.registration_date,
               role: row.users.role
             },
-            productList: {},
+            productList: [],
             orderDetails: {
               productQuantities: [],
               consumerComment: row.orders.consumer_comment,
