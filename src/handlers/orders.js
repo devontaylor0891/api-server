@@ -219,6 +219,7 @@ module.exports = {
         newOrder = order;
         // add the producer info
         let producerInfo = producersArray.filter((producer) => {
+          console.log('producerId: ', producer.producerId);
           producer.producerId === order.chosenSchedule.producerId;
         });
         newOrder.producer = producerInfo;
