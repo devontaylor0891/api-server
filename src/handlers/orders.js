@@ -204,8 +204,9 @@ module.exports = {
   get_orders: function(req, res) {
 
     function buildOrderArray(ordersArray, productsArray, producersArray) {
-      let formattedOrdersArray = [ordersArray, producersArray, productsArray];
-      let order = {
+      let formattedOrdersArray = [];
+      let newOrder = {
+        id: null,
         chosenSchedule: null,
         consumer: null,
         orderDetails: null,
@@ -213,10 +214,25 @@ module.exports = {
         productList: null
       };
       // build each order object into a new array
-    
-      // loop through the products, and assign them to the appropriate order array
-    
-      // loop through the producers and assign them to the orders
+      ordersArray.forEach(function (order) {
+        // add the order info
+        newOrder = order;
+        // add the producer info
+        let producerInfo = producersArray.filter((producer) => {
+          producer.producerId === order.chosenSchedule.producerId;
+        });
+        newOrder.producer = producerInfo;
+        // add the products info
+        let productsInfo = productsArray.filter((products) => {
+          products.orderId = order.id;
+        });
+        productsInfo.forEach(function (product) {
+          newOrder.orderDetails.productOrderQuantities.push(product.product_order_quantities);
+          newOrder.orderDetails.productList.push(product.products);
+        });
+        // push the new order to the formattedOrdersArray
+        formattedOrdersArray.push(newOrder);
+      });
       return formattedOrdersArray;
     };
 
