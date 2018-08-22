@@ -218,8 +218,7 @@ module.exports = {
       // build each order object into a new array
       ordersArray.forEach(function (order) {
         // add the order info
-        newOrder.id = order.id;
-        newOrder.chosenSchedule = order.chosenSchedule;
+        newOrder = order;
         console.log('neworder id: ', newOrder.id);
         // add the producer info
         let producerInfo = producersArray.filter(producer => producer.producerId == newOrder.chosenSchedule.producerId);
@@ -231,9 +230,9 @@ module.exports = {
         productsInfo.forEach(function (product) {
           console.log('product: ', product);
           console.log('newOrder: ', newOrder);
-          newOrder.orderDetails.productOrderQuantities.push(product.product_order_quantities);
+          newOrder.orderDetails.productQuantities.push(product.product_order_quantities);
           newOrder.orderDetails.productList.push(product.products);
-          console.log('newOrder.orderDetails.productOrderQuantities: ', newOrder.orderDetails.productOrderQuantities)
+          console.log('newOrder.orderDetails.productQuantities: ', newOrder.orderDetails.productQuantities)
         });
         // push the new order to the formattedOrdersArray
         formattedOrdersArray.push(newOrder);
