@@ -225,7 +225,9 @@ module.exports = {
         // add the products info
         let productsInfo = productsArray.filter(products => products.orderId == newOrder.id);
         console.log('productsinfo: ', productsInfo);
+        console.log('newOrder.orderDetails.productOrderQuantities: ', newOrder.orderDetails.productOrderQuantities)
         productsInfo.forEach(function (product) {
+          console.log('product.product_order_quantities: ', product.product_order_quantities);
           newOrder.orderDetails.productOrderQuantities.push(product.product_order_quantities);
           newOrder.orderDetails.productList.push(product.products);
         });
