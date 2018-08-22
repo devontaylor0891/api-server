@@ -225,13 +225,15 @@ module.exports = {
         console.log('producer info: ', producerInfo);
         newOrder.producer = producerInfo[0];
         // add the products info
+        console.log('products order id: ', products.orderId);
+        console.log('neworder id: ', newOrder.id);
         let productsInfo = productsArray.filter(products => products.orderId == newOrder.id);
         console.log('productsinfo: ', productsInfo);
-        console.log('newOrder.orderDetails.productOrderQuantities: ', newOrder.orderDetails.productOrderQuantities)
         productsInfo.forEach(function (product) {
           console.log('product: ', product);
           newOrder.orderDetails.productOrderQuantities.push(product.product_order_quantities);
           newOrder.orderDetails.productList.push(product.products);
+          console.log('newOrder.orderDetails.productOrderQuantities: ', newOrder.orderDetails.productOrderQuantities)
         });
         // push the new order to the formattedOrdersArray
         formattedOrdersArray.push(newOrder);
