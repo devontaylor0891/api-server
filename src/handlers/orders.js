@@ -230,6 +230,7 @@ module.exports = {
         console.log('productsinfo: ', productsInfo);
         productsInfo.forEach(function (product) {
           console.log('product: ', product);
+          console.log('newOrder: ', newOrder);
           newOrder.orderDetails.productOrderQuantities.push(product.product_order_quantities);
           newOrder.orderDetails.productList.push(product.products);
           console.log('newOrder.orderDetails.productOrderQuantities: ', newOrder.orderDetails.productOrderQuantities)
