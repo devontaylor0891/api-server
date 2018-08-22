@@ -220,12 +220,15 @@ module.exports = {
         console.log('neworder id: ', newOrder.id);
         // add the producer info
         let producerInfo = producersArray.filter((producer) => {
+          console.log('producer  id: ', producer.producerId);
+          console.log('neworder prodcuer id: ', newOrder.chosenSchedule.producerId);
           producer.producerId === newOrder.chosenSchedule.producerId;
         });
         newOrder.producer = producerInfo;
         // add the products info
         let productsInfo = productsArray.filter((products) => {
-          
+          console.log('products order id: ', products.orderId);
+          console.log('neworder id: ', newOrder.id);
           products.orderId = newOrder.id;
         });
         console.log('productsinfo: ', productsInfo);
