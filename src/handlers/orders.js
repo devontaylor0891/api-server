@@ -217,11 +217,9 @@ module.exports = {
       ordersArray.forEach(function (order) {
         // add the order info
         newOrder = order;
+        console.log('neworder id: ', newOrder.id);
         // add the producer info
         let producerInfo = producersArray.filter((producer) => {
-          console.log('producerId: ', producer.producerId);
-          console.log('order id: ', order.id);
-          console.log('producer: ', producer);
           producer.producerId === order.chosenSchedule.producerId;
         });
         newOrder.producer = producerInfo;
@@ -230,6 +228,7 @@ module.exports = {
           products.orderId = order.id;
         });
         productsInfo.forEach(function (product) {
+          console.log('product id: ', product.products.productId)
           newOrder.orderDetails.productOrderQuantities.push(product.product_order_quantities);
           newOrder.orderDetails.productList.push(product.products);
         });
