@@ -198,25 +198,27 @@
 'use strict';
 var connection = require('../../db');
 
-function buildOrderArray(ordersArray, productsArray, producersArray) {
-  let formattedOrdersArray = [];
-  let order = {
-    chosenSchedule: null,
-    consumer: null,
-    orderDetails: null,
-    producer: null,
-    productList: null
-  };
-  // build each order object into a new array
 
-  // loop through the products, and assign them to the appropriate order array
-
-  // loop through the producers and assign them to the orders
-
-};
 
 module.exports = {
   get_orders: function(req, res) {
+
+    function buildOrderArray(ordersArray, productsArray, producersArray) {
+      let formattedOrdersArray = [ordersArray, producersArray, productsArray];
+      let order = {
+        chosenSchedule: null,
+        consumer: null,
+        orderDetails: null,
+        producer: null,
+        productList: null
+      };
+      // build each order object into a new array
+    
+      // loop through the products, and assign them to the appropriate order array
+    
+      // loop through the producers and assign them to the orders
+      return formattedOrdersArray;
+    };
 
     // create an array to hold our results
     let ordersObject = {
@@ -391,7 +393,7 @@ module.exports = {
         ordersObject.producers = producersReceived;
         console.log('producers received: ', producersReceived.length);
         // build the ordersObject properly
-        formattedOrders = this.buildOrderArray(ordersObject.orders, ordersObject.products, ordersO.producers);
+        formattedOrders = buildOrderArray(ordersObject.orders, ordersObject.products, ordersObject.producers);
         return res.status(200).send(formattedOrders);
       }).catch(err => {
         return res.status(500).send(err);
