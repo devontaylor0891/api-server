@@ -209,7 +209,9 @@ module.exports = {
         id: null,
         chosenSchedule: null,
         consumer: null,
-        orderDetails: null,
+        orderDetails: {
+          productOrderQuantities: []
+        },
         producer: null,
         productList: null
       };
@@ -226,11 +228,13 @@ module.exports = {
         let productsInfo = productsArray.filter(products => products.orderId == newOrder.id);
         console.log('productsinfo: ', productsInfo);
         console.log('newOrder.orderDetails.productOrderQuantities: ', newOrder.orderDetails.productOrderQuantities)
-        productsInfo.forEach(function (product) {
-          console.log('product.product_order_quantities: ', product.product_order_quantities);
-          newOrder.orderDetails.productOrderQuantities.push(product.product_order_quantities);
-          newOrder.orderDetails.productList.push(product.products);
-        });
+        if (productsInfo) {
+          productsInfo.forEach(function (product) {
+            console.log('product.product_order_quantities: ', product.product_order_quantities);
+            newOrder.orderDetails.productOrderQuantities.push(product.product_order_quantities);
+            newOrder.orderDetails.productList.push(product.products);
+          });
+        };
         // push the new order to the formattedOrdersArray
         formattedOrdersArray.push(newOrder);
         // console.log('neworder: ', newOrder);
