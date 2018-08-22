@@ -225,8 +225,6 @@ module.exports = {
         console.log('producer info: ', producerInfo);
         newOrder.producer = producerInfo[0];
         // add the products info
-        console.log('products order id: ', products.orderId);
-        console.log('neworder id: ', newOrder.id);
         let productsInfo = productsArray.filter(products => products.orderId == newOrder.id);
         console.log('productsinfo: ', productsInfo);
         productsInfo.forEach(function (product) {
