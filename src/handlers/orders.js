@@ -220,7 +220,8 @@ module.exports = {
         // add the producer info
         let producerInfo = producersArray.filter((producer) => {
           console.log('producerId: ', producer.producerId);
-          console.log('order producer id: ', order.chosenSchedule.producerId);
+          console.log('order id: ', order.id);
+          console.log('producer: ', producer);
           producer.producerId === order.chosenSchedule.producerId;
         });
         newOrder.producer = producerInfo;
