@@ -225,13 +225,13 @@ module.exports = {
         // add the products info
         let productsInfo = productsArray.filter(products => products.orderId == newOrder.id);
         console.log('productsinfo: ', productsInfo);
-        productsInfo.forEach(product => {
+        productsInfo.forEach(function (product) {
           newOrder.orderDetails.productOrderQuantities.push(product.product_order_quantities);
           newOrder.orderDetails.productList.push(product.products);
         });
         // push the new order to the formattedOrdersArray
         formattedOrdersArray.push(newOrder);
-        console.log('neworder: ', newOrder);
+        // console.log('neworder: ', newOrder);
       });
       return formattedOrdersArray;
     };
