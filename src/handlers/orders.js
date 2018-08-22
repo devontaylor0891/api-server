@@ -218,7 +218,7 @@ module.exports = {
       // build each order object into a new array
       ordersArray.forEach(function (order) {
         // add the order info
-        newOrder = order;
+        newOrder.id = order.id;
         console.log('neworder id: ', newOrder.id);
         // add the producer info
         let producerInfo = producersArray.filter(producer => producer.producerId == newOrder.chosenSchedule.producerId);
