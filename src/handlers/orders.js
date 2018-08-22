@@ -222,14 +222,11 @@ module.exports = {
         console.log('neworder id: ', newOrder.id);
         // add the producer info
         let producerInfo = producersArray.filter(producer => producer.producerId == newOrder.chosenSchedule.producerId);
-        console.log('producer info: ', producerInfo);
         newOrder.producer = producerInfo[0];
         // add the products info
         let productsInfo = productsArray.filter(products => products.orderId == newOrder.id);
-        console.log('productsinfo: ', productsInfo);
         productsInfo.forEach(function (product) {
           console.log('product: ', product);
-          console.log('newOrder: ', newOrder);
           newOrder.orderDetails.productQuantities.push(product.product_order_quantities);
           newOrder.productList.push(product.products);
           // console.log('newOrder.orderDetails.productQuantities: ', newOrder.orderDetails.productQuantities)
