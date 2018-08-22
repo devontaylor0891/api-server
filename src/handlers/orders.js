@@ -227,7 +227,7 @@ module.exports = {
         let productsInfo = productsArray.filter(products => products.orderId == newOrder.id);
         productsInfo.forEach(function (product) {
           console.log('product: ', product);
-          newOrder.orderDetails.productQuantities.push(product.product_order_quantities);
+          newOrder.orderDetails.productQuantities.push(product.productOrderQuantities);
           newOrder.productList.push(product.products);
           // console.log('newOrder.orderDetails.productQuantities: ', newOrder.orderDetails.productQuantities)
         });
