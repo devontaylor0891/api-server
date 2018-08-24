@@ -283,6 +283,9 @@ module.exports = {
           }
         })
         ordersObject.orders = ordersReceived;
+        if (ordersObject.orders.length < 1) {
+          return res.status(200).send([]);
+        };
         console.log('orders received: ', ordersReceived.length);
         // retreive the orderId and producerId and assign to the values in the getProductsQueryOptions, getProducersQueryOptions
         for (let i = 0; i < ordersReceived.length; i++) {
