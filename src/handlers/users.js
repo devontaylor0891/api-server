@@ -48,7 +48,6 @@ module.exports = {
 
   get_users_id: function(req, res) {
     UserById.get_users_id(req, res);
-
   },
 
   get_users_auth_id: function (req, res) {
@@ -99,7 +98,8 @@ module.exports = {
   },
 
   get_users_id_orders: function(req, res) {
-    UserByIdOrders.get_users_id_orders(req, res);
+    // UserByIdOrders.get_users_id_orders(req, res);
+    UserById.get_users_id_orders(req, res);
   },
 
   post_users_id_orders: function(req, res) {
