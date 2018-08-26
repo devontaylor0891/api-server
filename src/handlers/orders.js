@@ -241,7 +241,7 @@ module.exports = {
       orderPostQuery,
       function(err, result) {
         if (err) {
-          res.status(500).send('error: ', err)
+          res.status(500).send('error: ', err.toString())
         } else { // success
           // use result.insertId to add to other table
           // using a for loop to add to product_quantities table
@@ -252,7 +252,8 @@ module.exports = {
             productQuantitiesPostQuery = {
               order_id_fk_pok: result.insertId,
               product_id_fk_pok: `${productQuantities[i].productId}`,
-              quantity: `${productQuantities[i].orderQuantity}`
+              quantity: `${productQuantities[i].orderQuantity}`,
+              order_value: `${product[i].orderValue}`
             };
             // run insert query
             console.log('product order qty query: ', productQuantitiesPostQuery);
@@ -262,7 +263,7 @@ module.exports = {
               productQuantitiesPostQuery,
               function (err, result) {
                 if (err) {
-                  res.send('error: ', err);
+                  res.status(500).send('error: ', err.toString());
                 } else {
                   return res.status(200).send(result);
                 }
