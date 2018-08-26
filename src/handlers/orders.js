@@ -27,7 +27,7 @@ module.exports = {
         // add the products info
         let productsInfo = productsArray.filter(products => products.orderId == newOrder.id);
         productsInfo.forEach(function (product) {
-          console.log('product: ', product);
+          // console.log('product: ', product);
           newOrder.orderDetails.productQuantities.push(product.productOrderQuantities);
           newOrder.productList.push(product.products);
           // console.log('newOrder.orderDetails.productQuantities: ', newOrder.orderDetails.productQuantities)
@@ -186,7 +186,7 @@ module.exports = {
         ordersObject.products = productsReceived;
         console.log('prodcuts received: ', productsReceived.length);
         getProducersQueryOptions.values = [producerValues];
-        console.log('producer options: ', getProducersQueryOptions);
+        // console.log('producer options: ', getProducersQueryOptions);
         // call the promisedQuery again
       // ************ PRODUCERS ***********
         return promisedQuery(getProducersQueryOptions);
@@ -211,7 +211,7 @@ module.exports = {
           };
         });
         ordersObject.producers = producersReceived;
-        console.log('producers received: ', producersReceived.length);
+        // console.log('producers received: ', producersReceived.length);
         // build the ordersObject properly
         formattedOrders = buildOrderArray(ordersObject.orders, ordersObject.products, ordersObject.producers);
         return res.status(200).send(formattedOrders);
