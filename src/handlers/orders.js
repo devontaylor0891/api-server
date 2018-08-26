@@ -161,6 +161,7 @@ module.exports = {
               id: row.product_order_quantities.product_order_quantities_id,
               productId: row.product_order_quantities.product_id_fk_pok,
               orderQuantity: row.product_order_quantities.quantity,
+              orderValue: row.product_order_quantities.order_value
             },
             products: {
               id: row.products.product_id, 
