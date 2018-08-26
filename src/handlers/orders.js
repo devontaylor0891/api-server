@@ -241,7 +241,7 @@ module.exports = {
       orderPostQuery,
       function(err, result) {
         if (err) {
-          res.status(500).send(err)
+          res.send('error:', err);
         } else { // success
           // use result.insertId to add to other table
           // using a for loop to add to product_quantities table
