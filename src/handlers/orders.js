@@ -253,7 +253,7 @@ module.exports = {
               order_id_fk_pok: result.insertId,
               product_id_fk_pok: `${productQuantities[i].productId}`,
               quantity: `${productQuantities[i].orderQuantity}`,
-              order_value: `${product[i].orderValue}`
+              order_value: `${productQuantities[i].orderValue}`
             };
             // run insert query
             console.log('product order qty query: ', productQuantitiesPostQuery);
