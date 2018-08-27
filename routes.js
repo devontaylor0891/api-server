@@ -65,6 +65,7 @@ router.route('/producers/:id').get(producers.get_producers_id);
 router.route('/producers/:id').put(producers.put_producer_id);
 router.route('/producersProducts/:id').get(producers.get_producer_id_products);
 router.route('/producersSchedules/:id').get(producers.get_producer_id_schedules);
+router.route('/producersFutureSchedules/:id').get(producers.get_producer_id_future_schedules);
 router.route('/producersOrders/:id').get(producers.get_producer_id_orders);
 
 router.route('/products').get(products.get_products); // ADMIN DASH ONLY

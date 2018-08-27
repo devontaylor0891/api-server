@@ -173,6 +173,10 @@ module.exports = {
     Producer.get_producer_id_schedules(req, res);
   },
 
+  get_producer_id_future_schedules: function(req, res) {
+    Producer.get_producer_id_future_schedules(req, res);
+  },
+
   post_producers_id_schedules: function(req, res) {
     return res.send(201);
   },
