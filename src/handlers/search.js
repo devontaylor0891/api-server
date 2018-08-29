@@ -7,7 +7,7 @@ module.exports = {
     
     // get the search parameters
     // let distance = req.body.radius;
-    let distance = 25;
+    let distance = 150;
     // let latitude = req.body.lat;
     let latitude = 50.1436;
     // let longitude = req.body.long;
