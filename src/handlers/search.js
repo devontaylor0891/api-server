@@ -22,7 +22,7 @@ module.exports = {
 
     // set other parameters (from https://coderwall.com/p/otkscg/geographic-searches-within-a-certain-distance)
     // earth's radius in km = ~6371
-    earthRadius = 6371;
+    let earthRadius = 6371;
 
     // latitude boundaries
     this.maxlat = this.latitude + (this.distance / this.earthRadius);
