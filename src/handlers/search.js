@@ -11,7 +11,7 @@ module.exports = {
     // let latitude = req.body.lat;
     let latitude = 50.1436;
     // let longitude = req.body.long;
-    let longitude = 101.6668;
+    let longitude = -101.6668;
     let maxlat, maxlng, minlat, minlng;
 
     // Converts from degrees to radians.
