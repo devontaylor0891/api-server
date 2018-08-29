@@ -1,4 +1,5 @@
 'use strict';
+var connection = require('../../db');
 
 module.exports = {
   get_search: function(req, res) {
