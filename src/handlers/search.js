@@ -28,12 +28,12 @@ module.exports = {
     let earthRadius = 6371;
 
     // latitude boundaries
-    this.maxlat = this.latitude + (this.distance / this.earthRadius);
-    this.minlat = this.latitude - (this.distance / this.earthRadius);
+    maxlat = latitude + (distance / earthRadius);
+    minlat = latitude - (distance / earthRadius);
 
     // longitude boundaries (longitude gets smaller when latitude increases)
-    this.maxlng = this.longitude + (this.distance / this.earthRadius / cos(Math.radians(this.latitude)));
-    this.minlng = this.longitude - (this.distance / this.earthRadius / cos(Math.radians(this.latitude)));
+    maxlng = longitude + (distance / earthRadius / cos(Math.radians(latitude)));
+    minlng = longitude - (distance / earthRadius / cos(Math.radians(latitude)));
 
     // SELECT *
     // FROM coordinates
