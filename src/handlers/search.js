@@ -29,12 +29,12 @@ module.exports = {
     let earthRadius = 6371;
 
     // latitude boundaries
-    maxlat = latitude + (distance / earthRadius);
-    minlat = latitude - (distance / earthRadius);
+    maxlat = latitude + Math.degrees(distance / earthRadius);
+    minlat = latitude - Math.degrees(distance / earthRadius);
 
     // longitude boundaries (longitude gets smaller when latitude increases)
-    maxlng = longitude + (distance / earthRadius / Math.cos(Math.radians(latitude)));
-    minlng = longitude - (distance / earthRadius / Math.cos(Math.radians(latitude)));
+    maxlng = longitude + Math.degrees(distance / earthRadius / Math.cos(Math.radians(latitude)));
+    minlng = longitude - Math.degrees(distance / earthRadius / Math.cos(Math.radians(latitude)));
     console.log('lat: ', latitude)
     console.log('lng: ', longitude);
     console.log('maxlat: ', maxlat);
