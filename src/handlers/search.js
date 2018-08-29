@@ -33,8 +33,8 @@ module.exports = {
     minlat = latitude - (distance / earthRadius);
 
     // longitude boundaries (longitude gets smaller when latitude increases)
-    maxlng = longitude + Math.degrees(distance / earthRadius / Math.cos(Math.radians(latitude)));
-    minlng = longitude - Math.degrees(distance / earthRadius / Math.cos(Math.radians(latitude)));
+    maxlng = longitude + (distance / earthRadius / Math.cos(Math.radians(latitude)));
+    minlng = longitude - (distance / earthRadius / Math.cos(Math.radians(latitude)));
     console.log('lat: ', latitude)
     console.log('lng: ', longitude);
     console.log('maxlat: ', maxlat);
