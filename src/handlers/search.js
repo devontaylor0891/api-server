@@ -5,9 +5,12 @@ module.exports = {
 
     
     // get the search parameters
-    let distance = req.body.radius;
-    let latitude = req.body.lat;
-    let longitude = req.body.long;
+    // let distance = req.body.radius;
+    let distance = 25;
+    // let latitude = req.body.lat;
+    let latitude = 50.1436;
+    // let longitude = req.body.long;
+    let longitude = 101.6668;
     let maxlat, maxlng;
 
     // Converts from degrees to radians.
