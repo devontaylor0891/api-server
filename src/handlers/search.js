@@ -55,9 +55,9 @@ module.exports = {
       WHERE 
       order_deadline >= NOW()
       AND
-      latitude BETWEEN minlat AND maxlat
+      latitude BETWEEN ${minlat} AND ${maxlat}
       AND
-      longitude BETWEEN minlng AND maxlng`,
+      longitude BETWEEN ${minlng} AND ${maxlng}`,
       function (error, schedulesResult) {
         let schedules = [];
         if (schedulesResult) {
