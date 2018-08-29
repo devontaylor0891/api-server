@@ -53,7 +53,7 @@ module.exports = {
     connection.query(
       `SELECT * FROM schedules
       WHERE 
-      order_deadline >= NOW())
+      order_deadline >= NOW()
       AND
       latitude BETWEEN minlat AND maxlat
       AND
