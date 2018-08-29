@@ -53,29 +53,35 @@ module.exports = {
       AND
       longitude BETWEEN minlng AND maxlng`,
       function (error, schedulesResult) {
-        let schedules = schedulesResult.map(function(row) {
-          return {
-            id: row.schedule_id,
-            producerId: row.producer_id_fk_s,
-            userId: row.user_id_fk_schedules,
-            type: row.schedule_type,
-            description: row.description,
-            startDateTime: row.start_date_time,
-            endDateTime: row.end_date_time,
-            hasFee: row.has_fee,
-            hasWiaver: row.has_waiver,
-            latitude: row.latitude,
-            longitude: row.longitude,
-            city: row.city,
-            province: row.province,
-            orderDeadline: row.order_deadline,
-            address: row.address,
-            fee: row.fee,
-            feeWaiver: row.fee_waiver
-          }
-        });
-        console.log('scheds: ', schedules);
-        return res.status(200).send(schedules);
+        let schedules = [];
+        if (schedulesResult) {
+          schedules = schedulesResult.map(function(row) {
+            return {
+              id: row.schedule_id,
+              producerId: row.producer_id_fk_s,
+              userId: row.user_id_fk_schedules,
+              type: row.schedule_type,
+              description: row.description,
+              startDateTime: row.start_date_time,
+              endDateTime: row.end_date_time,
+              hasFee: row.has_fee,
+              hasWiaver: row.has_waiver,
+              latitude: row.latitude,
+              longitude: row.longitude,
+              city: row.city,
+              province: row.province,
+              orderDeadline: row.order_deadline,
+              address: row.address,
+              fee: row.fee,
+              feeWaiver: row.fee_waiver
+            }
+          });
+          console.log('scheds: ', schedules);
+          return res.status(200).send(schedules);
+        } else {
+          console.log('no scheds');
+          return res.status(200).send(schedules);
+        }
       }
     )
     // second, return the producer information on those schedules
