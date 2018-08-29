@@ -7,7 +7,7 @@ module.exports = {
     
     // get the search parameters
     // let distance = req.body.radius;
-    let distance = 150;
+    let distance = 250;
     // let latitude = req.body.lat;
     let latitude = 50.1436;
     // let longitude = req.body.long;
@@ -33,8 +33,8 @@ module.exports = {
     minlat = latitude - (distance / earthRadius);
 
     // longitude boundaries (longitude gets smaller when latitude increases)
-    maxlng = longitude + (distance / earthRadius / Math.cos(Math.radians(latitude)));
-    minlng = longitude - (distance / earthRadius / Math.cos(Math.radians(latitude)));
+    maxlng = longitude + Math.degrees(distance / earthRadius / Math.cos(Math.radians(latitude)));
+    minlng = longitude - Math.degrees(distance / earthRadius / Math.cos(Math.radians(latitude)));
     console.log('lat: ', latitude)
     console.log('lng: ', longitude);
     console.log('maxlat: ', maxlat);
