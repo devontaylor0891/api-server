@@ -622,14 +622,14 @@ module.exports = {
       nestTables: true
     };
 
-    let getProducersSql = 'SELECT * FROM producers LEFT JOIN users ON producers.user_id = users.id WHERE producer_id = (?);';
+    let getProducersSql = 'SELECT * FROM producers LEFT JOIN users ON producers.user_id = users.id WHERE producer_id = ?;';
     let getProducersQueryOptions = {
       sql: getProducersSql,
       values: [],
       nestTables: true
     };
 
-    let getProductsSql = 'SELECT products.product_id, products.producer_id_fk_products,products.name AS productName, products.description, products.image, products.pricePerUnit, products.unit, products.unitsPer, products.category, products.subcategory, products.date_added, products.qty_available, products.qty_pending, products.qty_accepted, products.qty_completed, products.is_obsolete, producers.user_id AS pId, producers.name AS pName FROM products LEFT JOIN producers ON products.producer_id_fk_products = producers.producer_id WHERE producer_id_fk_products = (?);';
+    let getProductsSql = 'SELECT products.product_id, products.producer_id_fk_products,products.name AS productName, products.description, products.image, products.pricePerUnit, products.unit, products.unitsPer, products.category, products.subcategory, products.date_added, products.qty_available, products.qty_pending, products.qty_accepted, products.qty_completed, products.is_obsolete, producers.user_id AS pId, producers.name AS pName FROM products LEFT JOIN producers ON products.producer_id_fk_products = producers.producer_id WHERE producer_id_fk_products = ?;';
     let getProductsQueryOptions = {
       sql: getProductsSql,
       values: [],
