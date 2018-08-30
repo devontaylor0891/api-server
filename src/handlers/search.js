@@ -674,6 +674,9 @@ module.exports = {
         });
         // assign to searchResults
         searchResultsObject.schedules = schedulesReceived;
+        for(let i = 0; i < searchResultsObject.schedules.length; i++) {
+          console.log('producerid: ', searchResultsObject.schedules[i].producerId);
+        };
         console.log('results.scheds lenght: ', searchResultsObject.schedules.length);
         // create an array of producer Ids from the scheds;
         let producerIdArray = schedulesReceived.map((schedule) => {
