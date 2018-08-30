@@ -645,7 +645,7 @@ module.exports = {
 
     // then call the promisedQuery and pass the queries into it
     // ************ SCHEDULES ***********
-    promisedQuery(getOrdersQueryOptions)
+    promisedQuery(getSchedulesQueryOptions)
       .then(rows => {
         // do stuff with the returned rows
         schedulesReceived = row.map(function(row) {
