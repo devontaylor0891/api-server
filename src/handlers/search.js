@@ -695,20 +695,20 @@ module.exports = {
       .then((rows) => {
         producersReceived = rows.map(function(row) {
           return {
-            id: row.user_id,
-            producerId: row.producer_id,
-            name: row.name,
-            location: row.location,
-            province: row.province,
-            longitude: row.longitude,
-            latitude: row.latitude,
-            status: row.status,
-            address: row.address,
-            description: row.description,
-            logoUrl: row.logoUrl,
-            firstName: row.first_name,
-            email: row.email,
-            registrationDate: row.registration_date
+            id: row.producers.user_id,
+            producerId: row.producers.producer_id,
+            name: row.producers.name,
+            location: row.producers.location,
+            province: row.producers.province,
+            longitude: row.producers.longitude,
+            latitude: row.producers.latitude,
+            status: row.producers.status,
+            address: row.producers.address,
+            description: row.producers.description,
+            logoUrl: row.producers.logoUrl,
+            firstName: row.producers.first_name,
+            email: row.producers.email,
+            registrationDate: row.producers.registration_date
           }
         });
         // assign to producersArray
@@ -721,26 +721,26 @@ module.exports = {
       .then((rows) => {
         productsReceived = rows.map(function(row) {
           return {
-            id: row.product_id,
-            name: row.productName,
-            description: row.description,
-            image: row.image,
-            pricePerUnit: row.pricePerUnit,
-            unit: row.unit,
-            unitsPer: row.unitsPer,
-            category: row.category,
-            subcategory: row.subcategory,
+            id: row.products.product_id,
+            name: row.products.productName,
+            description: row.products.description,
+            image: row.products.image,
+            pricePerUnit: row.products.pricePerUnit,
+            unit: row.products.unit,
+            unitsPer: row.products.unitsPer,
+            category: row.products.category,
+            subcategory: row.products.subcategory,
             producer: {
-              id: row.pId,
-              name: row.pName
+              id: row.products.pId,
+              name: row.products.pName
             },
-            dateAdded: row.date_added,
-            qtyAvailable: row.qty_available,
-            qtyPending: row.qty_pending,
-            qtyAccepted: row.qty_accepted,
-            qtyCompleted: row.qty_completed,
-            isObsolete: row.is_obsolete,
-            producerId: row.producer_id_fk_products
+            dateAdded: row.products.date_added,
+            qtyAvailable: row.products.qty_available,
+            qtyPending: row.products.qty_pending,
+            qtyAccepted: row.products.qty_accepted,
+            qtyCompleted: row.products.qty_completed,
+            isObsolete: row.products.is_obsolete,
+            producerId: row.products.producer_id_fk_products
           }
         })
         // assign to productsArray
