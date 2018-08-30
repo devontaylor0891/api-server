@@ -650,26 +650,26 @@ module.exports = {
     promisedQuery(getSchedulesQueryOptions)
       .then(rows => {
         // do stuff with the returned rows
-        console.log('row:', rows);
+        // console.log('row:', rows);
         schedulesReceived = rows.map(function(row) {
           return {
-            id: row.schedule_id,
-            producerId: row.producer_id_fk_s,
-            userId: row.user_id_fk_schedules,
-            type: row.schedule_type,
-            description: row.description,
-            startDateTime: row.start_date_time,
-            endDateTime: row.end_date_time,
-            hasFee: row.has_fee,
-            hasWiaver: row.has_waiver,
-            latitude: row.latitude,
-            longitude: row.longitude,
-            city: row.city,
-            province: row.province,
-            orderDeadline: row.order_deadline,
-            address: row.address,
-            fee: row.fee,
-            feeWaiver: row.fee_waiver
+            id: row.schedules.schedule_id,
+            producerId: row.schedules.producer_id_fk_s,
+            userId: row.schedules.user_id_fk_schedules,
+            type: row.schedules.schedule_type,
+            description: row.schedules.description,
+            startDateTime: row.schedules.start_date_time,
+            endDateTime: row.schedules.end_date_time,
+            hasFee: row.schedules.has_fee,
+            hasWiaver: row.schedules.has_waiver,
+            latitude: row.schedules.latitude,
+            longitude: row.schedules.longitude,
+            city: row.schedules.city,
+            province: row.schedules.province,
+            orderDeadline: row.schedules.order_deadline,
+            address: row.schedules.address,
+            fee: row.schedules.fee,
+            feeWaiver: row.schedules.fee_waiver
           }
         });
         // assign to searchResults
