@@ -650,7 +650,7 @@ module.exports = {
     promisedQuery(getSchedulesQueryOptions)
       .then(rows => {
         // do stuff with the returned rows
-        schedulesReceived = row.map(function(row) {
+        schedulesReceived = rows.map(function(row) {
           return {
             id: row.schedule_id,
             producerId: row.producer_id_fk_s,
