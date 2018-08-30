@@ -605,8 +605,10 @@ module.exports = {
         console.log('query: ', sql);
         connection.query(sql, function(err, rows) {
           if ( err ) {
+            console.log('error: ', err);
             return reject( err );
           }
+          console.log('success');
           resolve( rows );
         })
       });
