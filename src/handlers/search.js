@@ -650,7 +650,7 @@ module.exports = {
     promisedQuery(getSchedulesQueryOptions)
       .then(rows => {
         // do stuff with the returned rows
-        // console.log('row:', rows);
+        console.log('row:', rows);
         schedulesReceived = rows.map(function(row) {
           return {
             id: row.schedule_id,
@@ -674,7 +674,7 @@ module.exports = {
         });
         // assign to searchResults
         searchResultsObject.schedules = schedulesReceived;
-        console.log('sched received: ', schedulesReceived);
+        // console.log('sched received: ', schedulesReceived);
         for(let i = 0; i < searchResultsObject.schedules.length; i++) {
           console.log('producerid: ', searchResultsObject.schedules[i].producerId);
         };
