@@ -676,7 +676,7 @@ module.exports = {
         console.log('results.scheds lenght: ', searchResultsObject.schedules.length);
         // create an array of producer Ids from the scheds;
         let producerIdArray = schedulesReceived.map((schedule) => {
-          console.log('pid: ', schedule.producerId);
+          console.log('pid: ', schedule);
           return schedule.producerId
         });
         // pull out duplicates
