@@ -650,6 +650,7 @@ module.exports = {
     promisedQuery(getSchedulesQueryOptions)
       .then(rows => {
         // do stuff with the returned rows
+        console.log('row:', rows);
         schedulesReceived = rows.map(function(row) {
           return {
             id: row.schedule_id,
@@ -676,7 +677,7 @@ module.exports = {
         console.log('results.scheds lenght: ', searchResultsObject.schedules.length);
         // create an array of producer Ids from the scheds;
         let producerIdArray = schedulesReceived.map((schedule) => {
-          console.log('pid: ', schedule);
+          // console.log('pid: ', schedule);
           return schedule.producerId
         });
         // pull out duplicates
