@@ -629,11 +629,10 @@ module.exports = {
       nestTables: true
     };
 
-    let getProductsSql = 'SELECT products.product_id, products.producer_id_fk_products,products.name AS productName, products.description, products.image, products.pricePerUnit, products.unit, products.unitsPer, products.category, products.subcategory, products.date_added, products.qty_available, products.qty_pending, products.qty_accepted, products.qty_completed, products.is_obsolete, producers.user_id AS pId, producers.name AS pName FROM products LEFT JOIN producers ON products.producer_id_fk_products = producers.producer_id WHERE producer_id_fk_products = ?;';
+    let getProductsSql = 'SELECT products.product_id, products.producer_id_fk_products, products.name AS productName, products.description, products.image, products.pricePerUnit, products.unit, products.unitsPer, products.category, products.subcategory, products.date_added, products.qty_available, products.qty_pending, products.qty_accepted, products.qty_completed, products.is_obsolete, producers.user_id AS pId, producers.name AS pName FROM products LEFT JOIN producers ON products.producer_id_fk_products = producers.producer_id WHERE producer_id_fk_products = ?;';
     let getProductsQueryOptions = {
       sql: getProductsSql,
-      values: [],
-      nestTables: true
+      values: []
     };
 
     // create the variables needed
@@ -720,28 +719,30 @@ module.exports = {
       })
       .then((rows) => {
         productsReceived = rows.map(function(row) {
-          console.log('products: ', row.products);
+          console.log('row: ', row);
+          // console.log('products: ', row.products);
           return {
-            id: row.products.product_id,
-            name: row.products.productName,
-            description: row.products.description,
-            image: row.products.image,
-            pricePerUnit: row.products.pricePerUnit,
-            unit: row.products.unit,
-            unitsPer: row.products.unitsPer,
-            category: row.products.category,
-            subcategory: row.products.subcategory,
-            producer: {
-              id: row.products.pId,
-              name: row.products.pName
-            },
-            dateAdded: row.products.date_added,
-            qtyAvailable: row.products.qty_available,
-            qtyPending: row.products.qty_pending,
-            qtyAccepted: row.products.qty_accepted,
-            qtyCompleted: row.products.qty_completed,
-            isObsolete: row.products.is_obsolete,
-            producerId: row.products.producer_id_fk_products
+            row
+            // id: row.products.product_id,
+            // name: row.products.productName,
+            // description: row.products.description,
+            // image: row.products.image,
+            // pricePerUnit: row.products.pricePerUnit,
+            // unit: row.products.unit,
+            // unitsPer: row.products.unitsPer,
+            // category: row.products.category,
+            // subcategory: row.products.subcategory,
+            // producer: {
+            //   id: row.products.pId,
+            //   name: row.products.pName
+            // },
+            // dateAdded: row.products.date_added,
+            // qtyAvailable: row.products.qty_available,
+            // qtyPending: row.products.qty_pending,
+            // qtyAccepted: row.products.qty_accepted,
+            // qtyCompleted: row.products.qty_completed,
+            // isObsolete: row.products.is_obsolete,
+            // producerId: row.products.producer_id_fk_products
           }
         })
         // assign to productsArray
