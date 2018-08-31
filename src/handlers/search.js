@@ -732,8 +732,8 @@ module.exports = {
             category: row.products.category,
             subcategory: row.products.subcategory,
             producer: {
-              id: row.pId,
-              name: row.pName
+              id: row.products.pId,
+              name: row.products.pName
             },
             dateAdded: row.products.date_added,
             qtyAvailable: row.products.qty_available,
