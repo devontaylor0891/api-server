@@ -722,26 +722,26 @@ module.exports = {
           console.log('row: ', row);
           // console.log('products: ', row.products);
           return {
-            id: row.product_id,
-            name: row.productName,
-            description: row.description,
+            id: row.products.product_id,
+            name: row.products.productName,
+            description: row.products.description,
             image: row.products.image,
-            pricePerUnit: row.pricePerUnit,
-            unit: row.unit,
-            unitsPer: row.unitsPer,
-            category: row.category,
-            subcategory: row.subcategory,
+            pricePerUnit: row.products.pricePerUnit,
+            unit: row.products.unit,
+            unitsPer: row.products.unitsPer,
+            category: row.products.category,
+            subcategory: row.products.subcategory,
             producer: {
               id: row.pId,
               name: row.pName
             },
-            dateAdded: row.date_added,
-            qtyAvailable: row.qty_available,
-            qtyPending: row.qty_pending,
-            qtyAccepted: row.qty_accepted,
-            qtyCompleted: row.qty_completed,
-            isObsolete: row.is_obsolete,
-            producerId: row.producer_id_fk_products
+            dateAdded: row.products.date_added,
+            qtyAvailable: row.products.qty_available,
+            qtyPending: row.products.qty_pending,
+            qtyAccepted: row.products.qty_accepted,
+            qtyCompleted: row.products.qty_completed,
+            isObsolete: row.products.is_obsolete,
+            producerId: row.products.producer_id_fk_products
           }
         })
         // assign to productsArray
