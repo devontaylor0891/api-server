@@ -720,7 +720,7 @@ module.exports = {
       .then((rows) => {
         productsReceived = rows.map(function(row) {
           console.log('row: ', row);
-          // console.log('products: ', row.products);
+          console.log('products: ', row.products);
           return {
             id: row.products.product_id,
             name: row.products.productName,
