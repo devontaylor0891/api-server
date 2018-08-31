@@ -722,27 +722,27 @@ module.exports = {
           console.log('row: ', row);
           // console.log('products: ', row.products);
           return {
-            row
-            // id: row.products.product_id,
-            // name: row.products.productName,
-            // description: row.products.description,
-            // image: row.products.image,
-            // pricePerUnit: row.products.pricePerUnit,
-            // unit: row.products.unit,
-            // unitsPer: row.products.unitsPer,
-            // category: row.products.category,
-            // subcategory: row.products.subcategory,
-            // producer: {
-            //   id: row.products.pId,
-            //   name: row.products.pName
-            // },
-            // dateAdded: row.products.date_added,
-            // qtyAvailable: row.products.qty_available,
-            // qtyPending: row.products.qty_pending,
-            // qtyAccepted: row.products.qty_accepted,
-            // qtyCompleted: row.products.qty_completed,
-            // isObsolete: row.products.is_obsolete,
-            // producerId: row.products.producer_id_fk_products
+            
+            id: row.product_id,
+            name: row.productName,
+            description: row.products.description,
+            image: row.products.image,
+            pricePerUnit: row.products.pricePerUnit,
+            unit: row.products.unit,
+            unitsPer: row.products.unitsPer,
+            category: row.products.category,
+            subcategory: row.products.subcategory,
+            producer: {
+              id: row.pId,
+              name: row.pName
+            },
+            dateAdded: row.products.date_added,
+            qtyAvailable: row.products.qty_available,
+            qtyPending: row.products.qty_pending,
+            qtyAccepted: row.products.qty_accepted,
+            qtyCompleted: row.products.qty_completed,
+            isObsolete: row.products.is_obsolete,
+            producerId: row.products.producer_id_fk_products
           }
         })
         // assign to productsArray
