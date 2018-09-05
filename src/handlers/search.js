@@ -120,7 +120,6 @@ module.exports = {
         for(let i = 0; i < searchResultsObject.schedules.length; i++) {
           console.log('producerid: ', searchResultsObject.schedules[i].producerId);
         };
-        console.log('results.scheds lenght: ', searchResultsObject.schedules.length);
         // create an array of producer Ids from the scheds;
         let producerIdArray = schedulesReceived.map((schedule) => {
           // console.log('pid: ', schedule);
@@ -128,7 +127,7 @@ module.exports = {
         });
         // pull out duplicates
         producerIds = producerIdArray.filter((v, i, a) => a.indexOf(v) === i); 
-        console.log('filtered pids: ', producerIds);
+        // console.log('filtered pids: ', producerIds);
         // call the query again to get producers
         getProducersQueryOptions.values = producerIds;
         // ************ PRODUCERS ***********
@@ -162,8 +161,8 @@ module.exports = {
       })
       .then((rows) => {
         productsReceived = rows.map(function(row) {
-          console.log('row: ', row);
-          console.log('products: ', row.products);
+          // console.log('row: ', row);
+          // console.log('products: ', row.products);
           return {
             id: row.product_id,
             name: row.productName,
