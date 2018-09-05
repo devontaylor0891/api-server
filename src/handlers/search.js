@@ -6,12 +6,12 @@ module.exports = {
 
     console.log('search Results req: ', req.body);
     // get the search parameters
-    // let distance = req.body.radius;
-    let distance = 150;
-    // let latitude = req.body.lat;
-    let latitude = 50.1436;
-    // let longitude = req.body.long;
-    let longitude = -101.6668;
+    let distance = req.body.radius;
+    // let distance = 150;
+    let latitude = req.body.latitude;
+    // let latitude = 50.1436;
+    let longitude = req.body.longitude;
+    // let longitude = -101.6668;
     let maxlat, maxlng, minlat, minlng;
 
     // Converts from degrees to radians.
