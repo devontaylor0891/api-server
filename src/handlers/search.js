@@ -91,47 +91,53 @@ module.exports = {
     // ************ SCHEDULES ***********
     promisedQuery(getSchedulesQueryOptions)
       .then(rows => {
-        // do stuff with the returned rows
-        // console.log('row:', rows);
-        schedulesReceived = rows.map(function(row) {
-          return {
-            id: row.schedules.schedule_id,
-            producerId: row.schedules.producer_id_fk_s,
-            userId: row.schedules.user_id_fk_schedules,
-            type: row.schedules.schedule_type,
-            description: row.schedules.description,
-            startDateTime: row.schedules.start_date_time,
-            endDateTime: row.schedules.end_date_time,
-            hasFee: row.schedules.has_fee,
-            hasWiaver: row.schedules.has_waiver,
-            latitude: row.schedules.latitude,
-            longitude: row.schedules.longitude,
-            city: row.schedules.city,
-            province: row.schedules.province,
-            orderDeadline: row.schedules.order_deadline,
-            address: row.schedules.address,
-            fee: row.schedules.fee,
-            feeWaiver: row.schedules.fee_waiver
-          }
-        });
-        // assign to searchResults
-        searchResultsObject.schedules = schedulesReceived;
-        // console.log('sched received: ', schedulesReceived);
-        for(let i = 0; i < searchResultsObject.schedules.length; i++) {
-          console.log('producerid: ', searchResultsObject.schedules[i].producerId);
-        };
-        // create an array of producer Ids from the scheds;
-        let producerIdArray = schedulesReceived.map((schedule) => {
-          // console.log('pid: ', schedule);
-          return schedule.producerId
-        });
-        // pull out duplicates
-        producerIds = producerIdArray.filter((v, i, a) => a.indexOf(v) === i); 
-        // console.log('filtered pids: ', producerIds);
-        // call the query again to get producers
-        getProducersQueryOptions.values = producerIds;
-        // ************ PRODUCERS ***********
-        return promisedQuery(getProducersQueryOptions);
+        // if no scheds are found
+        if (rows.length === 0) {
+          let zeroResults = {};
+          return res.status(200).send(zeroResults);
+        } else {
+          // do stuff with the returned rows
+          // console.log('row:', rows);
+          schedulesReceived = rows.map(function(row) {
+            return {
+              id: row.schedules.schedule_id,
+              producerId: row.schedules.producer_id_fk_s,
+              userId: row.schedules.user_id_fk_schedules,
+              type: row.schedules.schedule_type,
+              description: row.schedules.description,
+              startDateTime: row.schedules.start_date_time,
+              endDateTime: row.schedules.end_date_time,
+              hasFee: row.schedules.has_fee,
+              hasWiaver: row.schedules.has_waiver,
+              latitude: row.schedules.latitude,
+              longitude: row.schedules.longitude,
+              city: row.schedules.city,
+              province: row.schedules.province,
+              orderDeadline: row.schedules.order_deadline,
+              address: row.schedules.address,
+              fee: row.schedules.fee,
+              feeWaiver: row.schedules.fee_waiver
+            }
+          });
+          // assign to searchResults
+          searchResultsObject.schedules = schedulesReceived;
+          // console.log('sched received: ', schedulesReceived);
+          for(let i = 0; i < searchResultsObject.schedules.length; i++) {
+            console.log('producerid: ', searchResultsObject.schedules[i].producerId);
+          };
+          // create an array of producer Ids from the scheds;
+          let producerIdArray = schedulesReceived.map((schedule) => {
+            // console.log('pid: ', schedule);
+            return schedule.producerId
+          });
+          // pull out duplicates
+          producerIds = producerIdArray.filter((v, i, a) => a.indexOf(v) === i); 
+          // console.log('filtered pids: ', producerIds);
+          // call the query again to get producers
+          getProducersQueryOptions.values = producerIds;
+          // ************ PRODUCERS ***********
+          return promisedQuery(getProducersQueryOptions);
+        }
       })
       .then((rows) => {
         producersReceived = rows.map(function(row) {
