@@ -1,5 +1,6 @@
 'use strict';
 var connection = require('../../db');
+var Order = require('./orders/{id}');
 
 module.exports = {
   get_orders: function(req, res) {
@@ -495,6 +496,10 @@ module.exports = {
       }).catch(err => {
         return res.status(500).send(err);
       });
+  },
+
+  put_orders_id: function (req, res) {
+    Order.put_orders_id(req, res);
   }
 
 
