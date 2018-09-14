@@ -80,7 +80,7 @@ module.exports = {
   },
 
   put_schedules_id: function(req, res) {
-    return res.send(201);
+    ScheduleById.put_schedules_id(req, res);
   }
 
 };

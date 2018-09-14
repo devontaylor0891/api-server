@@ -34,7 +34,7 @@ router.route('/products/:id').put(products.put_products_id);
 
 router.route('/schedules').get(schedules.get_schedules); // ADMIN DASH ONLY
 router.route('/schedules').post(schedules.post_schedules);
-// router.route('/schedules/:id').put(schedules.put_schedules_id);
+router.route('/schedules/:id').put(schedules.put_schedules_id);
 // router.route('/schedulesDelete/:id').put(schedules.delete_products_id);
 
 router.route('/orders').get(orders.get_orders); // ADMIN DASH ONLY
