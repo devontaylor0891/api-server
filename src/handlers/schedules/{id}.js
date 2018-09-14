@@ -62,7 +62,7 @@ module.exports = {
       function (err, result) {
         if (err) {
           console.log('error in update sched:', err);
-          res.status(500).send('error:', err);
+          return res.status(500).send('error:', err);
         } else {
           console.log('sched updated: ', result);
           return res.status(200).send(result);

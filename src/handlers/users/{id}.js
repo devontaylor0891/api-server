@@ -266,7 +266,7 @@ module.exports = {
       function (err, result) {
         if (err) {
           console.log('error in update user:', err);
-          res.status(500).send('error:', err);
+          return res.status(500).send('error:', err);
         } else {
           console.log('user updated: ', result);
           console.log('postQuery: ', postQuery);

@@ -28,7 +28,7 @@ module.exports = {
                 function (err, result) {
                     if (err) {
                     console.log('error in update order:', err);
-                    res.status(500).send('error:', err);
+                    return res.status(500).send('error:', err);
                     } else {
                     console.log('order updated: ', result);
                     return res.status(200).send(result);
