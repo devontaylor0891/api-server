@@ -14,7 +14,7 @@ router.route('/users/:id').get(users.get_users_id); // GET a single user
 router.route('/users/auth/:id').get(users.get_users_auth_id); // GET a single user by auth0 id
 router.route('/users/:id').put(users.put_users_id);
 router.route('/usersOrders/:id').get(users.get_users_id_orders);
-router.route('/usersDelete/:id').put(users.delete_users_id); // mock DELETE single user
+// router.route('/usersDelete/:id').put(users.delete_users_id); // mock DELETE single user
 
 router.route('/producers').get(producers.get_producers);
 router.route('/producers').post(producers.post_producers);
@@ -34,13 +34,13 @@ router.route('/products/:id').put(products.put_products_id);
 
 router.route('/schedules').get(schedules.get_schedules); // ADMIN DASH ONLY
 router.route('/schedules').post(schedules.post_schedules);
-router.route('/schedules/:id').put(schedules.put_schedules_id);
+// router.route('/schedules/:id').put(schedules.put_schedules_id);
 // router.route('/schedulesDelete/:id').put(schedules.delete_products_id);
 
 router.route('/orders').get(orders.get_orders); // ADMIN DASH ONLY
 router.route('/orders').post(orders.post_order);
 router.route('/ordersBySchedule/:id').get(orders.get_orders_by_schedule_id);
-router.route('/orders/:id').put(orders.put_orders_id);
+// router.route('/orders/:id').put(orders.put_orders_id);
 // router.route('/orders/:id').delete(orders.delete_orders_id);
 
 router.route('/searchResults').post(search.get_search);
