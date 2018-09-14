@@ -246,6 +246,34 @@ module.exports = {
         return res.status(500).send(err);
       });
 
+  },
+
+  delete_users_id: function (req, res) {
+    // rather than deleting users, replace their info with a placeholder
+    // this ensures that past orders, etc won't be adversely affected, other than the user info being replaced
+    console.log('put called: ', req.body);
+    let postQuery = {
+      first_name: 'User deleted',
+      email: 'Email deleted',
+      role: `${req.body.role}`
+    };
+    let userId = req.params.id;
+    connection.query(
+      `UPDATE users 
+      SET ? 
+      WHERE id = ?;`,
+      [postQuery, userId],
+      function (err, result) {
+        if (err) {
+          console.log('error in update user:', err);
+          res.status(500).send('error:', err);
+        } else {
+          console.log('user updated: ', result);
+          console.log('postQuery: ', postQuery);
+          return res.status(200).send(result);
+        }
+      } 
+    );
   }
 };
   

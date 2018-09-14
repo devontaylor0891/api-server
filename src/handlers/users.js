@@ -107,4 +107,8 @@ module.exports = {
     var userId = req.params.id;
     return res.send(201);
   },
+
+  delete_users_id: function (req, res) {
+    UserById.delete_users_id(req, res);
+  }
 };
