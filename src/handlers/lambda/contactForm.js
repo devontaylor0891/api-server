@@ -8,8 +8,8 @@ module.exports = {
 
         // you shouldn't hardcode your keys in production! See http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html
         AWS.config.update({
-            accessKeyId: 'akid', 
-            secretAccessKey: 'secret'
+            accessKeyId: process.env.ACCESS_ID, 
+            secretAccessKey: process.env.ACCESS_SECRET
         });
 
         var lambda = new AWS.Lambda();
