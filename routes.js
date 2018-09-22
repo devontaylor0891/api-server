@@ -4,6 +4,7 @@ var products = require('./src/handlers/products');
 var schedules = require('./src/handlers/schedules');
 var search = require('./src/handlers/search');
 var orders = require('./src/handlers/orders');
+var captcha = require('./src/handlers/captcha');
 var express = require('express');
 
 var router = express.Router();
@@ -44,6 +45,8 @@ router.route('/orders/:id').put(orders.put_orders_id);
 // router.route('/orders/:id').delete(orders.delete_orders_id);
 
 router.route('/searchResults').post(search.get_search);
+
+router.route('captcha').post(captcha.post_captcha);
 
 
 module.exports = router;
