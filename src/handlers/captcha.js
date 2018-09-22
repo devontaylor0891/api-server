@@ -4,7 +4,8 @@ let request = require('request');
 module.exports = {
 
     post_captcha: function(req, res) {
-        let response = req.body.response;
+        console.log('captcha body: ', res.body);
+        let response = req.body.captchaResponse;
         if(response === undefined || response === '' || response === null) {
             return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
           }
