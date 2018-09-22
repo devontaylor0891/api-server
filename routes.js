@@ -48,7 +48,6 @@ router.route('/orders/:id').put(orders.put_orders_id);
 router.route('/searchResults').post(search.get_search);
 
 router.route('/captcha').post(captcha.post_captcha);
-router.route('/contactForm').post(contact.send_email);
 
 
 module.exports = router;
