@@ -27,7 +27,7 @@ module.exports = {
             res.json({"responseCode" : 0,"responseDesc" : "Success"});
             // send the email
             console.log('sending email: ', emailObject);
-            contact.send_email(emailObject, res);
+            contact.send_email(req, res);
           });
     }
 
