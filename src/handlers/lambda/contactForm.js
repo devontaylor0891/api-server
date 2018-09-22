@@ -6,6 +6,7 @@ module.exports = {
 
     send_email: function(req, res) {
         let payload = req.body;
+        console.log('req.body: ', req.body);
 
         // you shouldn't hardcode your keys in production! See http://docs.aws.amazon.com/AWSJavaScriptSDK/guide/node-configuring.html
         AWS.config.update({
