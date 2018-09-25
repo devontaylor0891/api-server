@@ -42,7 +42,7 @@ module.exports = {
         } else {
           console.log('user created: ', result);
           // send me an email
-          lambda.new_user_notification(postQuery, res);
+          lambda.new_user_notification(req, res);
           return res.status(200).send(result);
         }
       }
