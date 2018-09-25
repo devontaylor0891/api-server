@@ -59,7 +59,7 @@ module.exports = {
 
     // build the required queries
     // let getSchedulesSql = 'SELECT * FROM schedules WHERE order_deadline >= NOW() AND latitude BETWEEN (?) AND (?) AND longitude BETWEEN (?) AND (?);';
-    let getSchedulesSql = 'SELECT schedules.*, producers.name FROM schedules JOIN producers ON schedules.producer_id_fk_s = producers.producer_id WHERE order_deadline >= NOW() AND latitude BETWEEN (?) AND (?) AND longitude BETWEEN (?) AND (?);';
+    let getSchedulesSql = 'SELECT schedules.*, producers.name FROM schedules JOIN producers ON schedules.producer_id_fk_s = producers.producer_id WHERE order_deadline >= NOW() AND schedules.latitude BETWEEN (?) AND (?) AND schedules.longitude BETWEEN (?) AND (?);';
     let getSchedulesQueryOptions = {
       sql: getSchedulesSql,
       values: [minlat, maxlat, minlng, maxlng],
