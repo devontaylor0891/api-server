@@ -100,7 +100,7 @@ module.exports = {
           // do stuff with the returned rows
           // console.log('row:', rows);
           schedulesReceived = rows.map(function(row) {
-            console.log('scheds: ', row);
+            // console.log('scheds: ', row);
             return {
               id: row.schedules.schedule_id,
               producerId: row.schedules.producer_id_fk_s,
@@ -119,7 +119,7 @@ module.exports = {
               address: row.schedules.address,
               fee: row.schedules.fee,
               feeWaiver: row.schedules.fee_waiver,
-              producerName: row.schedules.name
+              producerName: row.producers.name
             }
           });
           // assign to searchResults
