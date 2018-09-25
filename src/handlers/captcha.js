@@ -6,11 +6,6 @@ module.exports = {
 
     post_captcha: function(req, res) {
         let response = req.body.captchaResponse;
-        let emailObject = {
-          name: req.body.name,
-          email: req.body.email,
-          message: req.body.message
-        };
         if(response === undefined || response === '' || response === null) {
             return res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"});
           }
@@ -26,7 +21,6 @@ module.exports = {
             }
             res.json({"responseCode" : 0,"responseDesc" : "Success"});
             // send the email
-            console.log('sending email: ', emailObject);
             contact.send_email(req, res);
           });
     }
