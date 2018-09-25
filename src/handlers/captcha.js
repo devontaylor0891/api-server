@@ -1,6 +1,6 @@
 'use strict';
 let request = require('request');
-let contact = require('./lambda/contactForm');
+let contact = require('./lambda/functions');
 
 module.exports = {
 
