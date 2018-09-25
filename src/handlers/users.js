@@ -3,6 +3,7 @@ var _ = require('lodash');
 var connection = require('../../db');
 var UserById = require('./users/{id}');
 var UserByIdOrders = require('./users/{id}/orders');
+let lambda = require('./lambda/functions');
 
 module.exports = {
   get_users: function(req, res) {
@@ -40,6 +41,8 @@ module.exports = {
           res.send('error:', err);
         } else {
           console.log('user created: ', result);
+          // send me an email
+          lambda.new_user_notification(postQuery, res);
           return res.status(200).send(result);
         }
       }

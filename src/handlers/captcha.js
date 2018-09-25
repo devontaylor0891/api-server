@@ -21,7 +21,7 @@ module.exports = {
             }
             res.json({"responseCode" : 0,"responseDesc" : "Success"});
             // send the email
-            contact.send_email(req, res);
+            contact.send_contact_form_email(req, res);
           });
     }
 
