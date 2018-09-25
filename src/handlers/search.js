@@ -100,6 +100,7 @@ module.exports = {
           // do stuff with the returned rows
           // console.log('row:', rows);
           schedulesReceived = rows.map(function(row) {
+            console.log('scheds: ', row);
             return {
               id: row.schedules.schedule_id,
               producerId: row.schedules.producer_id_fk_s,
