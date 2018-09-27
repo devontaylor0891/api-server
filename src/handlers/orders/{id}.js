@@ -28,12 +28,12 @@ module.exports = {
                 [postQuery, orderId],
                 function (err, result) {
                     if (err) {
-                    console.log('error in update order:', err);
-                    return res.status(500).send('error:', err);
+                        console.log('error in update order:', err);
+                        return res.status(500).send('error:', err);
                     } else {
-                    console.log('order updated: ', result);
-                    lambda.order_accepted_notification(req, res);
-                    return res.status(200).send(result);
+                        console.log('order updated: ', result);
+                        lambda.order_accepted_notification(req, res);
+                        return res.status(200).send(result);
                     }
                 } 
         )
