@@ -1,6 +1,7 @@
 'use strict';
 var connection = require('../../db');
 var Order = require('./orders/{id}');
+let lambda = require('./lambda/functions');
 
 module.exports = {
   get_orders: function(req, res) {
@@ -267,6 +268,7 @@ module.exports = {
                 if (err) {
                   res.status(500).send(err);
                 } else {
+                  lambda.new_order_notification(req, res);
                   return res.status(200).send(result);
                 }
               }
