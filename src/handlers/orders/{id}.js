@@ -1,6 +1,6 @@
 'use strict';
 var connection = require('../../../db');
-let lambda = require('./lambda/functions');
+let lambda = require('../lambda/functions');
 
 module.exports = {
 
