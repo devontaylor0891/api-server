@@ -1,5 +1,6 @@
 'use strict';
 var connection = require('../../../db');
+let lambda = require('./lambda/functions');
 
 module.exports = {
 
@@ -31,6 +32,7 @@ module.exports = {
                     return res.status(500).send('error:', err);
                     } else {
                     console.log('order updated: ', result);
+                    lambda.order_accepted_notification(req, res);
                     return res.status(200).send(result);
                     }
                 } 
