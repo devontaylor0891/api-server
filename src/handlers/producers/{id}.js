@@ -120,8 +120,12 @@ module.exports = {
   get_producer_id_schedules: function(req, res) {
     let userId = req.params.id;
     connection.query(
-      `SELECT * FROM schedules
+      `SELECT schedules.*,
+      (SELECT COUNT(*) FROM orders WHERE schedule_id_fk_o = schedules.schedule_id) AS orderCount
+      FROM schedules
       WHERE user_id_fk_schedules = ${userId}`,
+      // `SELECT * FROM schedules
+      // WHERE user_id_fk_schedules = ${userId}`,
       function (error, schedulesResult) {
         let schedules = schedulesResult.map(function(row) {
           return {
@@ -141,7 +145,8 @@ module.exports = {
             orderDeadline: row.order_deadline,
             address: row.address,
             fee: row.fee,
-            feeWaiver: row.fee_waiver
+            feeWaiver: row.fee_waiver,
+            orderCount: row.orderCount
           }
         });
         return res.status(200).send(schedules);
