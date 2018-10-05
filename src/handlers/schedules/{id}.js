@@ -36,7 +36,7 @@ module.exports = {
   put_schedules_id: function (req, res) {
     console.log('put schedule called: ', req.body);
     let postQuery = {
-      producer_id_fk: `${req.body.producerId}`,
+      producer_id_fk_s: `${req.body.producerId}`,
       schedule_type: `${req.body.type}`,
       description: `${req.body.description}`,
       start_date_time: `${req.body.startDateTime}`,
