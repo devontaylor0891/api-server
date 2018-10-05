@@ -64,12 +64,8 @@ module.exports = {
 
   put_products_id: function (req, res) {
     console.log('put product called: ', req.body);
-    convertBooleanToTinyInt = function(boolean) {
-      if (boolean == true) {
-        return '1'
-      } else {
-        return '0'
-      }
+    convertBooleanToTinyInt = function(bool) {
+      bool ? 1 : 0
     };
     let postQuery = {
       user_id_fk_products: `${req.body.userId}`,
