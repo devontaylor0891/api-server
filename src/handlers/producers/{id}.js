@@ -66,6 +66,7 @@ module.exports = {
       `SELECT 
       products.product_id,
       products.producer_id_fk_products,
+      products.user_id_fk_products,
       products.name AS productName,
       products.description,
       products.image,
@@ -108,7 +109,8 @@ module.exports = {
             qtyAccepted: row.qty_accepted,
             qtyCompleted: row.qty_completed,
             isObsolete: row.is_obsolete,
-            producerId: row.producer_id_fk_products
+            producerId: row.producer_id_fk_products,
+            userId: row.user_id_fk_products
           }
         });
         return res.status(200).send(products);
