@@ -63,10 +63,12 @@ module.exports = {
   },
 
   put_products_id: function (req, res) {
+    // convertBooleanToTinyInt = function(bool) {
+    //   bool ? 1 : 0
+    // };
+    req.body.isObsolete = req.body.isObsolete ? 1 : 0;
     console.log('put product called: ', req.body);
-    convertBooleanToTinyInt = function(bool) {
-      bool ? 1 : 0
-    };
+
     let postQuery = {
       user_id_fk_products: `${req.body.userId}`,
       product_id: `${req.params.id}`,
@@ -83,7 +85,7 @@ module.exports = {
       qty_pending: `${req.body.qtyPending}`,
       qty_accepted: `${req.body.qtyAccepted}`,
       qty_completed: `${req.body.qtyCompleted}`,
-      is_obsolete: convertBooleanToTinyInt(req.body.isObsolete),
+      is_obsolete: `${req.body.isObsolete}`,
       schedule_list: `${req.body.scheduleList}`,
       producer_id_fk_products: `${req.body.producerId}`
     };
