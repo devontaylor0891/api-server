@@ -67,7 +67,7 @@ module.exports = {
     };
 
     // let producersValuesLength: ' + new Array(values.length + 1).join('?,').slice(0, -1) + '
-    let producerValues = 0;
+    let producerValues = 2;
     let getProducersSql = 'SELECT * FROM producers LEFT JOIN users ON producers.user_id = users.id WHERE producer_id IN (' + new Array(producerValues + 1).join('?,').slice(0, -1) + ')';
     let getProducersQueryOptions = {
       sql: getProducersSql,
