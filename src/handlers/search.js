@@ -136,6 +136,7 @@ module.exports = {
           // pull out duplicates
           producerIds = producerIdArray.filter((v, i, a) => a.indexOf(v) === i); 
           console.log('filtered pids: ', producerIds);
+          console.log('joined filtered pids: ', producerIds.join());
           // call the query again to get producers
           getProducersQueryOptions.values = producerIds.join();
           // ************ PRODUCERS ***********
