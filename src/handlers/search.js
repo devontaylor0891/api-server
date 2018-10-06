@@ -66,10 +66,10 @@ module.exports = {
       nestTables: true
     };
 
-    let getProducersSql = 'SELECT * FROM producers LEFT JOIN users ON producers.user_id = users.id WHERE producer_id IN (' + values.join() + ')';
+    let getProducersSql = 'SELECT * FROM producers LEFT JOIN users ON producers.user_id = users.id WHERE producer_id IN (?)';
     let getProducersQueryOptions = {
       sql: getProducersSql,
-      values: [],
+      values: '',
       nestTables: true
     };
 
@@ -137,7 +137,7 @@ module.exports = {
           producerIds = producerIdArray.filter((v, i, a) => a.indexOf(v) === i); 
           // console.log('filtered pids: ', producerIds);
           // call the query again to get producers
-          getProducersQueryOptions.values = producerIds;
+          getProducersQueryOptions.values = producerIds.join();
           // ************ PRODUCERS ***********
           return promisedQuery(getProducersQueryOptions);
         }
