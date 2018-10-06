@@ -66,7 +66,7 @@ module.exports = {
       nestTables: true
     };
 
-    let getProducersSql = 'SELECT * FROM producers LEFT JOIN users ON producers.user_id = users.id WHERE producer_id IN (?,?)';
+    let getProducersSql = 'SELECT * FROM producers LEFT JOIN users ON producers.user_id = users.id WHERE producer_id IN (' + new Array(values.length + 1).join('?,').slice(0, -1) + ')';
     let getProducersQueryOptions = {
       sql: getProducersSql,
       values: null,
