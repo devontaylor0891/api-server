@@ -75,8 +75,7 @@ module.exports = {
       nestTables: true
     };
 
-    let productValues = 13;
-    let getProductsSql = 'SELECT products.product_id, products.producer_id_fk_products, products.name AS productName, products.description, products.image, products.pricePerUnit, products.unit, products.unitsPer, products.category, products.subcategory, products.date_added, products.qty_available, products.qty_pending, products.qty_accepted, products.qty_completed, products.is_obsolete, producers.user_id AS pId, producers.name AS pName FROM products LEFT JOIN producers ON products.producer_id_fk_products = producers.producer_id WHERE producer_id_fk_products IN (' + new Array(productValues + 1).join('?,').slice(0, -1) + ') AND qty_available > 0;';
+    let getProductsSql = 'SELECT products.product_id, products.producer_id_fk_products, products.name AS productName, products.description, products.image, products.pricePerUnit, products.unit, products.unitsPer, products.category, products.subcategory, products.date_added, products.qty_available, products.qty_pending, products.qty_accepted, products.qty_completed, products.is_obsolete, producers.user_id AS pId, producers.name AS pName FROM products LEFT JOIN producers ON products.producer_id_fk_products = producers.producer_id WHERE producer_id_fk_products IN (' + new Array(producerValues + 1).join('?,').slice(0, -1) + ') AND qty_available > 0;';
     let getProductsQueryOptions = {
       sql: getProductsSql,
       values: null
@@ -142,6 +141,7 @@ module.exports = {
           console.log('producervalues: ', producerValues);
           // call the query again to get producers
           getProducersQueryOptions.values = producerIds.slice(0);
+          getProductsQueryOptions.values = producerIds.slice(0);
           // ************ PRODUCERS ***********
           return promisedQuery(getProducersQueryOptions);
         }
@@ -169,7 +169,7 @@ module.exports = {
         // assign to producersArray
         searchResultsObject.producers = producersReceived;
         // call the query again to get producers
-        getProductsQueryOptions.values = producerIds.join();
+        // getProductsQueryOptions.values = producerIds.join();
         // ************ PRODUCERS ***********
         return promisedQuery(getProductsQueryOptions);
       })
