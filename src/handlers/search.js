@@ -141,6 +141,7 @@ module.exports = {
           // }); 
           console.log('filtered pids: ', producerIds);
           // producerValues = producerIds.length();
+          console.log('producerids lenght: ', Object.keys(producerIds).length);
           console.log('producervalues type: ', typeof producerIds);
           // call the query again to get producers
           getProducersQueryOptions.values = producerIds.slice(0);
