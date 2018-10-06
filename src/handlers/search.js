@@ -132,13 +132,13 @@ module.exports = {
           // };
           // create an array of producer Ids from the scheds;
           let producerIdArray = schedulesReceived.map((schedule) => {
-            console.log('pid: ', schedule);
             return schedule.producerId
           });
           // pull out duplicates
           producerIds = producerIdArray.filter((v, i, a) => a.indexOf(v) === i); 
           console.log('filtered pids: ', producerIds);
           producerValues = producerIds.length();
+          console.log('producervalue lenght: ', producerValues);
           // call the query again to get producers
           getProducersQueryOptions.values = producerIds.slice(0);
           // ************ PRODUCERS ***********
