@@ -135,7 +135,10 @@ module.exports = {
             return schedule.producerId
           });
           // pull out duplicates
-          producerIds = producerIdArray.filter((v, i, a) => a.indexOf(v) === i); 
+          producerIds = producerIdArray.names.reduce(function(a,b){
+            if (a.indexOf(b) < 0 ) a.push(b);
+            return a;
+          },[]); 
           console.log('filtered pids: ', producerIds);
           // producerValues = producerIds.length();
           console.log('producervalues type: ', typeof producerIds);
