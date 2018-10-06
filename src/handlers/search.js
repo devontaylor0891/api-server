@@ -83,7 +83,7 @@ module.exports = {
 
     // create the variables needed
     let schedulesReceived, producersReceived, productsReceived;
-    let producerIds;
+    let producerIds = [];
     let searchResultsObject = {
       schedules: [],
       producers: [],
