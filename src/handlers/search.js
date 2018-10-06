@@ -136,9 +136,9 @@ module.exports = {
             return schedule.producerId
           });
           // pull out duplicates
-          // producerIds = Object.keys(producerIdArray).map(function(key) {
-          //   return [Number(key), producerIdArray[key]];
-          // }); 
+          producerIds = producerIdArray.filter (function (value, index, array) { 
+            return array.indexOf (value) == index;
+          }); 
           console.log('filtered pids: ', producerIds);
           // producerValues = producerIds.length();
           console.log('producerids lenght: ', Object.keys(producerIds).length);
