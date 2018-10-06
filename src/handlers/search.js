@@ -138,7 +138,7 @@ module.exports = {
           producerIds = producerIdArray.filter((v, i, a) => a.indexOf(v) === i); 
           console.log('filtered pids: ', producerIds);
           // producerValues = producerIds.length();
-          console.log('producervalues: ', producerValues);
+          console.log('producervalues: ', producerIds.length());
           // call the query again to get producers
           getProducersQueryOptions.values = producerIds.slice(0);
           getProductsQueryOptions.values = producerIds.slice(0);
