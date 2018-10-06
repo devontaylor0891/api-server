@@ -67,7 +67,7 @@ module.exports = {
     };
 
     // let producersValuesLength: ' + new Array(values.length + 1).join('?,').slice(0, -1) + '
-    let producerValues = 2;
+    let producerValues = 0;
     let getProducersSql = 'SELECT * FROM producers LEFT JOIN users ON producers.user_id = users.id WHERE producer_id IN (' + new Array(producerValues + 1).join('?,').slice(0, -1) + ')';
     let getProducersQueryOptions = {
       sql: getProducersSql,
@@ -142,7 +142,7 @@ module.exports = {
           console.log('filtered pids: ', producerIds);
           // producerValues = producerIds.length();
           console.log('producerids lenght: ', Object.keys(producerIds).length);
-          console.log('producervalues type: ', typeof producerIds);
+          producerValues = Object.keys(producerIds).length;
           // call the query again to get producers
           getProducersQueryOptions.values = producerIds.slice(0);
           getProductsQueryOptions.values = producerIds.slice(0);
