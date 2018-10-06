@@ -67,8 +67,8 @@ module.exports = {
     };
 
     // let producersValuesLength: ' + new Array(values.length + 1).join('?,').slice(0, -1) + '
-    let producerValues = [];
-    let getProducersSql = 'SELECT * FROM producers LEFT JOIN users ON producers.user_id = users.id WHERE producer_id IN (' + new Array(producerValues.length + 1).join('?,').slice(0, -1) + ')';
+    let producerValues = 0;
+    let getProducersSql = 'SELECT * FROM producers LEFT JOIN users ON producers.user_id = users.id WHERE producer_id IN (' + new Array(producerValues + 1).join('?,').slice(0, -1) + ')';
     let getProducersQueryOptions = {
       sql: getProducersSql,
       values: null,
@@ -138,7 +138,7 @@ module.exports = {
           // pull out duplicates
           producerIds = producerIdArray.filter((v, i, a) => a.indexOf(v) === i); 
           console.log('filtered pids: ', producerIds);
-          producerValues = producerIds;
+          producerValues = producerIds.length();
           // call the query again to get producers
           getProducersQueryOptions.values = producerIds.slice(0);
           // ************ PRODUCERS ***********
