@@ -44,8 +44,8 @@ module.exports = {
 
     // build a query inside a promise, this will return the rows from the query
     function promisedQuery(sql) { 
+      console.log('query: ', sql);
       return new Promise ((resolve, reject) => {
-        console.log('query: ', sql);
         connection.query(sql, function(err, rows) {
           if ( err ) {
             console.log('error: ', err);
