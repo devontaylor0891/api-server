@@ -75,7 +75,7 @@ module.exports = {
       nestTables: true
     };
 
-    let getProductsSql = 'SELECT products.product_id, products.producer_id_fk_products, products.name AS productName, products.description, products.image, products.pricePerUnit, products.unit, products.unitsPer, products.category, products.subcategory, products.date_added, products.qty_available, products.qty_pending, products.qty_accepted, products.qty_completed, products.is_obsolete, producers.user_id AS pId, producers.name AS pName FROM products LEFT JOIN producers ON products.producer_id_fk_products = producers.producer_id WHERE producer_id_fk_products IN (' + new Array(producerValues + 1).join('?,').slice(0, -1) + ') AND qty_available > 0;';
+    let getProductsSql;
     let getProductsQueryOptions = {
       sql: getProductsSql,
       values: null
@@ -144,9 +144,11 @@ module.exports = {
           
           producerValues = Object.keys(producerIds).length;
           console.log('producerids lenght: ', producerValues);
-          getProducersSql = 'SELECT * FROM producers LEFT JOIN users ON producers.user_id = users.id WHERE producer_id IN (' + new Array(producerValues + 1).join('?,').slice(0, -1) + ')';
+          
           // call the query again to get producers
+          getProducersSql = 'SELECT * FROM producers LEFT JOIN users ON producers.user_id = users.id WHERE producer_id IN (' + new Array(producerValues + 1).join('?,').slice(0, -1) + ')';
           getProducersQueryOptions.values = producerIds.slice(0);
+          getProductsSql = 'SELECT products.product_id, products.producer_id_fk_products, products.name AS productName, products.description, products.image, products.pricePerUnit, products.unit, products.unitsPer, products.category, products.subcategory, products.date_added, products.qty_available, products.qty_pending, products.qty_accepted, products.qty_completed, products.is_obsolete, producers.user_id AS pId, producers.name AS pName FROM products LEFT JOIN producers ON products.producer_id_fk_products = producers.producer_id WHERE producer_id_fk_products IN (' + new Array(producerValues + 1).join('?,').slice(0, -1) + ') AND qty_available > 0;';
           getProductsQueryOptions.values = producerIds.slice(0);
           // ************ PRODUCERS ***********
           return promisedQuery(getProducersQueryOptions);
