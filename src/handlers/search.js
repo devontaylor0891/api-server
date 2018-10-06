@@ -144,6 +144,7 @@ module.exports = {
       })
       .then((rows) => {
         producersReceived = rows.map(function(row) {
+          console.log('producerRecd id: ', row.producers.producer_id);
           return {
             id: row.producers.user_id,
             producerId: row.producers.producer_id,
