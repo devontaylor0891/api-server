@@ -135,7 +135,7 @@ module.exports = {
             return schedule.producerId
           });
           // pull out duplicates
-          producerIds = producerIdArray.names.reduce(function(a,b){
+          producerIds = producerIdArray.reduce(function(a,b){
             if (a.indexOf(b) < 0 ) a.push(b);
             return a;
           },[]); 
