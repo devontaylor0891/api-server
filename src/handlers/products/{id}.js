@@ -110,7 +110,7 @@ module.exports = {
 
   delete_products_id: function (req, res) {
     console.log('delete products: ', req.body);
-    return res.sendStatus(200);
+    return res.status(200).send('some text');
   }
 
 };
