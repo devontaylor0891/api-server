@@ -130,6 +130,7 @@ module.exports = {
       schedule_list: null,
       producer_id_fk_products: `${req.body.producerId}`
     };
+    req.body.isObsolete = req.body.isObsolete ? 1 : 0;
     let productId = req.params.id;
     connection.query(
       `UPDATE products 
