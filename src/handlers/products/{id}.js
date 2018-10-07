@@ -109,8 +109,43 @@ module.exports = {
   },
 
   delete_products_id: function (req, res) {
-    console.log('delete products: ', req.body);
-    return res.status(200).send('some text');
+    // build the new 'deleted' product
+    let deletedProduct = {
+      user_id_fk_products: `${req.body.userId}`,
+      product_id: `${req.params.id}`,
+      name: 'deleted',
+      description: 'deleted',
+      image: 'deleted',
+      pricePerUnit: 0,
+      unit: 'deleted',
+      unitsPer: 0,
+      category: 'deleted',
+      subcategory: 'deleted',
+      date_added: 'deleted',
+      qty_available: 0,
+      qty_pending: 0,
+      qty_accepted: 0,
+      qty_completed: `${req.body.qtyCompleted}`,
+      is_obsolete: `${req.body.isObsolete}`,
+      schedule_list: null,
+      producer_id_fk_products: `${req.body.producerId}`
+    };
+    let productId = req.params.id;
+    connection.query(
+      `UPDATE products 
+      SET ?
+      WHERE product_id = ?;`,
+      [deletedProduct, productId],
+      function (err, result) {
+        if (err) {
+          console.log('error in delete product:', err);
+          res.status(500).send('error:', err);
+        } else {
+          console.log('product deleted: ', result);
+          return res.status(200).send(result);
+        }
+      } 
+    )
   }
 
 };
