@@ -106,6 +106,11 @@ module.exports = {
         }
       } 
     )
+  },
+
+  delete_products_id: function (req, res) {
+    console.log('delete products: ', req.body);
+    return res.send(202);
   }
 
 };

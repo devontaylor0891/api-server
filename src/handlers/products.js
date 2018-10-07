@@ -181,8 +181,6 @@ module.exports = {
   },
 
   delete_products_id: function(req, res) {
-    console.log(req.params.id);
-    var productId = req.params.id;
-    return res.send(201);
+    Product.delete_products_id(req, res);
   }
 };
