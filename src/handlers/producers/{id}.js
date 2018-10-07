@@ -86,7 +86,8 @@ module.exports = {
       FROM products
       LEFT JOIN producers 
       ON products.producer_id_fk_products = producers.producer_id
-      WHERE user_id_fk_products = ${userId}`, 
+      WHERE user_id_fk_products = ${userId}
+      AND productName <> 'DELETED'`, 
       function (error, productsResult) {
         let products = productsResult.map(function(row) {
           return {
