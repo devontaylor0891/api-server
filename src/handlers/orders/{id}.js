@@ -95,9 +95,30 @@ module.exports = {
             console.log('new product array: ', product);
             console.log('new product array length: ', product.length);
             // for each product, adjust the qtys with queries
-            for (let i = 0; i < product.length; i++) {
-                productId = product[i].id;
-                productQuantity = product[i].qty;
+            // for (let i = 0; i < product.length; i++) {
+            //     productId = product[i].id;
+            //     productQuantity = product[i].qty;
+            //     console.log('update product: ', productId, productQuantity);
+            //     connection.query(
+            //         `UPDATE products 
+            //         SET 
+            //         qty_available = qty_available + ?,
+            //         qty_pending = qty_pending - ?,
+            //         WHERE product_id = ?;`,
+            //         [[productQuantity, productQuantity], productId],
+            //         function (err, result) {
+            //           if (err) {
+            //             console.log('error in update product:', err);
+            //             res.status(500).send('error:', err);
+            //           } else {
+            //             console.log('product updated: ', result);
+            //           }
+            //         } 
+            //     )
+            // };
+            product.forEach(product => {
+                productId = product.id;
+                productQuantity = product.qty;
                 console.log('update product: ', productId, productQuantity);
                 connection.query(
                     `UPDATE products 
@@ -115,7 +136,7 @@ module.exports = {
                       }
                     } 
                 )
-            }
+            })
             // then delete the product order qtys
             return promisedQuery(deleteProductOrderQuantitiesQueryOptions);
         })
