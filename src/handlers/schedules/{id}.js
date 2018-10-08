@@ -72,46 +72,39 @@ module.exports = {
   },
 
   delete_schedules_id: function (req, res) {
-    console.log('req.body.sched: ', req.body);
-    res.status(200).send('some text');
         // build the new 'deleted' product
     // let deletedSchedule = {
-    //   user_id_fk_products: `${req.body.userId}`,
-    //   product_id: `${req.params.id}`,
-    //   name: 'DELETED',
+    //   producer_id_fk_s: `${req.body.producerId}`,
+    //   schedule_type: 'DELETED',
     //   description: 'DELETED',
-    //   image: 'DELETED',
-    //   pricePerUnit: 0,
-    //   unit: 'DELETED',
-    //   unitsPer: 0,
-    //   category: 'DELETED',
-    //   subcategory: 'DELETED',
-    //   date_added: 'DELETED',
-    //   qty_available: 0,
-    //   qty_pending: 0,
-    //   qty_accepted: 0,
-    //   qty_completed: `${req.body.qtyCompleted}`,
-    //   is_obsolete: `${req.body.isObsolete}`,
-    //   schedule_list: null,
-    //   producer_id_fk_products: `${req.body.producerId}`
+    //   start_date_time: 'DELETED',
+    //   end_date_time: 'DELETED',
+    //   has_fee: `${req.body.hasFee}`,
+    //   has_waiver: `${req.body.hasWaiver}`,
+    //   latitude: `${req.body.latitude}`,
+    //   longitude: `${req.body.longitude}`,
+    //   city: `${req.body.city}`,
+    //   province: `${req.body.province}`,
+    //   order_deadline: `${req.body.orderDeadline}`,
+    //   address: `${req.body.address}`,
+    //   fee: `${req.body.fee}`,
+    //   fee_waiver: `${req.body.feeWaiver}`
     // };
     // req.body.isObsolete = req.body.isObsolete ? 1 : 0;
-    // let productId = req.params.id;
-    // connection.query(
-    //   `UPDATE products 
-    //   SET ?
-    //   WHERE product_id = ?;`,
-    //   [deletedSchedule, productId],
-    //   function (err, result) {
-    //     if (err) {
-    //       console.log('error in delete product:', err);
-    //       res.status(500).send('error:', err);
-    //     } else {
-    //       console.log('product deleted: ', result);
-    //       return res.status(200).send(result);
-    //     }
-    //   } 
-    // )
+    connection.query(
+      `DELETE FROM schedules
+      WHERE schedule_id = ?;`,
+      [req.params.id],
+      function (err, result) {
+        if (err) {
+          console.log('error in delete sched:', err);
+          res.status(500).send('error:', err);
+        } else {
+          console.log('sched deleted: ', result);
+          return res.status(200).send(result);
+        }
+      } 
+    )
   }
 };
   
