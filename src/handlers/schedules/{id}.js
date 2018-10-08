@@ -72,25 +72,6 @@ module.exports = {
   },
 
   delete_schedules_id: function (req, res) {
-        // build the new 'deleted' product
-    // let deletedSchedule = {
-    //   producer_id_fk_s: `${req.body.producerId}`,
-    //   schedule_type: 'DELETED',
-    //   description: 'DELETED',
-    //   start_date_time: 'DELETED',
-    //   end_date_time: 'DELETED',
-    //   has_fee: `${req.body.hasFee}`,
-    //   has_waiver: `${req.body.hasWaiver}`,
-    //   latitude: `${req.body.latitude}`,
-    //   longitude: `${req.body.longitude}`,
-    //   city: `${req.body.city}`,
-    //   province: `${req.body.province}`,
-    //   order_deadline: `${req.body.orderDeadline}`,
-    //   address: `${req.body.address}`,
-    //   fee: `${req.body.fee}`,
-    //   fee_waiver: `${req.body.feeWaiver}`
-    // };
-    // req.body.isObsolete = req.body.isObsolete ? 1 : 0;
     connection.query(
       `DELETE FROM schedules
       WHERE schedule_id = ?;`,
