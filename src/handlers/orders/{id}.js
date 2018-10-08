@@ -114,6 +114,7 @@ module.exports = {
             return promisedQuery(deleteProductOrderQuantitiesQueryOptions);
         })
         .then(rows => {
+            // then delete the order itself
             console.log(rows);
             return promisedQuery(deleteOrderQueryOptions);
         })

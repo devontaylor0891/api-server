@@ -502,7 +502,10 @@ module.exports = {
 
   put_orders_id: function (req, res) {
     Order.put_orders_id(req, res);
-  }
+  },
 
+  delete_orders_id: function (req, res) {
+    Order.delete_orders_id(req, res);
+  }
 
 };

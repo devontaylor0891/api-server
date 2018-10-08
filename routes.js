@@ -42,7 +42,7 @@ router.route('/orders').get(orders.get_orders); // ADMIN DASH ONLY
 router.route('/orders').post(orders.post_order);
 router.route('/ordersBySchedule/:id').get(orders.get_orders_by_schedule_id);
 router.route('/orders/:id').put(orders.put_orders_id);
-// router.route('/orders/:id').delete(orders.delete_orders_id);
+router.route('/orders/:id').delete(orders.delete_orders_id);
 
 router.route('/searchResults').post(search.get_search);
 
