@@ -37,5 +37,92 @@ module.exports = {
                     }
                 } 
         )
+    },
+
+    delete_orders_id: function (req, res) {
+        let orderId = req.params.id;
+        let productOrderQty;
+        let product = [];
+
+        // build a query inside a promise, this will return the rows from the query
+        function promisedQuery(sql) { 
+            return new Promise ((resolve, reject) => {
+            // console.log('query: ', sql);
+            connection.query(sql, function(err, rows) {
+                if ( err ) {
+                return reject( err );
+                }
+                resolve( rows );
+            })
+            });
+        };
+
+        // build the queries
+        // let getOrdersSql = 'SELECT * FROM orders LEFT JOIN producers ON orders.producer_id_fk_o = producers.producer_id LEFT JOIN users ON orders.consumer_id_fk_o = users.id;';
+        let getProductOrderQuantitiesSql = 'SELECT * FROM product_order_quantities WHERE order_id_fk_pok = ?';
+        let getProductOrderQuantitiesQueryOptions = {
+            sql: getProductOrderQuantitiesSql,
+            values: [orderId],
+            nestTables: true
+        };
+        let deleteProductOrderQuantitiesSql = 'DELETE * FROM product_order_quantities WHERE order_id_fk_pok = ?';
+        let deleteProductOrderQuantitiesQueryOptions = {
+            sql: deleteProductOrderQuantitiesSql,
+            values: [orderId]
+        };
+        let deleteOrderSql = 'DELETE * FROM orders WHERE order_id = ?';
+        let deleteOrderQueryOptions = {
+            sql: deleteOrderSql,
+            values: [orderId]
+        };
+
+        // then call the promisedQuery and pass the queries into it
+        // ************ PRODUCT ORDER QTYS ***********
+        promisedQuery(getProductOrderQuantitiesQueryOptions)
+        .then(rows => {
+            // for each productOrderQty, get the product information
+            let productDataReceived = rows.map(function(row) {
+                return {
+                    id: row.product_id_fk_pok,
+                    qty: row.quantity
+                }
+            });
+            // copy the results into an array of product info
+            product = productDataReceived.slice(0);
+            // for each product, adjust the qtys with queries
+            for (let i = 0; i < product.length; i++) {
+                productId = product[i].id;
+                productQuantity = product[i].qty;
+                connection.query(
+                    `UPDATE products 
+                    SET 
+                    qty_available = qty_available + ?,
+                    qty_pending = qty_pending - ?,
+                    WHERE product_id = ?;`,
+                    [[productQuantity, productQuantity], productId],
+                    function (err, result) {
+                      if (err) {
+                        console.log('error in update product:', err);
+                        res.status(500).send('error:', err);
+                      } else {
+                        console.log('product updated: ', result);
+                      }
+                    } 
+                )
+            }
+            // then delete the product order qtys
+            return promisedQuery(deleteProductOrderQuantitiesQueryOptions);
+        })
+        .then(rows => {
+            console.log(rows);
+            return promisedQuery(deleteOrderQueryOptions);
+        })
+        .then(rows => {
+            return res.status(200).send(rows);
+        }).catch(err => {
+            return res.status(500).send(err);
+        });
+        // call lambda function to inform producer
     }
+
 };
