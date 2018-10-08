@@ -85,8 +85,8 @@ module.exports = {
             let productDataReceived = rows.map(function(row) {
                 console.log('row recd: ', row);
                 return {
-                    id: row.product_id_fk_pok,
-                    qty: row.quantity
+                    id: row.product_order_quantities.product_id_fk_pok,
+                    qty: row.product_order_quantities.quantity
                 }
             });
             console.log('productDataRecd:', productDataReceived);
