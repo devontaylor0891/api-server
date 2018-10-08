@@ -73,6 +73,7 @@ module.exports = {
 
   delete_schedules_id: function (req, res) {
     console.log('req.body.sched: ', req.body);
+    res.send(200);
     // build the new 'deleted' product
     // let deletedSchedule = {
     //   user_id_fk_products: `${req.body.userId}`,
