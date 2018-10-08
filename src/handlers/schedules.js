@@ -76,7 +76,7 @@ module.exports = {
   },
 
   delete_schedules_id: function(req, res) {
-    return res.send(202);
+    ScheduleById.delete_schedules_id(req, res);
   },
 
   put_schedules_id: function(req, res) {
