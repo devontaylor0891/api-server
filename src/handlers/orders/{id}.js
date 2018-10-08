@@ -82,18 +82,18 @@ module.exports = {
         promisedQuery(getProductOrderQuantitiesQueryOptions)
         .then(rows => {
             // for each productOrderQty, get the product information
-            let productDataReceived = rows.map(function(row) {
-                console.log('row recd: ', row);
-                return {
-                    id: row.product_order_quantities.product_id_fk_pok,
-                    qty: row.product_order_quantities.quantity
-                }
-            });
-            console.log('productDataRecd:', productDataReceived);
-            // copy the results into an array of product info
-            product = productDataReceived.slice(0);
-            console.log('new product array: ', product);
-            console.log('new product array length: ', product.length);
+            // let productDataReceived = rows.map(function(row) {
+            //     console.log('row recd: ', row);
+            //     return {
+            //         id: row.product_order_quantities.product_id_fk_pok,
+            //         qty: row.product_order_quantities.quantity
+            //     }
+            // });
+            // console.log('productDataRecd:', productDataReceived);
+            // // copy the results into an array of product info
+            // product = productDataReceived.slice(0);
+            // console.log('new product array: ', product);
+            // console.log('new product array length: ', product.length);
             // for each product, adjust the qtys with queries
             // for (let i = 0; i < product.length; i++) {
             //     productId = product[i].id;
@@ -116,9 +116,9 @@ module.exports = {
             //         } 
             //     )
             // };
-            product.forEach(product => {
-                productId = product.id;
-                productQuantity = product.qty;
+            rows.forEach(function(row) {
+                productId = row.product_order_quantities.product_id_fk_pok;
+                productQuantity = row.product_order_quantities.quantity;
                 console.log('update product: ', productId, productQuantity);
                 connection.query(
                     `UPDATE products 
