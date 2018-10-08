@@ -40,6 +40,7 @@ module.exports = {
     },
 
     delete_orders_id: function (req, res) {
+        console.log('delete order id: ', req.params.id);
         let orderId = req.params.id;
         let productOrderQty;
         let product = [];
@@ -47,13 +48,13 @@ module.exports = {
         // build a query inside a promise, this will return the rows from the query
         function promisedQuery(sql) { 
             return new Promise ((resolve, reject) => {
-            // console.log('query: ', sql);
-            connection.query(sql, function(err, rows) {
-                if ( err ) {
-                return reject( err );
-                }
-                resolve( rows );
-            })
+                console.log('query: ', sql);
+                connection.query(sql, function(err, rows) {
+                    if ( err ) {
+                    return reject( err );
+                    }
+                    resolve( rows );
+                })
             });
         };
 
@@ -87,6 +88,7 @@ module.exports = {
                     qty: row.quantity
                 }
             });
+            console.log('productDataRecd:', productDataReceived);
             // copy the results into an array of product info
             product = productDataReceived.slice(0);
             // for each product, adjust the qtys with queries
