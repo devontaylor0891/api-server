@@ -93,6 +93,7 @@ module.exports = {
             // copy the results into an array of product info
             product = productDataReceived.slice(0);
             console.log('new product array: ', product);
+            console.log('new product array length: ', product.length);
             // for each product, adjust the qtys with queries
             for (let i = 0; i < product.length; i++) {
                 productId = product[i].id;
