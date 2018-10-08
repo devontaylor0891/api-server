@@ -69,6 +69,48 @@ module.exports = {
         }
       } 
     )
+  },
+
+  delete_schedules_id: function (req, res) {
+    console.log('req.body.sched: ', req.body);
+    // build the new 'deleted' product
+    // let deletedSchedule = {
+    //   user_id_fk_products: `${req.body.userId}`,
+    //   product_id: `${req.params.id}`,
+    //   name: 'DELETED',
+    //   description: 'DELETED',
+    //   image: 'DELETED',
+    //   pricePerUnit: 0,
+    //   unit: 'DELETED',
+    //   unitsPer: 0,
+    //   category: 'DELETED',
+    //   subcategory: 'DELETED',
+    //   date_added: 'DELETED',
+    //   qty_available: 0,
+    //   qty_pending: 0,
+    //   qty_accepted: 0,
+    //   qty_completed: `${req.body.qtyCompleted}`,
+    //   is_obsolete: `${req.body.isObsolete}`,
+    //   schedule_list: null,
+    //   producer_id_fk_products: `${req.body.producerId}`
+    // };
+    // req.body.isObsolete = req.body.isObsolete ? 1 : 0;
+    // let productId = req.params.id;
+    // connection.query(
+    //   `UPDATE products 
+    //   SET ?
+    //   WHERE product_id = ?;`,
+    //   [deletedSchedule, productId],
+    //   function (err, result) {
+    //     if (err) {
+    //       console.log('error in delete product:', err);
+    //       res.status(500).send('error:', err);
+    //     } else {
+    //       console.log('product deleted: ', result);
+    //       return res.status(200).send(result);
+    //     }
+    //   } 
+    // )
   }
 };
   
