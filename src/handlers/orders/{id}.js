@@ -134,6 +134,8 @@ module.exports = {
                         res.status(500).send('error:', err);
                       } else {
                         console.log('product updated: ', result);
+                          return result;
+                        
                       }
                     } 
                 )
