@@ -116,6 +116,7 @@ module.exports = {
             //         } 
             //     )
             // };
+            console.log('rows: ', rows);
             rows.forEach(function(row) {
                 productId = row.product_order_quantities.product_id_fk_pok;
                 productQuantity = row.product_order_quantities.quantity;
