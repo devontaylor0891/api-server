@@ -120,7 +120,7 @@ module.exports = {
             rows.forEach(function(row) {
                 productId = row.product_order_quantities.product_id_fk_pok;
                 productQuantity = row.product_order_quantities.quantity;
-                console.log('update product: ', productId, productQuantity);
+                console.log('update product: ', productId);
                 connection.query(
                     `UPDATE products 
                     SET 
