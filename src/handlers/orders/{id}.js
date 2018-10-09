@@ -128,7 +128,7 @@ module.exports = {
                     qty_available = qty_available + ?,
                     qty_pending = qty_pending - ?
                     WHERE product_id = ?;`,
-                    [[productQuantity, productQuantity], productId],
+                    [productQuantity, productQuantity, productId],
                     function (err, result) {
                         if (err) {
                             console.log('error in update product:', err);
