@@ -66,12 +66,12 @@ module.exports = {
             values: [orderId],
             nestTables: true
         };
-        let deleteProductOrderQuantitiesSql = 'DELETE * FROM product_order_quantities WHERE order_id_fk_pok = ?';
+        let deleteProductOrderQuantitiesSql = 'DELETE FROM product_order_quantities WHERE order_id_fk_pok = ?';
         let deleteProductOrderQuantitiesQueryOptions = {
             sql: deleteProductOrderQuantitiesSql,
             values: [orderId]
         };
-        let deleteOrderSql = 'DELETE * FROM orders WHERE order_id = ?';
+        let deleteOrderSql = 'DELETE FROM orders WHERE order_id = ?';
         let deleteOrderQueryOptions = {
             sql: deleteOrderSql,
             values: [orderId]
