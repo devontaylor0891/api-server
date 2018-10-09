@@ -81,47 +81,9 @@ module.exports = {
         // ************ PRODUCT ORDER QTYS ***********
         promisedQuery(getProductOrderQuantitiesQueryOptions)
         .then(rows => {
-            // for each productOrderQty, get the product information
-            // let productDataReceived = rows.map(function(row) {
-            //     console.log('row recd: ', row);
-            //     return {
-            //         id: row.product_order_quantities.product_id_fk_pok,
-            //         qty: row.product_order_quantities.quantity
-            //     }
-            // });
-            // console.log('productDataRecd:', productDataReceived);
-            // // copy the results into an array of product info
-            // product = productDataReceived.slice(0);
-            // console.log('new product array: ', product);
-            // console.log('new product array length: ', product.length);
-            // for each product, adjust the qtys with queries
-            // for (let i = 0; i < product.length; i++) {
-            //     productId = product[i].id;
-            //     productQuantity = product[i].qty;
-            //     console.log('update product: ', productId, productQuantity);
-            //     connection.query(
-            //         `UPDATE products 
-            //         SET 
-            //         qty_available = qty_available + ?,
-            //         qty_pending = qty_pending - ?,
-            //         WHERE product_id = ?;`,
-            //         [[productQuantity, productQuantity], productId],
-            //         function (err, result) {
-            //           if (err) {
-            //             console.log('error in update product:', err);
-            //             res.status(500).send('error:', err);
-            //           } else {
-            //             console.log('product updated: ', result);
-            //           }
-            //         } 
-            //     )
-            // };
-            console.log('rows: ', rows);
             rows.forEach(function(row) {
-                console.log('row: ', row.product_order_quantities);
                 let productId = row.product_order_quantities.product_id_fk_pok;
                 let productQuantity = row.product_order_quantities.quantity;
-                console.log('update product: ', productId);
                 connection.query(
                     `UPDATE products 
                     SET 
@@ -141,7 +103,6 @@ module.exports = {
                 )
             })
             // then delete the product order qtys
-            console.log('reached here');
             return promisedQuery(deleteProductOrderQuantitiesQueryOptions);
         })
         .then(rows => {
