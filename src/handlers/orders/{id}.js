@@ -118,9 +118,9 @@ module.exports = {
             // };
             console.log('rows: ', rows);
             rows.forEach(function(row) {
-                console.log('row: ', row);
-                productId = row.product_order_quantities.product_id_fk_pok;
-                productQuantity = row.product_order_quantities.quantity;
+                console.log('row: ', row.product_order_quantities);
+                let productId = row.product_order_quantities.product_id_fk_pok;
+                let productQuantity = row.product_order_quantities.quantity;
                 console.log('update product: ', productId);
                 connection.query(
                     `UPDATE products 
