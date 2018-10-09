@@ -125,7 +125,7 @@ module.exports = {
                     `UPDATE products 
                     SET 
                     qty_available = qty_available + ?,
-                    qty_pending = qty_pending - ?,
+                    qty_pending = qty_pending - ?
                     WHERE product_id = ?;`,
                     [[productQuantity, productQuantity], productId],
                     function (err, result) {
