@@ -129,18 +129,18 @@ module.exports = {
                     WHERE product_id = ?;`,
                     [[productQuantity, productQuantity], productId],
                     function (err, result) {
-                      if (err) {
-                        console.log('error in update product:', err);
-                        res.status(500).send('error:', err);
-                      } else {
-                        console.log('product updated: ', result);
-                          return result;
-                        
-                      }
+                        if (err) {
+                            console.log('error in update product:', err);
+                            res.status(500).send('error:', err);
+                        } else {
+                            console.log('product updated: ', result);
+                            return result;
+                        }
                     } 
                 )
             })
             // then delete the product order qtys
+            console.log('reached here');
             return promisedQuery(deleteProductOrderQuantitiesQueryOptions);
         })
         .then(rows => {
