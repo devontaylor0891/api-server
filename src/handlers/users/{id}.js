@@ -274,6 +274,19 @@ module.exports = {
         }
       } 
     );
+  },
+
+  post_location_notification: function (req, res) {
+    console.log('post new location: ', req.body);
+    return res.status(200).send(req.body);
+  },
+
+  delete_location_notification: function (req, res) {
+    console.log('delete location: ', req.body);
+    console.log('delete location user id: ', req.params.id);
+    console.log('delete location notif id: ', req.params.locationNotificationId);
+    return res.status(200).send(req.body);
   }
+
 };
   

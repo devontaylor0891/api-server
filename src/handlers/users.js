@@ -113,5 +113,14 @@ module.exports = {
 
   delete_users_id: function (req, res) {
     UserById.delete_users_id(req, res);
+  },
+
+  post_location_notification: function (req, res) {
+    UserById.post_location_notification(req, res);
+  },
+
+  delete_location_notification: function (req, res) {
+    UserById.delete_location_notification(req, res);
   }
+
 };
