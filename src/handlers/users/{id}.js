@@ -276,6 +276,25 @@ module.exports = {
     );
   },
 
+  get_location_notification: function (req, res) {
+    var userId = req.params.id;
+    connection.query(
+      `SELECT * FROM location_notifications
+      WHERE user_id = ${userId}`, function (error, results) {
+        let locationNotifications = results.map(function(row) {
+          return {
+            id: row.id,
+            city: row.city,
+            province: row.province,
+            lat: row.latitude,
+            lng: row.longitude
+          }
+        })
+        return res.status(200).send(locationNotifications);
+      }
+    )
+  },
+
   post_location_notification: function (req, res) {
     let postQuery = {
       user_id: `${req.params.id}`,

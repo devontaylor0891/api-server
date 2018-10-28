@@ -16,6 +16,7 @@ router.route('/users/auth/:id').get(users.get_users_auth_id); // GET a single us
 router.route('/users/:id').put(users.put_users_id);
 router.route('/usersOrders/:id').get(users.get_users_id_orders);
 router.route('/usersDelete/:id').put(users.delete_users_id); // mock DELETE single user
+router.route('/users/:id/locationNotification/').get(users.get_location_notification);
 router.route('/users/:id/locationNotification/').post(users.post_location_notification);
 router.route('/users/:id/locationNotification/:locationNotificationId').delete(users.delete_location_notification);
 
