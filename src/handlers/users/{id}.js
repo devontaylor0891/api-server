@@ -298,7 +298,6 @@ module.exports = {
       }
     );
     console.log('post new location: ', req.body);
-    return res.status(200).send(req.body);
   },
 
   delete_location_notification: function (req, res) {
