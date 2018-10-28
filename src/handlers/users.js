@@ -116,7 +116,7 @@ module.exports = {
   },
 
   get_location_notification: function (req, res) {
-    UserById.gett_location_notification(req, res);
+    UserById.get_location_notification(req, res);
   },
 
   post_location_notification: function (req, res) {
