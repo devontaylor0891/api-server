@@ -277,6 +277,26 @@ module.exports = {
   },
 
   post_location_notification: function (req, res) {
+    let postQuery = {
+      user_id: `${req.params.id}`,
+      city: `${req.body.city}`,
+      province: `${req.body.province}`,
+      latitude: `${req.body.lat}`,
+      longitude: `${req.body.lng}`
+    };
+    connection.query(
+      `INSERT INTO location_notifications SET ?`,
+      postQuery,
+      function(err, result) {
+        if (err) {
+          console.log('error in create location_notifications:', err);
+          res.send('error:', err);
+        } else {
+          console.log('location_notifications created: ', result);
+          return res.status(200).send(result);
+        }
+      }
+    );
     console.log('post new location: ', req.body);
     return res.status(200).send(req.body);
   },
