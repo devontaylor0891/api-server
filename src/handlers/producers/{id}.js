@@ -32,6 +32,7 @@ module.exports = {
       }
     )
   },
+
   put_producers_id: function(req, res) {
     let postQuery = {
       name: `${req.body.name}`,
@@ -60,6 +61,7 @@ module.exports = {
       } 
     )
   },
+
   get_producer_id_products: function(req, res) {
     let userId = req.params.id;
     connection.query(
@@ -118,6 +120,7 @@ module.exports = {
       }
     )
   },
+
   get_producer_id_schedules: function(req, res) {
     let userId = req.params.id;
     connection.query(
@@ -441,5 +444,35 @@ module.exports = {
     //     return res.status(200).send(ordersResult);
     //   }
     // )
+  },
+
+  delete_producers_id: function(req, res) {
+    let postQuery = {
+      name: 'DELETED',
+      description: 'DELETED',
+      logoUrl: 'DELETED',
+      address: 'DELETED',
+      location: 'DELETED',
+      province: 'DELETED',
+      latitude: 0,
+      longitude: 0
+    };
+    let userId = req.params.id;
+    connection.query(
+      `SET SQL_SAFE_UPDATES=0;
+      UPDATE producers 
+      SET ? 
+      WHERE user_id = ?;
+      SET SQL_SAFE_UPDATES=1;`,
+      [postQuery, userId],
+      function (err, result) {
+        if (err) {
+          res.status(500).send('error:', err);
+        } else {
+          return res.status(200).send(result);
+        }
+      } 
+    )
   }
+
 };

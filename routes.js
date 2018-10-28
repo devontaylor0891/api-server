@@ -25,7 +25,7 @@ router.route('/producersProducts/:id').get(producers.get_producer_id_products);
 router.route('/producersSchedules/:id').get(producers.get_producer_id_schedules);
 router.route('/producersFutureSchedules/:id').get(producers.get_producer_id_future_schedules);
 router.route('/producersOrders/:id').get(producers.get_producer_id_orders);
-// router.route('/producersDelete/:id').put(producers.delete_producers_id);
+router.route('/producersDelete/:id').put(producers.delete_producers_id);
 
 router.route('/products').get(products.get_products); // ADMIN DASH ONLY
 router.route('/products').post(products.post_products);

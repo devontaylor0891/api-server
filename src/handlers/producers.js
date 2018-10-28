@@ -183,6 +183,10 @@ module.exports = {
 
   get_producer_id_orders: function (req, res) {
     Producer.get_producer_id_orders(req, res);
+  },
+
+  delete_producers_id: function (req, res) {
+    Producer.delete_producers_id(req, res);
   }
 
 };
