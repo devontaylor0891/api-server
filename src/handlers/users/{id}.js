@@ -287,7 +287,8 @@ module.exports = {
             city: row.city,
             province: row.province,
             lat: row.latitude,
-            lng: row.longitude
+            lng: row.longitude,
+            dateAdded: row.date_added
           }
         })
         return res.status(200).send(locationNotifications);
@@ -301,7 +302,8 @@ module.exports = {
       city: `${req.body.city}`,
       province: `${req.body.province}`,
       latitude: `${req.body.lat}`,
-      longitude: `${req.body.lng}`
+      longitude: `${req.body.lng}`,
+      date_added: `${req.body.dateAdded}`
     };
     connection.query(
       `INSERT INTO location_notifications SET ?`,
@@ -337,7 +339,6 @@ module.exports = {
     console.log('delete location: ', req.body);
     console.log('delete location user id: ', req.params.id);
     console.log('delete location notif id: ', req.params.locationNotificationId);
-    return res.status(200).send(req.body);
   }
 
 };
