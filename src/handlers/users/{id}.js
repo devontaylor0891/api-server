@@ -320,6 +320,20 @@ module.exports = {
   },
 
   delete_location_notification: function (req, res) {
+    connection.query(
+      `DELETE FROM location_notifications
+      WHERE id = ?;`,
+      [req.params.locationNotificationId],
+      function (err, result) {
+        if (err) {
+          console.log('error in delete location_notifications:', err);
+          res.status(500).send('error:', err);
+        } else {
+          console.log('location_notification deleted: ', result);
+          return res.status(200).send(result);
+        }
+      } 
+    )
     console.log('delete location: ', req.body);
     console.log('delete location user id: ', req.params.id);
     console.log('delete location notif id: ', req.params.locationNotificationId);
