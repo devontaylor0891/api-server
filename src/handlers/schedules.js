@@ -2,6 +2,7 @@
 var _ = require('lodash');
 var connection = require('../../db');
 var ScheduleById = require('./schedules/{id}');
+let lambda = require('./lambda/functions');
 
 module.exports = {
 
@@ -36,6 +37,22 @@ module.exports = {
   post_schedules: function (req, res) {
     // return res.send(201);
     console.log('new schedule body: ', req.body);
+    let lambdaScheduleInfo = {
+      schedule: {
+        producerId: req.body.producerId,
+        producerName: req.body.producerName,
+        scheduleId: null,
+        startDateTime: req.body.startDateTime,
+        endDateTime: req.body.endDateTime,
+        type: req.body.type,
+        description: req.body.description,
+        city: req.body.city,
+        province: req.body.province,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude
+      },
+      userList: []
+    };
     // return res.send(201);
     let postQuery = {
       producer_id_fk_s: `${req.body.producerId}`,
@@ -65,6 +82,7 @@ module.exports = {
           res.send('error:', err);
         } else {
           console.log('sched created: ', result);
+          lambda.location_notification(lambdaScheduleInfo, response);
           return res.status(200).send(result);
         }
       }
