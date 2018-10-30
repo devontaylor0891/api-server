@@ -82,7 +82,7 @@ module.exports = {
           res.send('error:', err);
         } else {
           console.log('sched created: ', result);
-          lambda.location_notification(lambdaScheduleInfo, response);
+          lambda.location_notification(lambdaScheduleInfo, res);
           return res.status(200).send(result);
         }
       }
