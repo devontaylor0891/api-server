@@ -69,12 +69,12 @@ module.exports = {
 
     location_notification: function (req, res) {
         console.log('req: ', req);
-        let payload = req.body;
+        let payload = req;
         // use great circle calculation
         // get the search parameters
         let distance = 25;
-        let latitude = req.body.schedule.latitude;
-        let longitude = req.body.schedule.longitude;
+        let latitude = req.schedule.latitude;
+        let longitude = req.schedule.longitude;
         let maxlat, maxlng, minlat, minlng;
         // Converts from degrees to radians.
         Math.radians = function(degrees) {
