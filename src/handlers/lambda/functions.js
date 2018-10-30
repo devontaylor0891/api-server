@@ -67,7 +67,8 @@ module.exports = {
         });
     },
 
-    location_notification: function (req) {
+    location_notification: function (req, res) {
+        console.log('req: ', req);
         let payload = req.body;
         // use great circle calculation
         // get the search parameters
