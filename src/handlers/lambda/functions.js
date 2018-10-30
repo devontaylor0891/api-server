@@ -137,6 +137,7 @@ module.exports = {
 
         promisedQuery(getLocationNotifsQueryOptions)
             .then(rows => {
+                console.log('rows returned: ', rows);
                 // if no scheds are found
                 if (rows.length === 0) {
                     let zeroResults = {};
