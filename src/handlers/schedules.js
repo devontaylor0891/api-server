@@ -191,8 +191,8 @@ module.exports = {
           // use great circle calculation
           // get the search parameters
           let distance = 25;
-          let latitude = lambdaScheduleInfo.latitude;
-          let longitude = lambdaScheduleInfo.longitude;
+          let latitude = lambdaScheduleInfo.schedule.latitude;
+          let longitude = lambdaScheduleInfo.schedule.longitude;
           let maxlat, maxlng, minlat, minlng;
           // Converts from degrees to radians.
           Math.radians = function (degrees) {
