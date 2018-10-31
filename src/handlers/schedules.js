@@ -264,8 +264,8 @@ module.exports = {
                 // do stuff with the returned rows
                 locationNotificationsReceived = rows.map(function (row) {
                   return {
-                    location_notifications.id: row.id,
-                    location_notifications.userId: row.user_id
+                    id: row.location_notifications.id,
+                    userId: row.location_notifications.user_id
                   }
                 });
                 // assign to searchResults
