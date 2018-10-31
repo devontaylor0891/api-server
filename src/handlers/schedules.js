@@ -292,12 +292,13 @@ module.exports = {
               }
             })
             .then((rows) => {
+              console.log('user rows: ', rows);
               // build the array of user info
-              usersReceived = rows.maps(function (row) {
+              usersReceived = rows.map(function (row) {
                 return {
-                  userId: row.id,
-                  firstName: row.first_name,
-                  email: row.email
+                  userId: row.users.id,
+                  firstName: row.users.first_name,
+                  email: row.users.email
                 }
               });
               // incorporate into lambda function object
