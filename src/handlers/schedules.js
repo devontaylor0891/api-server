@@ -268,8 +268,9 @@ module.exports = {
                     userId: row.location_notifications.user_id
                   }
                 });
+                console.log('notifs received: ', locationNotificationsReceived);
                 // assign to searchResults
-                searchResultsObject.schedules = schedulesReceived;
+                // searchResultsObject.schedules = schedulesReceived;
                 // create an array of producer Ids from the scheds;
                 let userIdArray = locationNotificationsReceived.map((notification) => {
                   console.log('notification: ', notification);
