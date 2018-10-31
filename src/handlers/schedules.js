@@ -272,7 +272,8 @@ module.exports = {
                 searchResultsObject.schedules = schedulesReceived;
                 // create an array of producer Ids from the scheds;
                 let userIdArray = locationNotificationsReceived.map((notification) => {
-                  userIds.push(notification.userId);
+                  console.log('notification: ', notification);
+                  // userIds.push(notification.userId);
                   return notification.userId
                 });
                 // pull out duplicates
