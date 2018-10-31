@@ -285,10 +285,10 @@ module.exports = {
                 let usersValues = Object.keys(userIds).length;
                 console.log('userIds lenght: ', usersValues);
                 // call the query again to get users info
-                getUserQueryOptions.sql = 'SELECT * FROM users WHERE id IN (' + new Array(usersValues + 1).join('?,').slice(0, -1) + ')';
-                getUserQueryOptions.values = userIds.slice(0);
+                getUsersQueryOptions.sql = 'SELECT * FROM users WHERE id IN (' + new Array(usersValues + 1).join('?,').slice(0, -1) + ')';
+                getUsersQueryOptions.values = userIds.slice(0);
                 // ************ USERS ***********
-                return promisedQuery(getUserQueryOptions);
+                return promisedQuery(getUsersQueryOptions);
               }
             })
             .then((rows) => {
