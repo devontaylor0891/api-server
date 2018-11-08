@@ -51,5 +51,7 @@ router.route('/searchResults').post(search.get_search);
 
 router.route('/captcha').post(captcha.post_captcha);
 
+router.route('/presignedUrl/:imageName').post(images.get_presigned_url);
+
 
 module.exports = router;
