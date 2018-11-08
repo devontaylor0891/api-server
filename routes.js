@@ -52,7 +52,7 @@ router.route('/searchResults').post(search.get_search);
 
 router.route('/captcha').post(captcha.post_captcha);
 
-router.route('/presignedUrl/:imageName').get(images.get_presigned_url);
+router.route('/presignedUrl').get(images.get_presigned_url);
 
 
 module.exports = router;

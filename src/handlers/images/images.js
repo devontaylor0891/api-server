@@ -11,7 +11,7 @@ module.exports = {
   // ***************** get presigned url for image uploads ***************
   get_presigned_url: function(req, res) {
 
-    console.log('image url req.body: ', req.params);
+    console.log('image url req.body: ', req.body);
 
     // (imageName: any): Observable<string> {
       AWS.config.update({
@@ -22,7 +22,7 @@ module.exports = {
       const s3 = new AWS.S3();
       let params = {
         Bucket: 'onlylocalfood-images',
-        Key: req.params.imageName,
+        Key: req.body.imageName,
         Expires: 1000000,
         ContentType: 'image/jpeg'
         // ACL: 'public-read'
