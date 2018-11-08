@@ -22,7 +22,7 @@ module.exports = {
       const s3 = new AWS.S3();
       let params = {
         Bucket: 'onlylocalfood-images',
-        Key: req.params,
+        Key: req.params.imageName,
         Expires: 1000000,
         ContentType: 'image/jpeg'
         // ACL: 'public-read'
