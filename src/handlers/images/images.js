@@ -11,7 +11,7 @@ module.exports = {
   // ***************** get presigned url for image uploads ***************
   get_presigned_url: function(req, res) {
 
-    console.log('image url req.params: ', req.params);
+    console.log('image url req.body: ', req.body);
 
     // (imageName: any): Observable<string> {
     //   AWS.config.update({
