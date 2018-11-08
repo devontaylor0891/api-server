@@ -5,7 +5,7 @@ var schedules = require('./src/handlers/schedules');
 var search = require('./src/handlers/search');
 var orders = require('./src/handlers/orders');
 var captcha = require('./src/handlers/captcha');
-var images = require('./src/handlers/images');
+var images = require('./src/handlers/images/images');
 var express = require('express');
 
 var router = express.Router();
