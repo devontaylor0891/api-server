@@ -14,25 +14,25 @@ module.exports = {
     console.log('image url req.body: ', req.params);
 
     // (imageName: any): Observable<string> {
-    //   AWS.config.update({
-    //     accessKeyId: ``,
-    //     secretAccessKey: ``,
-    //     region: 'us-west-2'
-    //   });
-    //   const s3 = new AWS.S3();
-    //   let params = {
-    //     Bucket: 'onlylocalfood-images',
-    //     Key: imageName,
-    //     Expires: 1000000,
-    //     ContentType: 'image/jpeg'
-    //     // ACL: 'public-read'
-    //   };
-    //   let url = s3.getSignedUrl('putObject', params);
-    //   console.log('params: ', params);
-    //   console.log('url: ', url);
-    //   return Observable.of(url);
+      AWS.config.update({
+        accessKeyId: ``,
+        secretAccessKey: ``,
+        region: 'us-west-2'
+      });
+      const s3 = new AWS.S3();
+      let params = {
+        Bucket: 'onlylocalfood-images',
+        Key: req.params,
+        Expires: 1000000,
+        ContentType: 'image/jpeg'
+        // ACL: 'public-read'
+      };
+      let url = s3.getSignedUrl('putObject', params);
+      console.log('params: ', params);
+      console.log('url: ', url);
+      return res.status(200).send(url);
     // }
-    return res.status(200).send(req.params);
+    // return res.status(200).send(req.params);
   }
 
 };
