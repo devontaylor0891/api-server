@@ -11,13 +11,13 @@ module.exports = {
   // ***************** get presigned url for image uploads ***************
   get_presigned_url: function(req, res) {
 
-    console.log('image url req: ', req);
+    console.log('image url req: ', req.body);
 
     const s3 = new AWS.S3();
     let params = {
       Bucket: 'onlylocalfood-images',
-      // Key: req.body.imageName,
-      Key: 'example',
+      Key: req.body.imageNameAttribute,
+      // Key: 'example',
       Expires: 1000000,
       ContentType: 'image/jpeg'
       // ACL: 'public-read'
