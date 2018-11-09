@@ -11,7 +11,7 @@ module.exports = {
   // ***************** get presigned url for image uploads ***************
   get_presigned_url: function(req, res) {
 
-    console.log('image url req.body: ', req.body);
+    console.log('image url req: ', req);
 
     const s3 = new AWS.S3();
     let params = {
