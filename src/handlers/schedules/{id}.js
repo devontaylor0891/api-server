@@ -73,7 +73,7 @@ module.exports = {
           }
         } 
       )
-    } else if (hasFee && hasWaiver) {
+    } else if (hasFeeVal && hasWaiverVal) {
       let postQuery = {
         producer_id_fk_s: `${req.body.producerId}`,
         schedule_type: `${req.body.type}`,
