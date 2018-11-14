@@ -2,6 +2,7 @@
 var _ = require('lodash');
 var connection = require('../../db');
 var Producer = require('./producers/{id}');
+let lambda = require('./lambda/functions');
 
 module.exports = {
   get_producers: function(req, res) {
@@ -151,6 +152,8 @@ module.exports = {
         if (err) {
           res.send('error:', err);
         } else {
+          // send me an email
+          lambda.new_producer_notification(req, res);
           return res.status(200).send(result);
         }
       }

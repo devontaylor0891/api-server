@@ -39,6 +39,20 @@ module.exports = {
         });
     },
 
+    // notify info@olf.com that a new producer has signed up
+    new_producer_notification: function (req, res) {
+        let payload = req.body;
+        var lambda = new AWS.Lambda();
+        var params = {
+            FunctionName: 'newProducerNotificationEmail', /* required */
+            Payload: JSON.stringify(payload)
+        };
+        lambda.invoke(params, function(err, data) {
+            if (err) console.log(err, err.stack); // an error occurred
+            else     console.log(data);           // successful response
+        });
+    },
+
     // notify producer that a new order has been created
     new_order_notification: function (req, res) {
         let payload = req.body;
