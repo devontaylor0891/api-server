@@ -206,7 +206,7 @@ module.exports = {
         //     customUrl: row.custom_url
         //   }
         // })
-        return res.status(200).send(results.producer_id);
+        return res.status(200).send(results.producer_id_fk);
       }
     ).catch(err => {
       return res.status(500).send(err);
