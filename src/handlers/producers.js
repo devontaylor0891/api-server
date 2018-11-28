@@ -199,14 +199,14 @@ module.exports = {
       WHERE custom_url = '${customString}'`, function (error, results) {
         console.log('req.params.id: ', customString);
         console.log('results: ', results);
-        let urlInfo = results.map(function(row) {
-          return {
-            id: row.id,
-            producerId: row.producer_id,
-            customUrl: row.custom_url
-          }
-        })
-        return res.status(200).send(urlInfo.producerId);
+        // let urlInfo = results.map(function(row) {
+        //   return {
+        //     id: row.id,
+        //     producerId: row.producer_id,
+        //     customUrl: row.custom_url
+        //   }
+        // })
+        return res.status(200).send(results.producer_id);
       }
     ).catch(err => {
       return res.status(500).send(err);
