@@ -199,10 +199,10 @@ module.exports = {
       WHERE custom_url = '${customString}'`, function (error, results) {
         console.log('req.params.id: ', customString);
         console.log('results: ', results);
-        let producerId = results.map(function(row) {
-          return row.producer_id_fk
+        let id = results.map(function(row) {
+          return row.user_id_fk
         })
-        return res.status(200).send(producerId);
+        return res.status(200).send(id);
       }
     )
   }
