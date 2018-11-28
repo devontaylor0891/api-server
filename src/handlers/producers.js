@@ -200,7 +200,7 @@ module.exports = {
         console.log('req.params.id: ', customString);
         console.log('results: ', results);
         let producerId = results.map(function(row) {
-          return row.producer_id
+          return row.producer_id_fk
         })
         return res.status(200).send(producerId);
       }
