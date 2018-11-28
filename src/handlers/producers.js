@@ -206,7 +206,7 @@ module.exports = {
         //     customUrl: row.custom_url
         //   }
         // })
-        return res.status(200).send(results.producer_id_fk);
+        return res.status(200).send(results[0].producer_id_fk);
       }
     );
   }
