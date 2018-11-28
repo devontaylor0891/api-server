@@ -197,7 +197,7 @@ module.exports = {
     connection.query(
       `SELECT * FROM custom_urls
       WHERE custom_url = '${customString}'`, function (error, results) {
-        console.log('req.params.id: ', req.params.id);
+        console.log('req.params.id: ', customString);
         console.log('results: ', results);
         let urlInfo = results.map(function(row) {
           return {
