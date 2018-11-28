@@ -54,5 +54,7 @@ router.route('/captcha').post(captcha.post_captcha);
 
 router.route('/presignedUrl').post(images.get_presigned_url);
 
+router.route('/customUrl/:urlString').get(producers.resolve_custom_url);
+
 
 module.exports = router;
