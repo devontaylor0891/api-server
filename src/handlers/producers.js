@@ -190,21 +190,6 @@ module.exports = {
 
   delete_producers_id: function (req, res) {
     Producer.delete_producers_id(req, res);
-  },
-
-  resolve_custom_url: function (req, res) {
-    var customString = req.params.urlString;
-    connection.query(
-      `SELECT * FROM custom_urls
-      WHERE custom_url = '${customString}'`, function (error, results) {
-        console.log('req.params.id: ', customString);
-        console.log('results: ', results);
-        let id = results.map(function(row) {
-          return row.user_id_fk
-        })
-        return res.status(200).send(id);
-      }
-    )
   }
 
 };

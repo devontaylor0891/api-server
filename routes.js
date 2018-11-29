@@ -6,6 +6,7 @@ var search = require('./src/handlers/search');
 var orders = require('./src/handlers/orders');
 var captcha = require('./src/handlers/captcha');
 var images = require('./src/handlers/images/images');
+var customUrl = require('./src/handlers/customUrl/customUrl');
 var express = require('express');
 
 var router = express.Router();
@@ -54,7 +55,7 @@ router.route('/captcha').post(captcha.post_captcha);
 
 router.route('/presignedUrl').post(images.get_presigned_url);
 
-router.route('/customUrl/:urlString').get(producers.resolve_custom_url);
-
+router.route('/customUrl/:urlString').get(customUrl.resolve_custom_url);
+router.route('/customUrl').post(customUrl.post_custom_url);
 
 module.exports = router;
