@@ -4,7 +4,7 @@ var connection = require('../../../db');
 module.exports = {
 
   resolve_custom_url: function (req, res) {
-    var customString = req.params.urlString;
+    var customString = req.params.urlString.toLowerCase();
     connection.query(
       `SELECT * FROM custom_urls
       WHERE custom_url = '${customString}'`, function (error, results) {
