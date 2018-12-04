@@ -38,6 +38,30 @@ module.exports = {
         }
       }
     )
+  },
+
+  get_custom_url: function (req, res) {
+    let id = req.params.id;
+    connection.query(
+      `SELECT * FROM custom_urls
+      WHERE producer_id = '${id}'`, function (error, results) {
+        if (error) {
+          res.send('error:', error);
+        } else {
+          console.log('req.params.id: ', id);
+          console.log('results: ', results);
+          let customUrl = results.map(function(row) {
+            return {
+              id: row.custom_url_id,
+              producerId: row.producer_id,
+              userId: row.user_id_fk,
+              customUrl: row.custom_url
+            }
+          })
+          return res.status(200).send(customUrl);
+        }
+      }
+    )
   }
 
 }
