@@ -44,7 +44,7 @@ module.exports = {
     let id = req.params.id;
     connection.query(
       `SELECT * FROM custom_urls
-      WHERE producer_id = '${id}'`, function (error, results) {
+      WHERE user_id_fk = '${id}'`, function (error, results) {
         if (error) {
           return res.status(500).send(error);
         } else {
@@ -53,7 +53,6 @@ module.exports = {
           let customUrl = results.map(function(row) {
             return {
               id: row.custom_url_id,
-              producerId: row.producer_id,
               userId: row.user_id_fk,
               customUrl: row.custom_url
             }
