@@ -46,7 +46,7 @@ module.exports = {
       `SELECT * FROM custom_urls
       WHERE producer_id = '${id}'`, function (error, results) {
         if (error) {
-          res.send('error:', error);
+          return res.status(500).send(erro);
         } else {
           console.log('req.params.id: ', id);
           console.log('results: ', results);
