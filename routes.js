@@ -57,6 +57,7 @@ router.route('/presignedUrl').post(images.get_presigned_url);
 
 router.route('/customUrl/:urlString').get(customUrl.resolve_custom_url);
 router.route('/customUrl').post(customUrl.post_custom_url);
+router.route('/customUrl/:id').put(customUrl.put_custom_url);
 router.route('/customUrlFromId/:id').get(customUrl.get_custom_url);
 
 module.exports = router;
