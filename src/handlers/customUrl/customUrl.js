@@ -73,9 +73,9 @@ module.exports = {
       `SET SQL_SAFE_UPDATES=0;
       UPDATE custom_urls 
       SET ? 
-      WHERE id = ?;
+      WHERE custom_url_id = ?;
       SET SQL_SAFE_UPDATES=1;`,
-      [postQuery, userId],
+      [postQuery, id],
       function (err, result) {
         if (err) {
           return res.status(500).send('error:', err);
