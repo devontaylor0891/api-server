@@ -64,7 +64,26 @@ module.exports = {
   },
 
   put_custom_url: function (req, res) {
-    
+    let postQuery = {
+      user_id_fk: `${req.body.userId}`,
+      custom_url: `${req.body.customUrl}`
+    };
+    let id = req.params.id;
+    connection.query(
+      `SET SQL_SAFE_UPDATES=0;
+      UPDATE custom_urls 
+      SET ? 
+      WHERE id = ?;
+      SET SQL_SAFE_UPDATES=1;`,
+      [postQuery, userId],
+      function (err, result) {
+        if (err) {
+          return res.status(500).send('error:', err);
+        } else {
+          return res.status(200).send(result);
+        }
+      } 
+    )
   }
 
 }
