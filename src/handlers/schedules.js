@@ -144,6 +144,7 @@ module.exports = {
     console.log('new schedule body: ', req.body);
     let lambdaScheduleInfo = {
       schedule: {
+        userId: req.body.userId,
         producerId: req.body.producerId,
         producerName: req.body.producerName,
         scheduleId: null,
