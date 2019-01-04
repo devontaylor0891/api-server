@@ -93,7 +93,7 @@ module.exports = {
         };
         lambda.invoke(params, function(err, data) {
             if (err) console.log(err, err.stack); // an error occurred
-            else     console.log(data);           // successful response
+            else     console.log('payload: ', data);           // successful response
         });
         
     }
