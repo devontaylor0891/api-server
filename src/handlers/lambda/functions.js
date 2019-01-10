@@ -81,6 +81,19 @@ module.exports = {
         });
     },
 
+    order_denied_notification: function (req, res) {
+      let payload = req.body;
+      var lambda = new AWS.Lambda();
+      var params = {
+          FunctionName: 'orderDeniedNotificationEmail', /* required */
+          Payload: JSON.stringify(payload)
+      };
+      lambda.invoke(params, function(err, data) {
+          if (err) console.log(err, err.stack); // an error occurred
+          else     console.log(data);           // successful response
+      });
+    },
+
     location_notification: function (req, res) {
         console.log('payload passed in: ', req);
         // get the payload
