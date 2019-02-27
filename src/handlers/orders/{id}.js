@@ -35,10 +35,11 @@ module.exports = {
                         if (req.body.orderDetails.orderStatus === 'accepted') {
                             lambda.order_accepted_notification(req, res);
                             return res.status(200).send(result);
-                        };
-                        if (req.body.orderDetails.orderStatus === 'denied') {
+                        } else if (req.body.orderDetails.orderStatus === 'denied') {
                             lambda.order_denied_notification(req, res);
                             return res.status(200).send(result);
+                        } else {
+                          return res.status(200).send(result);
                         }
                     }
                 } 
