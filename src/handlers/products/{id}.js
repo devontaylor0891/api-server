@@ -55,7 +55,7 @@ module.exports = {
             producerId: row.producer_id_fk_products
           }
         });
-        console.log('product returned: ', product);
+        // console.log('product returned: ', product);
         return res.status(200).send(product);
       }
     )
@@ -67,7 +67,7 @@ module.exports = {
     //   bool ? 1 : 0
     // };
     req.body.isObsolete = req.body.isObsolete ? 1 : 0;
-    console.log('put product called: ', req.body);
+    // console.log('put product called: ', req.body);
 
     let postQuery = {
       user_id_fk_products: `${req.body.userId}`,
@@ -89,7 +89,7 @@ module.exports = {
       schedule_list: `${req.body.scheduleList}`,
       producer_id_fk_products: `${req.body.producerId}`
     };
-    console.log('postQuery: ', postQuery);
+    // console.log('postQuery: ', postQuery);
     let productId = req.params.id;
     connection.query(
       `UPDATE products 

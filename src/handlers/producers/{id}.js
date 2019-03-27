@@ -212,14 +212,14 @@ module.exports = {
       ordersArray.forEach(function (order) {
         // add the order info
         newOrder = order;
-        console.log('neworder id: ', newOrder.id);
+        // console.log('neworder id: ', newOrder.id);
         // add the producer info
         let producerInfo = producersArray.filter(producer => producer.producerId == newOrder.chosenSchedule.producerId);
         newOrder.producer = producerInfo[0];
         // add the products info
         let productsInfo = productsArray.filter(products => products.orderId == newOrder.id);
         productsInfo.forEach(function (product) {
-          console.log('product: ', product);
+          // console.log('product: ', product);
           newOrder.orderDetails.productQuantities.push(product.productOrderQuantities);
           newOrder.productList.push(product.products);
           // console.log('newOrder.orderDetails.productQuantities: ', newOrder.orderDetails.productQuantities)
@@ -243,7 +243,7 @@ module.exports = {
     // build a query inside a promise, this will return the rows from the query
     function promisedQuery(sql) { 
       return new Promise ((resolve, reject) => {
-        console.log('query: ', sql);
+        // console.log('query: ', sql);
         connection.query(sql, function(err, rows) {
           if ( err ) {
             return reject( err );
@@ -333,7 +333,7 @@ module.exports = {
         if (ordersObject.orders.length < 1) {
           return res.status(200).send([]);
         };
-        console.log('orders received: ', ordersReceived.length);
+        // console.log('orders received: ', ordersReceived.length);
         // retreive the orderId and producerId and assign to the values in the getProductsQueryOptions, getProducersQueryOptions
         for (let i = 0; i < ordersReceived.length; i++) {
           let orderId = ordersReceived[i].id;
@@ -343,7 +343,7 @@ module.exports = {
           producerValues.push(producerId);
         }
         getProductsQueryOptions.values = [productValues];
-        console.log('product options: ', getProductsQueryOptions);
+        // console.log('product options: ', getProductsQueryOptions);
         // call the promisedQuery again
         // ************ PRODUCTS ***********
         return promisedQuery(getProductsQueryOptions);
@@ -380,9 +380,9 @@ module.exports = {
           };
         });
         ordersObject.products = productsReceived;
-        console.log('prodcuts received: ', productsReceived.length);
+        // console.log('prodcuts received: ', productsReceived.length);
         getProducersQueryOptions.values = [producerValues];
-        console.log('producer options: ', getProducersQueryOptions);
+        // console.log('producer options: ', getProducersQueryOptions);
         // call the promisedQuery again
       // ************ PRODUCERS ***********
         return promisedQuery(getProducersQueryOptions);
@@ -407,7 +407,7 @@ module.exports = {
           };
         });
         ordersObject.producers = producersReceived;
-        console.log('producers received: ', producersReceived.length);
+        // console.log('producers received: ', producersReceived.length);
         // build the ordersObject properly
         formattedOrders = buildOrderArray(ordersObject.orders, ordersObject.products, ordersObject.producers);
         return res.status(200).send(formattedOrders);

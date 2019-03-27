@@ -139,17 +139,17 @@ module.exports = {
           }
         })
         ordersObject.orders = ordersReceived;
-        console.log('orders received: ', ordersReceived.length);
+        // console.log('orders received: ', ordersReceived.length);
         // retreive the orderId and producerId and assign to the values in the getProductsQueryOptions, getProducersQueryOptions
         for (let i = 0; i < ordersReceived.length; i++) {
           let orderId = ordersReceived[i].id;
           let producerId = ordersReceived[i].producer.id;
-          console.log('id: ', orderId);
+          // console.log('id: ', orderId);
           productValues.push(orderId);
           producerValues.push(producerId);
         }
         getProductsQueryOptions.values = [productValues];
-        console.log('product options: ', getProductsQueryOptions);
+        // console.log('product options: ', getProductsQueryOptions);
         // call the promisedQuery again
         // ************ PRODUCTS ***********
         return promisedQuery(getProductsQueryOptions);
@@ -186,7 +186,7 @@ module.exports = {
           };
         });
         ordersObject.products = productsReceived;
-        console.log('prodcuts received: ', productsReceived.length);
+        // console.log('prodcuts received: ', productsReceived.length);
         getProducersQueryOptions.values = [producerValues];
         // console.log('producer options: ', getProducersQueryOptions);
         // call the promisedQuery again

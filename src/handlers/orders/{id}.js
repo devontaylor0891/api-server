@@ -114,7 +114,7 @@ module.exports = {
         })
         .then(rows => {
             // then delete the order itself
-            console.log(rows);
+            // console.log(rows);
             return promisedQuery(deleteOrderQueryOptions);
         })
         .then(rows => {
