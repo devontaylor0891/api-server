@@ -338,7 +338,7 @@ module.exports = {
         for (let i = 0; i < ordersReceived.length; i++) {
           let orderId = ordersReceived[i].id;
           let producerId = ordersReceived[i].producer.id;
-          console.log('id: ', orderId);
+          // console.log('id: ', orderId);
           productValues.push(orderId);
           producerValues.push(producerId);
         }
