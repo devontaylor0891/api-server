@@ -41,6 +41,7 @@ module.exports = {
   },
 
   get_custom_url: function (req, res) {
+    console.log('custom url req: ', req);
     let id = req.params.id;
     connection.query(
       `SELECT * FROM custom_urls
