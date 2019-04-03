@@ -62,7 +62,7 @@ module.exports = {
       start_date_time: `${req.body.startDateTime}`,
       end_date_time: `${req.body.endDateTime}`,
       has_fee: `${req.body.hasFee}`,
-      has_waiver: `${req.body.hasWiaver}`,
+      has_waiver: `${req.body.hasWaiver}`,
       latitude: `${req.body.latitude}`,
       longitude: `${req.body.longitude}`,
       city: `${req.body.city}`,
