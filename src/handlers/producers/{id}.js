@@ -34,6 +34,7 @@ module.exports = {
   },
 
   put_producers_id: function(req, res) {
+    console.log('put producer body: ', req.body);
     let postQuery = {
       name: `${req.body.name}`,
       description: `${req.body.description}`,
