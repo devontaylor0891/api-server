@@ -4,6 +4,7 @@ var connection = require('../../../db');
 module.exports = {
   get_products_id: function(req, res) {
     var productId = req.params.id;
+    console.log('product id requested: ', productId);
     connection.query(
       // `SELECT * FROM products
       // WHERE product_id = ${productId}`,
@@ -55,7 +56,7 @@ module.exports = {
             producerId: row.producer_id_fk_products
           }
         });
-        // console.log('product returned: ', product);
+        console.log('product returned: ', product);
         return res.status(200).send(product);
       }
     )
