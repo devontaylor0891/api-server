@@ -18,7 +18,7 @@ module.exports = {
             startDateTime: row.start_date_time,
             endDateTime: row.end_date_time,
             hasFee: row.has_fee,
-            hasWiaver: row.has_waiver,
+            hasWaiver: row.has_waiver,
             latitude: row.latitude,
             longitude: row.longitude,
             city: row.city,
