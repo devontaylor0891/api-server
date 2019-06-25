@@ -7,6 +7,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var hike = require('./routes/hike');
 var routes = require('./routes');
+var schedule = require('node-schedule');
+
+var rule = new schedule.RecurrenceRule();
+rule.hour = [7,19];
+
+var j = schedule.scheduleJob(rule, function(){
+  console.log('The answer to life, the universe, and everything!');
+});
 
 var app = express();
 
