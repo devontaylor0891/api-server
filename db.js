@@ -23,15 +23,17 @@ var connection = mysql.createConnection({
   }
 });
 
-connection.connect(function(err) {
-  if (err) {
-    console.error('Database connection failed: ' + err.stack);
-    return;
-  }
-  console.log('Connected to database.');
-});
+console.log('got here');
 
-connection.query('USE DATABASE ebdb;', function (error, results) {});
+// connection.connect(function(err) {
+//   if (err) {
+//     console.error('Database connection failed: ' + err.stack);
+//     return;
+//   }
+//   console.log('Connected to database.');
+// });
+
+// connection.query('USE DATABASE ebdb;', function (error, results) {});
 
 
 module.exports = connection;

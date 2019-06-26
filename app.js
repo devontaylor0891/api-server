@@ -8,13 +8,17 @@ var logger = require('morgan');
 var hike = require('./routes/hike');
 var routes = require('./routes');
 var schedule = require('node-schedule');
+var scheduledTask = require('./src/handlers/scheduledTasks/scheduledTasks');
 
 var rule = new schedule.RecurrenceRule();
-rule.hour = [7,19];
+rule.second = [0,10,15,30,45];
 
-var j = schedule.scheduleJob(rule, function(){
-  console.log('The answer to life, the universe, and everything!');
-});
+console.log('rule: ', rule);
+
+var j = schedule.scheduleJob(rule, scheduledTask.test_function);
+// var j = schedule.scheduleJob(rule, function(){
+//   console.log('The answer to life, the universe, and everything!');
+// });
 
 var app = express();
 
