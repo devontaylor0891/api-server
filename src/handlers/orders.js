@@ -249,8 +249,8 @@ module.exports = {
           console.log('result of post order: ', result)
           newOrderId = result.insertId;
           callback(null, newOrderId);
-        },
-      );
+        }
+      )
     };
 
     async.waterfall([
