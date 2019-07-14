@@ -2,6 +2,7 @@
 var connection = require('../../db');
 var Order = require('./orders/{id}');
 let lambda = require('./lambda/functions');
+var async = require('./async');
 
 module.exports = {
   get_orders: function(req, res) {
@@ -236,7 +237,94 @@ module.exports = {
       order_value: `${req.body.orderDetails.orderValue}`,
       incomplete_reason: null
     };
-    let productQuantitiesPostQuery;
+    let productQuantitiesPostQuery,
+        productQuantitiesArray,
+        newOrderId;
+
+    async.waterfall([
+      postOrder,
+      buildProductQtyArray,
+      postProductQuantities,
+    ], function(err, result) {
+      // lambda.multiple_location_notification(result);
+      console.log('results: ', result);
+    });
+
+    function postOrder(callback) {
+      connection.query(
+        `INSERT INTO orders SET ?;`,
+        orderPostQuery,
+        function (error, results) {
+          console.log('result of post order: ', result)
+          newOrderId = result.insertId;
+          callback(null, newOrderId);
+        },
+      );
+    };
+
+    function buildProductQtyArray(insertId, callback) {
+      for (let i = 0; i < req.body.orderDetails.productQuantities.length; i++) {
+        productQuantitiesPostQuery = {
+          order_id_fk_pok: insertId,
+          product_id_fk_pok: req.body.orderDetails.productQuantities[i].productId,
+          quantity: req.body.orderDetails.productQuantities[i].orderQuantity,
+          order_value: req.body.orderDetails.productQuantities[i].orderValue
+        };
+        productQuantitiesArray.push(productQuantitiesPostQuery)
+        if (i === (req.body.orderDetails.productQuantities.length - 1)) {
+          callback(null, productQuantitiesArray);
+        };
+      };
+    };
+
+    function postProductQuantities(productQuantitiesArray, callback) {
+
+      async.eachOfSeries(productQuantitiesArray, function(productQty, index, innerCallback) {
+
+        let numberOfProductQtys = productQty.length;
+        console.log('productQtysArray: ', productQuantitiesArray);
+        
+
+        // connection.query(
+        //   {
+        //     sql: 'SELECT * FROM users WHERE id IN (' + new Array(numberOfProductQtys + 1).join('?,').slice(0, -1) + ')',
+        //     values: location.userIds.slice(0),
+        //     nestedTables: true
+        //   },
+        //   function (error, rows) {
+            
+        //     if (error) {
+        //       console.log('error: ', error);
+        //     } else {
+        //       let usersReceived = rows.map(function (row) {
+        //         // console.log('user recd: ', row);
+        //         return {
+        //           userId: row.id,
+        //           firstName: row.first_name,
+        //           email: row.email
+        //         }
+        //       });
+        //       uniqueLocationArray[index].userList = usersReceived;
+        //       // console.log('uniques after users received: ', uniqueLocationArray);
+        //       innerCallback(null, null);
+        //     }
+        //   },
+          
+        // );
+
+      }, function(err, results){
+        if(err){
+            console.error(err);
+        } else {
+            console.log('all files are read.');
+            callback(null, numberOfProductQtys);
+        }
+      });
+
+    };
+
+
+
     function processRow(row) {
       console.log('got here, result: ', row);
       connection.resume();
@@ -296,13 +384,13 @@ module.exports = {
                 connection.pause();
              
                 processRow(row);
-                
+
               })
               .on('end', function() {
                 // all rows have been received
                 lambda.new_order_notification(req, res);
                 console.log('got here, result: ', result);
-                return res.status(200);
+                return res.status(200).send(result);
               });
 
           } 
