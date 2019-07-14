@@ -303,9 +303,8 @@ module.exports = {
           schedule_list: `${product.scheduleList}`,
           producer_id_fk_products: `${product.producerId}`
         };
-
+        console.log('productQuery: ', productUpdatePostQuery);
         connection.query(
-          console.log('productQuery: ', productUpdatePostQuery);
           `UPDATE products SET ? WHERE product_id = ?;`,
           [productUpdatePostQuery, product.id],
           function (err, result) {
