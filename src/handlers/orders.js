@@ -365,81 +365,10 @@ module.exports = {
     ], function(err, result) {
       // lambda.multiple_location_notification(result);
       console.log('results: ', result);
+      lambda.new_order_notification(req, res);
       res.send(200).send();
     });
 
-    // function processRow(row) {
-    //   console.log('got here, result: ', row);
-    //   connection.resume();
-    // };
-    // console.log('post new order: ', orderPostQuery);
-    // connection.query(
-    //   `INSERT INTO orders 
-    //   SET ?`,
-    //   orderPostQuery,
-    //   function(err, result) {
-    //     if (err) {
-    //       res.status(500).send(err);
-    //     } else { // success
-    //       // use result.insertId to add to other table
-    //       // using a for loop to add to product_quantities table
-    //       console.log('result of post order: ', result)
-    //       let productQuantities = req.body.orderDetails.productQuantities;
-    //       for (let i = 0; i < productQuantities.length; i++) {
-    //         // build query
-    //         productQuantitiesPostQuery = {
-    //           order_id_fk_pok: result.insertId,
-    //           product_id_fk_pok: `${productQuantities[i].productId}`,
-    //           quantity: `${productQuantities[i].orderQuantity}`,
-    //           order_value: `${productQuantities[i].orderValue}`
-    //         };
-    //         // run insert query
-    //         console.log('product order qty query: ', productQuantitiesPostQuery);
-
-    //         // connection.query(
-    //         //   `INSERT INTO product_order_quantities
-    //         //   SET ?`,
-    //         //   productQuantitiesPostQuery,
-    //         //   function (err, result) {
-    //         //     if (err) {
-    //         //       console.log('err.stack: ', err.stack);
-    //         //       res.status(500).send(err);
-    //         //     } else {
-    //         //       lambda.new_order_notification(req, res);
-    //         //       console.log('got here, result: ', result);
-    //         //       return res.status(200).send(result);
-    //         //     }
-    //         //   }
-    //         // )
-
-    //         connection.query(`INSERT INTO product_order_quantities SET ?`, productQuantitiesPostQuery)
-    //           .on('error', function(err) {
-    //             // Handle error, an 'end' event will be emitted after this as well
-    //             console.log('err.stack: ', err.stack);
-    //             res.status(500).send(err);
-    //           })
-    //           .on('fields', function(fields) {
-    //             // the field packets for the rows to follow
-    //             console.log('fields recd');
-    //           })
-    //           .on('result', function(row) {
-    //             // Pausing the connnection is useful if your processing involves I/O
-    //             connection.pause();
-             
-    //             processRow(row);
-
-    //           })
-    //           .on('end', function() {
-    //             // all rows have been received
-    //             lambda.new_order_notification(req, res);
-    //             console.log('got here, result: ', result);
-    //             return res.status(200).send(result);
-    //           });
-
-    //       } 
-    //    }
-    //   }
-    // )
   },
 
   get_orders_by_schedule_id: function (req, res) {
