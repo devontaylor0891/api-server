@@ -237,6 +237,10 @@ module.exports = {
       incomplete_reason: null
     };
     let productQuantitiesPostQuery;
+    function processRow(row) {
+      console.log('got here, result: ', row);
+      connection.resume();
+    };
     console.log('post new order: ', orderPostQuery);
     connection.query(
       `INSERT INTO orders 
@@ -291,10 +295,8 @@ module.exports = {
                 // Pausing the connnection is useful if your processing involves I/O
                 connection.pause();
              
-                processRow = function(row) {
-                  console.log('got here, result: ', row);
-                  connection.resume();
-                };
+                processRow(row);
+                
               })
               .on('end', function() {
                 // all rows have been received
