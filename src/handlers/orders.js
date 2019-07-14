@@ -291,10 +291,10 @@ module.exports = {
                 // Pausing the connnection is useful if your processing involves I/O
                 connection.pause();
              
-                processRow(row, function() {
+                processRow = function(row) {
                   console.log('got here, result: ', row);
                   connection.resume();
-                });
+                };
               })
               .on('end', function() {
                 // all rows have been received
