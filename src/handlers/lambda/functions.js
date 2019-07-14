@@ -94,7 +94,7 @@ module.exports = {
       });
     },
 
-    location_notification: function (req) {
+    location_notification: function (req, res) {
         console.log('payload passed in: ', req);
         // get the payload
         let payload = req;

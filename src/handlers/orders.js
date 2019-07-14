@@ -266,9 +266,10 @@ module.exports = {
               productQuantitiesPostQuery,
               function (err, result) {
                 if (err) {
+                  console.log('err.stack: ', err.stack);
                   res.status(500).send(err);
                 } else {
-                  lambda.new_order_notification(req);
+                  lambda.new_order_notification(req, res);
                   return res.status(200).send(result);
                 }
               }
