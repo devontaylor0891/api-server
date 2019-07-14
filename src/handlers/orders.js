@@ -279,8 +279,9 @@ module.exports = {
       async.eachOfSeries(productListArray, function(product, index, innerCallback) {
 
         numberOfProductQtys = productListArray.length;
-        console.log('productQtysArray: ', productQuantitiesArray);
-        console.log('original req.body: ', req.body);
+        // console.log('productQtysArray: ', productQuantitiesArray);
+        // console.log('original req.body: ', req.body);
+        console.log('product index: ', index);
 
         productUpdatePostQuery = {
           user_id_fk_products: `${product.userId}`,
@@ -304,9 +305,7 @@ module.exports = {
         };
 
         connection.query(
-          `UPDATE products 
-          SET ?
-          WHERE product_id = ?;`,
+          `UPDATE products SET ? WHERE product_id = ?;`,
           [productUpdatePostQuery, product.id],
           function (err, result) {
             // if (err) {
