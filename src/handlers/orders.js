@@ -352,7 +352,7 @@ module.exports = {
             console.error(err);
         } else {
             console.log('all files are read.');
-            callback(null, numberOfProductQtys);
+            callback(null, 'OK');
         }
       });
 
@@ -365,7 +365,7 @@ module.exports = {
     ], function(err, result) {
       // lambda.multiple_location_notification(result);
       console.log('results: ', result);
-      res.sendStatus(200).send(result);
+      res.send(200).send();
     });
 
     // function processRow(row) {
