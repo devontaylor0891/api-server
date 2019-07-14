@@ -254,7 +254,7 @@ module.exports = {
       connection.query(
         `INSERT INTO orders SET ?;`,
         orderPostQuery,
-        function (error, results) {
+        function (error, result) {
           console.log('result of post order: ', result)
           newOrderId = result.insertId;
           callback(null, newOrderId);
