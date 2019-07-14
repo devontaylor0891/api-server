@@ -2,7 +2,7 @@
 var connection = require('../../db');
 var Order = require('./orders/{id}');
 let lambda = require('./lambda/functions');
-var async = require('./async');
+var async = require('async');
 
 module.exports = {
   get_orders: function(req, res) {
