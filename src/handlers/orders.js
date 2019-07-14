@@ -281,7 +281,7 @@ module.exports = {
         numberOfProductQtys = productListArray.length;
         // console.log('productQtysArray: ', productQuantitiesArray);
         // console.log('original req.body: ', req.body);
-        console.log('product index: ', index);
+        console.log('product req: ', product);
 
         productUpdatePostQuery = {
           user_id_fk_products: `${product.userId}`,
@@ -305,6 +305,7 @@ module.exports = {
         };
 
         connection.query(
+          console.log('productQuery: ', productUpdatePostQuery);
           `UPDATE products SET ? WHERE product_id = ?;`,
           [productUpdatePostQuery, product.id],
           function (err, result) {
@@ -318,34 +319,6 @@ module.exports = {
             // }
           } 
         )
-        
-
-        // connection.query(
-        //   {
-        //     sql: 'SELECT * FROM users WHERE id IN (' + new Array(numberOfProductQtys + 1).join('?,').slice(0, -1) + ')',
-        //     values: location.userIds.slice(0),
-        //     nestedTables: true
-        //   },
-        //   function (error, rows) {
-            
-        //     if (error) {
-        //       console.log('error: ', error);
-        //     } else {
-        //       let usersReceived = rows.map(function (row) {
-        //         // console.log('user recd: ', row);
-        //         return {
-        //           userId: row.id,
-        //           firstName: row.first_name,
-        //           email: row.email
-        //         }
-        //       });
-        //       uniqueLocationArray[index].userList = usersReceived;
-        //       // console.log('uniques after users received: ', uniqueLocationArray);
-        //       innerCallback(null, null);
-        //     }
-        //   },
-          
-        // );
 
       }, function(err, results){
         if(err){
