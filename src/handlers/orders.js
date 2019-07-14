@@ -268,7 +268,7 @@ module.exports = {
                 if (err) {
                   res.status(500).send(err);
                 } else {
-                  lambda.new_order_notification(req, res);
+                  lambda.new_order_notification(req);
                   return res.status(200).send(result);
                 }
               }
