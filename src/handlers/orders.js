@@ -238,9 +238,11 @@ module.exports = {
       incomplete_reason: null
     };
     let productQuantitiesPostQuery,
+        productUpdatePostQuery,
         newOrderId;
 
     let productQuantitiesArray = [];
+    let productListArray = req.body.productList;
 
     function postOrder(callback) {
       connection.query(
@@ -270,14 +272,53 @@ module.exports = {
         };
       };
     };
-
+;
     function postProductQuantities(productQuantitiesArray, callback) {
+      let numberOfProductQtys
 
-      async.eachOfSeries(productQuantitiesArray, function(productQty, index, innerCallback) {
+      async.eachOfSeries(productListArray, function(product, index, innerCallback) {
 
-        let numberOfProductQtys = productQty.length;
+        numberOfProductQtys = productListArray.length;
         console.log('productQtysArray: ', productQuantitiesArray);
         console.log('original req.body: ', req.body);
+
+        productUpdatePostQuery = {
+          user_id_fk_products: `${product.userId}`,
+          product_id: `${product.id}`,
+          name: `${product.name}`,
+          description: `${product.description}`,
+          image: `${product.image}`,
+          pricePerUnit: `${product.pricePerUnit}`,
+          unit: `${product.unit}`,
+          unitsPer: `${product.unitsPer}`,
+          category: `${product.category}`,
+          subcategory: `${product.subcategory}`,
+          date_added: `${product.dateAdded}`,
+          qty_available: `${product.qtyAvailable}`,
+          qty_pending: `${product.qtyPending}`,
+          qty_accepted: `${product.qtyAccepted}`,
+          qty_completed: `${product.qtyCompleted}`,
+          is_obsolete: `${product.isObsolete}`,
+          schedule_list: `${product.scheduleList}`,
+          producer_id_fk_products: `${product.producerId}`
+        };
+
+        connection.query(
+          `UPDATE products 
+          SET ?
+          WHERE product_id = ?;`,
+          [productUpdatePostQuery, product.id],
+          function (err, result) {
+            // if (err) {
+            //   console.log('error in update product:', err);
+            //   res.status(500).send('error:', err);
+            // } else {
+              console.log('product updated: ', result);
+              // return res.status(200).send(result);
+              innerCallback(null, null);
+            // }
+          } 
+        )
         
 
         // connection.query(
