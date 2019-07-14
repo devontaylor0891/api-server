@@ -238,8 +238,9 @@ module.exports = {
       incomplete_reason: null
     };
     let productQuantitiesPostQuery,
-        productQuantitiesArray,
         newOrderId;
+
+    let productQuantitiesArray = [];
 
     function postOrder(callback) {
       connection.query(
@@ -255,12 +256,14 @@ module.exports = {
 
     function buildProductQtyArray(insertId, callback) {
       for (let i = 0; i < req.body.orderDetails.productQuantities.length; i++) {
+        console.log('index: ', i);
         productQuantitiesPostQuery = {
           order_id_fk_pok: insertId,
           product_id_fk_pok: req.body.orderDetails.productQuantities[i].productId,
           quantity: req.body.orderDetails.productQuantities[i].orderQuantity,
           order_value: req.body.orderDetails.productQuantities[i].orderValue
         };
+        console.log('postquery: ', productQuantitiesPostQuery);
         productQuantitiesArray.push(productQuantitiesPostQuery)
         if (i === (req.body.orderDetails.productQuantities.length - 1)) {
           callback(null, productQuantitiesArray);
