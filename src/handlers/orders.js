@@ -277,6 +277,7 @@ module.exports = {
 
         let numberOfProductQtys = productQty.length;
         console.log('productQtysArray: ', productQuantitiesArray);
+        console.log('original req.body: ', req.body);
         
 
         // connection.query(
