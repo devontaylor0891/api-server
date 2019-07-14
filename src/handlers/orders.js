@@ -365,7 +365,7 @@ module.exports = {
     ], function(err, result) {
       // lambda.multiple_location_notification(result);
       console.log('results: ', result);
-      res.status(200).send(result);
+      res.sendStatus(200).send(result);
     });
 
     // function processRow(row) {
