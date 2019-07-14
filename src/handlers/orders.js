@@ -277,8 +277,7 @@ module.exports = {
             //   }
             // )
 
-            connection.query(`INSERT INTO product_order_quantities SET ?`, productQuantitiesPostQuery);
-            query
+            connection.query(`INSERT INTO product_order_quantities SET ?`, productQuantitiesPostQuery)
               .on('error', function(err) {
                 // Handle error, an 'end' event will be emitted after this as well
                 console.log('err.stack: ', err.stack);
