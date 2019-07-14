@@ -4,7 +4,7 @@ var connection = require('../../db');
 module.exports = {
   get_search: function(req, res) {
 
-    console.log('search Results req: ', req.body);
+    // console.log('search Results req: ', req.body);
     // get the search parameters
     let distance = req.body.radius;
     // let distance = 150;
@@ -35,23 +35,23 @@ module.exports = {
     // longitude boundaries (longitude gets smaller when latitude increases)
     maxlng = longitude + Math.degrees(distance / earthRadius / Math.cos(Math.radians(latitude)));
     minlng = longitude - Math.degrees(distance / earthRadius / Math.cos(Math.radians(latitude)));
-    console.log('lat: ', latitude)
-    console.log('lng: ', longitude);
-    console.log('maxlat: ', maxlat);
-    console.log('maxlng: ', maxlng);
-    console.log('minlat: ', minlat);
-    console.log('minlng: ', minlng);
+    // console.log('lat: ', latitude)
+    // console.log('lng: ', longitude);
+    // console.log('maxlat: ', maxlat);
+    // console.log('maxlng: ', maxlng);
+    // console.log('minlat: ', minlat);
+    // console.log('minlng: ', minlng);
 
     // build a query inside a promise, this will return the rows from the query
     function promisedQuery(sql) { 
-      console.log('query: ', sql);
+      // console.log('query: ', sql);
       return new Promise ((resolve, reject) => {
         connection.query(sql, function(err, rows) {
           if ( err ) {
             console.log('error: ', err);
             return reject( err );
           }
-          console.log('success');
+          // console.log('success');
           resolve( rows );
         })
       });
@@ -139,11 +139,11 @@ module.exports = {
           producerIds = producerIdArray.filter (function (value, index, array) { 
             return array.indexOf (value) == index;
           }); 
-          console.log('filtered pids: ', producerIds);
+          // console.log('filtered pids: ', producerIds);
           // producerValues = producerIds.length();
           
           producerValues = Object.keys(producerIds).length;
-          console.log('producerids lenght: ', producerValues);
+          // console.log('producerids lenght: ', producerValues);
           
           // call the query again to get producers
           getProducersQueryOptions.sql = 'SELECT * FROM producers LEFT JOIN users ON producers.user_id = users.id WHERE producer_id IN (' + new Array(producerValues + 1).join('?,').slice(0, -1) + ')';
@@ -156,7 +156,7 @@ module.exports = {
       })
       .then((rows) => {
         producersReceived = rows.map(function(row) {
-          console.log('producerRecd id: ', row.producers.producer_id);
+          // console.log('producerRecd id: ', row.producers.producer_id);
           return {
             id: row.producers.user_id,
             producerId: row.producers.producer_id,
