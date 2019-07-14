@@ -241,15 +241,6 @@ module.exports = {
         productQuantitiesArray,
         newOrderId;
 
-    async.waterfall([
-      postOrder,
-      buildProductQtyArray,
-      postProductQuantities,
-    ], function(err, result) {
-      // lambda.multiple_location_notification(result);
-      console.log('results: ', result);
-    });
-
     function postOrder(callback) {
       connection.query(
         `INSERT INTO orders SET ?;`,
@@ -261,6 +252,15 @@ module.exports = {
         },
       );
     };
+
+    async.waterfall([
+      postOrder,
+      buildProductQtyArray,
+      postProductQuantities,
+    ], function(err, result) {
+      // lambda.multiple_location_notification(result);
+      console.log('results: ', result);
+    });
 
     function buildProductQtyArray(insertId, callback) {
       for (let i = 0; i < req.body.orderDetails.productQuantities.length; i++) {
