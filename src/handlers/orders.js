@@ -270,6 +270,7 @@ module.exports = {
                   res.status(500).send(err);
                 } else {
                   lambda.new_order_notification(req, res);
+                  console.log('got here, result: ', result);
                   return res.status(200).send(result);
                 }
               }
