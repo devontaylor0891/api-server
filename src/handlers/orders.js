@@ -286,22 +286,22 @@ module.exports = {
         productUpdatePostQuery = {
           user_id_fk_products: `${req.body.producerId}`,
           product_id: `${product[0].id}`,
-          name: `${product.name}`,
-          description: `${product.description}`,
-          image: `${product.image}`,
-          pricePerUnit: `${product.pricePerUnit}`,
-          unit: `${product.unit}`,
-          unitsPer: `${product.unitsPer}`,
-          category: `${product.category}`,
-          subcategory: `${product.subcategory}`,
-          date_added: `${product.dateAdded}`,
-          qty_available: `${product.qtyAvailable}`,
-          qty_pending: `${product.qtyPending}`,
-          qty_accepted: `${product.qtyAccepted}`,
-          qty_completed: `${product.qtyCompleted}`,
-          is_obsolete: `${product.isObsolete}`,
-          schedule_list: `${product.scheduleList}`,
-          producer_id_fk_products: `${product.producerId}`
+          name: `${product[0].name}`,
+          description: `${product[0].description}`,
+          image: `${product[0].image}`,
+          pricePerUnit: `${product[0].pricePerUnit}`,
+          unit: `${product[0].unit}`,
+          unitsPer: `${product[0].unitsPer}`,
+          category: `${product[0].category}`,
+          subcategory: `${product[0].subcategory}`,
+          date_added: `${product[0].dateAdded}`,
+          qty_available: `${product[0].qtyAvailable}`,
+          qty_pending: `${product[0].qtyPending}`,
+          qty_accepted: `${product[0].qtyAccepted}`,
+          qty_completed: `${product[0].qtyCompleted}`,
+          is_obsolete: `${product[0].isObsolete}`,
+          schedule_list: `${product[0].scheduleList}`,
+          producer_id_fk_products: `${product[0].producerId}`
         };
         console.log('productQuery: ', productUpdatePostQuery);
         connection.query(
