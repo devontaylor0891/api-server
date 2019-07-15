@@ -284,12 +284,12 @@ module.exports = {
         console.log('product req: ', product[0]);
 
         productUpdatePostQuery = {
-          user_id_fk_products: `${req.body.producerId}`,
+          user_id_fk_products: req.body.producerId,
           product_id: `${product[0].id}`,
           name: `${product[0].name}`,
           description: `${product[0].description}`,
           image: `${product[0].image}`,
-          pricePerUnit: `${product[0].pricePerUnit}`,
+          pricePerUnit: product[0].pricePerUnit,
           unit: `${product[0].unit}`,
           unitsPer: `${product[0].unitsPer}`,
           category: `${product[0].category}`,
