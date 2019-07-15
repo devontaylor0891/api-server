@@ -306,7 +306,7 @@ module.exports = {
         console.log('productQuery: ', productUpdatePostQuery);
         connection.query(
           `UPDATE products SET ? WHERE product_id = ?;`,
-          [productUpdatePostQuery, product.id],
+          [productUpdatePostQuery, product[0].id],
           function (err, result) {
             // if (err) {
             //   console.log('error in update product:', err);
