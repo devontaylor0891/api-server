@@ -285,7 +285,7 @@ module.exports = {
 
         productUpdatePostQuery = {
           user_id_fk_products: `${req.body.producerId}`,
-          product_id: `${product.id}`,
+          product_id: `${product[0].id}`,
           name: `${product.name}`,
           description: `${product.description}`,
           image: `${product.image}`,
