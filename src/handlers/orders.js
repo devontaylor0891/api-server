@@ -274,17 +274,17 @@ module.exports = {
     };
 ;
     function postProductQuantities(productQuantitiesArray, callback) {
-      let numberOfProductQtys
+      let numberOfProductQtys;
 
       async.eachOfSeries(productListArray, function(product, index, innerCallback) {
 
         numberOfProductQtys = productListArray.length;
         // console.log('productQtysArray: ', productQuantitiesArray);
         // console.log('original req.body: ', req.body);
-        console.log('product req: ', product);
+        console.log('product req: ', product[0]);
 
         productUpdatePostQuery = {
-          user_id_fk_products: `${product.userId}`,
+          user_id_fk_products: `${req.body.producerId}`,
           product_id: `${product.id}`,
           name: `${product.name}`,
           description: `${product.description}`,
