@@ -300,7 +300,7 @@ module.exports = {
           qty_accepted: `${product[0].qtyAccepted}`,
           qty_completed: `${product[0].qtyCompleted}`,
           is_obsolete: `${product[0].isObsolete}`,
-          schedule_list: `${product[0].scheduleList}`,
+          schedule_list: null,
           producer_id_fk_products: `${product[0].producerId}`
         };
         console.log('productQuery: ', productUpdatePostQuery);
