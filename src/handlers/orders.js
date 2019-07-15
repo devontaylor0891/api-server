@@ -335,10 +335,9 @@ module.exports = {
       buildProductQtyArray,
       postProductQuantities,
     ], function(err, result) {
-      // lambda.multiple_location_notification(result);
       console.log('results: ', result);
       lambda.new_order_notification(req, res);
-      res.send(200).send(result);
+      return res.status(200).send(result);
     });
 
   },
