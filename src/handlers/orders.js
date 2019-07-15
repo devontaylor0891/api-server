@@ -338,7 +338,7 @@ module.exports = {
       // lambda.multiple_location_notification(result);
       console.log('results: ', result);
       lambda.new_order_notification(req, res);
-      res.send(200).send();
+      res.send(200).send(result);
     });
 
   },
