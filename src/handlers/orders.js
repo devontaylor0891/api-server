@@ -324,7 +324,7 @@ module.exports = {
             console.error(err);
         } else {
             console.log('all files are read.');
-            callback(null, 'OK');
+            callback(null, results);
         }
       });
 
