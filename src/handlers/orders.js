@@ -257,6 +257,7 @@ module.exports = {
     };
 
     function buildProductQtyArray(insertId, callback) {
+      console.log('insertId: ', insertId);
       for (let i = 0; i < req.body.orderDetails.productQuantities.length; i++) {
         console.log('index: ', i);
         productQuantitiesPostQuery = {
