@@ -54,7 +54,7 @@ module.exports = {
     // build a query inside a promise, this will return the rows from the query
     function promisedQuery(sql) { 
       return new Promise ((resolve, reject) => {
-        console.log('query: ', sql);
+        // console.log('query: ', sql);
         connection.query(sql, function(err, rows) {
           if ( err ) {
             return reject( err );
@@ -421,7 +421,7 @@ post_order: function (req, res) {
   };
 
   function putProducts(productListArray, callback) {
-    
+
     async.eachOfSeries(productListArray, function(product, index, innerCallback) {
 
       console.log('product req: ', product[0]);

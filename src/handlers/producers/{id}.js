@@ -344,7 +344,7 @@ module.exports = {
           producerValues.push(producerId);
         }
         getProductsQueryOptions.values = [productValues];
-        console.log('productQuery values: ', getProductsQueryOptions.values);
+        // console.log('productQuery values: ', getProductsQueryOptions.values);
         // console.log('product options: ', getProductsQueryOptions);
         // call the promisedQuery again
         // ************ PRODUCTS ***********
