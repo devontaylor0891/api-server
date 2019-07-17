@@ -223,125 +223,262 @@ module.exports = {
       });
   },
   
-  post_order: function (req, res) {
-    let orderPostQuery = {
-      producer_id_fk_o: `${req.body.chosenSchedule.producerId}`,
-      consumer_id_fk_o: `${req.body.consumer.id}`,
-      schedule_id_fk_o: `${req.body.chosenSchedule.id}`,
-      producer_comment: null,
-      consumer_comment: `${req.body.orderDetails.consumerComment}`,
-      delivery_address: `${req.body.orderDetails.deliveryAddress}`,
-      delivery_fee: `${req.body.orderDetails.deliveryFee}`,
-      created_date: `${req.body.orderDetails.createdDate}`,
-      order_status: `${req.body.orderDetails.orderStatus}`,
-      order_value: `${req.body.orderDetails.orderValue}`,
-      incomplete_reason: null
-    };
-    let productQuantitiesPostQuery,
-        productUpdatePostQuery,
-        newOrderId;
+//   post_order: function (req, res) {
+//     let orderPostQuery = {
+//       producer_id_fk_o: `${req.body.chosenSchedule.producerId}`,
+//       consumer_id_fk_o: `${req.body.consumer.id}`,
+//       schedule_id_fk_o: `${req.body.chosenSchedule.id}`,
+//       producer_comment: null,
+//       consumer_comment: `${req.body.orderDetails.consumerComment}`,
+//       delivery_address: `${req.body.orderDetails.deliveryAddress}`,
+//       delivery_fee: `${req.body.orderDetails.deliveryFee}`,
+//       created_date: `${req.body.orderDetails.createdDate}`,
+//       order_status: `${req.body.orderDetails.orderStatus}`,
+//       order_value: `${req.body.orderDetails.orderValue}`,
+//       incomplete_reason: null
+//     };
+//     let productQuantitiesPostQuery,
+//         productUpdatePostQuery,
+//         newOrderId;
 
-    let productQuantitiesArray = [];
-    let productListArray = req.body.productList;
+//     let productQuantitiesArray = [];
+//     let productListArray = req.body.productList;
 
-    function postOrder(callback) {
-      connection.query(
-        `INSERT INTO orders SET ?;`,
-        orderPostQuery,
-        function (error, result) {
-          console.log('result of post order: ', result)
-          newOrderId = result.insertId;
-          callback(null, newOrderId);
-        }
-      )
-    };
+//     function postOrder(callback) {
+//       connection.query(
+//         `INSERT INTO orders SET ?;`,
+//         orderPostQuery,
+//         function (error, result) {
+//           console.log('result of post order: ', result)
+//           newOrderId = result.insertId;
+//           callback(null, newOrderId);
+//         }
+//       )
+//     };
 
-    function buildProductQtyArray(insertId, callback) {
-      console.log('insertId: ', insertId);
-      for (let i = 0; i < req.body.orderDetails.productQuantities.length; i++) {
-        console.log('index: ', i);
-        productQuantitiesPostQuery = {
-          order_id_fk_pok: insertId,
-          product_id_fk_pok: req.body.orderDetails.productQuantities[i].productId,
-          quantity: req.body.orderDetails.productQuantities[i].orderQuantity,
-          order_value: req.body.orderDetails.productQuantities[i].orderValue
-        };
-        console.log('postquery: ', productQuantitiesPostQuery);
-        productQuantitiesArray.push(productQuantitiesPostQuery)
-        if (i === (req.body.orderDetails.productQuantities.length - 1)) {
-          callback(null, productQuantitiesArray);
-        };
+//     function buildProductQtyArray(insertId, callback) {
+//       console.log('insertId: ', insertId);
+//       for (let i = 0; i < req.body.orderDetails.productQuantities.length; i++) {
+//         console.log('index: ', i);
+//         productQuantitiesPostQuery = {
+//           order_id_fk_pok: insertId,
+//           product_id_fk_pok: req.body.orderDetails.productQuantities[i].productId,
+//           quantity: req.body.orderDetails.productQuantities[i].orderQuantity,
+//           order_value: req.body.orderDetails.productQuantities[i].orderValue
+//         };
+//         console.log('postquery: ', productQuantitiesPostQuery);
+//         productQuantitiesArray.push(productQuantitiesPostQuery)
+//         if (i === (req.body.orderDetails.productQuantities.length - 1)) {
+//           callback(null, productQuantitiesArray);
+//         };
+//       };
+//     };
+// ;
+//     function postProductQuantities(productQuantitiesArray, callback) {
+//       let numberOfProductQtys;
+
+//       async.eachOfSeries(productListArray, function(product, index, innerCallback) {
+
+//         numberOfProductQtys = productListArray.length;
+//         // console.log('productQtysArray: ', productQuantitiesArray);
+//         // console.log('original req.body: ', req.body);
+//         console.log('product req: ', product[0]);
+
+//         productUpdatePostQuery = {
+//           user_id_fk_products: req.body.producerId,
+//           product_id: product[0].id,
+//           name: product[0].name,
+//           description: product[0].description,
+//           image: product[0].image,
+//           pricePerUnit: product[0].pricePerUnit,
+//           unit: product[0].unit,
+//           unitsPer: product[0].unitsPer,
+//           category: product[0].category,
+//           subcategory: product[0].subcategory,
+//           date_added: product[0].dateAdded,
+//           qty_available: product[0].qtyAvailable,
+//           qty_pending: product[0].qtyPending,
+//           qty_accepted: product[0].qtyAccepted,
+//           qty_completed: product[0].qtyCompleted,
+//           is_obsolete: product[0].isObsolete,
+//           schedule_list: null,
+//           producer_id_fk_products: product[0].producerId
+//         };
+//         console.log('productQuery: ', productUpdatePostQuery);
+//         connection.query(
+//           `UPDATE products SET ? WHERE product_id = ?;`,
+//           [productUpdatePostQuery, product[0].id],
+//           function (err, result) {
+//             // if (err) {
+//             //   console.log('error in update product:', err);
+//             //   res.status(500).send('error:', err);
+//             // } else {
+//               console.log('product updated: ', result);
+//               // return res.status(200).send(result);
+//               innerCallback(null, null);
+//             // }
+//           } 
+//         )
+
+//       }, function(err, results){
+//         if(err){
+//             console.error(err);
+//         } else {
+//             console.log('all files are read.');
+//             callback(null, results);
+//         }
+//       });
+
+//     };
+
+//     async.waterfall([
+//       postOrder,
+//       buildProductQtyArray,
+//       postProductQuantities,
+//     ], function(err, result) {
+//       console.log('results: ', result);
+//       lambda.new_order_notification(req, res);
+//       return res.status(200).send(result);
+//     });
+
+//   },
+
+post_order: function (req, res) {
+  let orderPostQuery = {
+    producer_id_fk_o: `${req.body.chosenSchedule.producerId}`,
+    consumer_id_fk_o: `${req.body.consumer.id}`,
+    schedule_id_fk_o: `${req.body.chosenSchedule.id}`,
+    producer_comment: null,
+    consumer_comment: `${req.body.orderDetails.consumerComment}`,
+    delivery_address: `${req.body.orderDetails.deliveryAddress}`,
+    delivery_fee: `${req.body.orderDetails.deliveryFee}`,
+    created_date: `${req.body.orderDetails.createdDate}`,
+    order_status: `${req.body.orderDetails.orderStatus}`,
+    order_value: `${req.body.orderDetails.orderValue}`,
+    incomplete_reason: null
+  };
+  let productQuantitiesPostQuery,
+      productUpdatePostQuery,
+      newOrderId,
+      productQtysLength;
+
+  let productQuantitiesArray = [];
+  let productListArray = req.body.productList;
+
+  function postOrder(callback) {
+    connection.query(
+      `INSERT INTO orders SET ?;`,
+      orderPostQuery,
+      function (error, result) {
+        console.log('result of post order: ', result)
+        newOrderId = result.insertId;
+        callback(null, newOrderId);
+      }
+    )
+  };
+
+  function buildProductQtyArray(insertId, callback) {
+    console.log('insertId: ', insertId);
+    for (let i = 0; i < req.body.orderDetails.productQuantities.length; i++) {
+      console.log('index: ', i);
+      productQuantitiesPostQuery = {
+        order_id_fk_pok: insertId,
+        product_id_fk_pok: req.body.orderDetails.productQuantities[i].productId,
+        quantity: req.body.orderDetails.productQuantities[i].orderQuantity,
+        order_value: req.body.orderDetails.productQuantities[i].orderValue
+      };
+      console.log('postquery: ', productQuantitiesPostQuery);
+      productQuantitiesArray.push(productQuantitiesPostQuery)
+      if (i === (req.body.orderDetails.productQuantities.length - 1)) {
+        callback(null, productQuantitiesArray);
       };
     };
-;
-    function postProductQuantities(productQuantitiesArray, callback) {
-      let numberOfProductQtys;
+  };
 
-      async.eachOfSeries(productListArray, function(product, index, innerCallback) {
+  function postProductQuantities(productQuantitiesArray, callback) {
 
-        numberOfProductQtys = productListArray.length;
-        // console.log('productQtysArray: ', productQuantitiesArray);
-        // console.log('original req.body: ', req.body);
-        console.log('product req: ', product[0]);
+    async.eachOfSeries(productQuantitiesArray, function(productQty, index, innerCallback) {
 
-        productUpdatePostQuery = {
-          user_id_fk_products: req.body.producerId,
-          product_id: product[0].id,
-          name: product[0].name,
-          description: product[0].description,
-          image: product[0].image,
-          pricePerUnit: product[0].pricePerUnit,
-          unit: product[0].unit,
-          unitsPer: product[0].unitsPer,
-          category: product[0].category,
-          subcategory: product[0].subcategory,
-          date_added: product[0].dateAdded,
-          qty_available: product[0].qtyAvailable,
-          qty_pending: product[0].qtyPending,
-          qty_accepted: product[0].qtyAccepted,
-          qty_completed: product[0].qtyCompleted,
-          is_obsolete: product[0].isObsolete,
-          schedule_list: null,
-          producer_id_fk_products: product[0].producerId
-        };
-        console.log('productQuery: ', productUpdatePostQuery);
-        connection.query(
-          `UPDATE products SET ? WHERE product_id = ?;`,
-          [productUpdatePostQuery, product[0].id],
-          function (err, result) {
-            // if (err) {
-            //   console.log('error in update product:', err);
-            //   res.status(500).send('error:', err);
-            // } else {
-              console.log('product updated: ', result);
-              // return res.status(200).send(result);
-              innerCallback(null, null);
-            // }
-          } 
-        )
+      console.log('productQtyQuery: ', productQty);
+      connection.query(
+        `INSERT INTO product_order_quantities SET ?;`,
+        [productQty],
+        function (err, result) {
+          console.log('productQty updated: ', result);
+          innerCallback(null, null);
+        } 
+      )
 
-      }, function(err, results){
-        if(err){
-            console.error(err);
-        } else {
-            console.log('all files are read.');
-            callback(null, results);
-        }
-      });
-
-    };
-
-    async.waterfall([
-      postOrder,
-      buildProductQtyArray,
-      postProductQuantities,
-    ], function(err, result) {
-      console.log('results: ', result);
-      lambda.new_order_notification(req, res);
-      return res.status(200).send(result);
+    }, function(err, results){
+      if(err){
+        console.error(err);
+      } else {
+        console.log('all files are read.');
+        callback(null, productListArray);
+      }
     });
 
-  },
+  };
+
+  function putProducts(productListArray, callback) {
+    
+    async.eachOfSeries(productListArray, function(product, index, innerCallback) {
+
+      console.log('product req: ', product[0]);
+
+      productUpdatePostQuery = {
+        user_id_fk_products: req.body.producerId,
+        product_id: product[0].id,
+        name: product[0].name,
+        description: product[0].description,
+        image: product[0].image,
+        pricePerUnit: product[0].pricePerUnit,
+        unit: product[0].unit,
+        unitsPer: product[0].unitsPer,
+        category: product[0].category,
+        subcategory: product[0].subcategory,
+        date_added: product[0].dateAdded,
+        qty_available: product[0].qtyAvailable,
+        qty_pending: product[0].qtyPending,
+        qty_accepted: product[0].qtyAccepted,
+        qty_completed: product[0].qtyCompleted,
+        is_obsolete: product[0].isObsolete,
+        schedule_list: null,
+        producer_id_fk_products: product[0].producerId
+      };
+      console.log('productQuery: ', productUpdatePostQuery);
+      connection.query(
+        `UPDATE products SET ? WHERE product_id = ?;`,
+        [productUpdatePostQuery, product[0].id],
+        function (err, result) {
+          console.log('product updated: ', result);
+          innerCallback(null, null);
+        } 
+      )
+
+    }, function(err, results){
+      if(err){
+          console.error(err);
+      } else {
+          console.log('all files are read.');
+          callback(null, results);
+      }
+    });
+  };
+
+  async.waterfall([
+    postOrder,
+    buildProductQtyArray,
+    postProductQuantities,
+    putProducts
+  ], function(err, result) {
+    console.log('results: ', result);
+    lambda.new_order_notification(req, res);
+    return res.status(200).send(result);
+  });
+
+},
+
 
   get_orders_by_schedule_id: function (req, res) {
     let scheduleId = req.params.id;
