@@ -8,7 +8,7 @@ var logger = require('morgan');
 var hike = require('./routes/hike');
 var routes = require('./routes');
 var schedule = require('node-schedule');
-var scheduledTask = require('./src/handlers/scheduledTasks/scheduledTasks');
+var scheduledTask = require('./src/handlers/scheduledTasks/scheduledTasks.2');
 
 var rule = new schedule.RecurrenceRule();
 // rule.second = [0,10,15,30,45];
