@@ -215,7 +215,6 @@ module.exports = {
             innerCallback(null, null);
           }
           
-          
         })
         
       }, function(err, results){
@@ -240,14 +239,12 @@ module.exports = {
         let usersValues = location.userIds.length;
         // console.log('usersValues: ', location.userIds.slice(0));
 
-        connection.query(
-          {
+        connection.query({
             sql: 'SELECT * FROM users WHERE id IN (' + new Array(usersValues + 1).join('?,').slice(0, -1) + ')',
             values: location.userIds.slice(0),
             nestedTables: true
           },
           function (error, rows) {
-            
             if (error) {
               console.log('error: ', error);
             } else {
@@ -263,59 +260,17 @@ module.exports = {
               // console.log('uniques after users received: ', uniqueLocationArray);
               innerCallback(null, null);
             }
-          },
-          
+          }
         )
-
       }, function(err, results){
         if(err){
-            console.error(err);
+          console.error(err);
         } else {
-            // console.log('all files are read.');
-            callback(null, uniqueLocationArray);
+          // console.log('all files are read.');
+          callback(null, uniqueLocationArray);
         }
-      });
-
-      // console.log('unique array passed into getUsers: ', uniqueLocationArray);
-      // let usersValues = uniqueLocationArray.userIds.length;
-      // // let usersValues = Object.keys(uniqueLocationArray.userIds).length;
-      // connection.query(
-      //   {
-      //     sql: 'SELECT * FROM users WHERE id IN (' + new Array(usersValues + 1).join('?,').slice(0, -1) + ')',
-      //     values: userIds.slice(0),
-      //     nestedTables: true
-      //   },
-      //   function (error, rows) {
-          
-      //     // if (error) {
-      //     //   res.status(500).send(error);
-      //     // } else {
-      //       let usersReceived = rows.map(function (row) {
-      //         console.log('user recd: ', row.users.first_name);
-      //         return {
-      //           userId: row.users.id,
-      //           firstName: row.users.first_name,
-      //           email: row.users.email
-      //         }
-      //       });
-      //       uniqueLocationArray.userList = usersReceived;
-      //       console.log('uniques after users received: ', uniqueLocationArray);
-      //       callback(null, uniqueLocationArray);
-      //   },
-        
-      // );
-
+      })
     }
-
-    // build the array structure that I want in the end (to pass to lambda)
-
-    // let lambdaMultiSchedInfo = [
-    //   {
-    //     location: '',
-    //     userList: [],
-    //     schedules: []
-    //   }
-    // ];
 
   }
 
