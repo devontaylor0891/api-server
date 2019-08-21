@@ -25,15 +25,15 @@ var connection = mysql.createConnection({
 
 console.log('got here');
 
-// connection.connect(function(err) {
-//   if (err) {
-//     console.error('Database connection failed: ' + err.stack);
-//     return;
-//   }
-//   console.log('Connected to database.');
-// });
+connection.connect(function(err) {
+  if (err) {
+    console.error('Database connection failed: ' + err.stack);
+    return;
+  }
+  console.log('Connected to database.');
+});
 
-// connection.query('USE DATABASE ebdb;', function (error, results) {});
+connection.query('USE DATABASE ebdb;', function (error, results) {});
 
 
 module.exports = connection;
