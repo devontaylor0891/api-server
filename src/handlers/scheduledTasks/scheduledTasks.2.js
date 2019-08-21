@@ -139,9 +139,9 @@ module.exports = {
             callback(null, uniqueLocationArray);
         },
         
-      );
+      )
       
-    }
+    };
 
     // *************** 2 *****************
     // set up to get location notifications
