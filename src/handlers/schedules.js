@@ -214,7 +214,7 @@ module.exports = {
 
   post_multi_schedules: function (req, res) {
     console.log('new schedule body: ', req.body);
-    return res.send(201);
+    return res.send('ok');
   },
 
   get_schedules_id: function (req, res) {
