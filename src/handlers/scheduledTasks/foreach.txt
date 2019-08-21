@@ -1,0 +1,94 @@
+eachOf(coll, iteratee, callbackopt)
+import eachOf from 'async/eachOf';
+
+Like each, except that it passes the key (or index) as the second argument to the iteratee.
+
+Alias:
+forEachOf
+
+Parameters:
+
+coll	Array | Iterable | AsyncIterable | Object	
+A collection to iterate over.
+
+iteratee	AsyncFunction	
+A function to apply to each item in coll. The key is the item's key, or index in the case of an array. Invoked with (item, key, callback).
+
+callback	function <optional>	
+A callback which is called when all iteratee functions have finished, or an error occurs. Invoked with (err).
+
+Returns:
+a promise, if a callback is omitted
+
+Type  Promise
+Example
+
+var obj = {dev: "/dev.json", test: "/test.json", prod: "/prod.json"};
+var configs = {};
+
+async.forEachOf(
+	obj, 
+	function (value, key, callback) {
+		fs.readFile(__dirname + value, "utf8", function (err, data) {
+			if (err) return callback(err);
+			try {
+				configs[key] = JSON.parse(data);
+			} catch (e) {
+				return callback(e);
+			}
+			callback();
+		});
+	}, function (err) {
+		if (err) console.error(err.message);
+		// configs is now a map of JSON data
+		doSomethingWith(configs);
+	}
+);
+
+
+example from http://www.sebastianseilund.com/nodejs-async-in-practice
+
+I need to iterate over a collection, perform an asynchronous task for each item, and when they’re all done do something else
+Then you use async.forEach. The signature is async.forEach(items, task, callback). items is the collection you want to iterate over and task is the function to call for each item in items. Async will immediately call task with each item in items as the first argument. All tasks are run in parallel. Example: task(item[0]), task(item[1]) … task(item[n]). Once all tasks complete the final callback will be called.
+
+An example could be a webservice where you support deleting multiple messages in one request. You get the message IDs as a comma separated string in the URL. Each deletion requires a separate call to the database. When all deletions have completed you want to reply the user with a response.
+
+app.delete('/messages/:messageIds', function(req, res, next) {
+    var messageIds = req.params.messageIds.split(','); // makes it into an array
+
+    async.forEach(
+			
+			messageIds, 
+			
+			function(messageId, callback) { //The second argument, `callback`, is the "task callback" for a specific `messageId`
+        //When the db has deleted the item it will call the "task callback"
+        //This way async knows which items in the collection have finished
+        db.delete('messages', messageId, callback);
+			},
+			
+			function(err) { // 'final' callback - either exits everything when an error occurs, or exits w/o erro after all tasks are complete
+					if (err) return next(err);
+					//Tell the user about the great success
+					res.json({
+							success: true,
+							message: messageIds.length+' message(s) was deleted.'
+					});
+			}
+		);
+
+});
+
+Bonus tip: If you ever need to iterate over an object, there is an easy way too. You just use Object.keys(o) (or _.keys(o) if you prefer Lodash or Underscore.js) on the object, and iterate over the keys. Example:
+
+var trafficLightActions = {
+    red: 'Stop',
+    yellow: 'Wait',
+    green: 'Go'
+}
+async.forEach(Object.keys(trafficLightActions), function(color, callback) {
+    var action = trafficLightActions[color];
+    //Play around with the color and action
+}, function(err) {
+    //When done
+});
+

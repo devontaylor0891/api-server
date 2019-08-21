@@ -5,6 +5,8 @@ AWS.config.update({
     secretAccessKey: process.env.ACCESS_SECRET,
     region:'us-west-2'
 });
+var connection = require('../../../db');
+var async = require('async');
 
 module.exports = {
 
@@ -109,6 +111,57 @@ module.exports = {
             else     console.log('payload: ', data);           // successful response
         });
         
+    },
+
+    multiple_location_notification: function (req, res) {
+        let payload,
+            schedIds;
+        // req is an array of locations and the accompanying sched and user info
+        // loop over each location and send separately to lambda
+        req.forEach(function(location, index) {
+            payload = location;
+            console.log('location.schedules: ', location.schedules);
+            schedIds = location.schedules.map(sched => sched.id); // create an array of sched ids
+            console.log('schedIds: ', schedIds);
+            // call lambda function
+            var lambda = new AWS.Lambda();
+            var params = {
+                FunctionName: 'multipleLocationNotificationEmail', /* required */
+                Payload: JSON.stringify(payload)
+            };
+            lambda.invoke(params, function(err, data) {
+                if (err) { // an error occurred
+                    console.log(err, err.stack);
+                } else {
+                    console.log('payload: ', data); // successful response
+                    // for each sched in the location
+                    async.forEach(
+                        schedIds, 
+                        function(schedId, callback) { //The second argument, `callback`, is the "task callback" for a specific `messageId`
+                            // When the db has updated the item it will call the "task callback"
+                            // This way async knows which items in the collection have finished
+                            // update the schedule.location_notif_sent to 1 (true)
+                            console.log('schedId: ', schedId);
+                            connection.query(
+                                `SET SQL_SAFE_UPDATES=0;
+                                UPDATE schedules 
+                                SET location_notif_sent = 1 
+                                WHERE schedule_id = ?;
+                                SET SQL_SAFE_UPDATES=1;`,
+                                schedId,
+                                callback
+                            )
+                        },
+                        function(err) { // 'final' callback - either exits everything when an error occurs, or exits w/o erro after all tasks are complete
+                            if (err) return err;
+                            // Tell the user about the great success
+                            console.log('all scheds changed for location: ', location.location);
+                        }
+                    );
+                    
+                }    
+            });
+        })
     }
 
 };

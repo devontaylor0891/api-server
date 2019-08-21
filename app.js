@@ -11,7 +11,8 @@ var schedule = require('node-schedule');
 var scheduledTask = require('./src/handlers/scheduledTasks/scheduledTasks');
 
 var rule = new schedule.RecurrenceRule();
-rule.second = [0,10,15,30,45];
+// rule.second = [0,10,15,30,45];
+rule.hour = [0];
 
 console.log('rule: ', rule);
 

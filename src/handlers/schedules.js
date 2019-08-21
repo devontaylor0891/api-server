@@ -212,6 +212,11 @@ module.exports = {
     )
   },
 
+  post_multi_schedules: function (req, res) {
+    console.log('new schedule body: ', req.body);
+    return res.send(201);
+  },
+
   get_schedules_id: function (req, res) {
     ScheduleById.get_schedules_id(req, res);
   },
