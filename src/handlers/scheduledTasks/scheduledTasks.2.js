@@ -265,7 +265,7 @@ module.exports = {
             }
           },
           
-        );
+        )
 
       }, function(err, results){
         if(err){
