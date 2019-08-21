@@ -136,8 +136,16 @@ module.exports = {
             });
 
             // console.log('uniques: ', uniqueLocationArray);
-            callback(null, uniqueLocationArray);
+            // callback(null, uniqueLocationArray);
         },
+        function(err, uniqueLocationArray){
+          if(err){
+              console.error(err);
+          } else {
+              // console.log('all files are read.');
+              callback(null, uniqueLocationArray);
+          }
+        });
         
       )
       
