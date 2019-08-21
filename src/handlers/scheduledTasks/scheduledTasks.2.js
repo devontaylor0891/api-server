@@ -145,9 +145,9 @@ module.exports = {
               // console.log('all files are read.');
               callback(null, uniqueLocationArray);
           }
-        });
+        }
         
-      )
+      );
       
     };
 
