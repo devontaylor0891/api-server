@@ -217,16 +217,17 @@ module.exports = {
     // return res.send('ok');
     console.log('new schedule body: ', req.body);
     // return res.send('ok');
+    let scheds = req.body;
 
     let postQuery;
 
-    async.eachOfSeries(req.body, function(sched, index, innerCallback) {
+    async.eachOfSeries(scheds, function(sched, index, innerCallback) {
       console.log('index of async: ', index);
       // build the sched to insert into DB
       postQuery = {
         producer_id_fk_s: `${sched.producerId}`,
         schedule_type: `${sched.type}`,
-        description: `$sched.description}`,
+        description: `${sched.description}`,
         start_date_time: `${sched.startDateTime}`,
         end_date_time: `${sched.endDateTime}`,
         has_fee: `${sched.hasFee}`,
