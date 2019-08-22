@@ -221,6 +221,7 @@ module.exports = {
     let postQuery;
 
     async.eachOfSeries(req.body, function(sched, index, innerCallback) {
+      console.log('index of async: ', index);
       // build the sched to insert into DB
       postQuery = {
         producer_id_fk_s: `${sched.producerId}`,
