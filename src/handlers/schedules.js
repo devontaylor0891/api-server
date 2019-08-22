@@ -213,8 +213,56 @@ module.exports = {
   },
 
   post_multi_schedules: function (req, res) {
+    // console.log('new schedule body: ', req.body);
+    // return res.send('ok');
     console.log('new schedule body: ', req.body);
-    return res.send('ok');
+    // return res.send('ok');
+
+    let postQuery;
+
+    async.eachOfSeries(req.body, function(sched, index, innerCallback) {
+      // build the sched to insert into DB
+      postQuery = {
+        producer_id_fk_s: `${sched.producerId}`,
+        schedule_type: `${sched.type}`,
+        description: `$sched.description}`,
+        start_date_time: `${sched.startDateTime}`,
+        end_date_time: `${sched.endDateTime}`,
+        has_fee: `${sched.hasFee}`,
+        has_waiver: `${sched.hasWaiver}`,
+        latitude: `${sched.latitude}`,
+        longitude: `${sched.longitude}`,
+        city: `${sched.city}`,
+        province: `${sched.province}`,
+        order_deadline: `${sched.orderDeadline}`,
+        address: `${sched.address}`,
+        fee: `${sched.fee}`,
+        fee_waiver: `${sched.feeWaiver}`,
+        user_id_fk_schedules: `${sched.userId}`
+      };
+      connection.query(
+        `INSERT INTO schedules SET ?`,
+        postQuery,
+        function (err, result) {
+          if (err) {
+            console.log('error: ', err);
+            innerCallback(err, null);
+          } else {
+            console.log('sched created: ', result);
+            innerCallback(null, null);
+          }
+        }
+      )
+      
+    }, function(err, results) { // final callback executed when each of series is completed
+      if(err){
+          console.error(err);
+      } else {
+          console.log('all scheds added');
+          return res.send('all scheds added');
+          // callback(null, results);
+      }
+    });
   },
 
   get_schedules_id: function (req, res) {
