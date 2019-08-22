@@ -3,6 +3,7 @@ var _ = require('lodash');
 var connection = require('../../db');
 var ScheduleById = require('./schedules/{id}');
 let lambda = require('./lambda/functions');
+var async = require('async');
 
 module.exports = {
 
@@ -225,7 +226,7 @@ module.exports = {
       console.log('index of async: ', index);
       // build the sched to insert into DB
       postQuery = {
-        producer_id_fk_s: `${sched[0].producerId}`,
+        producer_id_fk_s: `${sched.producerId}`,
         schedule_type: `${sched.type}`,
         description: `${sched.description}`,
         start_date_time: `${sched.startDateTime}`,
