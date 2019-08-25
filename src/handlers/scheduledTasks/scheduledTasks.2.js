@@ -138,7 +138,7 @@ module.exports = {
             });
 
             console.log('uniques: ', uniqueLocationArray);
-            // callback(null, uniqueLocationArray);
+            callback(null, uniqueLocationArray);
         },
         function(err, uniqueLocationArray){
           if(err){
