@@ -25,7 +25,7 @@ module.exports = {
       getUsers,
     ], function(err, result) {
       lambda.multiple_location_notification(result);
-      console.log('results: ', result[0].id);
+      // console.log('results: ', result[0].id);
     });
     
     // function myFirstFunction(callback) {
