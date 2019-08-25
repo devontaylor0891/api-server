@@ -137,7 +137,7 @@ module.exports = {
               }
             });
 
-            // console.log('uniques: ', uniqueLocationArray);
+            console.log('uniques: ', uniqueLocationArray);
             // callback(null, uniqueLocationArray);
         },
         function(err, uniqueLocationArray){
