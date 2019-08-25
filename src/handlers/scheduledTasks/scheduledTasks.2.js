@@ -127,7 +127,7 @@ module.exports = {
               sched.startTime = moment(sched.startDateTime).format("h:mmA");
               sched.endTime = moment(sched.endDateTime).format("h:mmA");
               sched.orderDeadlineTime = moment(sched.orderDeadline).format("h:mmA");
-              console.log('sched: ', sched);
+              console.log('sched: ', sched.id);
               // console.log('array lenght: ', uniqueLocationArray.length);
               for (let i = 0; i < uniqueLocationArray.length; i++) {
                 if (sched.city == (uniqueLocationArray[i].location).split(',', 1)) {
