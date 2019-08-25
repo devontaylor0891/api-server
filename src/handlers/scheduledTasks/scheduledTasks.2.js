@@ -158,7 +158,7 @@ module.exports = {
 
     function getLocationNotifications(uniqueLocationArray, callback) {
 
-      // console.log('get Location Notifs called');
+      console.log('get Location Notifs called');
 
       let distance = 25;
       let earthRadius = 6371;
@@ -173,7 +173,7 @@ module.exports = {
 
       async.eachOfSeries(uniqueLocationArray, function(location, index, innerCallback) {
         // console.log('series index: ', index);
-        // console.log('location working: ', location.location);
+        console.log('location working: ', location.location);
         // calculate the min/max
         // latitude boundaries
         location.maxlat = location.latitude + Math.degrees(distance / earthRadius);
@@ -223,7 +223,7 @@ module.exports = {
         if(err){
             console.error(err);
         } else {
-            // console.log('all files are read.');
+            console.log('all files are read.');
             callback(null, uniqueLocationArray);
         }
       });
@@ -239,7 +239,7 @@ module.exports = {
       async.eachOfSeries(uniqueLocationArray, function(location, index, innerCallback) {
 
         let usersValues = location.userIds.length;
-        // console.log('usersValues: ', location.userIds.slice(0));
+        console.log('usersValues: ', location.userIds.slice(0));
 
         connection.query({
             sql: 'SELECT * FROM users WHERE id IN (' + new Array(usersValues + 1).join('?,').slice(0, -1) + ')',
@@ -251,7 +251,7 @@ module.exports = {
               console.log('error: ', error);
             } else {
               let usersReceived = rows.map(function (row) {
-                // console.log('user recd: ', row);
+                console.log('user recd: ', row.id);
                 return {
                   userId: row.id,
                   firstName: row.first_name,
