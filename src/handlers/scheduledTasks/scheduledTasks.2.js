@@ -9,6 +9,8 @@ module.exports = {
   
   test_function: function(res) {
 
+    console.log('initiating multi sched.');
+
     let uniqueLocationArray;
     let timeZoneOffset,
         startTime,
@@ -23,7 +25,7 @@ module.exports = {
       getUsers,
     ], function(err, result) {
       lambda.multiple_location_notification(result);
-      console.log('results: ', result);
+      console.log('results: ', result[0].id);
     });
     
     // function myFirstFunction(callback) {

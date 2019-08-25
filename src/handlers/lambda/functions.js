@@ -114,6 +114,7 @@ module.exports = {
     },
 
     multiple_location_notification: function (req, res) {
+      console.log('payload received');
         let payload,
             schedIds;
         // req is an array of locations and the accompanying sched and user info
