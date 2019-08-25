@@ -144,7 +144,7 @@ module.exports = {
           if(err){
               console.error(err);
           } else {
-              // console.log('all files are read.');
+              console.log('all files are read.');
               callback(null, uniqueLocationArray);
           }
         }
