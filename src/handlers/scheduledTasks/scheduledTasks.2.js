@@ -259,7 +259,7 @@ module.exports = {
                 }
               });
               uniqueLocationArray[index].userList = usersReceived;
-              // console.log('uniques after users received: ', uniqueLocationArray);
+              console.log('uniques after users received: ', uniqueLocationArray);
               innerCallback(null, null);
             }
           }
