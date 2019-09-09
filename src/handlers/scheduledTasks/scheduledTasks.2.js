@@ -66,7 +66,8 @@ module.exports = {
 
         `SELECT schedules.*, producers.name FROM schedules JOIN producers ON schedules.producer_id_fk_s = producers.producer_id WHERE location_notif_sent = 0 AND order_deadline < (NOW() + INTERVAL 1 WEEK) AND order_deadline > NOW();`,
         function (error, results) {
-          
+          console.log('current time (plus 6 hrs): ', new Date().toISOString());
+
           console.log('here');
           // if (error) {
           //   res.status(500).send(error);
