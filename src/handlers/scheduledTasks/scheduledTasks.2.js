@@ -263,8 +263,8 @@ module.exports = {
               console.log('uniques after users received: ', uniqueLocationArray[index].schedules);
               // sort the scheds by start date
               uniqueLocationArray[index].schedules.sort(function(a,b){
-                var c = new Date(a.start_date_time);
-                var d = new Date(b.start_date_time);
+                var c = new Date(a.startDateTime);
+                var d = new Date(b.startDateTime);
                 return c-d;
               });
               console.log('uniques after sort: ', uniqueLocationArray[index].schedules);
