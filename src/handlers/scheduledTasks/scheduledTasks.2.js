@@ -139,13 +139,6 @@ module.exports = {
             });
 
             console.log('uniques: ', uniqueLocationArray);
-            // sort the scheds by start date
-            uniqueLocationArray.schedules.sort(function(a,b){
-              var c = new Date(a.date);
-              var d = new Date(b.date);
-              return c-d;
-            });
-            console.log('uniques after sort: ', uniqueLocationArray);
             callback(null, uniqueLocationArray);
         },
         function(err, uniqueLocationArray){
@@ -267,7 +260,14 @@ module.exports = {
                 }
               });
               uniqueLocationArray[index].userList = usersReceived;
-              console.log('uniques after users received: ', uniqueLocationArray);
+              console.log('uniques after users received: ', uniqueLocationArray[index].schedules);
+              // sort the scheds by start date
+              uniqueLocationArray[index].schedules.sort(function(a,b){
+                var c = new Date(a.start_date_time);
+                var d = new Date(b.start_date_time);
+                return c-d;
+              });
+              console.log('uniques after sort: ', uniqueLocationArray[index].schedules);
               innerCallback(null, null);
             }
           }
