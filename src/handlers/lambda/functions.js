@@ -121,9 +121,9 @@ module.exports = {
         // loop over each location and send separately to lambda
         req.forEach(function(location, index) {
             payload = location;
-            console.log('location.schedules: ', location.schedules);
+            // console.log('location.schedules: ', location.schedules);
             schedIds = location.schedules.map(sched => sched.id); // create an array of sched ids
-            console.log('schedIds: ', schedIds);
+            // console.log('schedIds: ', schedIds);
             // call lambda function
             var lambda = new AWS.Lambda();
             var params = {
