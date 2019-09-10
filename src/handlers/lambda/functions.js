@@ -121,6 +121,12 @@ module.exports = {
         // loop over each location and send separately to lambda
         req.forEach(function(location, index) {
             payload = location;
+            // sort the scheds by start date
+            payload.schedules.sort(function(a,b){
+              var c = new Date(a.date);
+              var d = new Date(b.date);
+              return c-d;
+            });
             console.log('location.schedules: ', location.schedules);
             schedIds = location.schedules.map(sched => sched.id); // create an array of sched ids
             console.log('schedIds: ', schedIds);
