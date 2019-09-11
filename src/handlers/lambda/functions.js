@@ -295,6 +295,7 @@ module.exports = {
                 // When the lambda fn has returned the payload it will call the "task callback"
                 // This way async knows which items in the collection have finished
                 // first create an array of sched Ids
+                console.log('location for first async: ', location);
                 schedIds = location.schedules.map(sched => sched.id);
                 // set lambda params
                 var lambda = new AWS.Lambda();
