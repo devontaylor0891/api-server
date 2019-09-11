@@ -283,11 +283,11 @@ module.exports = {
     },
 
     multiple_location_notification: function (req, res) {
-
         // create the new array from the req
         // call async on each item in the array
         let locations = req;
-        let schedIds;
+        let schedIds = [];
+        let tempSchedIds;
 
         async.forEach(
             locations,
@@ -296,7 +296,10 @@ module.exports = {
                 // This way async knows which items in the collection have finished
                 // first create an array of sched Ids
                 console.log('location for first async: ', location);
-                schedIds = location.schedules.map(sched => sched.id);
+                tempSchedIds = location.schedules.map(sched => sched.id);
+                schedIds = schedIds.concat(tempSchedIds);
+                console.log('tempscheds: ', tempSchedIds);
+                console.log('concat schedIds: ', schedIds);
                 // set lambda params
                 var lambda = new AWS.Lambda();
                 var params = {

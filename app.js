@@ -13,7 +13,7 @@ var scheduledTask = require('./src/handlers/scheduledTasks/scheduledTasks.2');
 var rule = new schedule.RecurrenceRule();
 // rule.second = [0,10,15,30,45];
 // rule.hour = [0,12];
-rule.minute = [40];
+rule.minute = [3];
 // rule.second = [22];
 
 console.log('rule: ', rule);
