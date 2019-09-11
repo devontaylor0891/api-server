@@ -312,36 +312,37 @@ module.exports = {
                         console.log(err, err.stack);
                     } else {
                         console.log('payload: ', data); // successful response
-                        // for each sched in the location
-                        async.forEach(
-                            schedIds, 
-                            function(schedId, callback) { //The second argument, `callback`, is the "task callback" for a specific `messageId`
-                                // When the db has updated the item it will call the "task callback"
-                                // This way async knows which items in the collection have finished
-                                // update the schedule.location_notif_sent to 1 (true)
-                                console.log('schedId: ', schedId);
-                                connection.query(
-                                    `SET SQL_SAFE_UPDATES=0;
-                                    UPDATE schedules 
-                                    SET location_notif_sent = 1 
-                                    WHERE schedule_id = ?;
-                                    SET SQL_SAFE_UPDATES=1;`,
-                                    schedId,
-                                    callback
-                                )
-                            },
-                            function(err) { // 'final' callback - either exits everything when an error occurs, or exits w/o erro after all tasks are complete
-                                if (err) return err;
-                                // Tell the user about the great success
-                                console.log('all scheds changed for location: ', location.location);
-                            }
-                        );
-                        
+                        callback;
                     }    
                 });
             },
             function(err) { // 'final' callback - either exits everything when an error occurs, or exits w/o erro after all tasks are complete
-                if (err) return err;
+              if (err) return err;
+              // for each sched in the location
+              async.forEach(
+                schedIds, 
+                function(schedId, callback) { //The second argument, `callback`, is the "task callback" for a specific `messageId`
+                    // When the db has updated the item it will call the "task callback"
+                    // This way async knows which items in the collection have finished
+                    // update the schedule.location_notif_sent to 1 (true)
+                    console.log('schedId: ', schedId);
+                    connection.query(
+                        `SET SQL_SAFE_UPDATES=0;
+                        UPDATE schedules 
+                        SET location_notif_sent = 1 
+                        WHERE schedule_id = ?;
+                        SET SQL_SAFE_UPDATES=1;`,
+                        schedId,
+                        callback
+                    )
+                },
+                function(err) { // 'final' callback - either exits everything when an error occurs, or exits w/o erro after all tasks are complete
+                    if (err) return err;
+                    // Tell the user about the great success
+                    console.log('all scheds changed');
+                    callback;
+                }
+              );
                 // Tell the user about the great success
                 console.log('SUCCESS! all scheds changed for multiple locations');
             }
