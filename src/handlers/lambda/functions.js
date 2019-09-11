@@ -318,11 +318,6 @@ module.exports = {
             },
             function(err) { // 'final' callback - either exits everything when an error occurs, or exits w/o erro after all tasks are complete
               if (err) return err;
-              // for each sched in the location
-              console.log('this callback reached');
-             
-                // Tell the user about the great success
-                console.log('SUCCESS! all scheds changed for multiple locations');
             }
         );
 
@@ -347,7 +342,6 @@ module.exports = {
               if (err) return err;
               // Tell the user about the great success
               console.log('all scheds changed');
-              callback;
           }
         );
 
