@@ -295,7 +295,7 @@ module.exports = {
                 // When the lambda fn has returned the payload it will call the "task callback"
                 // This way async knows which items in the collection have finished
                 // first create an array of sched Ids
-                console.log('location for first async: ', location);
+                console.log('location for first async: ', location.location);
                 tempSchedIds = location.schedules.map(sched => sched.id);
                 schedIds = schedIds.concat(tempSchedIds);
                 console.log('tempscheds: ', tempSchedIds);
@@ -319,6 +319,7 @@ module.exports = {
             function(err) { // 'final' callback - either exits everything when an error occurs, or exits w/o erro after all tasks are complete
               if (err) return err;
               // for each sched in the location
+              console.log('this callback reached');
               async.forEach(
                 schedIds, 
                 function(schedId, callback) { //The second argument, `callback`, is the "task callback" for a specific `messageId`
