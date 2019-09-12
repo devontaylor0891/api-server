@@ -260,7 +260,14 @@ module.exports = {
                 }
               });
               uniqueLocationArray[index].userList = usersReceived;
-              console.log('uniques after users received: ', uniqueLocationArray);
+              console.log('uniques after users received: ', uniqueLocationArray[index].schedules);
+              // sort the scheds by start date
+              uniqueLocationArray[index].schedules.sort(function(a,b){
+                var c = new Date(a.startDateTime);
+                var d = new Date(b.startDateTime);
+                return c-d;
+              });
+              console.log('uniques after sort: ', uniqueLocationArray[index].schedules);
               innerCallback(null, null);
             }
           }
