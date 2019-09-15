@@ -8,11 +8,11 @@ var logger = require('morgan');
 var hike = require('./routes/hike');
 var routes = require('./routes');
 var schedule = require('node-schedule');
-var scheduledTask = require('./src/handlers/scheduledTasks/scheduledTasks.2');
+var scheduledTask = require('./src/handlers/scheduledTasks/scheduledTasks');
 
 var rule = new schedule.RecurrenceRule();
 // rule.second = [0,10,15,30,45];
-rule.hour = [0,12];
+rule.hour = [1,13];
 rule.minute = [0];
 // rule.second = [22];
 
