@@ -68,7 +68,7 @@ module.exports = {
         function (error, results) {
           console.log('current time (plus 6 hrs): ', new Date().toISOString());
 
-          console.log('here');
+          // console.log('here');
           // if (error) {
           //   res.status(500).send(error);
           // } else {
@@ -138,7 +138,7 @@ module.exports = {
               }
             });
 
-            console.log('uniques: ', uniqueLocationArray);
+            // console.log('uniques: ', uniqueLocationArray);
             callback(null, uniqueLocationArray);
         },
         function(err, uniqueLocationArray){
@@ -240,7 +240,7 @@ module.exports = {
       async.eachOfSeries(uniqueLocationArray, function(location, index, innerCallback) {
 
         let usersValues = location.userIds.length;
-        console.log('usersValues: ', location.userIds.slice(0));
+        // console.log('usersValues: ', location.userIds.slice(0));
 
         connection.query({
             sql: 'SELECT * FROM users WHERE id IN (' + new Array(usersValues + 1).join('?,').slice(0, -1) + ')',
@@ -252,7 +252,7 @@ module.exports = {
               console.log('error: ', error);
             } else {
               let usersReceived = rows.map(function (row) {
-                console.log('user recd: ', row.id);
+                // console.log('user recd: ', row.id);
                 return {
                   userId: row.id,
                   firstName: row.first_name,
@@ -260,14 +260,14 @@ module.exports = {
                 }
               });
               uniqueLocationArray[index].userList = usersReceived;
-              console.log('uniques after users received: ', uniqueLocationArray[index].schedules);
+              // console.log('uniques after users received: ', uniqueLocationArray[index].schedules);
               // sort the scheds by start date
               uniqueLocationArray[index].schedules.sort(function(a,b){
                 var c = new Date(a.startDateTime);
                 var d = new Date(b.startDateTime);
                 return c-d;
               });
-              console.log('uniques after sort: ', uniqueLocationArray[index].schedules);
+              // console.log('uniques after sort: ', uniqueLocationArray[index].schedules);
               innerCallback(null, null);
             }
           }
