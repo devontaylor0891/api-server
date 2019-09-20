@@ -370,7 +370,7 @@ post_order: function (req, res) {
       `INSERT INTO orders SET ?;`,
       orderPostQuery,
       function (error, result) {
-        console.log('result of post order: ', result)
+        // console.log('result of post order: ', result)
         newOrderId = result.insertId;
         callback(null, newOrderId);
       }
@@ -378,18 +378,19 @@ post_order: function (req, res) {
   };
 
   function buildProductQtyArray(insertId, callback) {
-    console.log('insertId: ', insertId);
+    // console.log('insertId: ', insertId);
     for (let i = 0; i < req.body.orderDetails.productQuantities.length; i++) {
-      console.log('index: ', i);
+      console.log('prod qty array index: ', i);
       productQuantitiesPostQuery = {
         order_id_fk_pok: insertId,
         product_id_fk_pok: req.body.orderDetails.productQuantities[i].productId,
         quantity: req.body.orderDetails.productQuantities[i].orderQuantity,
         order_value: req.body.orderDetails.productQuantities[i].orderValue
       };
-      console.log('postquery: ', productQuantitiesPostQuery);
+      // console.log('postquery: ', productQuantitiesPostQuery);
       productQuantitiesArray.push(productQuantitiesPostQuery)
       if (i === (req.body.orderDetails.productQuantities.length - 1)) {
+        console.log('all prod qty added: ', productQuantitiesArray);
         callback(null, productQuantitiesArray);
       };
     };
@@ -399,12 +400,12 @@ post_order: function (req, res) {
 
     async.eachOfSeries(productQuantitiesArray, function(productQty, index, innerCallback) {
 
-      console.log('productQtyQuery: ', productQty);
+      // console.log('productQtyQuery: ', productQty);
       connection.query(
         `INSERT INTO product_order_quantities SET ?;`,
         [productQty],
         function (err, result) {
-          console.log('productQty updated: ', result);
+          // console.log('productQty updated: ', result);
           innerCallback(null, null);
         } 
       )
@@ -424,7 +425,7 @@ post_order: function (req, res) {
 
     async.eachOfSeries(productListArray, function(product, index, innerCallback) {
 
-      console.log('product req: ', product[0]);
+      // console.log('product req: ', product[0]);
 
       productUpdatePostQuery = {
         user_id_fk_products: req.body.producerId,
@@ -446,12 +447,12 @@ post_order: function (req, res) {
         schedule_list: null,
         producer_id_fk_products: product[0].producerId
       };
-      console.log('productQuery: ', productUpdatePostQuery);
+      // console.log('productQuery: ', productUpdatePostQuery);
       connection.query(
         `UPDATE products SET ? WHERE product_id = ?;`,
         [productUpdatePostQuery, product[0].id],
         function (err, result) {
-          console.log('product updated: ', result);
+          // console.log('product updated: ', result);
           innerCallback(null, null);
         } 
       )
@@ -472,7 +473,7 @@ post_order: function (req, res) {
     postProductQuantities,
     putProducts
   ], function(err, result) {
-    console.log('results: ', result);
+    // console.log('results: ', result);
     lambda.new_order_notification(req, res);
     return res.status(200).send(result);
   });
