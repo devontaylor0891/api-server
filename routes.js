@@ -40,6 +40,7 @@ router.route('/productsDelete/:id').put(products.delete_products_id);
 
 router.route('/schedules').get(schedules.get_schedules); // ADMIN DASH ONLY
 router.route('/schedules').post(schedules.post_schedules);
+router.route('/multiSchedules').post(schedules.post_multi_schedules);
 router.route('/schedules/:id').put(schedules.put_schedules_id);
 router.route('/schedules/:id').delete(schedules.delete_schedules_id);
 

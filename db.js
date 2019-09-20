@@ -23,6 +23,8 @@ var connection = mysql.createConnection({
   }
 });
 
+console.log('got here');
+
 connection.connect(function(err) {
   if (err) {
     console.error('Database connection failed: ' + err.stack);
