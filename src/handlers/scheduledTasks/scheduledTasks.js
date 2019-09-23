@@ -64,7 +64,7 @@ module.exports = {
     function getScheds(callback) {
       connection.query(
 
-        `SELECT schedules.*, producers.name FROM schedules JOIN producers ON schedules.producer_id_fk_s = producers.producer_id WHERE location_notif_sent = 0 AND order_deadline < (NOW() + INTERVAL 4 DAY) AND order_deadline > NOW();`,
+        `SELECT schedules.*, producers.name, producers.user_id FROM schedules JOIN producers ON schedules.producer_id_fk_s = producers.producer_id WHERE location_notif_sent = 0 AND order_deadline < (NOW() + INTERVAL 4 DAY) AND order_deadline > NOW();`,
         function (error, results) {
           console.log('current time (plus 6 hrs): ', new Date().toISOString());
 
@@ -76,7 +76,7 @@ module.exports = {
               {
                 return {
                   id: row.schedule_id,
-                  producerId: row.producer_id_fk_s,
+                  producerId: row.user_id,
                   producerName: row.name,
                   type: row.schedule_type,
                   description: row.description,
