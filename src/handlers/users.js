@@ -88,8 +88,8 @@ module.exports = {
         EMAIL: req.body.email
       }
     })
-    .then(res => {
-      console.log(res)
+    .then(response => {
+      console.log(response)
     
       // then update user in db
       console.log('put called: ', req.body);
