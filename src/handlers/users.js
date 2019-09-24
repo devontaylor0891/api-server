@@ -4,6 +4,7 @@ var connection = require('../../db');
 var UserById = require('./users/{id}');
 var UserByIdOrders = require('./users/{id}/orders');
 let lambda = require('./lambda/functions');
+let Mailchimp = require('mailchimp-api-v3');
 
 module.exports = {
   get_users: function(req, res) {
@@ -75,29 +76,72 @@ module.exports = {
   },
 
   put_users_id: function(req, res) {
-    console.log('put called: ', req.body);
-    let postQuery = {
-      first_name: `${req.body.firstName}`,
-      email: `${req.body.email}`,
-      role: `${req.body.role}`
-    };
-    let userId = req.params.id;
-    connection.query(
-      `UPDATE users 
-      SET ? 
-      WHERE id = ?;`,
-      [postQuery, userId],
-      function (err, result) {
-        if (err) {
-          console.log('error in update user:', err);
-          res.status(500).send('error:', err);
-        } else {
-          console.log('user updated: ', result);
-          console.log('postQuery: ', postQuery);
-          return res.status(200).send(result);
-        }
-      } 
-    )
+
+    // add user to mailchimp
+    const mailchimp = new Mailchimp(process.env.MAILCHIMP_API);
+
+    mailchimp.post(`/lists/${process.env.MAILCHIMP_LIST_ID}/members`, {
+      email_address: req.body.email,
+      status: 'subscribed',
+      merge_fields: {
+        FNAME: req.body.firstName,
+        EMAIL: req.body.email
+      }
+    })
+    .then(res => {
+      console.log(res)
+    
+      // then update user in db
+      console.log('put called: ', req.body);
+      let postQuery = {
+        first_name: `${req.body.firstName}`,
+        email: `${req.body.email}`,
+        role: `${req.body.role}`
+      };
+      let userId = req.params.id;
+      connection.query(
+        `UPDATE users 
+        SET ? 
+        WHERE id = ?;`,
+        [postQuery, userId],
+        function (err, result) {
+          if (err) {
+            console.log('error in update user:', err);
+            res.status(500).send('error:', err);
+          } else {
+            console.log('user updated: ', result);
+            console.log('postQuery: ', postQuery);
+            return res.status(200).send(result);
+          }
+        } 
+      )
+    
+    })
+    .catch(err => console.log(err));
+
+    // console.log('put called: ', req.body);
+    // let postQuery = {
+    //   first_name: `${req.body.firstName}`,
+    //   email: `${req.body.email}`,
+    //   role: `${req.body.role}`
+    // };
+    // let userId = req.params.id;
+    // connection.query(
+    //   `UPDATE users 
+    //   SET ? 
+    //   WHERE id = ?;`,
+    //   [postQuery, userId],
+    //   function (err, result) {
+    //     if (err) {
+    //       console.log('error in update user:', err);
+    //       res.status(500).send('error:', err);
+    //     } else {
+    //       console.log('user updated: ', result);
+    //       console.log('postQuery: ', postQuery);
+    //       return res.status(200).send(result);
+    //     }
+    //   } 
+    // )
   },
 
   get_users_id_orders: function(req, res) {
