@@ -238,11 +238,12 @@ module.exports = {
       console.log('getusers called', uniqueLocationArray);
 
       async.eachOfSeries(uniqueLocationArray, function(location, index, innerCallback) {
+      
 
         let usersValues = location.userIds.length;
         console.log('usersValues: ', location.userIds.slice(0));
 
-        if (location.usersIds === undefined || location.usersIds.length == 0) {
+        if (usersValues === undefined || usersValues == 0) {
           console.log('no users');
           innerCallback(null, null);
         } else {
