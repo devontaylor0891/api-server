@@ -242,7 +242,8 @@ module.exports = {
         let usersValues = location.userIds.length;
         console.log('usersValues: ', location.userIds.slice(0));
 
-        if (location.usersIds.length < 1) {
+        if (location && (location.usersIds.length < 1)) {
+          console.log('no users');
           innerCallback(null, null);
         } else {
 
