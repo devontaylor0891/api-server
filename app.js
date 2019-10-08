@@ -14,7 +14,7 @@ var rule = new schedule.RecurrenceRule();
 // rule.second = [0,10,15,30,45];
 // rule.hour = [1,13];
 // rule.minute = [1];
-rule.minute = [43];
+rule.minute = [50];
 // rule.second = [22];
 
 console.log('rule: ', rule);
