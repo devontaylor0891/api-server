@@ -174,7 +174,7 @@ module.exports = {
 
       async.eachOfSeries(uniqueLocationArray, function(location, index, innerCallback) {
         // console.log('series index: ', index);
-        console.log('location working: ', location.location);
+        console.log('location working: ', location);
         // calculate the min/max
         // latitude boundaries
         location.maxlat = location.latitude + Math.degrees(distance / earthRadius);
