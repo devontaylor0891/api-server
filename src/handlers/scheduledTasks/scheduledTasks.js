@@ -242,36 +242,41 @@ module.exports = {
         let usersValues = location.userIds.length;
         console.log('usersValues: ', location.userIds.slice(0));
 
-        connection.query({
-            sql: 'SELECT * FROM users WHERE id IN (' + new Array(usersValues + 1).join('?,').slice(0, -1) + ')',
-            values: location.userIds.slice(0),
-            nestedTables: true
-          },
-          function (error, rows) {
-            if (error) {
-              console.log('error: ', error);
-            } else {
-              let usersReceived = rows.map(function (row) {
-                // console.log('user recd: ', row.id);
-                return {
-                  userId: row.id,
-                  firstName: row.first_name,
-                  email: row.email
-                }
-              });
-              uniqueLocationArray[index].userList = usersReceived;
-              // console.log('uniques after users received: ', uniqueLocationArray[index].schedules);
-              // sort the scheds by start date
-              uniqueLocationArray[index].schedules.sort(function(a,b){
-                var c = new Date(a.startDateTime);
-                var d = new Date(b.startDateTime);
-                return c-d;
-              });
-              // console.log('uniques after sort: ', uniqueLocationArray[index].schedules);
-              innerCallback(null, null);
+        if (location.usersIds.length < 1) {
+          innerCallback(null, null);
+        } else {
+
+          connection.query({
+              sql: 'SELECT * FROM users WHERE id IN (' + new Array(usersValues + 1).join('?,').slice(0, -1) + ')',
+              values: location.userIds.slice(0),
+              nestedTables: true
+            },
+            function (error, rows) {
+              if (error) {
+                console.log('error: ', error);
+              } else {
+                let usersReceived = rows.map(function (row) {
+                  // console.log('user recd: ', row.id);
+                  return {
+                    userId: row.id,
+                    firstName: row.first_name,
+                    email: row.email
+                  }
+                });
+                uniqueLocationArray[index].userList = usersReceived;
+                // console.log('uniques after users received: ', uniqueLocationArray[index].schedules);
+                // sort the scheds by start date
+                uniqueLocationArray[index].schedules.sort(function(a,b){
+                  var c = new Date(a.startDateTime);
+                  var d = new Date(b.startDateTime);
+                  return c-d;
+                });
+                // console.log('uniques after sort: ', uniqueLocationArray[index].schedules);
+                innerCallback(null, null);
+              }
             }
-          }
-        )
+          )
+        }
       }, function(err, results){
         if(err){
           console.error(err);
