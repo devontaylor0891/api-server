@@ -224,7 +224,7 @@ module.exports = {
         if(err){
             console.error(err);
         } else {
-            console.log('all files are read.');
+            console.log('all location data read.');
             callback(null, uniqueLocationArray);
         }
       });
@@ -235,12 +235,12 @@ module.exports = {
     // set up to get users
     function getUsers(uniqueLocationArray, callback) {
 
-      // console.log('getusers called', uniqueLocationArray);
+      console.log('getusers called', uniqueLocationArray);
 
       async.eachOfSeries(uniqueLocationArray, function(location, index, innerCallback) {
 
         let usersValues = location.userIds.length;
-        // console.log('usersValues: ', location.userIds.slice(0));
+        console.log('usersValues: ', location.userIds.slice(0));
 
         connection.query({
             sql: 'SELECT * FROM users WHERE id IN (' + new Array(usersValues + 1).join('?,').slice(0, -1) + ')',
@@ -276,7 +276,7 @@ module.exports = {
         if(err){
           console.error(err);
         } else {
-          // console.log('all files are read.');
+          console.log('all users retrieved.');
           callback(null, uniqueLocationArray);
         }
       })
