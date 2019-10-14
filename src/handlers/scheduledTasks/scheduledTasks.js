@@ -82,6 +82,7 @@ module.exports = {
                   description: row.description,
                   startDateTime: row.start_date_time,
                   endDateTime: row.end_date_time,
+                  readableDate: row.readable_date,
                   hasFee: row.has_fee,
                   hasWaiver: row.has_waiver,
                   latitude: row.latitude,
