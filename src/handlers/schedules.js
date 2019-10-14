@@ -62,6 +62,7 @@ module.exports = {
       description: `${req.body.description}`,
       start_date_time: `${req.body.startDateTime}`,
       end_date_time: `${req.body.endDateTime}`,
+      readable_date: `${req.body.readableDate}`,
       has_fee: `${req.body.hasFee}`,
       has_waiver: `${req.body.hasWaiver}`,
       latitude: `${req.body.latitude}`,
