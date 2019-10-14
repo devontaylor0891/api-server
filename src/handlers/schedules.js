@@ -232,7 +232,7 @@ module.exports = {
         description: `${sched.description}`,
         start_date_time: `${sched.startDateTime}`,
         end_date_time: `${sched.endDateTime}`,
-        readable_date: `${req.body.readableDate}`,
+        readable_date: `${sched.readableDate}`,
         has_fee: `${sched.hasFee}`,
         has_waiver: `${sched.hasWaiver}`,
         latitude: `${sched.latitude}`,
