@@ -104,6 +104,7 @@ module.exports = {
               description: row.schedules.description,
               startDateTime: row.schedules.start_date_time,
               endDateTime: row.schedules.end_date_time,
+              readableDate: row.readable_date,
               hasFee: row.schedules.has_fee,
               hasWaiver: row.schedules.has_waiver,
               latitude: row.schedules.latitude,
