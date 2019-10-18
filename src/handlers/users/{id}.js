@@ -150,6 +150,7 @@ module.exports = {
             orderDetails: {
               productQuantities: [],
               consumerComment: row.orders.consumer_comment,
+              consumerPhone: row.orders.consumer_phone,
               deliveryAddress: row.orders.delivery_address,
               deliveryFee: row.orders.delivery_fee,
               createdDate: row.orders.created_date,
