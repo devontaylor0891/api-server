@@ -12,6 +12,7 @@ module.exports = {
             schedule_id_fk_o: `${req.body.chosenSchedule.id}`,
             producer_comment: `${req.body.orderDetails.producerComment}`,
             consumer_comment: `${req.body.orderDetails.consumerComment}`,
+            consumer_phone: `${req.body.orderDetails.consumerPhone}`,
             delivery_address: `${req.body.orderDetails.deliveryAddress}`,
             delivery_fee: `${req.body.orderDetails.deliveryFee}`,
             created_date: `${req.body.orderDetails.createdDate}`,
