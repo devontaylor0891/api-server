@@ -22,6 +22,7 @@ module.exports = {
         };
         if (req.body.orderDetails.producerComment === null) {
           postQuery.producer_comment = null;
+          postQuery.incomplete_reason = null;
         };
         if (req.body.orderDetails.incomplete_reason === null) {
           postQuery.incomplete_reason = null;
