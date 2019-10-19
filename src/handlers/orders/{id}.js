@@ -24,7 +24,7 @@ module.exports = {
           postQuery.producer_comment = null;
           postQuery.incomplete_reason = null;
         };
-        if (req.body.orderDetails.incomplete_reason === null) {
+        if (req.body.orderDetails.incompleteReason === null) {
           postQuery.incomplete_reason = null;
         };
         console.log('postQuery: ', postQuery);
