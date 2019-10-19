@@ -20,6 +20,12 @@ module.exports = {
             order_value: `${req.body.orderDetails.orderValue}`,
             incomplete_reason: `${req.body.orderDetails.incompleteReason}`
         };
+        if (req.body.orderDetails.producerComment === null) {
+          postQuery.producer_comment = null;
+        };
+        if (req.body.orderDetails.incomplete_reason === null) {
+          postQuery.incomplete_reason = null;
+        };
         console.log('postQuery: ', postQuery);
         let orderId = req.params.id;
             connection.query(
