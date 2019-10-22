@@ -12,12 +12,20 @@ module.exports = {
             schedule_id_fk_o: `${req.body.chosenSchedule.id}`,
             producer_comment: `${req.body.orderDetails.producerComment}`,
             consumer_comment: `${req.body.orderDetails.consumerComment}`,
+            consumer_phone: `${req.body.orderDetails.consumerPhone}`,
             delivery_address: `${req.body.orderDetails.deliveryAddress}`,
             delivery_fee: `${req.body.orderDetails.deliveryFee}`,
             created_date: `${req.body.orderDetails.createdDate}`,
             order_status: `${req.body.orderDetails.orderStatus}`,
             order_value: `${req.body.orderDetails.orderValue}`,
             incomplete_reason: `${req.body.orderDetails.incompleteReason}`
+        };
+        if (req.body.orderDetails.producerComment === null) {
+          postQuery.producer_comment = null;
+          postQuery.incomplete_reason = null;
+        };
+        if (req.body.orderDetails.incompleteReason === null) {
+          postQuery.incomplete_reason = null;
         };
         console.log('postQuery: ', postQuery);
         let orderId = req.params.id;

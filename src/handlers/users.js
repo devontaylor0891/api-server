@@ -117,7 +117,35 @@ module.exports = {
       )
     
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err)
+      console.log(response)
+      
+      // then update user in db
+      console.log('put called: ', req.body);
+      let postQuery = {
+        first_name: `${req.body.firstName}`,
+        email: `${req.body.email}`,
+        role: `${req.body.role}`
+      };
+      let userId = req.params.id;
+      connection.query(
+        `UPDATE users 
+        SET ? 
+        WHERE id = ?;`,
+        [postQuery, userId],
+        function (err, result) {
+          if (err) {
+            console.log('error in update user:', err);
+            res.status(500).send('error:', err);
+          } else {
+            console.log('user updated: ', result);
+            console.log('postQuery: ', postQuery);
+            return res.status(200).send(result);
+          }
+        } 
+      )
+    });
 
     // console.log('put called: ', req.body);
     // let postQuery = {
