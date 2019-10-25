@@ -119,7 +119,7 @@ module.exports = {
     })
     .catch(err => {
       console.log(err)
-      console.log(response)
+      // console.log(response)
       
       // then update user in db
       console.log('put called: ', req.body);
