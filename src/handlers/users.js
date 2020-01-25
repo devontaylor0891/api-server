@@ -89,7 +89,7 @@ module.exports = {
       }
     })
     .then(response => {
-      console.log(response)
+      console.log("Mailchimp response here");
     
       // then update user in db
       console.log('put called: ', req.body);
