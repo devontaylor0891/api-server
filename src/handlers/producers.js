@@ -133,6 +133,7 @@ module.exports = {
   },
 
   post_producers: function (req, res) {
+    console.log('new Producer req: ', req);
     let postQuery = {
       user_id: `${req.body.id}`,
       name: `${req.body.name}`,
