@@ -4,7 +4,7 @@ var connection = require('../../../db');
 module.exports = {
 
   resolve_custom_url: function (req, res) {
-    console.log('resolve customurl: ', req);
+    // console.log('resolve customurl: ', req);
     var customString = req.params.urlString.toLowerCase();
     connection.query(
       `SELECT * FROM custom_urls
@@ -13,7 +13,7 @@ module.exports = {
           res.send('error:', error);
         } else {
           console.log('req.params.id: ', customString);
-          console.log('results: ', results);
+          // console.log('results: ', results);
           let id = results.map(function(row) {
             return row.user_id_fk
           })
@@ -28,7 +28,7 @@ module.exports = {
       user_id_fk: `${req.body.userId}`,
       custom_url: `${req.body.customUrl}`
     };
-    console.log('post custom url postQuery: ', postQuery);
+    // console.log('post custom url postQuery: ', postQuery);
     connection.query(
       'INSERT INTO custom_urls SET ?',
       postQuery,
@@ -43,7 +43,7 @@ module.exports = {
   },
 
   get_custom_url: function (req, res) {
-    console.log('custom url req: ', req);
+    // console.log('custom url req: ', req);
     let id = req.params.id;
     connection.query(
       `SELECT * FROM custom_urls
@@ -52,7 +52,7 @@ module.exports = {
           return res.status(500).send(error);
         } else {
           console.log('req.params.id: ', id);
-          console.log('results: ', results);
+          // console.log('results: ', results);
           let customUrl = results.map(function(row) {
             return {
               id: row.custom_url_id,
@@ -71,7 +71,7 @@ module.exports = {
       user_id_fk: `${req.body.userId}`,
       custom_url: `${req.body.customUrl}`
     };
-    console.log('put custom url postQuery: ', postQuery);
+    // console.log('put custom url postQuery: ', postQuery);
     let id = req.params.id;
     connection.query(
       `SET SQL_SAFE_UPDATES=0;

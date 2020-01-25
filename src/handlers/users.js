@@ -92,7 +92,7 @@ module.exports = {
       console.log("Mailchimp response here");
     
       // then update user in db
-      console.log('put called: ', req.body);
+      console.log('put user called: ', req.body);
       let postQuery = {
         first_name: `${req.body.firstName}`,
         email: `${req.body.email}`,
@@ -119,10 +119,10 @@ module.exports = {
     })
     .catch(err => {
       console.log(err)
-      // console.log(response)
+      console.log('Mailchimp errored out');
       
       // then update user in db
-      console.log('put called: ', req.body);
+      console.log('put user called: ', req.body);
       let postQuery = {
         first_name: `${req.body.firstName}`,
         email: `${req.body.email}`,
@@ -139,8 +139,8 @@ module.exports = {
             console.log('error in update user:', err);
             res.status(500).send('error:', err);
           } else {
-            console.log('user updated: ', result);
-            console.log('postQuery: ', postQuery);
+            console.log('user updated: ');
+            // console.log('postQuery: ', postQuery);
             return res.status(200).send(result);
           }
         } 
