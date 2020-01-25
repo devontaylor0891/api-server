@@ -4,6 +4,7 @@ var connection = require('../../../db');
 module.exports = {
 
   resolve_custom_url: function (req, res) {
+    console.log('resolve customurl: ', req);
     var customString = req.params.urlString.toLowerCase();
     connection.query(
       `SELECT * FROM custom_urls
@@ -27,6 +28,7 @@ module.exports = {
       user_id_fk: `${req.body.userId}`,
       custom_url: `${req.body.customUrl}`
     };
+    console.log('post custom url postQuery: ', postQuery);
     connection.query(
       'INSERT INTO custom_urls SET ?',
       postQuery,
@@ -69,6 +71,7 @@ module.exports = {
       user_id_fk: `${req.body.userId}`,
       custom_url: `${req.body.customUrl}`
     };
+    console.log('put custom url postQuery: ', postQuery);
     let id = req.params.id;
     connection.query(
       `SET SQL_SAFE_UPDATES=0;
