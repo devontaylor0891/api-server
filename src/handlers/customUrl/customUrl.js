@@ -15,7 +15,12 @@ module.exports = {
           console.log('req.params.id: ', customString);
           // console.log('results: ', results);
           let id = results.map(function(row) {
-            return row.user_id_fk
+            // return row.user_id_fk
+            return {
+              id: row.custom_url_id,
+              userId: row.user_id_fk,
+              customUrl: row.custom_url
+            }
           })
           return res.status(200).send(id);
         }
