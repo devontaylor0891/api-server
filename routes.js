@@ -1,5 +1,6 @@
 var users = require('./src/handlers/users');
 var producers = require('./src/handlers/producers');
+var markets = require('./src/handlers/markets');
 var products = require('./src/handlers/products');
 var schedules = require('./src/handlers/schedules');
 var search = require('./src/handlers/search');
@@ -31,6 +32,8 @@ router.route('/producersSchedules/:id').get(producers.get_producer_id_schedules)
 router.route('/producersFutureSchedules/:id').get(producers.get_producer_id_future_schedules);
 router.route('/producersOrders/:id').get(producers.get_producer_id_orders);
 router.route('/producersDelete/:id').put(producers.delete_producers_id);
+
+router.route('/markets').post(markets.post_market);
 
 router.route('/products').get(products.get_products); // ADMIN DASH ONLY
 router.route('/products').post(products.post_products);
