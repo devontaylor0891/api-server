@@ -32,7 +32,8 @@ module.exports = {
   post_custom_url: function (req, res) {
     let postQuery = {
       user_id_fk: `${req.body.userId}`,
-      custom_url: `${req.body.customUrl}`
+      custom_url: `${req.body.customUrl}`,
+      user_type: `${req.body.userType}`
     };
     // console.log('post custom url postQuery: ', postQuery);
     connection.query(
@@ -63,7 +64,8 @@ module.exports = {
             return {
               id: row.custom_url_id,
               userId: row.user_id_fk,
-              customUrl: row.custom_url
+              customUrl: row.custom_url,
+              userType: row.user_type
             }
           })
           return res.status(200).send(customUrl);
@@ -75,7 +77,8 @@ module.exports = {
   put_custom_url: function (req, res) {
     let postQuery = {
       user_id_fk: `${req.body.userId}`,
-      custom_url: `${req.body.customUrl}`
+      custom_url: `${req.body.customUrl}`,
+      user_type: `${req.body.userType}`
     };
     // console.log('put custom url postQuery: ', postQuery);
     let id = req.params.id;
