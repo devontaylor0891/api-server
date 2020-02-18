@@ -19,7 +19,8 @@ module.exports = {
             return {
               id: row.custom_url_id,
               userId: row.user_id_fk,
-              customUrl: row.custom_url
+              customUrl: row.custom_url,
+              userType: row.user_type
             }
           })
           return res.status(200).send(id);
