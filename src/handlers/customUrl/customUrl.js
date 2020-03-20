@@ -41,6 +41,7 @@ module.exports = {
       postQuery,
       function(err, result) {
         if (err) {
+          console.log('error in custom url post: ', err);
           return res.status(500).send(err);
         } else {
           return res.status(200).send(result);
