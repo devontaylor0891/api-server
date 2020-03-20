@@ -35,7 +35,7 @@ module.exports = {
       custom_url: `${req.body.customUrl}`,
       user_type: `${req.body.userType}`
     };
-    // console.log('post custom url postQuery: ', postQuery);
+    console.log('post custom url postQuery: ', postQuery);
     connection.query(
       'INSERT INTO custom_urls SET ?',
       postQuery,
