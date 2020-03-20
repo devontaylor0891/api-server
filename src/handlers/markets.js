@@ -7,7 +7,7 @@ let lambda = require('./lambda/functions');
 module.exports = {
 
   post_market: function (req, res) {
-    console.log('new market req: ', req);
+    console.log('new market req: ', req.body);
     let postQuery = {
       user_id_fk: `${req.body.id}`,
       name: `${req.body.name}`,

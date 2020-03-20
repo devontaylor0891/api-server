@@ -41,7 +41,7 @@ module.exports = {
       postQuery,
       function(err, result) {
         if (err) {
-          res.send('error:', err);
+          return res.send('error:', err);
         } else {
           return res.status(200).send(result);
         }
