@@ -12,8 +12,7 @@ module.exports = {
       user_id_fk: `${req.body.id}`,
       name: `${req.body.name}`,
       description: `${req.body.description}`,
-      logoUrl: `${req.body.logoUrl}`,
-      multiple_locations: `${req.body.multipleLocations}`
+      logoUrl: `${req.body.logoUrl}`
     };
     connection.query(
       'INSERT INTO markets SET ?',
