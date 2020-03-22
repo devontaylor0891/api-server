@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('lodash');
 var connection = require('../../db');
-var Producer = require('./producers/{id}');
+var Market = require('./markets/{id}');
 let lambda = require('./lambda/functions');
 
 module.exports = {
@@ -22,43 +22,43 @@ module.exports = {
           res.send('error:', err);
         } else {
           // send me an email
-          lambda.new_producer_notification(req, res);
+          lambda.new_market_notification(req, res);
           return res.status(200).send(result);
         }
       }
     )
+  },
+
+  get_markets_id: function(req, res) {
+		Market.get_markets_id(req, res);
+  },
+
+  // put_market_id: function(req, res) {
+  //   market.put_markets_id(req, res);
+  // },
+
+  // get_market_id_products: function (req, res) {
+  //   market.get_market_id_products(req, res);
+  // },
+
+  get_market_id_schedules: function(req, res) {
+    Market.get_market_id_schedules(req, res);
   }
 
-  // get_producers_id: function(req, res) {
-	// 	Producer.get_producers_id(req, res);
+  // get_market_id_future_schedules: function(req, res) {
+  //   market.get_market_id_future_schedules(req, res);
   // },
 
-  // put_producer_id: function(req, res) {
-  //   Producer.put_producers_id(req, res);
-  // },
-
-  // get_producer_id_products: function (req, res) {
-  //   Producer.get_producer_id_products(req, res);
-  // },
-
-  // get_producer_id_schedules: function(req, res) {
-  //   Producer.get_producer_id_schedules(req, res);
-  // },
-
-  // get_producer_id_future_schedules: function(req, res) {
-  //   Producer.get_producer_id_future_schedules(req, res);
-  // },
-
-  // post_producers_id_schedules: function(req, res) {
+  // post_markets_id_schedules: function(req, res) {
   //   return res.send(201);
   // },
 
-  // get_producer_id_orders: function (req, res) {
-  //   Producer.get_producer_id_orders(req, res);
+  // get_market_id_orders: function (req, res) {
+  //   market.get_market_id_orders(req, res);
   // },
 
-  // delete_producers_id: function (req, res) {
-  //   Producer.delete_producers_id(req, res);
+  // delete_markets_id: function (req, res) {
+  //   market.delete_markets_id(req, res);
   // }
 
 };
