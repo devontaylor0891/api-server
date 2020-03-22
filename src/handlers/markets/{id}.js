@@ -3,6 +3,7 @@ var connection = require('../../../db');
 
 module.exports = {
   get_markets_id: function(req, res) {
+    console.log('get markets req: ', req.body);
     var marketId = req.params.id;
     connection.query(
       `SELECT * FROM markets
