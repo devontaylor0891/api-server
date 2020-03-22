@@ -3,12 +3,13 @@ var connection = require('../../../db');
 
 module.exports = {
   get_markets_id: function(req, res) {
-    console.log('get markets req: ', req.params);
+    console.log('get markets req: ', req.params.id);
     var marketId = req.params.id;
     connection.query(
       `SELECT * FROM markets
       LEFT JOIN users ON markets.user_id_fk = users.id
       WHERE user_id_fk = ${marketId}`, function (error, marketResult) {
+        console.log('marketResult: ', marketResult);
         let market = marketResult.map(function(row) 
           {
             return {
