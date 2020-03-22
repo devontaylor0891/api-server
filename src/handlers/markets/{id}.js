@@ -75,28 +75,31 @@ module.exports = {
       // `SELECT * FROM schedules
       // WHERE user_id_fk_schedules = ${userId}`,
       function (error, schedulesResult) {
-        let schedules = schedulesResult.map(function(row) {
-          return {
-            id: row.schedule_id,
-            marketId: row.market_id_fk_s,
-            userId: row.user_id_fk_schedules,
-            type: row.schedule_type,
-            description: row.description,
-            startDateTime: row.start_date_time,
-            endDateTime: row.end_date_time,
-            hasFee: row.has_fee,
-            hasWaiver: row.has_waiver,
-            latitude: row.latitude,
-            longitude: row.longitude,
-            city: row.city,
-            province: row.province,
-            orderDeadline: row.order_deadline,
-            address: row.address,
-            fee: row.fee,
-            feeWaiver: row.fee_waiver,
-            orderCount: row.orderCount
-          }
-        });
+        let schedules = []
+        if (schedulesResult) {
+          schedules = schedulesResult.map(function(row) {
+            return {
+              id: row.schedule_id,
+              marketId: row.market_id_fk_s,
+              userId: row.user_id_fk_schedules,
+              type: row.schedule_type,
+              description: row.description,
+              startDateTime: row.start_date_time,
+              endDateTime: row.end_date_time,
+              hasFee: row.has_fee,
+              hasWaiver: row.has_waiver,
+              latitude: row.latitude,
+              longitude: row.longitude,
+              city: row.city,
+              province: row.province,
+              orderDeadline: row.order_deadline,
+              address: row.address,
+              fee: row.fee,
+              feeWaiver: row.fee_waiver,
+              orderCount: row.orderCount
+            }
+          });
+        };
         return res.status(200).send(schedules);
       }
     )
