@@ -14,7 +14,7 @@ module.exports = {
           {
             return {
               id: row.user_id,
-              marketId: row.id,
+              marketId: row.market_id,
               name: row.name,
               location: row.location,
               province: row.province,
