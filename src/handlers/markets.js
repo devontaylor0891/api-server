@@ -3,6 +3,7 @@ var _ = require('lodash');
 var connection = require('../../db');
 var Market = require('./markets/{id}');
 let lambda = require('./lambda/functions');
+var async = require('async');
 
 module.exports = {
 
@@ -17,13 +18,52 @@ module.exports = {
     connection.query(
       'INSERT INTO markets SET ?',
       postQuery,
-      function(err, result) {
+      function(err, marketResult) {
         if (err) {
           res.send('error:', err);
         } else {
-          // send me an email
-          lambda.new_market_notification(req, res);
-          return res.status(200).send(result);
+          // insertion successful, add locations as necessary
+          const marketId = marketResult.insertId;
+          let locations = req.body.locations;
+          let postQuery;
+          async.eachOfSeries(locations, function(location, index, innerCallback) {
+            // build postQuery
+            postQuery = {
+              market_id_fk: `${marketId}`,
+              latitude: `${location.latitude}`,
+              longitude: `${location.longitude}`,
+              address: `${location.address}`,
+              city: `${location.city}`,
+              province: `${location.province}`,
+              description: `${location.description}`,
+              timeframe: `${location.timeframe}`
+            };
+            // connect and insert
+            connection.query(
+              `INSERT INTO market_locations SET ?`,
+              postQuery,
+              function (err, result) {
+                if (err) {
+                  console.log('error: ', err);
+                  innerCallback(err, null);
+                } else {
+                  console.log('market Loc created: ', result);
+                  innerCallback(null, null);
+                }
+              }
+            )
+          }, function(err, results) { // final callback executed when each of series is completed
+            if(err){
+                console.error(err);
+            } else {
+              console.log('all market Locs added');
+              // return res.send('all mark locs added');
+              // callback(null, results);
+              // send me an email
+              // lambda.new_market_notification(req, res);
+              return res.status(200).send(marketResult);
+            }
+          });
         }
       }
     )
