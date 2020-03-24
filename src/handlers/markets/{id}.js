@@ -67,6 +67,7 @@ module.exports = {
 
   get_market_id_locations: function(req, res) {
     let marketId = req.params.id;
+    console.log('get market locations req.params.id: ', marketId);
     connection.query(
       `SELECT * FROM schedules
       WHERE market_id_fk = ${marketId}`,
