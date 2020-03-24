@@ -84,7 +84,8 @@ module.exports = {
               city: row.city,
               province: row.province,
               address: row.address,
-              timeframe: row.timeframe
+              timeframe: row.timeframe,
+              locationName: row.location_name
             }
           });
         };
