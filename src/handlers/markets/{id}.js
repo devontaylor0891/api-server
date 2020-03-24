@@ -70,7 +70,7 @@ module.exports = {
     connection.query(
       `SELECT * FROM schedules
       WHERE market_id_fk = ${marketId}`,
-      function (error, schedulesResult) {
+      function (error, locationsResult) {
         let locations = []
         if (locationsResult) {
           locations = locationsResult.map(function(row) {
