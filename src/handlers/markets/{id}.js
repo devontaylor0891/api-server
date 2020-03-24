@@ -65,6 +65,33 @@ module.exports = {
   //   )
   // },
 
+  get_market_id_locations: function(req, res) {
+    let marketId = req.params.id;
+    connection.query(
+      `SELECT * FROM schedules
+      WHERE market_id_fk = ${marketId}`,
+      function (error, schedulesResult) {
+        let locations = []
+        if (locationsResult) {
+          locations = locationsResult.map(function(row) {
+            return {
+              id: row.id,
+              marketId: row.market_id_fk,
+              latitude: row.latitude,
+              longitude: row.longitude,
+              description: row.description,
+              city: row.city,
+              province: row.province,
+              address: row.address,
+              timeframe: row.timeframe
+            }
+          });
+        };
+        return res.status(200).send(locations);
+      }
+    )
+  },
+
   get_market_id_schedules: function(req, res) {
     let userId = req.params.id;
     connection.query(
