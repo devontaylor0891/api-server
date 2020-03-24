@@ -36,7 +36,8 @@ module.exports = {
               city: `${location.city}`,
               province: `${location.province}`,
               description: `${location.description}`,
-              timeframe: `${location.timeframe}`
+              timeframe: `${location.timeframe}`,
+              location_name: `${location.locationName}`
             };
             // connect and insert
             connection.query(
