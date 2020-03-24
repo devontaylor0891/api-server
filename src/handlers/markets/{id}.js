@@ -69,7 +69,7 @@ module.exports = {
     let marketId = req.params.id;
     console.log('get market locations req.params.id: ', marketId);
     connection.query(
-      `SELECT * FROM schedules
+      `SELECT * FROM market_locations
       WHERE market_id_fk = ${marketId}`,
       function (error, locationsResult) {
         let locations = []
