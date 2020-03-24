@@ -81,6 +81,10 @@ module.exports = {
   //   market.get_market_id_products(req, res);
   // },
 
+  get_market_id_locations: function(req, res) {
+    Market.get_market_id_locations(req, res);
+  },
+
   get_market_id_schedules: function(req, res) {
     Market.get_market_id_schedules(req, res);
   }
