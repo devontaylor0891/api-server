@@ -16,7 +16,8 @@ router.route('/users').get(users.get_users); // GET all users - ADMIN DASH ONLY
 router.route('/users').post(users.post_users); // CREATE a new user
 router.route('/users/:id').get(users.get_users_id); // GET a single user
 router.route('/users/auth/:id').get(users.get_users_auth_id); // GET a single user by auth0 id
-router.route('/users/:id').put(users.put_users_id);
+router.route('/users/initial/:id').put(users.put_users_id_initial); // intial put of user just after acct creation
+router.route('/users/:id').put(users.put_users_id); // put/patch users
 router.route('/usersOrders/:id').get(users.get_users_id_orders);
 router.route('/usersDelete/:id').put(users.delete_users_id); // mock DELETE single user
 router.route('/users/:id/locationNotification/').get(users.get_location_notification);

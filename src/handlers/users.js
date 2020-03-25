@@ -75,7 +75,7 @@ module.exports = {
     )
   },
 
-  put_users_id: function(req, res) {
+  put_users_id_initial: function(req, res) {
 
     // add user to mailchimp
     const mailchimp = new Mailchimp(process.env.MAILCHIMP_API);
@@ -170,6 +170,34 @@ module.exports = {
     //     }
     //   } 
     // )
+  },
+
+  put_users_id: function(req, res) {
+      
+    console.log('put user called: ', req.body);
+    let postQuery = {
+      first_name: `${req.body.firstName}`,
+      email: `${req.body.email}`,
+      role: `${req.body.role}`
+    };
+    let userId = req.params.id;
+    connection.query(
+      `UPDATE users 
+      SET ? 
+      WHERE id = ?;`,
+      [postQuery, userId],
+      function (err, result) {
+        if (err) {
+          console.log('error in update user:', err);
+          res.status(500).send('error:', err);
+        } else {
+          console.log('user updated: ');
+          // console.log('postQuery: ', postQuery);
+          return res.status(200).send(result);
+        }
+      } 
+    )
+
   },
 
   get_users_id_orders: function(req, res) {
