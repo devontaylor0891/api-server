@@ -90,6 +90,37 @@ module.exports = {
     )
   },
 
+  put_market_id_locations: function(req, res) {
+    console.log('put market locations params id: ', req.params.id);
+    console.log('put market locations body: ', req.body);
+    let postQuery = {
+      market_id_fk: `${req.body.marketId}`,
+      location_name: `${req.body.locationName}`,
+      description: `${req.body.description}`,
+      latitude: `${req.body.latitude}`,
+      longitude: `${req.body.longitude}`,
+      city: `${req.body.city}`,
+      province: `${req.body.province}`,
+      timeframe: `${req.body.timeframe}`
+    };
+    let locationId = req.params.id;
+    connection.query(
+      `SET SQL_SAFE_UPDATES=0;
+      UPDATE market_locations 
+      SET ? 
+      WHERE id = ?;
+      SET SQL_SAFE_UPDATES=1;`,
+      [postQuery, locationId],
+      function (err, result) {
+        if (err) {
+          res.status(500).send('error:', err);
+        } else {
+          return res.status(200).send(result);
+        }
+      } 
+    )
+  },
+
   get_market_id_schedules: function(req, res) {
     let userId = req.params.id;
     connection.query(
