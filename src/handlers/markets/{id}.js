@@ -35,35 +35,30 @@ module.exports = {
     )
   },
 
-  // put_markets_id: function(req, res) {
-  //   console.log('put market body: ', req.body);
-  //   let postQuery = {
-  //     name: `${req.body.name}`,
-  //     description: `${req.body.description}`,
-  //     logoUrl: `${req.body.logoUrl}`,
-  //     address: `${req.body.address}`,
-  //     location: `${req.body.location}`,
-  //     province: `${req.body.province}`,
-  //     latitude: `${req.body.latitude}`,
-  //     longitude: `${req.body.longitude}`
-  //   };
-  //   let userId = req.params.id;
-  //   connection.query(
-  //     `SET SQL_SAFE_UPDATES=0;
-  //     UPDATE markets 
-  //     SET ? 
-  //     WHERE user_id = ?;
-  //     SET SQL_SAFE_UPDATES=1;`,
-  //     [postQuery, userId],
-  //     function (err, result) {
-  //       if (err) {
-  //         res.status(500).send('error:', err);
-  //       } else {
-  //         return res.status(200).send(result);
-  //       }
-  //     } 
-  //   )
-  // },
+  put_markets_id: function(req, res) {
+    console.log('put market body: ', req.body);
+    let postQuery = {
+      name: `${req.body.name}`,
+      description: `${req.body.description}`,
+      logoUrl: `${req.body.logoUrl}`
+    };
+    let userId = req.params.id;
+    connection.query(
+      `SET SQL_SAFE_UPDATES=0;
+      UPDATE markets 
+      SET ? 
+      WHERE user_id = ?;
+      SET SQL_SAFE_UPDATES=1;`,
+      [postQuery, userId],
+      function (err, result) {
+        if (err) {
+          res.status(500).send('error:', err);
+        } else {
+          return res.status(200).send(result);
+        }
+      } 
+    )
+  },
 
   get_market_id_locations: function(req, res) {
     let marketId = req.params.id;
