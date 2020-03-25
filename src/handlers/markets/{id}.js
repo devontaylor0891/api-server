@@ -47,7 +47,7 @@ module.exports = {
       `SET SQL_SAFE_UPDATES=0;
       UPDATE markets 
       SET ? 
-      WHERE user_id = ?;
+      WHERE user_id_fk = ?;
       SET SQL_SAFE_UPDATES=1;`,
       [postQuery, userId],
       function (err, result) {
