@@ -36,6 +36,7 @@ module.exports = {
   },
 
   put_markets_id: function(req, res) {
+    console.log('put market params id: ', req.params.id);
     console.log('put market body: ', req.body);
     let postQuery = {
       name: `${req.body.name}`,
