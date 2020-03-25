@@ -75,7 +75,7 @@ module.exports = {
   },
 
   put_markets_id: function(req, res) {
-    market.put_markets_id(req, res);
+    Market.put_markets_id(req, res);
   },
 
   // get_market_id_products: function (req, res) {
