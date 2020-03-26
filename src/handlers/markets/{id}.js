@@ -90,6 +90,22 @@ module.exports = {
     )
   },
 
+  post_market_id_locations: function(req, res) {
+    console.log('post market loc parmas id: ', req.params.id);
+    let marketId = req.params.id;
+    connection.query(
+      'INSERT INTO markets SET ?',
+      [marketId],
+      function (err, result) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          return res.status(200).send(result);
+        }
+      } 
+    )
+  },
+
   put_market_id_locations: function(req, res) {
     console.log('put market locations params id: ', req.params.id);
     console.log('put market locations body: ', req.body);
