@@ -92,6 +92,10 @@ module.exports = {
 
   get_market_id_schedules: function(req, res) {
     Market.get_market_id_schedules(req, res);
+  },
+
+  delete_market_id_locations: function(req, res) {
+    Market.delete_market_id_locations(req, res);
   }
 
   // get_market_id_future_schedules: function(req, res) {

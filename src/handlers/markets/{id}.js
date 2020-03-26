@@ -160,7 +160,25 @@ module.exports = {
         return res.status(200).send(schedules);
       }
     )
+  },
+  
+  delete_market_id_locations: function (req, res) {
+    connection.query(
+      `DELETE FROM market_locations
+      WHERE id = ?;`,
+      [req.params.id],
+      function (err, result) {
+        if (err) {
+          console.log('error in delete market location:', err);
+          res.status(500).send(err);
+        } else {
+          console.log('market location deleted: ', result);
+          return res.status(200).send(result);
+        }
+      } 
+    )
   }
+
 
   // get_market_id_future_schedules: function(req, res) {
   //   let userId = req.params.id;
