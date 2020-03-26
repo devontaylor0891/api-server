@@ -90,19 +90,28 @@ module.exports = {
     )
   },
 
-  post_market_id_locations: function(req, res) {
-    console.log('post market loc parmas id: ', req.params.id);
-    let marketId = req.params.id;
+  post_market_locations: function(req, res) {
+    let postQuery = {
+      market_id_fk: `${req.body.marketId}`,
+      latitude: `${req.body.location.latitude}`,
+      longitude: `${req.body.location.longitude}`,
+      address: `${req.body.location.address}`,
+      city: `${req.body.location.city}`,
+      province: `${req.body.location.province}`,
+      description: `${req.body.location.description}`,
+      timeframe: `${req.body.location.timeframe}`,
+      location_name: `${req.body.location.locationName}`
+    };
     connection.query(
-      'INSERT INTO markets SET ?',
-      [marketId],
+      `INSERT INTO market_locations SET ?`,
+      postQuery,
       function (err, result) {
         if (err) {
           res.status(500).send(err);
         } else {
           return res.status(200).send(result);
         }
-      } 
+      }
     )
   },
 
