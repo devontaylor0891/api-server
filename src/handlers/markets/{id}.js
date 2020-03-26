@@ -99,6 +99,7 @@ module.exports = {
       description: `${req.body.description}`,
       latitude: `${req.body.latitude}`,
       longitude: `${req.body.longitude}`,
+      address: `${req.body.address}`,
       city: `${req.body.city}`,
       province: `${req.body.province}`,
       timeframe: `${req.body.timeframe}`
