@@ -113,7 +113,7 @@ module.exports = {
       [postQuery, locationId],
       function (err, result) {
         if (err) {
-          res.status(500).send('error:', err);
+          res.status(500).send(err);
         } else {
           return res.status(200).send(result);
         }
