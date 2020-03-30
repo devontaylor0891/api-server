@@ -297,8 +297,7 @@ module.exports = {
         order_deadline: `${sched.orderDeadline}`,
         address: `${sched.address}`,
         fee: `${sched.fee}`,
-        fee_waiver: `${sched.feeWaiver}`,
-        user_id_fk_schedules: `${sched.userId}`
+        fee_waiver: `${sched.feeWaiver}`
       };
       connection.query(
         `INSERT INTO market_schedules SET ?`,
