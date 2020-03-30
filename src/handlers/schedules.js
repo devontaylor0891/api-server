@@ -271,6 +271,60 @@ module.exports = {
     });
   },
 
+  post_multi_market_schedules: function (req, res) {
+    console.log('new schedule body: ', req.body);
+    // return res.send('ok');
+    let scheds = req.body;
+
+    let postQuery;
+
+    async.eachOfSeries(scheds, function(sched, index, innerCallback) {
+      console.log('index of async: ', index);
+      // build the sched to insert into DB
+      postQuery = {
+        market_id_fk_ms: `${sched.marketId}`,
+        market_schedule_type: `${sched.type}`,
+        description: `${sched.description}`,
+        start_date_time: `${sched.startDateTime}`,
+        end_date_time: `${sched.endDateTime}`,
+        readable_date: `${sched.readableDate}`,
+        has_fee: `${sched.hasFee}`,
+        has_waiver: `${sched.hasWaiver}`,
+        latitude: `${sched.latitude}`,
+        longitude: `${sched.longitude}`,
+        city: `${sched.city}`,
+        province: `${sched.province}`,
+        order_deadline: `${sched.orderDeadline}`,
+        address: `${sched.address}`,
+        fee: `${sched.fee}`,
+        fee_waiver: `${sched.feeWaiver}`,
+        user_id_fk_schedules: `${sched.userId}`
+      };
+      connection.query(
+        `INSERT INTO market_schedules SET ?`,
+        postQuery,
+        function (err, result) {
+          if (err) {
+            console.log('error: ', err);
+            innerCallback(err, null);
+          } else {
+            console.log('sched created: ', result);
+            innerCallback(null, null);
+          }
+        }
+      )
+      
+    }, function(err, results) { // final callback executed when each of series is completed
+      if(err){
+          console.error(err);
+      } else {
+          console.log('all scheds added');
+          return res.send('all scheds added');
+          // callback(null, results);
+      }
+    });
+  },
+
   get_schedules_id: function (req, res) {
     ScheduleById.get_schedules_id(req, res);
   },
