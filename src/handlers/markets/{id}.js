@@ -148,23 +148,19 @@ module.exports = {
   },
 
   get_market_id_schedules: function(req, res) {
-    let userId = req.params.id;
+    let marketId = req.params.id;
     connection.query(
-      `SELECT schedules.*,
-      (SELECT COUNT(*) FROM orders WHERE schedule_id_fk_o = schedules.schedule_id) AS orderCount
-      FROM schedules
-      WHERE user_id_fk_schedules = ${userId}`,
-      // `SELECT * FROM schedules
-      // WHERE user_id_fk_schedules = ${userId}`,
+      `SELECT * FROM FROM schedules
+      WHERE market_id_fk_ms = ${marketId}`,
       function (error, schedulesResult) {
         let schedules = []
         if (schedulesResult) {
           schedules = schedulesResult.map(function(row) {
             return {
-              id: row.schedule_id,
-              marketId: row.market_id_fk_s,
+              id: row.market_schedule_id,
+              marketId: row.market_id_fk_ms,
               userId: row.user_id_fk_schedules,
-              type: row.schedule_type,
+              type: row.market_schedule_type,
               description: row.description,
               startDateTime: row.start_date_time,
               endDateTime: row.end_date_time,
@@ -177,8 +173,7 @@ module.exports = {
               orderDeadline: row.order_deadline,
               address: row.address,
               fee: row.fee,
-              feeWaiver: row.fee_waiver,
-              orderCount: row.orderCount
+              feeWaiver: row.fee_waiver
             }
           });
         };
