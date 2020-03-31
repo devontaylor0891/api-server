@@ -195,7 +195,7 @@ module.exports = {
               ON ms.market_schedule_id = msp.market_schedule_id_fk_msp
                 INNER JOIN producers p
                 ON msp.producer_id_fk_msp = p.producer_id
-            WHERE market_id_fk_ms = ${sched.market_schedule_id}`,
+            WHERE msp.market_id_fk_ms = ${sched.market_schedule_id}`,
             function (error, marketSchedulesProducerResult) {
               let producerScheds = [];
               if (marketSchedulesProducerResult) {
