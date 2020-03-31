@@ -208,12 +208,12 @@ module.exports = {
                     producerName: row.name,
                   }
                 });
+                sched.producerSchedules = producerScheds;
               };
               if (error) {
                 console.log('error: ', error);
                 innerCallback(err, null);
               } else {
-                sched.producerSchedules = producerScheds;
                 console.log('producerScheds processed: ', producerScheds);
                 innerCallback(null, null);
               }
@@ -221,11 +221,11 @@ module.exports = {
           )
         }, function(err, results) { // final callback executed when each of series is completed
           if(err){
-              console.error(err);
+            console.error(err);
           } else {
-              console.log('all Pscheds added');
-              return res.send('all scheds added');
-              return res.status(200).send(schedules);          }
+            console.log('all Pscheds added');
+            return res.status(200).send(schedules);
+          }
         });
         // return res.status(200).send(schedules);
       }
