@@ -151,14 +151,14 @@ module.exports = {
     let marketId = req.params.id;
     console.log('get market scheds req.params.id: ', marketId);
     connection.query(
-      // `SELECT msp.*, ms.*
-      // FROM market_schedules ms 
-      // JOIN market_schedule_producer msp
-      // ON ms.market_schedule_id = msp.market_schedule_id_fk_msp
-      // WHERE market_id_fk_ms = ${marketId}`,
-
-      `SELECT * FROM market_schedules
+      `SELECT msp.*, ms.*
+      FROM market_schedules ms 
+      JOIN market_schedule_producer msp
+      ON ms.market_schedule_id = msp.market_schedule_id_fk_msp
       WHERE market_id_fk_ms = ${marketId}`,
+
+      // `SELECT * FROM market_schedules
+      // WHERE market_id_fk_ms = ${marketId}`,
       function (error, schedulesResult) {
         let schedules = []
         if (schedulesResult) {
