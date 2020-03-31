@@ -209,8 +209,8 @@ module.exports = {
                   }
                 });
               };
-              if (err) {
-                console.log('error: ', err);
+              if (error) {
+                console.log('error: ', error);
                 innerCallback(err, null);
               } else {
                 sched.producerSchedules = producerScheds;
