@@ -202,10 +202,10 @@ module.exports = {
                 producerScheds = marketSchedulesProducerResult.map(function(row) {
                   return {
                     producerSchedId: row.id,
-                    scheduleId: row.market_id_fk_ms,
-                    producerId: row.user_id_fk_schedules,
-                    marketScheduleId: row.market_schedule_type,
-                    producerName: row.description,
+                    scheduleId: row.schedule_id_fk_msp,
+                    producerId: row.producer_id_fk_msp,
+                    marketScheduleId: row.market_schedule_id_fk_msp,
+                    producerName: row.name,
                   }
                 });
               };
