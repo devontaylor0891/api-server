@@ -1,5 +1,6 @@
 'use strict';
 var connection = require('../../../db');
+var async = require('async');
 
 module.exports = {
   get_markets_id: function(req, res) {
@@ -151,14 +152,14 @@ module.exports = {
     let marketId = req.params.id;
     console.log('get market scheds req.params.id: ', marketId);
     connection.query(
-      `SELECT msp.*, ms.*
-      FROM market_schedules ms 
-      JOIN market_schedule_producer msp
-      ON ms.market_schedule_id = msp.market_schedule_id_fk_msp
-      WHERE market_id_fk_ms = ${marketId}`,
-
-      // `SELECT * FROM market_schedules
+      // `SELECT msp.*, ms.*
+      // FROM market_schedules ms 
+      // JOIN market_schedule_producer msp
+      // ON ms.market_schedule_id = msp.market_schedule_id_fk_msp
       // WHERE market_id_fk_ms = ${marketId}`,
+
+      `SELECT * FROM market_schedules
+      WHERE market_id_fk_ms = ${marketId}`,
       function (error, schedulesResult) {
         let schedules = []
         if (schedulesResult) {
@@ -181,12 +182,52 @@ module.exports = {
               address: row.address,
               fee: row.fee,
               feeWaiver: row.fee_waiver,
-              producerId: row.producer_id_fk_msp,
-              scheduleId: row.schedule_id_fk_msp,
+              producerSchedules: []
             }
           });
         };
-        return res.status(200).send(schedules);
+        async.eachOfSeries(schedules, function(sched, index, innerCallback) {
+          console.log('index of async: ', index);
+          connection.query(
+            `SELECT  msp.*, p.name
+            from market_schedules ms 
+            INNER join market_schedule_producer msp
+              ON ms.market_schedule_id = msp.market_schedule_id_fk_msp
+                inner JOIN producers p
+                on msp.producer_id_fk_msp = p.producer_id
+                where market_id_fk_ms = ${sched.marketId}`,
+            function (error, marketSchedulesProducerResult) {
+              let producerScheds = [];
+              if (marketSchedulesProducerResult) {
+                producerScheds = marketSchedulesProducerResult.map(function(row) {
+                  return {
+                    producerSchedId: row.id,
+                    scheduleId: row.market_id_fk_ms,
+                    producerId: row.user_id_fk_schedules,
+                    marketScheduleId: row.market_schedule_type,
+                    producerName: row.description,
+                  }
+                });
+              };
+              if (err) {
+                console.log('error: ', err);
+                innerCallback(err, null);
+              } else {
+                sched.producerSchedules = producerScheds;
+                console.log('producerScheds processed: ', producerScheds);
+                innerCallback(null, null);
+              }
+            }
+          )
+        }, function(err, results) { // final callback executed when each of series is completed
+          if(err){
+              console.error(err);
+          } else {
+              console.log('all Pscheds added');
+              return res.send('all scheds added');
+              return res.status(200).send(schedules);          }
+        });
+        // return res.status(200).send(schedules);
       }
     )
   },
