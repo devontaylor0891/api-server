@@ -280,6 +280,23 @@ module.exports = {
         }
       } 
     )
+  },
+
+  delete_market_id_schedules: function (req, res) {
+    connection.query(
+      `DELETE FROM market_schedules
+      WHERE market_schedule_id = ?;`,
+      [req.params.id],
+      function (err, result) {
+        if (err) {
+          console.log('error in delete market sched:', err);
+          res.status(500).send(err);
+        } else {
+          console.log('market sched deleted: ', result);
+          return res.status(200).send(result);
+        }
+      } 
+    )
   }
 
 
