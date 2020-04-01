@@ -190,9 +190,7 @@ module.exports = {
           console.log('index of async: ', index);
           connection.query(
             `SELECT  msp.*, p.name
-            from market_schedules ms 
-            INNER join market_schedule_producer msp
-              ON ms.market_schedule_id = msp.market_schedule_id_fk_msp
+            from market_schedule_producer msp 
                 INNER JOIN producers p
                 ON msp.producer_id_fk_msp = p.producer_id
             WHERE msp.market_id_fk_ms = ${sched.market_schedule_id}`,
