@@ -229,11 +229,11 @@ module.exports = {
     console.log('put market sched body: ', req.body);
     let postQuery = {
       market_schedule_id: `${scheduleId}`,
-      market_id_fk_ms: `${req.body.marketId}`,
       market_schedule_type: `${req.body.type}`,
       description: `${req.body.description}`,
       start_date_time: `${req.body.startDateTime}`,
       end_date_time: `${req.body.endDateTime}`,
+      readable_date: `${req.body.readableDate}`,
       has_fee: `${req.body.hasFee}`,
       has_waiver: `${req.body.hasWaiver}`,
       latitude: `${req.body.latitude}`,
@@ -243,7 +243,8 @@ module.exports = {
       order_deadline: `${req.body.orderDeadline}`,
       address: `${req.body.address}`,
       fee: `${req.body.fee}`,
-      fee_waiver: `${req.body.feeWaiver}`
+      fee_waiver: `${req.body.feeWaiver}`,
+      market_id_fk_ms: `${req.body.marketId}`
     };
     connection.query(
       `SET SQL_SAFE_UPDATES=0;
