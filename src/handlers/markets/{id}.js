@@ -222,6 +222,45 @@ module.exports = {
       }
     )
   },
+
+  put_market_id_schedules: function(req, res) {
+    let scheduleId = req.params.id;
+    console.log('put market sched params id: ', req.params.id);
+    console.log('put market sched body: ', req.body);
+    let postQuery = {
+      market_schedule_id: `${scheduleId}`,
+      market_id_fk_ms: `${req.body.marketId}`,
+      market_schedule_type: `${req.body.type}`,
+      description: `${req.body.description}`,
+      start_date_time: `${req.body.startDateTime}`,
+      end_date_time: `${req.body.endDateTime}`,
+      has_fee: `${req.body.hasFee}`,
+      has_waiver: `${req.body.hasWaiver}`,
+      latitude: `${req.body.latitude}`,
+      longitude: `${req.body.longitude}`,
+      city: `${req.body.city}`,
+      province: `${req.body.province}`,
+      order_deadline: `${req.body.orderDeadline}`,
+      address: `${req.body.address}`,
+      fee: `${req.body.fee}`,
+      fee_waiver: `${req.body.feeWaiver}`
+    };
+    connection.query(
+      `SET SQL_SAFE_UPDATES=0;
+      UPDATE market_schedules 
+      SET ? 
+      WHERE id = ?;
+      SET SQL_SAFE_UPDATES=1;`,
+      [postQuery, scheduleId],
+      function (err, result) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          return res.status(200).send(result);
+        }
+      } 
+    )
+  },
   
   delete_market_id_locations: function (req, res) {
     connection.query(
