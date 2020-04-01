@@ -256,6 +256,7 @@ module.exports = {
       [postQuery, scheduleId],
       function (err, result) {
         if (err) {
+          console.log('error: ', err);
           res.status(500).send(err);
         } else {
           return res.status(200).send(result);
