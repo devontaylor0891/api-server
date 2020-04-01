@@ -235,16 +235,16 @@ module.exports = {
       start_date_time: `${req.body.startDateTime}`,
       end_date_time: `${req.body.endDateTime}`,
       readable_date: `${req.body.readableDate}`,
-      has_fee: `${req.body.hasFee}`,
-      has_waiver: `${req.body.hasWaiver}`,
+      has_fee: 0,
+      has_waiver: 0,
       latitude: `${req.body.latitude}`,
       longitude: `${req.body.longitude}`,
       city: `${req.body.city}`,
       province: `${req.body.province}`,
       order_deadline: `${req.body.orderDeadline}`,
       address: `${req.body.address}`,
-      fee: `${req.body.fee}`,
-      fee_waiver: `${req.body.feeWaiver}`,
+      fee: 0,
+      fee_waiver: 0,
       market_id_fk_ms: `${req.body.marketId}`
     };
     connection.query(
