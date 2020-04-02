@@ -184,7 +184,7 @@ module.exports = {
         async.eachOfSeries(schedules, function(sched, index, innerCallback) {
           console.log('index of async: ', index);
           connection.query(
-            `SELECT  msp.*, p.name
+            `SELECT  msp.*, p.name, p.user_id
             from market_schedule_producer msp 
                 INNER JOIN producers p
                 ON msp.producer_id_fk_msp = p.producer_id
@@ -199,6 +199,7 @@ module.exports = {
                     producerId: row.producer_id_fk_msp,
                     marketScheduleId: row.market_schedule_id_fk_msp,
                     producerName: row.name,
+                    producerUserId: row.user_id
                   }
                 });
                 sched.producerSchedules = producerScheds;
