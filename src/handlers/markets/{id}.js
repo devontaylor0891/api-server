@@ -284,8 +284,10 @@ module.exports = {
 
   delete_market_id_schedules: function (req, res) {
     connection.query(
-      `DELETE FROM market_schedules
-      WHERE market_schedule_id = ?;`,
+      `SET SQL_SAFE_UPDATES=0;
+      DELETE FROM market_schedules
+      WHERE market_schedule_id = ?;
+      SET SQL_SAFE_UPDATES=1;`,
       [req.params.id],
       function (err, result) {
         if (err) {
