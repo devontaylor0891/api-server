@@ -288,16 +288,7 @@ module.exports = {
         start_date_time: `${sched.startDateTime}`,
         end_date_time: `${sched.endDateTime}`,
         readable_date: `${sched.readableDate}`,
-        has_fee: `${sched.hasFee}`,
-        has_waiver: `${sched.hasWaiver}`,
-        latitude: `${sched.latitude}`,
-        longitude: `${sched.longitude}`,
-        city: `${sched.city}`,
-        province: `${sched.province}`,
-        order_deadline: `${sched.orderDeadline}`,
-        address: `${sched.address}`,
-        fee: `${sched.fee}`,
-        fee_waiver: `${sched.feeWaiver}`
+        market_location_id_fk: `${sched.locationId}`
       };
       connection.query(
         `INSERT INTO market_schedules SET ?`,

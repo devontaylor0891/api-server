@@ -167,16 +167,7 @@ module.exports = {
               startDateTime: row.start_date_time,
               endDateTime: row.end_date_time,
               readableDate: row.readable_date,
-              hasFee: row.has_fee,
-              hasWaiver: row.has_waiver,
-              latitude: row.latitude,
-              longitude: row.longitude,
-              city: row.city,
-              province: row.province,
-              orderDeadline: row.order_deadline,
-              address: row.address,
-              fee: row.fee,
-              feeWaiver: row.fee_waiver,
+              locationId: row.market_location_id_fk,
               producerSchedules: []
             }
           });
@@ -236,16 +227,7 @@ module.exports = {
       start_date_time: `${req.body.startDateTime}`,
       end_date_time: `${req.body.endDateTime}`,
       readable_date: `${req.body.readableDate}`,
-      has_fee: 0,
-      has_waiver: 0,
-      latitude: `${req.body.latitude}`,
-      longitude: `${req.body.longitude}`,
-      city: `${req.body.city}`,
-      province: `${req.body.province}`,
-      order_deadline: `${req.body.orderDeadline}`,
-      address: `${req.body.address}`,
-      fee: 0,
-      fee_waiver: 0,
+      market_location_id_fk: `${req.body.locationId}`,
       market_id_fk_ms: `${req.body.marketId}`
     };
     connection.query(
