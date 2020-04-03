@@ -94,7 +94,7 @@ module.exports = {
     console.log('search Results req: ', req.body);
     // get the search parameters
     // let distance = req.body.radius;
-    let distance = 150;
+    let distance = 25;
     let latitude = req.body.lat;
     // let latitude = 50.1436;
     let longitude = req.body.lng;
