@@ -90,6 +90,50 @@ module.exports = {
     Market.post_market_locations(req, res);
   },
 
+  get_locations_search: function(req, res) {
+    console.log('search Results req: ', req.body);
+    // get the search parameters
+    // let distance = req.body.radius;
+    let distance = 150;
+    let latitude = req.body.lat;
+    // let latitude = 50.1436;
+    let longitude = req.body.lng;
+    // let longitude = -101.6668;
+    let maxlat, maxlng, minlat, minlng;
+
+    // Converts from degrees to radians.
+    Math.radians = function(degrees) {
+      return degrees * Math.PI / 180;
+    };
+    
+    // Converts from radians to degrees.
+    Math.degrees = function(radians) {
+      return radians * 180 / Math.PI;
+    };
+
+    // set other parameters (from https://coderwall.com/p/otkscg/geographic-searches-within-a-certain-distance)
+    // earth's radius in km = ~6371
+    let earthRadius = 6371;
+
+    // latitude boundaries
+    maxlat = latitude + Math.degrees(distance / earthRadius);
+    minlat = latitude - Math.degrees(distance / earthRadius);
+
+    // longitude boundaries (longitude gets smaller when latitude increases)
+    maxlng = longitude + Math.degrees(distance / earthRadius / Math.cos(Math.radians(latitude)));
+    minlng = longitude - Math.degrees(distance / earthRadius / Math.cos(Math.radians(latitude)));
+    console.log('lat: ', latitude)
+    console.log('lng: ', longitude);
+    console.log('maxlat: ', maxlat);
+    console.log('maxlng: ', maxlng);
+    console.log('minlat: ', minlat);
+    console.log('minlng: ', minlng);
+
+    // build a query inside a promise, this will return the rows from the query
+  
+    res.send(200).status('OK');
+  },
+
   put_market_id_locations: function(req, res) {
     Market.put_market_id_locations(req, res);
   },
