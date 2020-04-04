@@ -173,7 +173,7 @@ module.exports = {
             }
           });
         };
-        async.eachOfSeries(scheds, function(sched, index, innerCallback) {
+        async.eachOfSeries(schedules, function(sched, index, innerCallback) {
           console.log('getting location info for sched: ', index);
           connection.query(
             `SELECT * from market_locations
