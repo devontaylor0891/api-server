@@ -207,8 +207,8 @@ module.exports = {
                     locationName: row.location_name
                   }
                 });
-                sched.city = locationData.city;
-                sched.province = marketSchedulesLocationResult.province;
+                sched.city = locationData[0].city;
+                sched.province = locationData[0].province;
                 sched.locationData = locationData;
               };
               if (error) {
