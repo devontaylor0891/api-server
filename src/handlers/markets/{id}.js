@@ -168,48 +168,86 @@ module.exports = {
               endDateTime: row.end_date_time,
               readableDate: row.readable_date,
               locationId: row.market_location_id_fk,
-              producerSchedules: []
+              producerSchedules: [],
+              locationData: null
             }
           });
         };
-        async.eachOfSeries(schedules, function(sched, index, innerCallback) {
-          console.log('index of async: ', index);
+        async.eachOfSeries(scheds, function(sched, index, innerCallback) {
+          console.log('getting location info for sched: ', index);
           connection.query(
-            `SELECT  msp.*, p.name, p.user_id
-            from market_schedule_producer msp 
-                INNER JOIN producers p
-                ON msp.producer_id_fk_msp = p.producer_id
-            WHERE market_schedule_id_fk_msp = ${sched.id}`,
-            function (error, marketSchedulesProducerResult) {
-              let producerScheds = [];
-              if (marketSchedulesProducerResult) {
-                producerScheds = marketSchedulesProducerResult.map(function(row) {
+            `SELECT * from market_locations
+            WHERE id = ${sched.locationId}`,
+            function(error, marketSchedulesLocationResult) {
+              let locationData = {};
+              if (marketSchedulesLocationResult) {
+                locationData = marketSchedulesLocationResult.map(function(row) {
                   return {
-                    producerSchedId: row.id,
-                    scheduleId: row.schedule_id_fk_msp,
-                    producerId: row.producer_id_fk_msp,
-                    marketScheduleId: row.market_schedule_id_fk_msp,
-                    producerName: row.name,
-                    producerUserId: row.user_id
+                    latitude: row.latitude,
+                    longitude: row.longitude,
+                    address: row.address,
+                    city: row.city,
+                    province: row.province,
+                    description: row.description,
+                    timeframe: row.timeframe,
+                    locationName: row.location_name
                   }
                 });
-                sched.producerSchedules = producerScheds;
+                sched.locationData = locationData;
               };
               if (error) {
                 console.log('error: ', error);
                 innerCallback(error, null);
               } else {
-                console.log('producerScheds processed: ', producerScheds);
+                console.log('locations processed: ', locationData);
                 innerCallback(null, null);
               }
             }
           )
-        }, function(err, results) { // final callback executed when each of series is completed
-          if(err){
-            console.error(err);
+        }, function(err, result) {
+          if (err) {
+            console.log('error: ', err);
           } else {
-            console.log('all Pscheds added');
-            return res.status(200).send(schedules);
+            async.eachOfSeries(schedules, function(sched, index, innerCallback) {
+              console.log('index of async: ', index);
+              connection.query(
+                `SELECT  msp.*, p.name, p.user_id
+                from market_schedule_producer msp 
+                    INNER JOIN producers p
+                    ON msp.producer_id_fk_msp = p.producer_id
+                WHERE market_schedule_id_fk_msp = ${sched.id}`,
+                function (error, marketSchedulesProducerResult) {
+                  let producerScheds = [];
+                  if (marketSchedulesProducerResult) {
+                    producerScheds = marketSchedulesProducerResult.map(function(row) {
+                      return {
+                        producerSchedId: row.id,
+                        scheduleId: row.schedule_id_fk_msp,
+                        producerId: row.producer_id_fk_msp,
+                        marketScheduleId: row.market_schedule_id_fk_msp,
+                        producerName: row.name,
+                        producerUserId: row.user_id
+                      }
+                    });
+                    sched.producerSchedules = producerScheds;
+                  };
+                  if (error) {
+                    console.log('error: ', error);
+                    innerCallback(error, null);
+                  } else {
+                    console.log('producerScheds processed: ', producerScheds);
+                    innerCallback(null, null);
+                  }
+                }
+              )
+            }, function(err, results) { // final callback executed when each of series is completed
+              if(err){
+                console.error(err);
+              } else {
+                console.log('all Pscheds added');
+                return res.status(200).send(schedules);
+              }
+            });
           }
         });
       }
