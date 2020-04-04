@@ -181,17 +181,18 @@ module.exports = {
             function(error, marketSchedulesLocationResult) {
               // let locationData = {};
               if (marketSchedulesLocationResult) {
-                console.log(marketSchedulesLocationResult);
-                // sched.locationData = {
-                //   latitude: row.latitude,
-                //   longitude: row.longitude,
-                //   address: row.address,
-                //   city: row.city,
-                //   province: row.province,
-                //   description: row.description,
-                //   timeframe: row.timeframe,
-                //   locationName: row.location_name
-                // }
+                let row = marketSchedulesLocationResult;
+                // console.log(marketSchedulesLocationResult);
+                sched.locationData = {
+                  latitude: row.latitude,
+                  longitude: row.longitude,
+                  address: row.address,
+                  city: row.city,
+                  province: row.province,
+                  description: row.description,
+                  timeframe: row.timeframe,
+                  locationName: row.location_name
+                };
                 // locationData = marketSchedulesLocationResult.map(function(row) {
                 //   return {
                 //     latitude: row.latitude,
