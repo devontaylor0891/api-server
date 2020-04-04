@@ -179,11 +179,11 @@ module.exports = {
             `SELECT * from market_locations
             WHERE id = ${sched.locationId}`,
             function(error, marketSchedulesLocationResult) {
-              // let locationData = {};
+              let locationData = {};
               if (marketSchedulesLocationResult) {
                 let row = marketSchedulesLocationResult;
                 // console.log(marketSchedulesLocationResult);
-                sched.locationData = {
+                locationData = {
                   latitude: row.latitude,
                   longitude: row.longitude,
                   address: row.address,
@@ -205,7 +205,7 @@ module.exports = {
                 //     locationName: row.location_name
                 //   }
                 // });
-                // sched.locationData = locationData;
+                sched.locationData = locationData;
               };
               if (error) {
                 console.log('error: ', error);
