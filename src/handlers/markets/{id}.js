@@ -169,7 +169,8 @@ module.exports = {
               readableDate: row.readable_date,
               locationId: row.market_location_id_fk,
               producerSchedules: [],
-              locationData: null
+              locationData: null,
+              city: ''
             }
           });
         };
@@ -205,6 +206,7 @@ module.exports = {
                     locationName: row.location_name
                   }
                 });
+                sched.city = locationData.city;
                 sched.locationData = locationData;
               };
               if (error) {
