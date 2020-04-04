@@ -127,9 +127,10 @@ module.exports = {
     console.log('maxlng: ', maxlng);
 
     connection.query(
-      `SELECT loc.*, sched.*
+      `SELECT loc.*, sched.*, market.name
       FROM ebdb.market_locations as loc
       INNER JOIN market_schedules sched ON sched.market_location_id_fk = loc.id
+      INNER JOIN markets market on market.market_id = loc.market_id_fk
       WHERE sched.start_date_time >= CURDATE() + INTERVAL 1 DAY 
       and loc.latitude BETWEEN  ${minlat} and ${maxlat}
       AND loc.longitude BETWEEN ${minlng} and ${maxlng}`, function (error, marketSchedLocSearchResult) {
@@ -152,7 +153,8 @@ module.exports = {
             scheduleDescription: row.schedule_description,
             startDateTime: row.start_date_time,
             endDateTime: row.end_date_time,
-            readableDate: row.readable_date
+            readableDate: row.readable_date,
+            marketName: row.name
           }
         }
       );
