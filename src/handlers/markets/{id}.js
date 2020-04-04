@@ -77,7 +77,7 @@ module.exports = {
               marketId: row.market_id_fk,
               latitude: row.latitude,
               longitude: row.longitude,
-              description: row.description,
+              description: row.location_description,
               city: row.city,
               province: row.province,
               address: row.address,
@@ -163,7 +163,7 @@ module.exports = {
               marketId: row.market_id_fk_ms,
               userId: row.user_id_fk_schedules,
               type: row.market_schedule_type,
-              description: row.description,
+              description: row.schedule_description,
               startDateTime: row.start_date_time,
               endDateTime: row.end_date_time,
               readableDate: row.readable_date,
@@ -202,7 +202,7 @@ module.exports = {
                     address: row.address,
                     city: row.city,
                     province: row.province,
-                    description: row.description,
+                    description: row.location_description,
                     timeframe: row.timeframe,
                     locationName: row.location_name
                   }
