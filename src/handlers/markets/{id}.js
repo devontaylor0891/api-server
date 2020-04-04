@@ -170,7 +170,8 @@ module.exports = {
               locationId: row.market_location_id_fk,
               producerSchedules: [],
               locationData: null,
-              city: ''
+              city: null,
+              province: null
             }
           });
         };
@@ -207,6 +208,7 @@ module.exports = {
                   }
                 });
                 sched.city = locationData.city;
+                sched.province = marketSchedulesLocationResult.province;
                 sched.locationData = locationData;
               };
               if (error) {
