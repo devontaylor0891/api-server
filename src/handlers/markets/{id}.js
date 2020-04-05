@@ -175,6 +175,7 @@ module.exports = {
             }
           });
         };
+        console.log('schedules in get: ', schedules);
         async.eachOfSeries(schedules, function(sched, index, innerCallback) {
           console.log('getting location info for sched: ', index);
           console.log('sched: ', sched);
