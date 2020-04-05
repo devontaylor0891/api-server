@@ -177,6 +177,7 @@ module.exports = {
         };
         async.eachOfSeries(schedules, function(sched, index, innerCallback) {
           console.log('getting location info for sched: ', index);
+          console.log('sched: ', sched);
           connection.query(
             `SELECT * from market_locations
             WHERE id = ${sched.locationId}`,
