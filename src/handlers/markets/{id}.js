@@ -217,7 +217,7 @@ module.exports = {
                 console.log('error: ', error);
                 innerCallback(error, null);
               } else {
-                console.log('locations processed: ', locationData);
+                // console.log('locations processed: ', locationData);
                 innerCallback(null, null);
               }
             }
