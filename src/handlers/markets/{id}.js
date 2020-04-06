@@ -103,13 +103,16 @@ module.exports = {
       timeframe: `${req.body.location.timeframe}`,
       location_name: `${req.body.location.locationName}`
     };
+    console.log('post mLoc postquery: ', postQuery);
     connection.query(
       `INSERT INTO market_locations SET ?`,
       postQuery,
       function (err, result) {
         if (err) {
+          console.log('post mLoc error: ', err);
           res.status(500).send(err);
         } else {
+          console.log('mloc posted: ', result);
           return res.status(200).send(result);
         }
       }
