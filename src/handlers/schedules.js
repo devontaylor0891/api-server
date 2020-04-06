@@ -284,7 +284,7 @@ module.exports = {
       postQuery = {
         market_id_fk_ms: `${sched.marketId}`,
         market_schedule_type: `${sched.type}`,
-        description: `${sched.description}`,
+        schedule_description: `${sched.description}`,
         start_date_time: `${sched.startDateTime}`,
         end_date_time: `${sched.endDateTime}`,
         readable_date: `${sched.readableDate}`,
