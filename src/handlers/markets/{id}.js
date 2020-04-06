@@ -99,7 +99,7 @@ module.exports = {
       address: `${req.body.location.address}`,
       city: `${req.body.location.city}`,
       province: `${req.body.location.province}`,
-      description: `${req.body.location.description}`,
+      location_description: `${req.body.location.description}`,
       timeframe: `${req.body.location.timeframe}`,
       location_name: `${req.body.location.locationName}`
     };
