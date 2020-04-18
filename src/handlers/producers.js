@@ -144,7 +144,7 @@ module.exports = {
       logoUrl: `${req.body.logoUrl}`,
       longitude: `${req.body.longitude}`,
       latitude: `${req.body.latitude}`,
-      status: `${req.body.status}`
+      status: 'active'
     };
     connection.query(
       'INSERT INTO producers SET ?',
