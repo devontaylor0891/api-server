@@ -223,6 +223,7 @@ module.exports = {
     let scheds = req.body;
 
     let postQuery;
+    let mspPostQuery;
 
     async.eachOfSeries(scheds, function(sched, index, innerCallback) {
       console.log('index of async: ', index);
