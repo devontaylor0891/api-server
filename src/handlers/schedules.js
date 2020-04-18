@@ -246,12 +246,8 @@ module.exports = {
         fee_waiver: `${sched.feeWaiver}`,
         user_id_fk_schedules: `${sched.userId}`
       };
-      // build the accompanying query to insert into market_schedule_producer
-      mspPostQuery = {
-        schedule_id_fk_msp: null,
-        producer_id_fk_msp: `${sched.producerId}`,
-        market_schedule_id_fk_msp: `${sched.marketScheduleId}`
-      };
+      
+      console.log('psotQuery: ', postQuery);
       connection.query(
         `INSERT INTO schedules SET ?`,
         postQuery,
@@ -261,7 +257,13 @@ module.exports = {
             innerCallback(err, null);
           } else {
             console.log('sched created: ', result);
-            mspPostQuery.schedule_id_fk_msp = result.insertId;
+            // build the accompanying query to insert into market_schedule_producer
+            mspPostQuery = {
+              schedule_id_fk_msp: `${result.insertId}`,
+              producer_id_fk_msp: `${sched.producerId}`,
+              market_schedule_id_fk_msp: `${sched.marketScheduleId}`
+            };            
+            console.log('mspPostQuery: ', mspPostQuery);
             connection.query(
               `INSERT INTO market_schedule_producer SET ?`,
               mspPostQuery,
