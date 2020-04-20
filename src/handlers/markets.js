@@ -35,7 +35,7 @@ module.exports = {
               address: `${location.address}`,
               city: `${location.city}`,
               province: `${location.province}`,
-              description: `${location.description}`,
+              location_description: `${location.description}`,
               timeframe: `${location.timeframe}`,
               location_name: `${location.locationName}`
             };
