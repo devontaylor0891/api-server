@@ -45,6 +45,7 @@ router.route('/marketsSchedules/:id').get(markets.get_market_id_schedules);
 router.route('/marketsSchedules/:id').put(markets.put_market_id_schedules);
 router.route('/marketsSchedules/:id').delete(markets.delete_market_id_schedules);
 router.route('/marketsLocationsSearch').post(markets.get_locations_search);
+router.route('/marketsSchedulesById/:id').get(markets.get_market_schedules_by_id);
 
 router.route('/products').get(products.get_products); // ADMIN DASH ONLY
 router.route('/products').post(products.post_products);

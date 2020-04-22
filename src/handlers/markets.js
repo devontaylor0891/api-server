@@ -181,6 +181,10 @@ module.exports = {
 
   delete_market_id_schedules: function(req, res) {
     Market.delete_market_id_schedules(req, res);
+  },
+
+  get_market_schedules_by_id: function(req, res) {
+    Market.get_market_schedules_by_id(req, res);
   }
 
   // get_market_id_future_schedules: function(req, res) {
