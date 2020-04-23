@@ -178,10 +178,10 @@ module.exports = {
             }
           });
         };
-        console.log('schedules in get: ', schedules);
+        // console.log('schedules in get: ', schedules);
         async.eachOfSeries(schedules, function(sched, index, innerCallback) {
-          console.log('getting location info for sched: ', index);
-          console.log('sched: ', sched);
+          // console.log('getting location info for sched: ', index);
+          // console.log('sched: ', sched);
           connection.query(
             `SELECT * from market_locations
             WHERE id = ${sched.locationId}`,
@@ -230,7 +230,7 @@ module.exports = {
             console.log('error: ', err);
           } else {
             async.eachOfSeries(schedules, function(sched, index, innerCallback) {
-              console.log('index of async: ', index);
+              // console.log('index of async: ', index);
               connection.query(
                 `SELECT  msp.*, p.name, p.user_id
                 from market_schedule_producer msp 
@@ -256,7 +256,7 @@ module.exports = {
                     console.log('error: ', error);
                     innerCallback(error, null);
                   } else {
-                    console.log('producerScheds processed: ', producerScheds);
+                    // console.log('producerScheds processed: ', producerScheds);
                     innerCallback(null, null);
                   }
                 }
@@ -265,7 +265,7 @@ module.exports = {
               if(err){
                 console.error(err);
               } else {
-                console.log('all Pscheds added');
+                // console.log('all Pscheds added');
                 return res.status(200).send(schedules);
               }
             });
@@ -370,10 +370,10 @@ module.exports = {
             }
           });
         };
-        console.log('schedules in get: ', schedules);
+        // console.log('schedules in get: ', schedules);
         async.eachOfSeries(schedules, function(sched, index, innerCallback) {
-          console.log('getting location info for sched: ', index);
-          console.log('sched: ', sched);
+          // console.log('getting location info for sched: ', index);
+          // console.log('sched: ', sched);
           connection.query(
             `SELECT * from market_locations
             WHERE id = ${sched.locationId}`,
@@ -448,7 +448,7 @@ module.exports = {
                     console.log('error: ', error);
                     innerCallback(error, null);
                   } else {
-                    console.log('producerScheds processed: ', producerScheds);
+                    // console.log('producerScheds processed: ', producerScheds);
                     innerCallback(null, null);
                   }
                 }
@@ -457,7 +457,7 @@ module.exports = {
               if(err){
                 console.error(err);
               } else {
-                console.log('all Pscheds added');
+                // console.log('all Pscheds added');
                 return res.status(200).send(schedules);
               }
             });
