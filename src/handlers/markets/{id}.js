@@ -14,7 +14,7 @@ module.exports = {
         let market = marketResult.map(function(row) 
           {
             return {
-              id: row.user_id,
+              id: row.user_id_fk,
               marketId: row.market_id,
               name: row.name,
               location: row.location,
