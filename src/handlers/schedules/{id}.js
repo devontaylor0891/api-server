@@ -162,7 +162,20 @@ module.exports = {
           res.status(500).send('error:', err);
         } else {
           console.log('sched deleted: ', result);
-          return res.status(200).send(result);
+          connection.query(
+            `DELETE FROM market_schedule_producer
+            WHERE schedule_id_fk_msp = ?;`,
+            [req.params.id],
+            function (err, result) {
+              if (err) {
+                console.log('error in delete msp:', err);
+                res.status(500).send('error:', err);
+              } else {
+                console.log('msp deleted: ', result);
+                return res.status(200).send(result);
+              }
+            } 
+          )
         }
       } 
     )
