@@ -258,28 +258,30 @@ module.exports = {
             innerCallback(err, null);
           } else {
             console.log('sched created: ', result);
-            // build the accompanying query to insert into market_schedule_producer
-            mspPostQuery = {
-              schedule_id_fk_msp: `${result.insertId}`,
-              producer_id_fk_msp: `${sched.producerId}`,
-              market_schedule_id_fk_msp: `${sched.marketScheduleId}`
-            };            
-            console.log('mspPostQuery: ', mspPostQuery);
-            connection.query(
-              `INSERT INTO market_schedule_producer SET ?`,
-              mspPostQuery,
-              function (error, mspResult) {
-                if (error) {
-                  console.log('error: ', error);
-                  innerCallback(error, null);
-                } else {
-                  console.log('results from insert into msp: ', mspResult)
-                  innerCallback(null, null);
+            if (sched.type === 'Market Pickup') { // if market, build the accompanying query to insert into market_schedule_producer
+              mspPostQuery = {
+                schedule_id_fk_msp: `${result.insertId}`,
+                producer_id_fk_msp: `${sched.producerId}`,
+                market_schedule_id_fk_msp: `${sched.marketScheduleId}`
+              };            
+              console.log('mspPostQuery: ', mspPostQuery);
+              connection.query(
+                `INSERT INTO market_schedule_producer SET ?`,
+                mspPostQuery,
+                function (error, mspResult) {
+                  if (error) {
+                    console.log('error: ', error);
+                    innerCallback(error, null);
+                  } else {
+                    console.log('results from insert into msp: ', mspResult)
+                    innerCallback(null, null);
+                  }
                 }
-              }
-            )
-            // receive result.insertId, use to add to market_schedule_producer
-            // innerCallback(null, null);
+              )
+            } else { // no need to insert into msp as not a market
+              innerCallback(null, null);
+            }
+           
           }
         }
       )
