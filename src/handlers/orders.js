@@ -226,6 +226,7 @@ module.exports = {
   },
 
   post_order: function (req, res) {
+    console.log('post new order req body: ', req.body);
     
     let orderPostQuery = {
       producer_id_fk_o: `${req.body.chosenSchedule.producerId}`,
