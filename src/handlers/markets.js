@@ -20,7 +20,9 @@ module.exports = {
       postQuery,
       function(err, marketResult) {
         if (err) {
-          res.send('error:', err);
+          // res.send('error:', err);
+          console.log('error in adding market: ', err);
+          res.status(500).send('error:', err);
         } else {
           // insertion successful, add locations as necessary
           const marketId = marketResult.insertId;
